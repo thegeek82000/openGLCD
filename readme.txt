@@ -1,5 +1,3 @@
-readme.txt file for Arduino openGLCD library
-
 LICENSE
 The Arduino openGLCD library files are part of the openGLCD project.
 openGLCD is an open source project licensed for use in open source projects
@@ -24,9 +22,10 @@ Wherever that directory is, you will need to create a directory called
 "libraries", then extract the zip image into that directory.
 So you will end up with {sketchbook directory}/libraries/glcd ...
 
-Alternatively you can install the openGLCD library directly in the arduino distribution
-by placing it in the libraries directory where the arduino distribution
-was installed. For arduino release 0018 and later that would be:
+Alternatively you can install the openGLCD library directly in the Arduino
+distribution by placing it in the libraries directory where the
+Arduino distribution was installed.
+For Arduino release 0018 and later that would be:
 {Arduino install directory}/libraries
 So you will end up with {Arduino install directory}/libraries/openGLCD ...
 
