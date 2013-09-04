@@ -1,0 +1,86 @@
+/*
+ * Troubleshoot documenation
+ */
+
+/**
+@page page_troubleshoot Troubleshooting
+- No pixels visible on the display
+	-# Check +5v and Gnd connections between Arduino and GLCD panel
+	-# Check all data and command pins are wired according to the datasheet and matching the configuration settings (This is the most common cure to this problem)
+	-# Check the datasheet for your panel to verify appropriate timing values are set in the configuration file
+	-# Check contrast voltage (typically between -3 and -4 volts) on contrast-in pin of LCD panel
+	While the sketch is operating, try gradually adjusting the pot through its range
+	Some displays are very sensitive to this setting
+	-# Check sketch has compiled ok and downloaded to Arduino
+	-# Run \ref page_GLCDdiags "GLCDDiags" test sketch.
+	.
+- All pixels are dark
+	-# Check contrast voltage (typically between -3 and -4 volts) on contrast-in pin of LCD panel. While the sketch is operating, try gradually adjusting the pot through its range. Some displays are very sensitive to this setting
+- Left and right side of image reversed
+	-# Swap CSEL1 and CSEL2 wires (or swap pin assignments in header file)
+- No Serial port diagnostic information
+	-# Verify the code is compiling and properly uploading
+	-# Disonnect glcd wires to ensure that no pins are in conflict with the serial port pins
+
+@subpage page_GLCDdiags
+
+*/
+
+/**
+@page page_GLCDdiags Diagnostic Sketch
+GLCDdiags is a test sketch included in the examples folder.
+It will validate the connections and test the memory of GLCD module as well
+as report the active configuration information to the serial port.
+Unfortunately, the nature of glcd hardware interfaces is such that nearly all the pins have
+to be correctly configured and wired up correctly in order to initialize the glcd and see anything.
+If your display is not working properly then check the information displayed
+in the serial monitor. This shows what information the library is using and
+you can use this to help verify if the library is configured correctly. 
+
+The tests start off with a display that shows the library version and a test pattern.
+After a few seconds, the pixels on this initial display screen will blink off
+and on. If backlight control is configured, it will blink off and on as well.
+The tests conclude with a final display screen that indicates whether all the tests
+finished successfully and also reports the speed of the glcd::SetDot() API function call
+when setting non contiguous pixels which is a worst case (slowest) scenario
+as it requires additional low level glcd commands to reposition the glcd X & Y
+addresses between each glcd::SetDot() call.
+
+
+Below is a sample of the diagnostic information available on the glcd display.
+
+
+<center>
+<table boarder="0">
+<tr>
+	<td> @image html glcddiag1.jpg "Library version and Test Pattern"</td>
+	<td> @image html glcddiag2.jpg "Draws from upper left to lower right"</td>
+</tr>
+<tr>
+	<td> @image html glcddiag3.jpg "Flashes each chip# sequentially"</td>
+	<td> @image html glcddiag4.jpg "Testing chip0 memory"</td>
+</tr>
+<tr>
+	<td> @image html glcddiag5.jpg "Testing chip1 memory"</td>
+	<td> @image html glcddiag6.jpg "Results and SetDot speed (thousands/sec)"</td>
+</tr>
+</table>
+</center>
+
+Below is a sample of the diagnostic information available on the serial port.
+The information includes library versioning information, all the configuration settings,
+which includes pin configurations as well as delay settings, and data port modes.
+It also includes results from all the diagnostic tests as they are being performed.
+
+All the pin configuration information is displayed in both Arduino pin#s
+as well as AVR pin values.
+
+@note
+It is possible that under certain pin misconfigurations or wiring errors, no information will be presented
+to the serial port. In the event that no diagnostic information is showing up on the serial
+port, it may be necessary to disconnect the glcd to rule out that no misconfigured or miswired
+pins are conflicting with the serial port pins.
+
+
+@include GLCDdiags.txt
+*/

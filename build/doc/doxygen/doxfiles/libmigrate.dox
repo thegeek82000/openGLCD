@@ -1,0 +1,180 @@
+/*
+ * Documenation about migration for those familiar with the GLCDv3 library
+ */
+
+/**
+@page page_libmigrate Migration from GLCDv3
+@image html glcdv3_ks0108.jpg
+
+@warning
+openGLCD is not backwards compatible with GLCDv3.
+
+Existing GLCDv3 sketches will not work "as is" with openGLCD.
+See the following sections for how to migrate existing GLCDv3 sketches
+and configurations to openGLCD.
+
+
+@subpage page_GLCDv3config\n
+@subpage page_GLCDv3sketch\n
+
+*/
+
+/*
+ * GLCDv3 configuration migration
+ */
+
+/**
+@page page_GLCDv3config Migrating Configurations
+
+The master configuration file is openGLCD_Config.h
+
+openGLCD is shipped with ks0108 configuration files that are
+similar to the configuration files in the GLCDv3 library.
+The default pin mappings and wiring used with the GLCDv3 library will work with openGLCD since
+the default pin configurations is the same.
+
+@warning
+While tempting, <b>DO NOT</b> copy any existing custom GLCDv3 configuration
+files to the config directory.
+This will not work as the openGLCD
+header files have additional defines that are not present in the GLCDv3 version of the header files.
+Also, the names of all the defines in the pin configuration files, while similer to the names used in GLCDv3,
+have been slightly changed to make them all consistent.
+
+Normally, for a standard 128x64 ks0108 panel, the only changes necessary for a custom
+pin configuration will be to modify the ks0108_{BOARD}.h file. Everthing else will
+automatically configure itself.
+
+If the custom configuration is more complex than simple pin changes to a 128x64 display:
+
+- Edit the openGLCD_Config.h file to select the active config file (normally not necessary for ks0108)
+- Edit the ks0108_panel.h to verify/set proper values for:
+ - DISPLAY_WIDTH
+ - DISPLAY_HEIGHT
+ - CHIP_HEIGHT
+ - CHIP_WIDTH
+ - If necessary, modify NBR_CHIP_SELECT_PINS and corresponding glcd_CHIPx defines
+- Edit ks0108_{BOARD}.h to verify/set all the pin values
+
+In terms of how to actually move a custom pin configuration from the
+GLCDv3 library to the openGLCD library, it has to be done manually.
+Each pin from the GLCDv3 pin configuration file will have to be
+manually moved into the openGLCD pin configuration file.
+The pin names used in pin configuration files in openGLCD are very 
+similar to those used in GLCDv3. The difference is that all pin names
+now include the term "pin" in them.
+
+
+See the library configuration page for full details on configuration:
+@ref page_configuring
+
+*/
+
+/*
+ * GLCDv3 sketch migration
+ */
+
+/**
+@page page_GLCDv3sketch Sketch Migration
+
+@warning
+openGLCD is not backward compatible with GLCDv3.
+
+While many of the API functions are the same names,
+there are differences that will prevent existing code
+from compiling or working properly.
+
+The primary library include header file name used by GLCDv3
+is a different name which will keep existing GLCDv3 code from compiling.\n
+More importantly, @em width and @em height parameters to all API functions in openGLCD are
+exact pixels for the drawn object whereas this was not the case in GLCDv3.\n
+@b Examples: \n
+- If a width of 6 is specified, the width of the drawn object will be exactly 6 pixels
+- If a height of 6 is specified, the height of the drawn object will be exactly 6 pixels
+
+The main include header file for sketches is
+
+\code
+#include <openGLCD.h>
+\endcode
+
+
+If any of the following library functions are used, the code must be modified to use the new 
+function names.\n
+Also, the @em length parameter will have to be adjusted for the height/width parameters.
+- DrawVertLine(x, y, length, color)  is now:   \ref glcd::DrawVLine() "DrawVLine(x, y, height, color)"
+- DrawHoriLine(x, y, length, color)  is now :  \ref glcd::DrawHLine() "DrawHLine(x, y, width, color)"
+- ClearSysTextLine(row)  is now \ref gText::EraseTextLine() "EraseTextLine(row)"
+- SetTextMode()  is now \ref gText::SetAreaMode() "SetAreaMode(mode)"
+
+If any of the following GLCDv3 functions are used:
+- \ref glcd::DrawVLine() "DrawVLine()"
+- \ref glcd::DrawHLine() "DrawHLine()"
+- \ref glcd::DrawRect() "DrawRect()"
+- \ref glcd::DrawRoundRect() "DrawRroundRect()"
+- \ref glcd::FillRect() "FillRect()"
+- \ref glcd::InvertRect() "InvertRect()"
+
+@em height and @em width parameters will will have to be adjusted since openGLCD specifies
+exact pixels for @em height and @em width parameters.
+
+All versions of the function \ref gText::DefineArea() "DefineArea()" return
+0 on sucess or an error code on failure vs GLCDv3 DefineArea() returned a status of 
+true on success and false on failure.
+
+<hr>
+<H1>GLCDv3 Compatibility Header</H1>
+
+openGLCD provides a header file to temporarily aid in transitioning existing GLCDv3 sketches
+to openGLCD.
+Sketches may include the GLCDv3 compatibility header file to automatically
+map the sketches use of GLCDv3 functions and parameters to openGLCD.
+
+\code
+#include <openGLCD_GLCDv3.h> // header to provide GLCDv3 compatibility
+\endcode
+
+Notable exceptions are the following functions:\n
+- \ref gText::DefineArea() "DefineArea()
+for which there is no backward compatibilty.
+
+@warning
+While using this compatibility header should allow most existing GLCDv3 sketches to
+compile and work as if they were still using GLCDv3, it is not recommended as a permanent
+solution.\n
+Also, it should be noted that when using this backward compability capability, the
+documention no longer matches the API functions and parameters the sketch is actually using.
+For example:\n
+@code
+  GLCD.DrawRect(0,0, 8, 16); // draw a rectangle 8 pixels wide 16 pixels tall with openGLCD
+  GLCD.DrawRect(0,0, 8, 16); // draw a rectangle 9 pixels wide 17 pixels tall with GLCDv3
+@endcode
+The documenation will state that @em width and @em height are an exact number of pixels;
+however, when the sketch is running in GLCDv3 compability mode, the compatibilty header
+will modify the parameters to be GLCDv3 compatible parameters which draws the objects 1 pixel bigger
+than the @em width and @em height parameters.
+While this makes the existing sketch code backward compability with GLCDv3,
+this difference can easily create confusion when looking at results obtained
+vs parameters passed, vs the documenation.
+
+
+@note
+For even greater temporary GLCDv3 compatibility,
+a dummy glcd.h file can be created with the following contents:
+@code
+#include <openGLCD_GLCDv3.h>
+@endcode
+which should allow most existing GLCDv3 sketches to work "as is". However, if this is
+done, GLCDv3 and openGLCD cannot both be installed at the same time.\n
+@warning
+<b>DO NOT</b> rename openGLCD_GLCDv3.h to glcd.h as it will break
+the included GLCDv3 demos.\n
+While creating a glcd.h compatibility file can provide instant backward compatiblity
+to most existing GLCDv3 sketches, it should be cautioned, as mentioned above,
+that those sketches will be using the functions and parameters as defined in GLCDv3 vs openGLCD.
+The results obtained from the functions will not match the openGLCD documenation.
+Therefore, as stated above, this method of backward compability is not recommeded as a
+permanent solution.
+
+
+*/

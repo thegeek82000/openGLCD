@@ -1,0 +1,40 @@
+Serial initialized
+--------------------------------------------------------------------
+Reported Arduino Revision: 1.0.5
+F_CPU: 16000000
+--------------------------------------------------------------------
+Lib Configuration: openGLCD ver: 0.5a
+Lib build date: Aug 21 2013 20:36:08
+Lib build number: (none/unofficial-release)
+Panel Configuration:ks0108
+Pin Configuration:ks0108-Arduino
+--------------------------------------------------------------------
+GLCD:ks0108 DisplayWidth:128 DisplayHeight:64
+Chips:2 ChipWidth:64 ChipHeight:64
+ CSEL1:A0(PIN_C0) CSEL2:A1(PIN_C1)
+ RW:A2(PIN_C2) DI:A3(PIN_C3) EN:A4(PIN_C4)
+ D0:8(PIN_B0) D1:9(PIN_B1) D2:10(PIN_B2) D3:11(PIN_B3)
+ D4:4(PIN_D4) D5:5(PIN_D5) D6:6(PIN_D6) D7:7(PIN_D7)
+Delays: tDDR:320 tAS:140 tDSW:200 tWH:450 tWL:450
+ChipSelects: CHIP0:(A0,0x1, A1,0x0) CHIP1:(A0,0x0, A1,0x1)
+Data mode: 
+ d0-d3:nibble mode-Non-Atomic
+ d4-d7:nibble mode-Non-Atomic
+Backlight: <Not configured>
+--------------------------------------------------------------------
+Diag Loop: 1
+Initializing openGLCD
+Displaying Library version Screen
+Turning display & backlight on/off
+Displaying ChipSelect Screens
+Walking 1s data test
+Wr/Rd Chip Select Test
+Testing GLCD memory pages
+Horizontal Page Test Chip: 0 Pixels 0-63
+Vertical Page Test Chip: 0 Pixels 0-63
+Horizontal Page Test Chip: 1 Pixels 64-127
+Vertical Page Test Chip: 1 Pixels 64-127
+Full Module Horizontal Page Test:Pixels 0-127
+Full Module Vertical Page Test:Pixels 0-127
+Tests PASSED
+GLCD.SetDot() speed (K ops/sec): 16.21

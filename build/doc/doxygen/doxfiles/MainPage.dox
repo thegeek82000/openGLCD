@@ -1,0 +1,36 @@
+/**
+@mainpage openGLCD Graphical LCD Library
+
+@image html glcdlib-2.png
+<H1>Licensing</H1>
+openGLCD is an open source project for open source projects.
+Those wishing to create closed projects should seek an alternate solution.
+openGLCD is licensed under the terms of the GNU General Public License v3.0
+as opposed to the more liberal licensing terms of the GNU Lesser General Public License (LGPL), 
+modified BSD, Apache, etc..
+
+For full details on the licensing of openGLCD see the section on \ref page_license "licensing".
+
+<H2>Overview</H2>
+openGLCD makes it easy to use Graphical LCDs (GLCD) with Arduino.
+The library supports several different chips and is easy to integrate with different panels.
+The configuration mechanism allows using a broad range of GLCD panels and Arduino controllers.
+
+<!-- subpage names comes from the page description in the appropriate dox file -->
+@subpage page_wiring
+
+@subpage page_configuring
+
+@subpage page_GLCD_methods
+
+@subpage page_FontsBitmaps
+
+@subpage page_troubleshoot
+
+@subpage page_license
+
+@subpage page_libmigrate
+
+@subpage page_AdditionalResources
+
+*/

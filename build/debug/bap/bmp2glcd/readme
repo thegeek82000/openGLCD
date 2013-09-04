@@ -1,0 +1,17 @@
+bmp2glcd - Bitmap to GLCD bitmap ver 1.01 by S.Varjo 2008
+
+To create binary file simply invoke make. 
+
+Usage: bmp2glcd <image.bmp> <options>
+	-h <height>	target image height in pixels
+	-w <width>	target image width in pixels
+	-v	verbose mode
+	-pgm	create header with __attribute__ ((progmem)) for AVR
+	-pic30  create header whith __attribute__((space(auto_psv))) for PIC30
+	-glcdlib create header for use with openGLCD
+
+This program converts a bitmap to binary bitmap (black and white) with 8bit page
+height that can be written directly to graphical lcd display. A c-header file is
+created where data bytes represent pixels in page columns rather than in lines.
+The created bitmap is solely to see the result image in a simple way. 
+

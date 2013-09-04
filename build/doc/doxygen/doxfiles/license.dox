@@ -1,0 +1,49 @@
+/**
+@page page_license Licensing
+
+@image html gpl-v3-logo-red.png
+
+<center>
+<table>
+<tr>
+<td>
+  openGLCD is free software: you can redistribute it and/or modify\n
+  it under the terms of the GNU General Public License as published by\n
+  the Free Software Foundation, either version 3 of the License, or\n
+  (at your option) any later version.\n
+
+  openGLCD is distributed in the hope that it will be useful,\n
+  but WITHOUT ANY WARRANTY; without even the implied warranty of\n
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the\n
+  GNU General Public License for more details.\n
+</td>
+</tr>
+</table>
+</center>
+
+
+For an overview of GPL v3 see: <a href="http://www.gnu.org/licenses/quick-guide-gplv3.html">A Quick Guide to GPLv3</a>\n
+For a full copy copy of GPLv3 see: <a href="http://www.gnu.org/licenses/gpl-3.0.html">version 3 of the GNU General Public License</a>\n
+For a full copy copy of the latest GPL license see:
+<a href="http://www.gnu.org/licenses/gpl.html">The GNU General Public License</a>\n
+
+@note
+While openGLCD shares a common ancestry with GLCDv3, openGLCD is a separate derivative work,
+licensed under GPLv3 whereas GLCDv3 was licensed as LGPL v2.1 or later.
+As such, projects that use openGLCD that are conveyed (shared/distributed) to others
+must be open source licensed under the same terms
+and may only use other libraries that are fully compatible with GPLv3.
+
+.i.e.  LGPL v2.1 code can be used in closed source and GPLv3 projects
+but projects that are to be conveyed (shared/distributed) to others,
+code from GPLv3 projects can only be used in open source projects that
+only use code that is compatible with GPLv3.\n
+For a full GPL/LGPL compatibilty matrix see:
+<a href="http://www.gnu.org/licenses/gpl-faq.html#AllCompatibility">GNU license compatibility matrix</a>\n
+
+Furthermore, none of the code, including any additions and improvements in openGLCD over GLCDv3 can
+be moved back into GLCDv3 or into any other LGPL, BSD, or closed source compatible licensed project or library
+without violating the GPLv3 licensing terms.\n
+
+*/
+

@@ -1,0 +1,309 @@
+vi:ts=4
+
+- Remove GLCDBigdemo???
+- Remove fonts/newbasix3x5.h font (Wendy3x5 is better)
+- FillCircle() and DrawCircle() are different boundaries.
+ Fill circle is one pixel bigger on the bottom half.
+
+- rename config files
+	"Arduino" becomes "Uno" (done)
+	panel: [module]-{glcdChip}_AutoConfig_Panel.h
+	autopinconfig: [module]-{glcdChip}_AutoConfig_Pins.h
+	pinconfig: [module]-{glcdChip}_PinConfig_{BoardType}.h
+	manualconfig: [module]-{glcdchip}_ManualConfig.h
+	[module] name is optional
+
+- update comment in header of pinconfig files
+  to reflect boards it works with.
+
+- Arduino core code fall back mode so it works on any "Arduino" board.
+
+- FillRoundRect API function
+
+- New Demos
+	-iFPS (iFPS demo - NEW)
+	-openGLCDGraphics
+	-openGLCDText
+
+- add API examples:
+    - Text
+	DefineArea
+	print (Print class)
+	Printf
+	Printf_P
+	SelectFont
+	SetFontColor
+	SetAreaMode
+	ClearAreaMode
+		low
+			EraseTextLine
+			gText
+			DrawSring_P
+			printFlash ??
+			printFlashln ??
+			printNumber ??
+			Puts_P
+			Streaming i/o
+
+	- Graphics
+		- ClearScreen
+		- FillRoundRect (when API is real)
+		- DrawBitmap
+		- DrawBitmapXBM
+    - Device
+	Init
+		low priority
+		- GotoXY
+		- ReadData
+		- WriteData
+	
+- update doxgen for backlight functions to indicate that
+  backlight must be configured in config files.
+
+- update doxygen for how to install???
+
+- Update diags text output in doxygen (to show new version info)
+
+- need to add GLCD.top & GLCD.Left to coordinate system photo
+	Pretty much need to update/replace all photos in doxygen
+
+- Clean up references to SCROLL_UP/SCROLL_DOWN
+
+- trace down progmem / const/ static stuff
+	warnings vs errors on AVR vs ARM.
+
+- look at pin order of config files
+	- Teensy vs others
+	- consistency of CSEL3 & CSEL4
+	- Should pin order match pin configuration table order in doxygen? 
+
+- Nano & Micro have their own variants
+	- have seperate pinconfig files?
+	- nano is m328 variant same as "standard" but defines 8 analog pins
+	- micro is 32u4 variant same as "leonardo" except LED definitions.
+
+- change checks for pin/feature support.
+	- instead of checking for pin definitin,
+	  change glcdio to define/not-define "function" macro based on
+	  pin defintion, then have mainline code check for existence
+	  of "function" macro vs checking for pin definition.
+
+- move LCD_OFF checks & code to glcdio and new glcdio  "function" macro
+
+- Verify ARM delay code
+ (seems to be fairly accurate, 450ns delay is about 480 or so)
+
+- Make colors BLACK and WHITE types/enums
+	Be careful on this as enums are bigger/slower than uint8_t
+	Also consider adding "PIXEL_ON" and "PIXEL_OFF" to simplify color usage. (DONE)
+	Also consider adding a color for "transparent" for DrawBitmapXBM()
+	Also consider adding a color "XOR" which allows drawing, across filled regions. (FUTURE...)
+
+- update code to use C99 "fast" types: ??
+	uint_fast8_t
+	int_fast8_t
+
+- remove/illiminate FontRead access function ReadPgmData()
+	It is in glcd.cpp but used by gText.cpp
+	This is also used by things that need pgm data like bitmap functions.
+	use a glcdio macro instead?
+
+- remove Streaming.h from include directory
+
+- Update links to FontCreator2 in doxygen ("Additional Resources") [ it points to google code glcd-arduino]
+	Will need to point to place in new repository
+
+
+- Change inheritance  (has implications for doxygen stuff)
+	glcd: gText glcd_device
+	gText: Print
+	glcd_device: (none)
+
+- cleanup/remove old font rendering code in gText.cpp
+
+- track down why DrawString() uses 242 bytes of RAM and HelloWorld only uses 94
+	(some of this was debugging in gText.cpp)
+
+- eliminate tAS delays on writes? Seems to work on Teensy3
+(didn't make much performance difference, 9.97 to 10.02 FPS)
+
+GLCD issues to solve:
+47 - move SetDisplayMode() from glcd to glcd_device
+53 - e-gizmo gizduino support 
+	http://www.e-gizmo.com/KIT/gizDuino%20X.html
+
+NEW FEATURES:--------------------------------------------------------------
+Some of the new capabilities include:
+Core support:
+- Teensy v3 support
+- Leonardo support
+- Sanguino, Mighty1284p, Bobuino
+- Arduino core code fall back mode so it works on any "Arduino" board.
+
+Device:
+- backlight support (on/off, brightness)
+- enable/disable display (on/off)
+- support for hd44102 display
+
+Graphics:
+- draw/fill triangles, ellipses
+- X11/XBM bitmap support
+- draw bargraphs DrawHBarGraph/DrawVBarGraph
+
+Text:
+- Additional fonts
+- Render variable fonts with fixed width spacing
+- non padded fonts (allows cp437 fonts)
+- Text overstrike mode
+- get text area properties
+- Set/clear text area mode options
+- Get CharHeight
+- DrawString() with justifications (right, left, center)
+- DrawString() with col/row positioning
+- full support for F() macro (including in pre 1.x IDEs)
+
+Examples:
+- Seperate example for most API functions (Device, Graphics, & Text)
+
+other
+- rename to "openGLCD"
+- DefineArea() - changed return staus (not backward compatible)
+- updated documentation 
+- glcdio much cleaner and more consistent names
+- auto config pin names are now consistent "glcdpinXXX"
+- many functions now return status vs being "void"
+- return status for unsupported capabilities
+- removed seperate revisions for sub classes
+    - one single revision for the "library".
+- many bug fixes
+
+not yet
+- Chipkit support
+
+---------------------------------------------------------------------------
+
+DONE-------------------------------------------------------------
+- remove revision information for gText and glcd_device
+- openGLCD.h includes <glcd.h>
+- update lcdxxx() macros in glcd_device.cpp
+- update/rename all glcdxxx pin defines to be glcdPinxxx
+	affects:
+		-glcd_device.cpp
+		-include/glcd_io.h
+		-config/*.h
+		-Device/*.h
+- print F_CPU in diags
+
+- Rename device functions to use caps for consistency?
+	on(), off(), display(), noDisplay(), backlight(), noBacklight()
+		OnBacklight(), OffBacklight(), SetBacklight()
+		OnDisplay(), OffDisplay().
+		On(), Off()
+	affects APIexamples
+
+- move glcd.h to include directory
+- rename include/delay.h include/glcd_delay.h
+- rename include/arduino_io.h include/glcd_arduino_io.h ??
+- rename glcd_Config.h to openGLCD_Config.h
+- rename glcd_Buildinfo.h to openGLCD_Buildinfo.h
+- Rename doc/GLCDref.htm doc/openGLCDref.htm
+	Will need to check for references in code and documenation/readme etc...
+- Rename build/doc/doxygen/GLCDref.htm build/doc/doxygen/openGLCDref.htm
+- Rename GetTextProp() to GetAreaProp()  (DONE)
+	- What about SetTextMode() and ClearTextMode() ?? (DONE)
+		Change to SetAreaMode() and ClearAreaMode() ?? (DONE)
+		Backward compatibility???
+		Make SetTexMode() deprecated? (DONE)
+
+- update auto config panel files to use auto config pinconfig header
+	- currently they are doing their own pin config file includes
+- Remove fonts/font12x16.h font (it is not in correct format for library)
+- check all config files for backlight control defines
+	- panel files for backlight control define
+	- pin config file for backlight pin define
+- fix pin order in MEGA config file to match others
+- fix pin order in Sanguino config file to match others
+- add DrawBarGraph() to glcd API ???
+	DrawVBarGraph(x,y, width, height, border, minval, fullval, currval)
+	DrawHBarGraph(x,y, width, height, border, minval, fullval, currval)
+	negative width means width is to left of x
+	negative height means height is above y
+
+	if width negative on DrawHBarGraph graph starts on right and advances to left
+	if width positive on DrawHBarGraph graph starts on left and advances to right
+	if height negative on DrawVBarGraph graph starts a bottom and advances up
+	if height positive on DrawVBarGraph graph starts at top and advances down
+
+- clean up ARM delay code 
+- create a GLCD v3 compatibility header file (done)
+	This will remap/adjust the function parameters of
+	DrawHLine, DrawVLine, DrawRect, DrawRoundRect
+	in the sketch.
+	That way you can translate them to account for the +1
+	pixels when the width/height size changes.
+	Example
+	#define DrawHLine(x, y, width, ...) DrawHLine(x,y, width+1, ##__VA_ARGS)
+	handles optional color with gcc varargs for macros.
+	This way the actual openGLCD code is not modified and the
+	compatibility is done just for the sketch.
+	i.e. something like
+	#include <openGLCD_GLCDv3.h>
+	This header should make GLCDv3 sketches "just work",
+	It will also need dummy values for the GLCD version numbers.
+	It won't work for GLCDdiags since it uses lots of internal stuff.
+- Update photos for diags in doxygen (done)
+- review deprecated stuff (done)
+  It was all removed since there is no
+  deprecated stuff yet. This is a new library.
+  There is a openGLCD_GLCDv3.h compatibilty file.
+
+- add doxygen examples for DrawVBarGraph/DrawHBarGraph in glcd.cpp
+- insert ascii schematic for backlight circuit into examples that use backlight control
+
+- cleanup bitmaps directory (done)
+	- move all non .h files (.bmp, .bmp, .xcf etc) to "images" directory
+
+- FillRect APIexample
+- Remove include/glcd_Deprecated.h ???
+- Arial14 vs Arial_14 inconsistency (can use "Arial14" for font name)
+- check remove/replace all references to ks0108 playground page
+	- definitely in doxygen stuff
+- Remove all references to "ks0108 library"
+	Shows up in doxygen.
+		"previously.... ks0108 library"... etc..
+- compare/sync include/avrio.h to the "official" avrio.h in mcuio
+- make sure mcuio is mentioned in additional resources section
+- verify all widths, heights, for accuracy and consistency
+	-DrawRect - DONE
+	-FillRect - DONE
+	-InvertRect - DONE
+	-DrawVLine - DONE
+	-DrawHLine - DONE
+
+- verify DrawString
+	- handles "bottom" same as normal scrolling (DONE) - padding at bottom
+	- That "center" is correct. (DONE)
+
+- Move around Examples:
+	APIexamples
+	GLCDv3Demos
+		-GLCDv3 ("as is" GLCDv3 code with header changed)
+			-GLCDBigdemo???
+			-GLCDdemo
+			-ks0108example
+		-openGLCD (modified for openGLCD and all platforms)
+			-GLCDBigdemo???
+			-GLCDdemo
+			-ks0108example
+	Demos
+		-life
+		-Rocket
+		-clockFace
+		-BigNums
+		-iFPS (iFPS demo - NEW)
+
+	HelloWorld
+	GLCDdiags
+	Serial2GLCD
+- move debug to build/debug
+- update/cleanup build/debug part of tree

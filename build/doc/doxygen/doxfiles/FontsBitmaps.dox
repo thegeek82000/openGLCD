@@ -1,0 +1,166 @@
+/*
+ * openGLCD library Font and Bitmap documenation
+ */
+
+/**
+@page page_FontsBitmaps Fonts and Bitmaps
+
+While the openGLCD library distribution comes with a few fonts and bitmaps, 
+the library supports user defined custom fonts and bitmaps.
+Additional fonts and bitmaps can be added and included in sketches.
+
+@subpage page_Fonts
+
+@subpage page_Bitmaps
+
+*/
+
+/**
+@page page_Fonts Using Fonts
+
+There is a free java application available that can convert PC fonts for use with this library. 
+The software is called FontCreator2 and it can produce a header file that can be included in your sketch.
+
+@note
+GLCDFontCreator2 should not be confused with GLCD FontCreator 1.1 mikroElektronica Edition, 
+which is an entirely different product/tool. FontCreator2 is a free open source Java based application
+while GLCD FontCreator 1.1 is a Windows based font tool for use with microElectronica s/w products.
+The mikroElektronica Edition s/w encodes the font data differently and the free
+version of the software does not allow saving a full character set.
+
+Here is a link to a zip image for FontCreator2: <a href="http://code.google.com/p/glcd-arduino/downloads/detail?name=GLCDFontCreator2.zip">FontCreator2 Zip Image</a>
+
+To create a font click on [File]->[New Font]
+Type in the name of the font in the Name box that says "new Font".
+This will be the name you use for the SetFont() api call.
+DO NOT use spaces in the name.\n
+Example:
+@code
+myfont
+@endcode
+
+If you do not wish to create an entire font yourself, you can
+import a font from one of the system fonts available by choosing a font
+from the [Import Font] drop down box.
+The size is a font size and not a height in pixels. Because of this
+you may have to play with the size a bit to get a font of the desired pixel height
+or one that is close to the size you want as not all pixel heights are possible.
+@note You can only specify the size of the font when you import it. So
+if you decide to change sizes, you must start over by creating a new font and re-importing
+the font.
+
+When you are ready to create the .h file, simply click on [Export]->[Export Font]
+and type in the name of the .h file in the File Name box.
+For consistency it is recommended that you name the .h the same as the font name.
+DO NOT use spaces in the name.\n
+Example:
+@code
+myfont.h
+@endcode
+
+
+The font header files created should be placed in the directory named fonts and included in your sketch.
+For example, if you create a font named myfont in a header named myfont.h then copy myfont.h
+to the fonts directory and in your sketch:
+@code
+  #include "fonts/myfont.h"       // system font
+@endcode
+To use the font in your sketch you select the font as follows: 
+@code
+  GLCD.SelectFont(myfont);   // use myfont 
+@endcode
+
+Note that the distribution contains a file named allFonts.h that includes all the distributed fonts,
+so you can include these files instead of explicitly including the individual fonts
+@code
+#include "fonts/allFonts.h"       // all distributed fonts
+@endcode
+
+In order to make newly created installed fonts "known" by the allFonts.h you will need
+to not only copy the font header to the fonts directory
+but also place an include for the font header file in the allFonts.h file.
+
+
+Font definitions are stored in program memory and this can be significant
+for larger fonts. The 7 pixel high system font uses under 500 bytes,
+the supplied Arial14 font uses 1200 bytes of program memory.
+
+Here are some links to additional free fonts that can be downloaded:
+
+Pixel/Bitmap fonts: <a href="http://www.1001freefonts.com/bitmap-pixel-fonts.php">1001 Free Fonts</a>\n
+Pixel/Bitmap fonts: <a href="http://www.fonts2u.com/index.html">FONTs2U</a>\n
+Pixel/Bitmap as well as Dingbat fonts: <a href="http://www.dafont.com/bitmap.php">dafonts</a>
+
+A few tips to keep in mind is that not all the characters have to saved. You can save
+only a portion or range of the characters. This can be very useful to save
+memory space if all you need is numbers.
+Or in some cases fonts may contain characters that can be used as icons or tiny bitmaps.
+This is particularly true of many of the digbat fonts on the
+<a href="http://www.dafont.com/bitmap.php">dafonts</a>
+site.
+
+
+*/
+
+
+/**
+@page page_Bitmaps Using Bitmaps
+You can use the distributed bitmaps or create your own. 
+The distribution contains a file named allBitmaps.h that includes all the distributed bitmaps, 
+so you can include this to make the bitmaps available:
+@code
+#include "bitmaps/allBitmaps.h"  // all distributed bitmaps
+@endcode
+
+@note Included bitmaps will not consume any memory if they are not explicitly referenced in
+your sketch with the @ref glcd::DrawBitmap() "DrawBitmap()" function.
+
+You can also display your own images in your sketch.
+
+A utility located in the glcd/bitmaps/utils converts a gif,
+jpg, bmp, tga or  png  file to a header file that can be used by your sketch.
+
+The utility is written in the Processing language; However, a java version of the utilty
+is also provided.
+The Processing file glcdMakeBitmap.pde located in the glcdMakeBitmap subdirectory runs
+in the Processing environment on your computer - its not an Arduino sketch.
+See: http://processing.org/
+
+The java runtime (glcdMakeBitmap.jar) and java source (glcdMakeBitmap.java) are located
+in the Java subdirectory.
+
+
+Run the utility by either running the java jar file directly or loading the pde file into Processing.
+
+@image html glcdMakeBitmap.png
+
+Drop the image file to be converted into the window.
+If the image can be converted, the image will be displayed in the window
+and a header file is created in the bitmap directory.
+For example, if the image file name to be converted is named image.bmp, the header is named image.h
+
+To use the newly created bitmap, add the following line to the sketch:
+@code
+#include "bitmaps/image.h"
+@endcode
+and display the image using the following code:
+@code
+  GLCD.DrawBitmap(image, x, y);
+@endcode
+where x and y are the desired location of the upper left edge of the bitmap.
+
+The utility can also update the aggregate header file (named allBitmaps.h).
+Including allBitmaps.h in your sketch makes all images in the bitmaps directory available.
+Flash memory is only consumed for images that are explicitly used by your code so there
+is no penalty using this file instead of explicitly including header files.
+
+To update allBitmaps.h to include all header files in the bitmap directory, click the window.
+
+
+Images are stored in program memory, a 128x64 pixel image takes 1k bytes of flash.
+Bear in mind that each different image used in a sketch will reduce the amount of
+code in a sketch. The utility displays the amount of
+memory required for the image and other useful information when it does the conversion. 
+
+
+*/

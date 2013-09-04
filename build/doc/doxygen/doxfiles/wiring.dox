@@ -1,0 +1,15 @@
+/**
+@page page_wiring Wiring
+Panel characteristics (like pixel height and width) and the pins used to connect
+to the panel must be set in a configuration file.
+Configuration files are provided for the wiring described below,
+you can change the file if you want to use different wiring or panels.
+
+This release supports the panels using the following chipsets:
+
+- @subpage page_ks0108_family
+- @subpage page_sed1520_family
+
+*/
+
+

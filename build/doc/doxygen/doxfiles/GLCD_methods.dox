@@ -1,0 +1,129 @@
+/*
+ * openGLCD library API function & methods documenation
+ *
+ */
+
+
+/**
+@page page_GLCD_methods openGLCD Methods
+
+@subpage page_GLCD_object
+
+@subpage page_gText_object
+
+@subpage page_arduino_print
+
+@subpage page_coordinates
+
+*/
+
+/**
+@page page_GLCD_object GLCD object API functions
+@subpage glcd "Functions availabe to GLCD object"
+
+*/
+
+
+/**
+@page page_gText_object gText API functions
+
+All of the text functions described below can be applied to a rectangular area of the
+screen, called a text area.
+A text area acts like a virtual terminal and text output is displayed within the confines
+of a rectangle given in the DefineArea command.
+For example:
+@code
+  gText  textTop = gText(textAreaTOP); // create a text area covering the top half of the display 
+  gText  myTextArea = gText(GLCD.CenterX-16, GLCD.CenterY -16, GLCD.CenterX +16, GLCD.CenterY+16); // create a text area covering the center 32 pixels of the display 
+@endcode
+
+All of the text functons operate on a text area by using the text area name instead of "GLCD", for example:
+@code
+  textTop.SelectFont(System5x7); // select the system font for the text area name textTop
+  textTop.println("a line of text"); // print a line of text to the text area.
+@endcode
+
+See the example sketches for more example usage.
+
+@subpage gText "Functions available to user defined gText objects"
+
+*/
+
+/**
+@page page_arduino_print Arduino print Functions
+
+All of the Arduino print functions can be used in this library, see: 
+<a href="http://www.arduino.cc/en/Serial/Print">Serial Print Functions</a>
+
+The functions work with any selected font.
+All of these functions print from the current cursor position
+@see @ref gText::CursorTo() "CursorTo()", @ref gText::CursorToXY() "CursorToXY()"
+
+@code
+GLCD.print(character);     // prints the character at the current cursor position
+GLCD.print(integer);       // prints the decimal value of the integer 
+GLCD.print(integer,DEC);   // as above 
+GLCD.print(integer, HEX);  // prints the hexadecimal value of the integer 
+GLCD.print(integer, OCT) ; // prints the octal value of the integer
+GLCD.print(integer, BIN) ; // prints the binary value of the integer
+GLCD.print(integer, BYTE); // prints the ASCII character represented by the integer 
+GLCD.print(float);         // prints a floating point number using two decimal places
+GLCD.print(float, digits); // prints a floating point number using the given number of digits after the decimal point
+GLCD.print(string);        // prints the string
+@endcode
+
+The println variants of these functions are also supported:
+@code
+  GLCD.println(variable);  // will wrap to the next line at the end of the print.  
+@endcode
+
+Printing strings can consume a lot of RAM. Printing strings using the flashStr prefix results in the compiler using flash rather than RAM to store the string
+@code
+  GLCD.print("string");             // string stored in RAM: the compiler reserves 7 bytes of RAM (string length + 1) to store the string
+  GLCD.print(F("string") );  // stores the string in Flash memory (Progmem) , no RAM  is used to store the string
+  GLCD.print(flashStr("string") );  // stores the string in Flash memory (Progmem) , no RAM  is used to store the string
+  GLCD.println(flashStr("another string") );  // as above, but wraps following text to the next line
+@endcode
+
+*/
+
+
+
+/**
+@page page_coordinates GLCD coordinate system
+
+The coorindate system used by the openGLCD library is not a normal
+cartesian coordinate system.
+The coordinate system used by the library assigns (0,0) to the upper left
+corner. Y values grow down instead of the normal up direction, but X values
+increment left to right as in normal cartesian coordinates.
+
+Below is an example of the coordinate system which also includes the libraries properties.
+
+@image html Coordinates.jpg
+0,0 is the upper left edge of the display.
+
+
+@em Properties
+
+
+@ref glcd::Width "GLCD.Width" is the width of the display in pixels
+
+@ref glcd::Height "GLCD.Height" is the height of the display in pixels
+
+@ref glcd::Left "GLCD.Left" is the left most pixel x coordinate (0 zero)
+
+@ref glcd::Right "GLCD.Right" is the right most pixel x coordinate (equals GLCD.Width-1)
+
+@ref glcd::Top "GLCD.Top" is the top most pixel y coordinate on the display (0 zero)
+
+@ref glcd::Bottom "GLCD.Bottom" is the bottom pixel y coordinate (equals GLCD.Height-1)
+
+@ref glcd::CenterX "GLCD.CenterX" is the horizontal center  (equals GLCD.Width/2) 
+
+@ref glcd::CenterY "GLCD.CenterY" is the vertical center (equals GLCD.Height/2) 
+
+
+*/
+
+
