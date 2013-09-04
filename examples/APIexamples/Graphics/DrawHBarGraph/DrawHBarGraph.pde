@@ -76,7 +76,7 @@ void loop()
 		 * no border,
 		 * with a range of 0 to BARMAXVAL
 		 */
-		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+15, GLCD.Width-20, 5, 0, 0, BARMAXVAL, num);
+		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+15, GLCD.Width-2*10, 5, 0, 0, BARMAXVAL, num);
 
 		/*
 		 * Draw Horizontal bar graph:
@@ -87,18 +87,18 @@ void loop()
 		 * 1 pixel border,
 		 * with a range of 0 to BARMAXVAL
 		 */
-		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+21, GLCD.Width-20, 5, 1, 0, BARMAXVAL, num);
+		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+21, GLCD.Width-2*10, 5, 1, 0, BARMAXVAL, num);
 
 		/*
 		 * Draw Horizontal bar graph:
-		 * 10 pixels from right edge of display 
+		 * 10 pixels from left edge of display 
 		 * 27 pixels from top
 		 * (GLCD.Width -20) pixels wide advancing to right of x
 		 * 5 pixels in height droping down from y
 		 * 2 pixel border,
 		 * with a range of 0 to BARMAXVAL
 		 */
-		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+27, GLCD.Width-20, 5, 2, 0, BARMAXVAL, num);
+		GLCD.DrawHBarGraph(GLCD.Left+10, GLCD.Top+27, GLCD.Width-2*10, 5, 2, 0, BARMAXVAL, num);
 
 
 	/*
@@ -139,7 +139,7 @@ void loop()
 		 * no border,
 		 * with a range of 0 to BARMAXVAL
 		 */
-		GLCD.DrawHBarGraph(GLCD.Right-10, GLCD.Bottom, -(GLCD.Width-20), -5, 0, 0, BARMAXVAL, num);
+		GLCD.DrawHBarGraph(GLCD.Right-10, GLCD.Bottom, -(GLCD.Width-2*10), -5, 0, 0, BARMAXVAL, num);
 
 		/*
 		 * Draw Horizontal bar graph:
@@ -150,7 +150,7 @@ void loop()
 		 * 1 pixel border,
 		 * with a range of 0 to BARMAXVAL
 		 */
-		GLCD.DrawHBarGraph(GLCD.Right-10, GLCD.Bottom-6, -(GLCD.Width-20), -5, 1, 0, BARMAXVAL, num);
+		GLCD.DrawHBarGraph(GLCD.Right-10, GLCD.Bottom-6, -(GLCD.Width-2*10), -5, 1, 0, BARMAXVAL, num);
 
 		/*
 		 * Draw Horizontal bar graph:
