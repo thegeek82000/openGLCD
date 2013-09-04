@@ -1,6 +1,6 @@
 @echo off
 REM ##################################################################
-REM # Windows batch file wrapper to create GLCD distribution zip image.
+REM # Windows batch file wrapper to create openGLCD distribution zip image.
 REM #
 REM # This batch file looks for the unix tools, adds their path
 REM # to the PATH variable, than calls a unix based tool
@@ -8,8 +8,9 @@ REM # to do the work to build the zip.
 REM #
 REM # Needed Tools:
 REM # -------------
-REM # you must have a commandline SVN tool:
-REM #	http://www.open.collab.net/downloads/subversion/
+REM # you must have a commandline VCS tool:
+REM #   GIT: http://git-scm.com/download/win
+REM #	SVN: http://www.open.collab.net/downloads/subversion/
 REM #
 REM # you must have 7zip installed.
 REM #	http://www.7-zip.org/
@@ -21,7 +22,7 @@ REM # you must have doxygen/doxywizard installed.
 REM #	http://www.doxygen.nl/download.html#latestsrc
 REM #	(Make sure to have version 1.6.3 or later)
 REM #
-REM # you must either put your svn glcd working directory in the Arduino
+REM # you must either put your openGLCD develoment directory in the Arduino
 REM #	distribution "libraries" directory or install WinAVR.
 REM #	This is because this batch file attempts to locate a unix tools directory
 REM #	and can locate one in the arduino install area.
@@ -69,8 +70,8 @@ REM #
 echo looking for unix tools
 
 REM #
-REM # Use relative paths assuming this batch file is in a svn development
-REM # glcd tree is that is underneath the Arduino distribution tree
+REM # Use relative paths assuming this batch file is in a
+REM # openGLCD tree is that is underneath the Arduino distribution tree
 REM # in the "libraries" directory
 REM # Note that arduino  0018 and later use a different directory structure
 REM #

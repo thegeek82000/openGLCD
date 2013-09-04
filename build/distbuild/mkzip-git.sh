@@ -6,12 +6,15 @@
 #
 # build process overview:
 #
-# - checkout a library from VCS
-# - create the buildinfo files
-# - update/create any needed documenation in the working directory
-# - remove any uneeded/unwanted subdirectories from the working directory
-# - remove the VCS tracking stuff from the working directory
-# - create a zip file of the working directory.
+# - checkout/create a tmp working tree from VCS repo
+# - create the build information files in the tmp working dirctory
+# - update/create any needed documenation in the tmp working directory
+#     includes all doxygen based documenation
+# - remove any uneeded/unwanted subdirectories from the tmp working directory
+#      (currently the build directory)
+# - remove the VCS tracking stuff from the tmp working directory
+# - create a zip file of the tmp working directory.
+# - remove the tmp working directory.
 #
 # It is a bit complicated/messy because it has to capabable of running in
 # multiple environments on multiple OSs.
@@ -31,38 +34,40 @@
 #
 # Not only are there issues with Windoze but there issues whith linux too,
 # especially when running this script from the nautilus GUI shell. 
-# nautilus does not always properly set the $PWD variable to reflect the location
-# where script is launched from.
-# Also Nautilus not use $SHELL to determine which shell intrpreter to launch;
+# nautilus does not always properly set the $PWD variable to reflect the
+# location where the script is launched from.
+# Also Nautilus does not use $SHELL to determine which shell intrpreter
+# to launch;
 # It uses /bin/sh 
 # This creates an issues as the Ubuntu boys in their
-# infinite wisdom as have changed the default shell in /bin to be dash
+# infinite wisdom have changed the default shell in /bin to be dash
 # instead of bash but use bash for the login shells (which Nautilus does use
 # when starting a terminal. So this means that when using Nautilus the script
 # may start with bash or dash.
 # The biggest issue is with the built in echo command in dash.
 # The brilliant boys that wrote dash have broken decades of compability with 
-# the echo command by not supporting # options like -e to process escape characters. 
-# They support escape character processing by default, which
-# is good, but but then they don't swallow a -e option to maintain compatibilty with
+# the echo command by not supporting  options like -e to
+# process escape characters. 
+# They support escape character processing by default, which is good,
+# but but then they don't swallow a -e option to maintain compatibilty with
 # the echo command (VERY stupid). This is why the printf command must be used
 # instead of echo when wanting escaped character processing
 #
 # bottom line is that while written assuming bash, it is a goal to make
 # it work on  bash,  dash, sh so that it can run without having to set
 # the shell processor at the top since this will not work across platforms.
-# *nix uses that use ksh may have to run it by typing 'bash xxx'
+# *nix users that use ksh may have to run it by typing 'bash xxx'
 #
 #
 #
 # Needed Tools:
 # -------------
 # you must have a commandline VCS tool:
-#   VCS:
+#   GIT:
+#	debian package: git
+#   SVN:
 #	http://www.open.collab.net/downloads/subversion/
 #	debian package: subversion
-#   GIT
-#	debian package: git
 #
 #
 # you must have 7zip installed.
@@ -155,7 +160,6 @@ VCSBUILDSTR="git describe --dirty"
 # zip command
 #
 ZIPCMD="7z a"
-
 
 #
 # Name of working directory for distibution tree
