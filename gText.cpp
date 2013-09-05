@@ -149,6 +149,8 @@ uint8_t color;
  * Upon defining the text area, the cursor position for the text area will be set to x,y
  *
  * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
  */
 
 uint8_t
@@ -201,6 +203,9 @@ uint8_t width, height;
  * Upon creation of the text area, the cursor position for the text area will be set to x1, y1
  *
  * @see ClearArea()
+ * @see SetAreaMode()
+ * @see ClearAreaMode()
+ * @see gTextMode
  *
  */
 
@@ -252,7 +257,7 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
  * Define a predefined generic text area
  *
  * @param selection a value from @ref predefinedArea
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
  * Defines a text area using a selection form a set of predefined areas.
  *
@@ -269,7 +274,10 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
  * the upper left coordinate of the given predefined area
  *
  * @see ClearArea()
+ * @see SetAreaMode()
+ * @see ClearAreaMode()
  * @see predefinedArea
+ * @see gTextMode
  *
  */
 
@@ -311,7 +319,10 @@ TareaToken tok;
  * the upper left coordinate of the given predefined area
  *
  * @see ClearArea()
+ * @see SetAreaMode() 
+ * @see ClearAreaMode()
  * @see predefinedArea
+ * @see gTextMode
  *
  */
 
@@ -2045,15 +2056,16 @@ void gText::SetFontColor(uint8_t fgcolor)
  *
  * @b Examples:
  * @code
- * textarea.SetAreaMode(gTextmode_SCROLLDOWN); // enable reverse vertical scrolling
- * textarea.SetAreaMode(gTextmode_VARasFIXED); // render variable font as fixedwidth
- * textarea.SetAreaMode(gTextmode_OVERSTRIKE); // enable text overstrike
+ * textarea.SetAreaMode(gTextMode_SCROLLDOWN); // enable reverse vertical scrolling
+ * textarea.SetAreaMode(gTextMode_VARasFIXED); // render variable font as fixedwidth
+ * textarea.SetAreaMode(gTextMode_OVERSTRIKE); // enable text overstrike
  * @endcode
  *
  * @see ClearAreaMode()
  * @see SelectFont()
  * @see SetFontColor()
  * @see DefineArea()
+ * @see gTextMode
  */
 /*
  */
@@ -2077,14 +2089,15 @@ void gText::SetAreaMode(gTextMode mode)
  *
  * @b Examples:
  * @code
- * textarea.ClearAreaMode(gTextmode_SCROLLDOWN); // Disable reverse vertical scrolling
- * textarea.ClearAreaMode(gTextmode_OVERSTRIKE); // Disable text overstrike mode
+ * textarea.ClearAreaMode(gTextMode_SCROLLDOWN); // Disable reverse vertical scrolling
+ * textarea.ClearAreaMode(gTextMode_OVERSTRIKE); // Disable text overstrike mode
  * @endcode
  *
  * @see SetAreaMode()
  * @see SelectFont()
  * @see SetFontColor()
  * @see DefineArea()
+ * @see gTextMode
  */
 /*
  */

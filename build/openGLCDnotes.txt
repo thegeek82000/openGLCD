@@ -16,12 +16,26 @@ vi:ts=4
 - update comment in header of pinconfig files
   to reflect boards it works with.
 
-- Arduino core code fall back mode so it works on any "Arduino" board.
+- build change (consider)
+	Consider having "readme" in VCS be a readme for openGLCD
+	Have the build script create
+		- openGLCD/doc all of it
+		- openGLCD/readme.txt (which overwrites the VCS readme).
 
-- FillRoundRect API function
+		The build script would copy files from a doc area that include
+			doc/*
+				html stuff
+			ReadMe.txt at root
+			ReleaseNotes.txt at root
+		It would be a directory tree for each type of release
+		"Arduino" being the only one right now.
+			
+
+- Arduino core code fall back mode so it works on any "Arduino" board.
 
 - New Demos
 	-iFPS (iFPS demo - NEW)
+	-cp437 font example
 	-openGLCDGraphics
 	-openGLCDText
 
@@ -47,7 +61,6 @@ vi:ts=4
 
 	- Graphics
 		- ClearScreen
-		- FillRoundRect (when API is real)
 		- DrawBitmap
 		- DrawBitmapXBM
     - Device
@@ -307,3 +320,5 @@ DONE-------------------------------------------------------------
 	Serial2GLCD
 - move debug to build/debug
 - update/cleanup build/debug part of tree
+- FillRoundRect API function
+
