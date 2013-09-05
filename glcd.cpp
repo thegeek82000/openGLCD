@@ -42,7 +42,7 @@
 
 glcd::glcd()
 {
-   glcd_Device::Inverted = NON_INVERTED; 
+	glcd_Device::Inverted = NON_INVERTED; 
 }
 
 /**
@@ -181,12 +181,12 @@ int8_t error, ystep;
 	for(x = x1; x <= x2; x++)
 	{
 		if (steep) this->SetDot(y,x, color); else this->SetDot(x,y, color);
-   		error = error - deltay;
+		error = error - deltay;
 		if (error < 0)
 		{
 			y = y + ystep;
 			error = error + deltax;
-    	}
+		}
 	}
 }
 
@@ -217,60 +217,8 @@ void glcd::DrawRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t
 {
 	DrawHLine(x, y, width, color);				// top
 	DrawHLine(x, y+height-1, width, color);		// bottom
-	DrawVLine(x, y, height, color);			    // left
+	DrawVLine(x, y, height, color);				// left
 	DrawVLine(x+width-1, y, height, color);		// right
-}
-
-/**
- * Draw a rectangle with rounder corners
- *
- * @param x the x coordinate of the upper left corner of the rectangle
- * @param y the y coordinate of the upper left corner of the rectangle
- * @param width width of the rectangle
- * @param height height of the rectangle
- * @param radius radius of rounded corners
- * @param color 
- *
- * optional
- * Draw a rectangle the same as DrawRect() but with rounded corners.
- * Radius is a value from 1 to half the smaller of height or width of the rectangle.
- *
- * @see DrawRect()
- */
-
-void glcd::DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color)
-{
-  	int16_t tSwitch; 
-	uint8_t x1 = 0, y1 = radius;
-  	tSwitch = 3 - 2 * radius;
-	
-	while (x1 <= y1)
-	{
-	    this->SetDot(x+radius - x1, y+radius - y1, color);
-	    this->SetDot(x+radius - y1, y+radius - x1, color);
-
-	    this->SetDot(x+width-radius-1 + x1, y+radius - y1, color);
-	    this->SetDot(x+width-radius-1 + y1, y+radius - x1, color);
-	    
-	    this->SetDot(x+width-radius-1 + x1, y+height-radius-1 + y1, color);
-	    this->SetDot(x+width-radius-1 + y1, y+height-radius-1 + x1, color);
-
-	    this->SetDot(x+radius - x1, y+height-radius-1 + y1, color);
-	    this->SetDot(x+radius - y1, y+height-radius-1 + x1, color);
-
-	    if (tSwitch < 0) {
-	    	tSwitch += (4 * x1 + 6);
-	    } else {
-	    	tSwitch += (4 * (x1 - y1) + 10);
-	    	y1--;
-	    }
-	    x1++;
-	}
-	  	
-	this->DrawHLine(x+radius, y, width-(2*radius), color);			// top
-	this->DrawHLine(x+radius, y+height-1, width-(2*radius), color);	// bottom
-	this->DrawVLine(x, y+radius, height-(2*radius), color);			// left
-	this->DrawVLine(x+width-1, y+radius, height-(2*radius), color);	// right
 }
 
 /**
@@ -301,7 +249,130 @@ void glcd::DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, ui
 
 void glcd::FillRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color)
 {
-    this->SetPixels(x,y,x+width-1,y+height-1,color);
+	this->SetPixels(x,y,x+width-1,y+height-1,color);
+}
+
+/**
+ * Draw a rectangle with rounded corners
+ *
+ * @param x the x coordinate of the upper left corner of the rectangle
+ * @param y the y coordinate of the upper left corner of the rectangle
+ * @param width width of the rectangle
+ * @param height height of the rectangle
+ * @param radius radius of rounded corners
+ * @param color 
+ *
+ * Draw a rectangle the same as DrawRect() but with rounded corners.
+ * Radius is a value from 1 to half the smaller of height or width of the rectangle.
+ *
+ * @see DrawRect() FillRoundRect
+ */
+
+void glcd::DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color)
+{
+  	int16_t tSwitch; 
+	uint8_t x1 = 0, y1 = radius;
+  	tSwitch = 3 - 2 * radius;
+	
+	while (x1 <= y1)
+	{
+		// upper left corner
+		this->SetDot(x+radius - x1, y+radius - y1, color); // upper half
+		this->SetDot(x+radius - y1, y+radius - x1, color); // lower half
+
+		
+		// upper right corner
+		this->SetDot(x+width-radius-1 + x1, y+radius - y1, color); // upper half
+		this->SetDot(x+width-radius-1 + y1, y+radius - x1, color); // lower half
+
+		// lower right corner
+		this->SetDot(x+width-radius-1 + x1, y+height-radius-1 + y1, color); // lower half
+		this->SetDot(x+width-radius-1 + y1, y+height-radius-1 + x1, color); // upper half
+
+		// lower left corner
+		this->SetDot(x+radius - x1, y+height-radius-1 + y1, color); // lower half
+		this->SetDot(x+radius - y1, y+height-radius-1 + x1, color); // upper half
+
+		if (tSwitch < 0)
+		{
+			tSwitch += (4 * x1 + 6);
+		}
+		else
+		{
+			tSwitch += (4 * (x1 - y1) + 10);
+			y1--;
+		}
+		x1++;
+	}
+	  	
+	this->DrawHLine(x+radius, y, width-(2*radius), color);			// top
+	this->DrawHLine(x+radius, y+height-1, width-(2*radius), color);	// bottom
+	this->DrawVLine(x, y+radius, height-(2*radius), color);			// left
+	this->DrawVLine(x+width-1, y+radius, height-(2*radius), color);	// right
+}
+/**
+ * Fill a rectangle with rounded corners
+ *
+ * @param x the x coordinate of the upper left corner of the rectangle
+ * @param y the y coordinate of the upper left corner of the rectangle
+ * @param width width of the rectangle
+ * @param height height of the rectangle
+ * @param radius radius of rounded corners
+ * @param color 
+ *
+ * Fill a rectangle with the same outline as DrawRoundRect()
+ * Radius is a value from 1 to half the smaller of height or width of the rectangle.
+ *
+ * @see DrawRoundRect DrawRect() FillRect()
+ * 
+ */
+
+/*
+ * Filling rounded rectangles kind of sucks as there is no good way to do it,
+ * The code below draws vertical lines between the upper and lower corners.
+ * Then fills in the remaining rectangle.
+ * -- bperrybap
+ */
+void glcd::FillRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color)
+{
+  	int16_t tSwitch; 
+	uint8_t x1 = 0, y1 = radius;
+  	tSwitch = 3 - 2 * radius;
+	
+	// center block
+	// filling center block first makes it apear to fill faster
+	FillRect(x+radius, y, width-2*radius, height);
+
+	while (x1 <= y1)
+	{
+		// left side
+		DrawLine(
+			x+radius - x1, y+radius - y1,			// upper left corner upper half
+			x+radius - x1, y+height-radius-1 + y1,	// lower left corner lower half
+			color);
+		DrawLine(
+			x+radius - y1, y+radius - x1,			// upper left corner lower half
+			x+radius - y1, y+height-radius-1 + x1,	// lower left corner upper half
+			color);
+
+		// right side
+		DrawLine(
+			x+width-radius-1 + x1, y+radius - y1,			// upper right corner upper half
+			x+width-radius-1 + x1, y+height-radius-1 + y1, // lower right corner lower half
+			color);
+		DrawLine(
+			x+width-radius-1 + y1, y+radius - x1,			// upper right corner lower half
+			x+width-radius-1 + y1, y+height-radius-1 + x1,	// lower right corner upper half
+			color);
+
+	    if (tSwitch < 0) {
+	    	tSwitch += (4 * x1 + 6);
+	    } else {
+	    	tSwitch += (4 * (x1 - y1) + 10);
+	    	y1--;
+	    }
+	    x1++;
+	}
 }
 
 /**
@@ -678,7 +749,7 @@ uint8_t xbmdata = 0; // FIXME? assignment unneeded, but eliminates a stupid warn
 
 void glcd::DrawVLine(uint8_t x, uint8_t y, uint8_t height, uint8_t color)
 {
-   this->SetPixels(x,y,x,y+height-1,color);
+	this->SetPixels(x,y,x,y+height-1,color);
 }
 	
 /**
@@ -700,7 +771,7 @@ void glcd::DrawVLine(uint8_t x, uint8_t y, uint8_t height, uint8_t color)
 
 void glcd::DrawHLine(uint8_t x, uint8_t y, uint8_t width, uint8_t color)
 {
-    this->SetPixels(x,y, x+width-1, y, color);
+	this->SetPixels(x,y, x+width-1, y, color);
 }
 
 /**
@@ -726,7 +797,7 @@ void glcd::DrawHLine(uint8_t x, uint8_t y, uint8_t width, uint8_t color)
  */
 void glcd::DrawCircle(uint8_t xCenter, uint8_t yCenter, uint8_t radius, uint8_t color)
 {
-   this->DrawRoundRect(xCenter-radius, yCenter-radius, 2*radius, 2*radius, radius, color);
+	this->DrawRoundRect(xCenter-radius, yCenter-radius, 2*radius, 2*radius, radius, color);
 }
 
 /**
@@ -804,7 +875,7 @@ uint8_t y = radius;
 		}
 		x++;
 		ddF_x += 2;
-		f += ddF_x;    
+		f += ddF_x;
 
 		/*
 		 * Now draw vertical lines between the points on the circle rather than
@@ -1055,7 +1126,7 @@ uint8_t glrx, glry; // bargraph lower right corner coordinates
 	{
 		for(uint8_t i = 0; i < border; i++)
 		{
-			GLCD.DrawRect(x+i, y+i, abs(width)-2*i, abs(height)-2*i);
+			this->DrawRect(x+i, y+i, abs(width)-2*i, abs(height)-2*i);
 		}
 	}
 
@@ -1069,17 +1140,17 @@ uint8_t glrx, glry; // bargraph lower right corner coordinates
 	{
 		// bar advances to left
 		if(busypix)
-			GLCD.SetPixels(glrx-busypix+1, guly, glrx, glry, PIXEL_ON);
+			this->SetPixels(glrx-busypix+1, guly, glrx, glry, PIXEL_ON);
 		if(curval < maxval)
-			GLCD.SetPixels(gulx, guly, glrx-busypix, glry, PIXEL_OFF);
+			this->SetPixels(gulx, guly, glrx-busypix, glry, PIXEL_OFF);
 	}
 	else
 	{
 		// bar advances to right
 		if(busypix)
-			GLCD.SetPixels(gulx, guly, gulx+busypix-1, glry, PIXEL_ON);
+			this->SetPixels(gulx, guly, gulx+busypix-1, glry, PIXEL_ON);
 		if(curval < maxval)
-			GLCD.SetPixels(gulx+busypix+1, guly, glrx, glry, PIXEL_OFF);
+			this->SetPixels(gulx+busypix+1, guly, glrx, glry, PIXEL_OFF);
 	}
 }
 
@@ -1183,7 +1254,7 @@ uint8_t glrx, glry; // bargraph lower right corner coordinates
 	{
 		for(uint8_t i = 0; i < border; i++)
 		{
-			GLCD.DrawRect(x+i, y+i, abs(width)-2*i, abs(height)-2*i);
+			this->DrawRect(x+i, y+i, abs(width)-2*i, abs(height)-2*i);
 		}
 	}
 
@@ -1197,17 +1268,17 @@ uint8_t glrx, glry; // bargraph lower right corner coordinates
 	{
 		// bar advances up
 		if(busypix)
-			GLCD.SetPixels(gulx, glry-busypix+1, glrx, glry, PIXEL_ON);
+			this->SetPixels(gulx, glry-busypix+1, glrx, glry, PIXEL_ON);
 		if(curval < maxval)
-			GLCD.SetPixels(gulx, guly, glrx, glry-busypix, PIXEL_OFF);
+			this->SetPixels(gulx, guly, glrx, glry-busypix, PIXEL_OFF);
 	}
 	else
 	{
 		// bar advances down
 		if(busypix)
-			GLCD.SetPixels(gulx, guly, glrx, guly+busypix-1, PIXEL_ON);
+			this->SetPixels(gulx, guly, glrx, guly+busypix-1, PIXEL_ON);
 		if(curval < maxval)
-			GLCD.SetPixels(gulx, guly+busypix+1, glrx, glry, PIXEL_OFF);
+			this->SetPixels(gulx, guly+busypix+1, glrx, glry, PIXEL_OFF);
 	}
 }
 

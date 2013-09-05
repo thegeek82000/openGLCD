@@ -113,8 +113,9 @@ class glcd : public gText
 	void DrawHLine(uint8_t x, uint8_t y, uint8_t width, uint8_t color= PIXEL_ON);
 	void DrawLine(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t color= PIXEL_ON);
 	void DrawRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color= PIXEL_ON);
-	void DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color= PIXEL_ON);
 	void FillRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t color= PIXEL_ON);
+	void DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color= PIXEL_ON);
+	void FillRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t radius, uint8_t color= PIXEL_ON);
 	void InvertRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height);
 	void DrawTriangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t x3, uint8_t y3, uint8_t color=PIXEL_ON);
 	void FillTriangle(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t x3, uint8_t y3, uint8_t color=PIXEL_ON);
