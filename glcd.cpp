@@ -320,7 +320,8 @@ void glcd::DrawRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, ui
  * @param radius radius of rounded corners
  * @param color 
  *
- * Fill a rectangle with the same outline as DrawRoundRect()
+ * Fill a rectanglular area with rounded corners with the same outline
+ * as DrawRoundRect()\n
  * Radius is a value from 1 to half the smaller of height or width of the rectangle.
  *
  * @see DrawRoundRect DrawRect() FillRect()
@@ -341,7 +342,7 @@ void glcd::FillRoundRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, ui
 	
 	// center block
 	// filling center block first makes it apear to fill faster
-	FillRect(x+radius, y, width-2*radius, height);
+	FillRect(x+radius, y, width-2*radius, height, color);
 
 	while (x1 <= y1)
 	{
