@@ -1,4 +1,4 @@
-Instructions for how to build a zip.
+Instructions for how to build a zip installation file.
 
 Generic notes based on current operation:
 
@@ -11,6 +11,12 @@ the bash script to properly run. (they come with WinAVR & Arduino installs)
 - create the build information files in the tmp working directory
 - update/create any needed documenation in the tmp working directory
     includes all doxygen based documenation
+    NOTE: the script will patch the PROJECT_NAME and PROJECT_NUMBER
+	to override what is in the doxyfile
+	They are set in the sript. The PROJECT_NUMBER will be set to match
+	the GLCDBIULDVERSION. This ensures that the version reported in doxygen
+	always matches the VCS version and the doxyfile doesn't have to be manually
+	updated.
 - remove any uneeded/unwanted subdirectories from the tmp working directory
 - remove the VCS tracking stuff from the tmp working directory
 - create a zip file of the working directory.

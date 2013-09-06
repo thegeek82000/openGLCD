@@ -6,6 +6,11 @@ The subdirectory debug is used to aid in creating special builds for debugging
 
 The main idea behind this directory is that this build directory and 
 its files will not be included in a distribution zip image.
+Also, it should be noted that while the VCS tree can be used "in place"
+for development, the VCS tree is NOT a distribution.
+Only the build script script can build a distribution image
+because certain files and directories don't exist in the VCS tree
+and are created/modified as needed when building a distribution.
 
 For documenation.
 If the document is to always be distributed, it could be put it in openGLCD/doc.

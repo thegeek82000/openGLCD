@@ -180,6 +180,11 @@ GLCDDISTDIR="$PROGTEMP/$GLCDLIBNAME"
 DOXYGEN=doxygen
 DOXYGENDIR="$GLCDDISTDIR/build/doc/doxygen"
 DOXYGENCFG=Doxyfile.doxcfg
+#
+# override project name and number in doxyfile
+#
+DOXYPROJNAME="Arduino $GLCDLIBNAME Library"
+DOXYPROJNUM="Version $($VCSBUILDSTR)"
 
 #
 # name of Build Information file
@@ -236,7 +241,7 @@ fi
 echo Working tree is ready for processing
 
 # 
-# Must deal with and grab svn build number string before we do any mucking around with tree
+# Must deal with and grab VCS build number string before we do any mucking around with tree
 #
 cd "$GLCDDISTDIR"
 GLCDBUILDVERSION=$($VCSBUILDSTR)
@@ -276,7 +281,11 @@ echo "#endif" >> "$GLCDBUILDINFO_HDR"
 echo Building Doxygen Documents
 echo ======== Building Doxygen Documents >> "$LOGFILE"
 cd "$DOXYGENDIR"
-$DOXYGEN $DOXYGENCFG  >> "$LOGFILE" 2>&1
+echo "PROJECT_NAME=\"$DOXYPROJNAME\"" >> "$LOGFILE"
+echo "PROJECT_NUMBER=\"$DOXYPROJNUM\"" >> "$LOGFILE"
+echo "PROJECT_NAME=$DOXYPROJNAME"
+echo "PROJECT_NUMBER=$DOXYPROJNUM"
+(cat $DOXYGENCFG ; echo "PROJECT_NAME=\"$DOXYPROJNAME\""  ; echo "PROJECT_NUMBER=\"$DOXYPROJNUM\"" ) | $DOXYGEN - >> "$LOGFILE" 2>&1
 cd "$PROGWD"
 
 #
