@@ -1,7 +1,9 @@
 /*
  *  AnalogClock.cpp- Analog clock display for Graphics LCD libraries
- *  coded by Michael Margolis 2010
-*/
+ *
+ * 2013.06.15 bperrybap        - updates to work with openGLCD
+ * 2010 Michael Margolis       - original creation
+ */
 
 #include "AnalogClock.h"
 #include <openGLCD.h>  // this clock uses openGLCD library for display
@@ -27,7 +29,7 @@ void AnalogClock::Init(byte x, byte y, byte r)
 	/* Initialise previous positions of hour and minute hand */
 	PX_Hour = PX_Minute = PX_Second = x_centre ;
 	PY_Hour = PY_Minute = PY_Second = y_centre ;
-        GLCD.DrawCircle(x,y, r + 3,BLACK); // draw the surrounding circle
+        GLCD.DrawCircle(x,y, r + 3); // draw the surrounding circle
 	this->DrawFace() ; /* draw the clock dial       */
 }
 
@@ -44,27 +46,27 @@ void AnalogClock::DisplayTime( byte hours, byte minutes, byte seconds )
 	this->DrawFace();
 #endif
 	/* erase previous hands */
-	GLCD.DrawLine( x_centre, y_centre, PX_Hour, PY_Hour, WHITE ) ;
-	GLCD.DrawLine( x_centre, y_centre, PX_Minute, PY_Minute, WHITE ) ;
-       // GLCD.SetDot(PX_Second, PY_Second, WHITE); 
-        GLCD.DrawCircle(PX_Second, PY_Second,1, WHITE);
+	GLCD.DrawLine( x_centre, y_centre, PX_Hour, PY_Hour, PIXEL_OFF ) ;
+	GLCD.DrawLine( x_centre, y_centre, PX_Minute, PY_Minute, PIXEL_OFF ) ;
+       // GLCD.SetDot(PX_Second, PY_Second, PIXEL_OFF); 
+        GLCD.DrawCircle(PX_Second, PY_Second,1, PIXEL_OFF);
 
 	/* calculate new position of minute hand and draw it */
 	angle = minutes ;
 	this->CalcHands( angle, l_minute, &PX_Minute, &PY_Minute ) ;
-	GLCD.DrawLine( x_centre, y_centre, PX_Minute, PY_Minute, BLACK ) ;
+	GLCD.DrawLine( x_centre, y_centre, PX_Minute, PY_Minute, PIXEL_ON ) ;
 
 	/* calculate new position of hour hand and draw it */
 	angle = ( ( 5*hours ) + ( minutes/12 ) ) % 60 ;
 	this->CalcHands( angle, l_hour, &PX_Hour, &PY_Hour ) ;
-	GLCD.DrawLine( x_centre, y_centre, PX_Hour, PY_Hour, BLACK ) ;
+	GLCD.DrawLine( x_centre, y_centre, PX_Hour, PY_Hour, PIXEL_ON ) ;
 
 	/* calculate new position of second hand and draw if requested */
         if( seconds != -1)   
         {
   	  this->CalcHands( seconds, l_second, &PX_Second, &PY_Second ) ;
-	  //GLCD.SetDot( PX_Second, PY_Second, BLACK ) ;
-          GLCD.DrawCircle(PX_Second, PY_Second,1, BLACK);
+	  //GLCD.SetDot( PX_Second, PY_Second, PIXEL_ON ) ;
+          GLCD.DrawCircle(PX_Second, PY_Second,1, PIXEL_ON);
         }
         
 	/* re-draw clock centre */
@@ -116,7 +118,7 @@ void AnalogClock::DrawFace()
 void AnalogClock::Box( byte x, byte y  )
 /* draw a 3 x 3 pixel box centered at x,y */
 {
-	byte color = BLACK;
+	byte color = PIXEL_ON;
 	GLCD.DrawLine( x-1, y-1, x+1, y-1,color ) ;
 	GLCD.DrawLine( x-1, y,   x+1, y, color ) ;
 	GLCD.DrawLine( x-1, y+1, x+1, y+1,color ) ;	
@@ -136,17 +138,17 @@ void AnalogClock::SegBox( byte FaceAngle )
 	switch( quadrant ) {
 	  case 0 :
 	  case 4 :  // 12 oclock
-		      GLCD.GotoXY(x_centre-6,  y_centre - radius -1 );		       
+		      GLCD.CursorToXY(x_centre-6,  y_centre - radius -1 );		       
 			   break;
 	  case 1 : // 3 oclock
-		      GLCD.GotoXY(x_centre + radius - 3,  y_centre -3 );
+		      GLCD.CursorToXY(x_centre + radius - 4,  y_centre -3 );
 			   break;
 	  case 2 : // 6 oclock
-		       GLCD.GotoXY(x_centre-2,  y_centre + radius -5);
+		       GLCD.CursorToXY(x_centre-2,  y_centre + radius -6);
 			   break;
 	  case 3 : // 9 oclock
-		     GLCD.GotoXY(x_centre- radius ,  y_centre -3 );
+		     GLCD.CursorToXY(x_centre- radius ,  y_centre -3 );
 			   break;
 	}
-	 GLCD.PrintNumber(hour);
+	GLCD.print(hour);
 }

@@ -154,7 +154,10 @@ GLCDREPO="$PROGWD/../.."
 # cheat for now and simpy copy the local git repo
 VCSCMD="cp -r"
 #VCSBUILDSTR="git log --oneline |wc -l"
-VCSBUILDSTR="git describe --dirty"
+# create build and rev string
+VCSBUILDSTR=$(git describe --dirty)
+# strip out leading "v" and remove trailing git stuff
+VCSBUILDREV=$(echo $VCSBUILDSTR | sed -e "s/^v//" -e "s/-g.*//")
 
 #
 # zip command
@@ -184,7 +187,7 @@ DOXYGENCFG=Doxyfile.doxcfg
 # override project name and number in doxyfile
 #
 DOXYPROJNAME="Arduino $GLCDLIBNAME Library"
-DOXYPROJNUM="Version $($VCSBUILDSTR)"
+DOXYPROJNUM="Version $VCSBUILDSTR"
 
 #
 # name of Build Information file
@@ -197,8 +200,9 @@ GLCDBUILDINFO_HDR_GUARD=__$(basename "$GLCDBUILDINFO_HDR" .h)_h__
 #
 # names of build string defines
 #
-GLCD_GLCDLIB_DATESTR_NAME=GLCD_GLCDLIB_DATESTR
-GLCD_GLCDLIB_BUILDSTR_NAME=GLCD_GLCDLIB_BUILDSTR
+GLCD_GLCDLIB_DATESTR_NAME=GLCD_GLCDLIB_BUILD_DATESTR
+GLCD_GLCDLIB_BUILDSTR_NAME=GLCD_GLCDLIB_BUILD_BUILDSTR
+GLCD_GLCDLIB_REVSTR_NAME=GLCD_GLCDLIB_BUILD_REVSTR
 
 #
 # list of unwanted directories
@@ -214,13 +218,6 @@ GLCDUNWANTED="debug build .git"
 # be careful with this.
 #
 GLCDTRASH=".svn"
-
-#
-# Name of ZIP file
-# has date as part of file name
-#
-
-GLCDZIPNAME="$GLCDLIBNAME-$MYDATE.zip"
 
 ##################################################################
 # Now start to actually do something
@@ -244,7 +241,9 @@ echo Working tree is ready for processing
 # Must deal with and grab VCS build number string before we do any mucking around with tree
 #
 cd "$GLCDDISTDIR"
-GLCDBUILDVERSION=$($VCSBUILDSTR)
+GLCDBUILDSTR=$VCSBUILDSTR
+GLCDBUILDREV=$VCSBUILDREV
+
 cd "$PROGWD"
 
 
@@ -256,7 +255,8 @@ echo Creating BuildInfo Text File "$GLCDBUILDINFO" in DOS format
 echo ======== Creating BuildInfo Text File "$GLCDBUILDINFO" in DOS format >> "$LOGFILE"
 printf "Distribution files created $MYDATETIME\r\n" > "$GLCDBUILDINFO"
 printf "=====================================================================\r\n" >> "$GLCDBUILDINFO"
-printf "BuildVersion $GLCDBUILDVERSION \r\n">> "$GLCDBUILDINFO"
+printf "Revision: $GLCDBUILDREV \r\n">> "$GLCDBUILDINFO"
+printf "Build: $GLCDBUILDSTR \r\n">> "$GLCDBUILDINFO"
 printf "=====================================================================\r\n" >> "$GLCDBUILDINFO"
 
 echo Creating BuildInfo Header file
@@ -271,7 +271,9 @@ echo "#define $GLCDBUILDINFO_HDR_GUARD"  >> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
 printf "#define $GLCD_GLCDLIB_DATESTR_NAME\\t\"$MYDATETIME\"">> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
-printf "#define $GLCD_GLCDLIB_BUILDSTR_NAME\\t\"$GLCDBUILDVERSION\"" >> "$GLCDBUILDINFO_HDR"
+printf "#define $GLCD_GLCDLIB_REVSTR_NAME\\t\"$GLCDBUILDREV\"" >> "$GLCDBUILDINFO_HDR"
+echo  >> "$GLCDBUILDINFO_HDR"
+printf "#define $GLCD_GLCDLIB_BUILDSTR_NAME\\t\"$GLCDBUILDSTR\"" >> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
 echo "#endif" >> "$GLCDBUILDINFO_HDR"
 
@@ -308,6 +310,12 @@ done
 
 cd "$PROGWD"
 
+#
+# Name of ZIP file
+#
+
+#GLCDZIPNAME="$GLCDLIBNAME-$MYDATE.zip"
+GLCDZIPNAME="$GLCDLIBNAME-$GLCDBUILDSTR.zip"
 
 echo Creating Zip file
 echo ======== Creating Zip file from $GLCDDISTDIR >> "$LOGFILE"

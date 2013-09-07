@@ -28,7 +28,7 @@ void IntroScreen()
 {
   GLCD.SelectFont(Arial14);
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
-  GLCD.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
+  GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
   GLCD.DrawRoundRect(0+10,0, GLCD.Right-20, GLCD.CharHeight(0) *2 + 1, 5);  // rounded rectangle around text area   
 }
 
@@ -38,18 +38,18 @@ void loop()
 	DrawHLine();
 	DrawLine();
 	DrawRect();
+	InvertRect();
+
 	DrawTriangle();
 	DrawRoundRect();
 	DrawCircle();
 	DrawEllipse();
 
-	InvertRect();
-
-	FillCircle();
-	FillEllipse();
 	FillRect();
 	FillRoundRect();
 	FillTriangle();
+	FillCircle();
+	FillEllipse();
 
 	DrawHBarGraph();
 	DrawVBarGraph();
@@ -153,7 +153,7 @@ void DrawHBarGraph()
 	 * break up into two seperate loops
 	 */
 #if (DISPLAY_HEIGHT < 64)
-		delay(DELAY/20);
+		delay(DELAY/30);
 	}
 	delay(1000);
 	GLCD.ClearScreen();
@@ -210,7 +210,7 @@ void DrawHBarGraph()
 		 */
 		GLCD.DrawHBarGraph(GLCD.Right-10, GLCD.Bottom-12, -(GLCD.Width-20), -5, 2, 0, BARMAXVAL, num);
 
-		delay(DELAY/20);
+		delay(DELAY/30);
 	}
 
 	delay(DELAY);
@@ -225,7 +225,7 @@ void DrawHLine(void)
 	for(uint8_t y = 0; y < GLCD.Height; y+=4)
 	{
 		GLCD.DrawHLine(0, y, GLCD.Width);
-		delay(150);
+		delay(100);
 	}
 	delay(DELAY);
 }
@@ -240,7 +240,7 @@ void DrawLine(void)
 	for(uint8_t y = 0; y < GLCD.Height; y+=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, GLCD.Left,y);
-		delay(150);
+		delay(100);
 	}
 	/*
 	 * Draw lines from center connecting to the 8th pixels along bottom
@@ -248,7 +248,7 @@ void DrawLine(void)
 	for(uint8_t x = 0; x < GLCD.Width; x+=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, x,GLCD.Bottom);
-		delay(150);
+		delay(100);
 	}
 
 	/*
@@ -257,7 +257,7 @@ void DrawLine(void)
 	for(int y = GLCD.Bottom; y > 0; y -=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, GLCD.Right,y);
-		delay(150);
+		delay(100);
 	}
 
 	/*
@@ -266,7 +266,7 @@ void DrawLine(void)
 	for(uint8_t x = GLCD.Right; x > 7; x -=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, x,GLCD.Top);
-		delay(150);
+		delay(100);
 	}
 	
 	delay(DELAY);
@@ -282,7 +282,7 @@ void DrawRect(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2; i +=4)
 	{
 		GLCD.DrawRect(GLCD.Left+i, GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i);
-		delay(200);
+		delay(150);
 	}
 	delay(DELAY);
 }
@@ -438,7 +438,7 @@ void DrawVLine(void)
 	for(uint8_t x = 0; x < GLCD.Width; x+=4)
 	{
 		GLCD.DrawVLine(x, 0, GLCD.Height-1);
-		delay(150);
+		delay(100);
 	}
 	delay(DELAY);
 }
@@ -450,14 +450,14 @@ void FillCircle(void)
 	 */
 
 	GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-1);
-	delay(2000);
+	delay(1000);
 
 	/*
 	 * Draw filled circle in center of display
 	 */
 
 	GLCD.FillCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-1);
-	delay(2000);
+	delay(1000);
 
 	/*
 	 * A little animation for eye candy
@@ -530,7 +530,7 @@ void FillEllipse(void)
 	 */
 
 	GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, 32, 14);
-	delay(2000);
+	delay(1000);
 	GLCD.ClearScreen();
 
 	/*
@@ -538,7 +538,7 @@ void FillEllipse(void)
 	 */
 
 	GLCD.FillEllipse(GLCD.CenterX, GLCD.CenterY, 32, 14);
-	delay(2000);
+	delay(1000);
 	GLCD.ClearScreen();
 
 	/*
@@ -546,7 +546,7 @@ void FillEllipse(void)
 	 * Note: DrawCircle() is more efficient
 	 */
 	GLCD.FillEllipse(GLCD.CenterX, GLCD.CenterY, 10, 10);
-	delay(2000);
+	delay(1000);
 	GLCD.ClearScreen();
 
 	/*
@@ -623,9 +623,8 @@ void FillRect(void)
 	GLCD.SelectFont(SystemFont5x7);
 	GLCD.SetDisplayMode(NON_INVERTED); // "normal" display mode
 	GLCD.ClearScreen();
-	GLCD.DrawString("FillRect", gTextfmt_center, gTextfmt_center);
-	delay(1000);
 
+//	GLCD.DrawString("FillRect", gTextfmt_center, gTextfmt_center);
 	/*
 	 * Fill a rectangle 
 	 * 8 pixels in height 2 pixels from top of display
@@ -659,7 +658,7 @@ void FillRect(void)
 	 */
 	GLCD.SetDisplayMode(INVERTED); // "INVERTED" display mode
 	GLCD.ClearScreen();
-	GLCD.DrawString("FillRect", gTextfmt_center, gTextfmt_center);
+//	GLCD.DrawString("FillRect", gTextfmt_center, gTextfmt_center);
 
 	/*
 	 * Fill a rectangle 
@@ -838,7 +837,6 @@ void InvertRect(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2; i +=4)
 	{
 		GLCD.DrawRect(GLCD.Left+i, GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i);
-		delay(200);
 	}
 
 	delay(1000);

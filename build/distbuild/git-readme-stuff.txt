@@ -11,6 +11,9 @@ git log -n 1 --format=%ci
 git log -n 1 --format=%aD
 (show most recent RFC2822 date/time commit)
 
+git describe --abbrev=0
+(show most recent tag)
+
 git clean
 (remove untracked files)
 

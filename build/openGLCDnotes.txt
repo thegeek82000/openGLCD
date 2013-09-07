@@ -321,4 +321,6 @@ DONE-------------------------------------------------------------
 - move debug to build/debug
 - update/cleanup build/debug part of tree
 - FillRoundRect API function
+- updates to build script for 
+#define GLCD_GLCDLIB_REVSTR "DevRev"  // development rev string
 

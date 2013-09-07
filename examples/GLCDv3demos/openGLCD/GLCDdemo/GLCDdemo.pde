@@ -75,13 +75,13 @@ void  loop()
   int fps_fract = (10000 % duration) * 10 / (duration/10);
   if(GLCD.Height <= 32)
   {
-    textArea.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(0));
+    textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(0));
     textArea.CursorTo(0,1);
   }
   else  
   {
     textArea.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, gTextfmt_row(0));
-    textArea.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(1));
+    textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(1));
     textArea.CursorTo(0,3);
   }
 
@@ -100,7 +100,7 @@ void introScreen()
   GLCD.SelectFont(Arial_14); // you can also make your own fonts, see playground for details   
    
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
-  GLCD.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
+  GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
   GLCD.DrawRoundRect(0+10,0, GLCD.Right-20, GLCD.CharHeight(0) *2 + 1, 5);  // rounded rectangle around text area   
   countdown(5);  
   GLCD.ClearScreen();

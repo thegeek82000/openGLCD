@@ -19,21 +19,6 @@
 
 #include <Time.h>  // download from: http://www.arduino.cc/playground/Code/Time
 
-#ifdef notdef
-/*
- * Check for small displays as several components of this demo
- * require a large display.
- */
-#if DISPLAY_HEIGHT < 64
-#error GLCD_BigDemo requires a display at least 64 pixels tall
-#endif
-#if DISPLAY_WIDTH < 128
-#error GLCD_BigDemo requires a display at least 128 pixels wide
-#endif
-#endif
-
-
-
 Image_t icon;
 
 gText textArea;              // a text area to be defined later in the sketch
@@ -107,7 +92,7 @@ void introScreen(){
 
   GLCD.SelectFont(Arial_14); // you can also make your own fonts, see playground for details   
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
-  GLCD.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
+  GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
   GLCD.DrawRoundRect(0+10,0, GLCD.Right-20, GLCD.CharHeight(0) *2 + 1, 5);  // rounded rectangle around text area   
   countdown(5);  
   GLCD.ClearScreen(); 
@@ -131,18 +116,18 @@ void showCharacters(const char * title, Font_t font) {
     delay(20);
   }
 }
-
-void drawSpinner(byte pos, byte x, byte y) {   
+void drawSpinner(byte pos, byte x, byte y, uint8_t color)
+{
   // this draws an object that appears to spin
   switch(pos % 8) {
-    case 0 : GLCD.DrawLine( x, y-8, x, y+8);        break;
-    case 1 : GLCD.DrawLine( x+3, y-7, x-3, y+7);    break;
-    case 2 : GLCD.DrawLine( x+6, y-6, x-6, y+6);    break;
-    case 3 : GLCD.DrawLine( x+7, y-3, x-7, y+3);    break;
-    case 4 : GLCD.DrawLine( x+8, y, x-8, y);        break;
-    case 5 : GLCD.DrawLine( x+7, y+3, x-7, y-3);    break;
-    case 6 : GLCD.DrawLine( x+6, y+6, x-6, y-6);    break; 
-    case 7 : GLCD.DrawLine( x+3, y+7, x-3, y-7);    break;
+    case 0 : GLCD.DrawLine( x, y-8, x, y+8, color);        break;
+    case 1 : GLCD.DrawLine( x+3, y-7, x-3, y+7, color);    break;
+    case 2 : GLCD.DrawLine( x+6, y-6, x-6, y+6, color);    break;
+    case 3 : GLCD.DrawLine( x+7, y-3, x-7, y+3, color);    break;
+    case 4 : GLCD.DrawLine( x+8, y, x-8, y, color);        break;
+    case 5 : GLCD.DrawLine( x+7, y+3, x-7, y-3, color);    break;
+    case 6 : GLCD.DrawLine( x+6, y+6, x-6, y-6, color);    break; 
+    case 7 : GLCD.DrawLine( x+3, y+7, x-3, y-7, color);    break;
   } 
 }
 
@@ -343,14 +328,16 @@ void FPS( const byte width, const byte height)
   textArea.SelectFont(System5x7); 
 
   startMillis = millis();
-  while(iter < 10){   // do 10 iterations
+  while(iter < 10)   // do 10 iterations
+  {
     GLCD.DrawRect(0, 0, CenterX, Bottom); // rectangle in left side of screen
     GLCD.DrawRoundRect(CenterX + 2, 0, CenterX - 3, Bottom, 5);  // rounded rectangle around text area   
     for(int i=0; i < Bottom; i += 4)
       GLCD.DrawLine(1,1, CenterX-1, i);  // draw lines from upper left down right side of rectangle  
     GLCD.DrawCircle(GLCD.CenterX/2, GLCD.CenterY-1, min(GLCD.CenterX/2, GLCD.CenterY)-2);   // draw circle centered in the left side of screen
-    GLCD.FillRect( CenterX + CenterX/2-8 , CenterY + CenterY/2 -8,16,16, WHITE); // clear previous spinner position  
-    drawSpinner(loops++, CenterX + CenterX/2, CenterY + CenterY/2);       // draw new spinner position
+    drawSpinner(loops++, GLCD.CenterX + GLCD.CenterX/2, GLCD.CenterY + GLCD.CenterY/2, PIXEL_OFF);  // clear previous spinner position
+    drawSpinner(loops, GLCD.CenterX + GLCD.CenterX/2, GLCD.CenterY + GLCD.CenterY/2, PIXEL_ON);  // draw new spinner position
+
     GLCD.CursorToXY(CenterX/2, Bottom -15);          
     GLCD.print(iter);            // print current iteration at the current cursor position 
     iter++;
@@ -361,13 +348,13 @@ void FPS( const byte width, const byte height)
   int fps_fract = (10000 % duration) * 10 / (duration/10);
   if(GLCD.Height <= 32)
   {
-    textArea.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(0));
+    textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(0));
     textArea.CursorTo(0,1);
   }
   else  
   {
     textArea.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, gTextfmt_row(0));
-    textArea.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(1));
+    textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(1));
     textArea.CursorTo(0,3);
   }
 
@@ -378,5 +365,3 @@ void FPS( const byte width, const byte height)
     textArea.print((int)0);             // have to manually print the leading 0 when necessary
   textArea.print(fps_fract);
 }
-
-

@@ -10,6 +10,8 @@
 
 #define GLCD_GLCDLIB_NAMESTR "openGLCD" // name of library
 
-#define GLCD_GLCDLIB_VERSIONSTR "0.5a" // library version
+// library version
+// get it from the build info
+#define GLCD_GLCDLIB_VERSIONSTR GLCD_GLCDLIB_BUILD_REVSTR
 
 #endif // __openGLCD_H__

@@ -180,9 +180,9 @@ unsigned int generate(){
       for(int column = 0; column < COLUMNS; column++)
       {
         if(isAlive(thisGeneration,row,column))     
-           GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE-1, CELL_SIZE-1, CELL_SIZE/2, BLACK) ; 
+           GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE, CELL_SIZE, CELL_SIZE/2, BLACK) ; 
         else
-           GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE-1, CELL_SIZE-1, CELL_SIZE/2, WHITE) ; 
+           GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE, CELL_SIZE, CELL_SIZE/2, WHITE) ; 
       }
   }
 
@@ -204,7 +204,7 @@ unsigned int generate(){
         if(cell == DEAD){
           if(n==3) {
             setLife(nextGeneration,row,column,ALIVE); // birth     
-            GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE-1, CELL_SIZE-1, CELL_SIZE/2, BLACK) ; 
+            GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE, CELL_SIZE, CELL_SIZE/2, BLACK) ; 
             births++;
           }
         }
@@ -214,7 +214,7 @@ unsigned int generate(){
             // No need to draw cell as it is already there.
           } else { 
             setLife(nextGeneration,row,column,DEAD); //death 
-            GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE-1, CELL_SIZE-1, CELL_SIZE/2, WHITE) ; 
+            GLCD.DrawRoundRect(column * CELL_SIZE, row * CELL_SIZE,  CELL_SIZE, CELL_SIZE, CELL_SIZE/2, WHITE) ; 
             deaths++;
           }
         }

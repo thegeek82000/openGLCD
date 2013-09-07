@@ -96,6 +96,7 @@ P(hline) =  "-------------------------------------------------------------------
 
 P(GLCDlibName) = GLCD_GLCDLIB_NAMESTR;
 P(GLCDlibVersion) = GLCD_GLCDLIB_VERSIONSTR;
+P(GLCDlibBuild) = GLCD_GLCDLIB_BUILD_BUILDSTR;
 
 
 #define xstr(s) str(s)
@@ -210,10 +211,11 @@ showlibinfo()
 
   char strbuf[64];
   strcpy_P(strbuf, GLCDlibName);
-  strcat(strbuf, " v");
-  strcat_P(strbuf, GLCDlibVersion);
   GLCD.DrawString(strbuf, gTextfmt_center, gTextfmt_row(0));
-  GLCD.CursorTo(0, 2);
+  strcpy_P(strbuf, GLCDlibVersion);
+  GLCD.DrawString(strbuf, gTextfmt_center, gTextfmt_row(1));
+
+  GLCD.CursorTo(0, 3);
   for(int i=0; i  < GLCD.Width / GLCD.CharWidth(' '); i++ )
   {
      GLCD.print(char('A' + i)); // show the ascii characters
@@ -810,6 +812,8 @@ showGLCDconfig(void)
   SerialPrintP(GLCDlibName);
   SerialPrintQ(" ver: ");
   SerialPrintP(GLCDlibVersion);
+  SerialPrintQ(" build: ");
+  SerialPrintP(GLCDlibBuild);
   Serial.println();
 #ifdef GLCD_GLCDLIB_DATESTR
   SerialPrintQ("Lib build date: ");

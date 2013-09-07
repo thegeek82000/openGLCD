@@ -201,7 +201,9 @@ int8_t error, ystep;
  *
  * Draw a rectangle with the specified width and height.
  * The upper left corner at x,y and the lower right
- * corner at x+width-1, y+width-1.
+ * corner at x+width-1, y+width-1.\n
+ * The left and right edges of the rectangle are at x and x+width-1.\n
+ * The top and bottom edges of the rectangle ar at y and y+height -1.\n
  *
  * The length of the horizontal sides will be width pixels
  * The length of the vertical sides will be height pixels
@@ -264,6 +266,10 @@ void glcd::FillRect(uint8_t x, uint8_t y, uint8_t width, uint8_t height, uint8_t
  *
  * Draw a rectangle the same as DrawRect() but with rounded corners.
  * Radius is a value from 1 to half the smaller of height or width of the rectangle.
+ * The upper left corner at x,y and the lower right
+ * corner at x+width-1, y+width-1.\n
+ * The left and right edges of the rectangle are at x and x+width-1.\n
+ * The top and bottom edges of the rectangle ar at y and y+height-1.\n
  *
  * @see DrawRect() FillRoundRect
  */

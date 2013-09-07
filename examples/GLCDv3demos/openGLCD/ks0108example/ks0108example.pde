@@ -43,7 +43,7 @@ void setup(){
 void introScreen(){
   GLCD.SelectFont(System5x7); // Font for libname & version
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
-  GLCD.DrawString("v" GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 3);
+  GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 3);
   GLCD.DrawRoundRect(0+10,0, GLCD.Width-20, GLCD.CharHeight(0) *2 + 4, 5);  // rounded rectangle around text area   
   GLCD.SelectFont(System5x7); // switch to fixed width system font 
   showCharacters();

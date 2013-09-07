@@ -42,6 +42,10 @@ void AnalogClock::DisplayTime( byte hours, byte minutes, byte seconds )
 	if( hours == 0 )
            hours = 12 ;
 
+#if DISPLAY_HEIGHT < 64
+	// small clocks scribble over numbers so redraw face
+	this->DrawFace();
+#endif
 	/* erase previous hands */
 	GLCD.DrawLine( x_centre, y_centre, PX_Hour, PY_Hour, PIXEL_OFF ) ;
 	GLCD.DrawLine( x_centre, y_centre, PX_Minute, PY_Minute, PIXEL_OFF ) ;

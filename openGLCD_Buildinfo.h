@@ -14,8 +14,9 @@
 #ifndef __openGLCD_Buildinfo_H__  
 #define __openGLCD_Buildinfo_H__  
   
-#define GLCD_GLCDLIB_DATESTR __DATE__ " " __TIME__
+#define GLCD_GLCDLIB_BUILD_DATESTR __DATE__ " " __TIME__
   
-#define GLCD_GLCDLIB_BUILDSTR "(none/unrevisioned-release)" 
+#define GLCD_GLCDLIB_BUILD_BUILDSTR "DevBuild"  // development build string
+#define GLCD_GLCDLIB_BUILD_REVSTR "DevRev"  // development rev string
   
 #endif 
