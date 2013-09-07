@@ -48,14 +48,14 @@ struct {
          byte height ;
          byte width ;
          byte bitfield[2];
-       } table = {2,4,  { 0b10010000 ,       //  *  *  
+       } static table = {2,4,  { 0b10010000 ,       //  *  *  
                           0b11110000 } };    //  **** 
                           
 struct {
          byte height ; 
          byte width ;  
          byte bitfield[3];
-       } glider  = {3,3, { 0b00100000 ,      //    *    
+       } static glider  = {3,3, { 0b00100000 ,      //    *    
                            0b10100000 ,      //  * *
                            0b01100000 }};    //   **
                           
@@ -64,7 +64,7 @@ struct {
          byte height ; 
          byte width ;  
          byte bitfield[3];
-       } glider2 = {3,3, { 0b10100000 ,      //  * *
+       } static glider2 = {3,3, { 0b10100000 ,      //  * *
                            0b11000000 ,      //  **
                            0b11110000 }};    //  ****                      
 #endif
@@ -72,7 +72,7 @@ struct {
          byte height ; 
          byte width ;  
          byte bitfield[4];
-       } loaf = {4,4,    { 0b01100000 ,     //   **
+       } static loaf = {4,4,    { 0b01100000 ,     //   **
                            0b10010000 ,     //  *  *  
                            0b01010000 ,     //   * * 
                            0b00100000 }};   //    *                      
@@ -80,7 +80,7 @@ struct {
          byte height ; 
          byte width ;  
          byte bitfield[3];
-       } ship = {3,3,    { 0b11000000 ,     //   **
+       } static ship = {3,3,    { 0b11000000 ,     //   **
                            0b10100000 ,     //   * *  
                            0b01100000 }};   //    **
 
@@ -88,7 +88,7 @@ struct {
          byte height ; 
          byte width ;  
          byte bitfield[4];
-       } behive = {4,3,  { 0b01000000 ,     //   *    
+       } static behive = {4,3,  { 0b01000000 ,     //   *    
                            0b10100000 ,     //  * *
                            0b10100000 ,     //  * * 
                            0b01000000}};    //   *
@@ -97,14 +97,14 @@ struct {
          byte height ; 
          byte width ;  
          byte bitfield[1];
-       } blinker = {1,3, { 0b11100000 }};   //  *** 
+       } static blinker = {1,3, { 0b11100000 }};   //  *** 
                           
                          
 struct {
          byte height ; 
          byte width ;  
          byte bitfield[2];
-       } block = {2,2, { 0b11000000 ,      //  **
+       } static block = {2,2, { 0b11000000 ,      //  **
                          0b11000000}};     //  **                     
 
 // place all the objects in the object table                         
@@ -146,7 +146,7 @@ void loop (void){
 
 unsigned int generate(){
   unsigned int iteration = 0;
-  byte thisGeneration,nextGeneration, previousGeneration;  
+  byte thisGeneration,nextGeneration;
   thisGeneration = nextGeneration  = 0;
   //display the initial array
   for(int row = 0; row < ROWS; row++)
@@ -164,7 +164,6 @@ unsigned int generate(){
   do{    
     thisGeneration  = iteration % STABLE_GENERATIONS;
     nextGeneration =  (thisGeneration+1) % STABLE_GENERATIONS;
-    previousGeneration  =  (thisGeneration-1) % STABLE_GENERATIONS;
     delay(DELAY);     
     memset(generations[nextGeneration],0,sizeof(generations[0])); // clear the array for the next generation
     //see who lives and who dies

@@ -300,22 +300,6 @@ void FPS(const byte width, const byte height, const unsigned long msecs)
 
 unsigned long stime = millis();
 
-  while(millis()  - stime < msecs)
-
-    FPS(width, height);
-
-}
-
-
-void FPS( const byte width, const byte height)
-{
-  
-  const byte CenterX = width/2;
-  const byte CenterY = height/2;
-//  const byte Right = width-1; // not used for now
-  const byte Bottom = height-1;
- 
-  iter=0; 
   // Create a text window on the righ side of the display
   if(GLCD.Height <= 32)
   {
@@ -326,6 +310,21 @@ void FPS( const byte width, const byte height)
     textArea.DefineArea(GLCD.CenterX + 4, 3, GLCD.Right-2, GLCD.Bottom-4);
   }
   textArea.SelectFont(System5x7); 
+
+  while(millis()  - stime < msecs)
+    FPS(width, height);
+
+}
+
+
+void FPS( const byte width, const byte height)
+{
+  
+  const byte CenterX = width/2;
+//  const byte Right = width-1; // not used for now
+  const byte Bottom = height-1;
+ 
+  iter=0; 
 
   startMillis = millis();
   while(iter < 10)   // do 10 iterations
