@@ -2,10 +2,6 @@ vi:ts=4
 
 - Remove GLCDBigdemo???
 - Remove fonts/newbasix3x5.h font (Wendy3x5 is better)
-- FillCircle() and DrawCircle() are different boundaries.
- Fill circle is one pixel bigger on the bottom half.
- ellipse dimensions are 2 * xRad by 2 * yRad (center pixel shared vs extra)
-
 - rename config files
 	"Arduino" becomes "Uno" (done)
 	panel: [module]-{glcdChip}_AutoConfig_Panel.h
@@ -325,3 +321,6 @@ DONE-------------------------------------------------------------
 - updates to build script for 
 #define GLCD_GLCDLIB_REVSTR "DevRev"  // development rev string
 
+- FillCircle() and DrawCircle() are different boundaries. (FIXED)
+ Fill circle is one pixel bigger on the bottom half.
+ ellipse dimensions are 2 * xRad by 2 * yRad (center pixel shared vs extra)

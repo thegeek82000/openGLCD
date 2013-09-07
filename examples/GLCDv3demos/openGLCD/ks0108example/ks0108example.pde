@@ -10,7 +10,6 @@
  */
 
 #include <openGLCD.h>
-#include "fonts/Arial14.h"         // proportional font
 #include "fonts/SystemFont5x7.h"   // system font
 #include "bitmaps/ArduinoIcon.h"     // bitmap 
 
@@ -85,8 +84,8 @@ void  loop(){   // run over and over again
   iter = 0;
   startMillis = millis();
   while( millis() - startMillis < 1000){ // loop for one second
-    GLCD.DrawRect(0, 0, 64, 61); // rectangle in left side of screen
-    GLCD.DrawRoundRect(68, 0, 58, 61, 5);  // rounded rectangle around text area   
+    GLCD.DrawRect(0, 0, 65, 64); // rectangle in left side of screen
+    GLCD.DrawRoundRect(68, 0, 58, 64, 5);  // rounded rectangle around text area   
     for(int i=0; i < 62; i += 4)
       GLCD.DrawLine(1,1,63,i);  // draw lines from upper left down right side of rectangle  
     GLCD.DrawCircle(32,31,30);   // draw circle centered in the left side of screen  

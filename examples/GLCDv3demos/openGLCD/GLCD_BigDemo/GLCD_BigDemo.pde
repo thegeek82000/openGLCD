@@ -43,13 +43,16 @@ void setup()
   GLCD.ClearScreen();    
   GLCD.SelectFont(System5x7, BLACK); // font for the default text area
   clockBegin(); // start the clock
+#ifdef notdef
   clock(10); // show the clock to allow it to be set
+#endif
 
 }
 
 void  loop()
 {  
   GLCD.ClearScreen();  
+#ifdef notdef
   scribble(5000);  // run for 5 seconds
 
   GLCD.ClearScreen(); 
@@ -78,14 +81,17 @@ void  loop()
   scrollingDemo();
 
   GLCD.ClearScreen();   
-  FPS(GLCD.Width, GLCD.Height, 10000); // 10 seconds of FPS
+#endif
 
   if(GLCD.Width >= 192)
   {         
     GLCD.ClearScreen();   
-    FPS(GLCD.Width/2, GLCD.Height, 10000); // 10 seconds of FPS
+    FPS(128, GLCD.Height, 10000); // 10 seconds of FPS
   }
+
+  FPS(GLCD.Width, GLCD.Height, 10000); // 10 seconds of FPS
 }
+
 
 
 void introScreen(){  
@@ -95,9 +101,11 @@ void introScreen(){
   GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
   GLCD.DrawRoundRect(0+10,0, GLCD.Right-20, GLCD.CharHeight(0) *2 + 1, 5);  // rounded rectangle around text area   
   countdown(5);  
+#ifdef notdef
   GLCD.ClearScreen(); 
   GLCD.DrawBitmap(icon, GLCD.CenterX-32,0); //draw the bitmap at the given x,y position
   countdown(3);
+#endif
   GLCD.ClearScreen();
 }
 
@@ -301,16 +309,17 @@ void FPS(const byte width, const byte height, const unsigned long msecs)
 unsigned long stime = millis();
 
   // Create a text window on the righ side of the display
-  if(GLCD.Height <= 32)
+  if(height <= 32)
   {
     textArea.DefineArea(GLCD.CenterX + 4, 1, GLCD.Right-2, GLCD.Bottom-4);
   }
   else
   {
-    textArea.DefineArea(GLCD.CenterX + 4, 3, GLCD.Right-2, GLCD.Bottom-4);
+    textArea.DefineArea(width/2 + 4, 3, width-3, height-5);
   }
   textArea.SelectFont(System5x7); 
 
+  GLCD.ClearScreen();   
   while(millis()  - stime < msecs)
     FPS(width, height);
 
@@ -321,6 +330,7 @@ void FPS( const byte width, const byte height)
 {
   
   const byte CenterX = width/2;
+  const byte CenterY = height/2;
 //  const byte Right = width-1; // not used for now
   const byte Bottom = height-1;
  
@@ -329,13 +339,13 @@ void FPS( const byte width, const byte height)
   startMillis = millis();
   while(iter < 10)   // do 10 iterations
   {
-    GLCD.DrawRect(0, 0, CenterX, Bottom); // rectangle in left side of screen
-    GLCD.DrawRoundRect(CenterX + 2, 0, CenterX - 3, Bottom, 5);  // rounded rectangle around text area   
+    GLCD.DrawRect(0, 0, CenterX+1, height); // rectangle in left side of screen
+    GLCD.DrawRoundRect(CenterX + 2, 0, CenterX - 3, height, 5);  // rounded rectangle around text area   
     for(int i=0; i < Bottom; i += 4)
       GLCD.DrawLine(1,1, CenterX-1, i);  // draw lines from upper left down right side of rectangle  
-    GLCD.DrawCircle(GLCD.CenterX/2, GLCD.CenterY-1, min(GLCD.CenterX/2, GLCD.CenterY)-2);   // draw circle centered in the left side of screen
-    drawSpinner(loops++, GLCD.CenterX + GLCD.CenterX/2, GLCD.CenterY + GLCD.CenterY/2, PIXEL_OFF);  // clear previous spinner position
-    drawSpinner(loops, GLCD.CenterX + GLCD.CenterX/2, GLCD.CenterY + GLCD.CenterY/2, PIXEL_ON);  // draw new spinner position
+    GLCD.DrawCircle(CenterX/2, CenterY-1, min(CenterX/2, CenterY)-2);   // draw circle centered in the left side of screen
+    drawSpinner(loops++, CenterX + CenterX/2, CenterY + CenterY/2, PIXEL_OFF);  // clear previous spinner position
+    drawSpinner(loops, CenterX + CenterX/2, CenterY + CenterY/2, PIXEL_ON);  // draw new spinner position
 
     GLCD.CursorToXY(CenterX/2, Bottom -15);          
     GLCD.print(iter);            // print current iteration at the current cursor position 
@@ -345,22 +355,33 @@ void FPS( const byte width, const byte height)
   unsigned long duration = millis() - startMillis;
   int fps = 10000 / duration;
   int fps_fract = (10000 % duration) * 10 / (duration/10);
-  if(GLCD.Height <= 32)
+  if(height <= 32)
   {
     textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(0));
+#ifdef OLDWAY
     textArea.CursorTo(0,1);
+#endif
   }
   else  
   {
     textArea.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, gTextfmt_row(0));
     textArea.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, gTextfmt_row(1));
+#ifdef OLDWAY
     textArea.CursorTo(0,3);
+#endif
   }
 
+#ifdef OLDWAY
+	
   textArea.print("FPS=");               // print a text string
   textArea.print(fps);                  // print an integer value
   textArea.print(".");
   if(fps_fract < 10)
     textArea.print((int)0);             // have to manually print the leading 0 when necessary
   textArea.print(fps_fract);
+#else
+  char buf[12];
+  sprintf(buf, "FPS=%02d.%02d", fps, fps_fract);
+  textArea.DrawString(buf, gTextfmt_center, gTextfmt_row(3));
+#endif
 }

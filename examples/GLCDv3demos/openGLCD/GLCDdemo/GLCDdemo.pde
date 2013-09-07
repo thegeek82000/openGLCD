@@ -58,8 +58,8 @@ void  loop()
   startMillis = millis();
   while(iter < 10) // do 10 iterations
   {
-    GLCD.DrawRect(0, 0, GLCD.CenterX, GLCD.Bottom); // rectangle in left side of screen
-    GLCD.DrawRoundRect(GLCD.CenterX + 2, 0, GLCD.CenterX - 3, GLCD.Bottom, 5);  // rounded rectangle around text area   
+    GLCD.DrawRect(0, 0, GLCD.CenterX+1, GLCD.Height); // rectangle in left side of screen
+    GLCD.DrawRoundRect(GLCD.CenterX + 2, 0, GLCD.CenterX - 3, GLCD.Height, 5);  // rounded rectangle around text area   
     for(int i=0; i < GLCD.Bottom; i += 4)
       GLCD.DrawLine(1,1, GLCD.CenterX-1, i);  // draw lines from upper left down right side of rectangle  
     GLCD.DrawCircle(GLCD.CenterX/2, GLCD.CenterY-1, min(GLCD.CenterX/2, GLCD.CenterY)-2);   // draw circle centered in the left side of screen  

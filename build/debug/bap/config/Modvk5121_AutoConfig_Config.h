@@ -18,9 +18,9 @@
  */
 
 #if defined (__AVR_ATmega328P__ ) || defined(__AVR_ATmega168P__)
-#include "debug/bap/config/Modvk5121_BBB_Config.h"   // config file for BBB breadboard configuration
+#include "build/debug/bap/config/Modvk5121_BBB_Config.h"   // config file for BBB breadboard configuration
 #elif defined(__AVR_ATmega32U4__)// Teensy
-#include "debug/bap/config/Modvk5121_TeensyBB_Config.h"    // BreadBoard config for Teensy
+#include "build/debug/bap/config/Modvk5121_TeensyBB_Config.h"    // BreadBoard config for Teensy
 #else
 #error GLCD vk5121 Autoconfig: Unsupported board type
 #endif

@@ -804,7 +804,7 @@ void glcd::DrawHLine(uint8_t x, uint8_t y, uint8_t width, uint8_t color)
  */
 void glcd::DrawCircle(uint8_t xCenter, uint8_t yCenter, uint8_t radius, uint8_t color)
 {
-	this->DrawRoundRect(xCenter-radius, yCenter-radius, 2*radius, 2*radius, radius, color);
+	this->DrawRoundRect(xCenter-radius, yCenter-radius, 2*radius+1, 2*radius+1, radius, color);
 }
 
 /**
