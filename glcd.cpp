@@ -61,8 +61,9 @@ int glcd::Init(glcd_device_mode invert)
  *
  * @param color
  *
- * Sets all the pixels on the display from 0,0 to GLCD.Width-1,GLCD.Height-1
- * to the specified color.
+ * Sets all the pixels on the display from \ref glcd::Left "GLCD.Left",
+ * \ref glcd::Top "GLCD.Top" to \ref glcd::Right "GLCD.Right",
+ * \ref glcd::Bottom "GLCD.Bottom" to the specified color.
  *
  * Color is optional and defaults to ::PIXEL_OFF
  *

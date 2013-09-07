@@ -48,15 +48,13 @@ The example sketches are in the examples folder and can be accessed from
 the IDE menu by selecting File > Examples > openGLCD
 
 Within the examples folder is a subfolder called APIexamples
-that has an example sketch for most of each the openGLCD functions.
-
-GLCDdemo provides a good introduction to the functionality of the library.
+that has an example sketch for most of each of the openGLCD functions.
 
 GLCDdiags is a test sketch to help get things up and running and provides
 diagnostic information that can help with troubleshooting.
 
-Other example sketches and demos are provided that show how to use various capabilities
-of the library.
+Other example sketches and demos are provided that show how to use various
+capabilities of the library.
 
 FONTS
 The library is supplied with fixed and variable width font definitons 

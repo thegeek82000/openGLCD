@@ -38,6 +38,7 @@ vi:ts=4
 
 - add API examples:
     - Text
+	gText
 	DefineArea
 	print (Print class)
 	Printf
@@ -48,7 +49,6 @@ vi:ts=4
 	ClearAreaMode
 		low
 			EraseTextLine
-			gText
 			DrawSring_P
 			printFlash ??
 			printFlashln ??
@@ -57,9 +57,9 @@ vi:ts=4
 			Streaming i/o
 
 	- Graphics
-		- ClearScreen
-		- DrawBitmap
-		- DrawBitmapXBM
+		- ClearScreen (done)
+		- DrawBitmap (done)
+		- DrawBitmapXBM (done)
     - Device
 	Init
 		low priority

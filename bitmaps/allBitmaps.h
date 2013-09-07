@@ -15,4 +15,8 @@
 
 // goofy images of me -- bperrybap
 #include "BillsHead128x64_xbm.h"
-#include "BillsHead32x32.h"
+#include "BillsHead.h"
+
+// extra XBM images
+
+#include "car914_xbm.h"

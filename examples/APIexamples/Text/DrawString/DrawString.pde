@@ -4,7 +4,7 @@
  * Example of using:
  * DrawString()
  *
- * Drawstring(str, hpos, vpos, [erase_option])
+ * Drawstring(str, hpos, vpos, [erase_option]);
  *
  * Output a NULL terminated character string with
  * horizontal and vertical positioning. 
