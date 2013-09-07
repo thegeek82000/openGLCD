@@ -66,7 +66,7 @@
  *
  */
 
-#define DrawVLine(x, y, height, ...) DrawHLine(x, y, (height+1), ##__VA_ARGS__)
+#define DrawVLine(x, y, height, ...) DrawVLine(x, y, (height+1), ##__VA_ARGS__)
 
 #define DrawHLine(x, y, width, ...) DrawHLine(x, y, (width+1), ##__VA_ARGS__)
 
