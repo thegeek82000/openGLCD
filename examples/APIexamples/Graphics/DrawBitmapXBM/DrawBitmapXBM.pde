@@ -37,9 +37,28 @@ void loop()
 	/*
 	 * Display bitmap centered on Display
 	 */
-	GLCD.DrawBitmapXBM(car914_bits, GLCD.CenterX - Car914_width/2, 0);
+	GLCD.DrawBitmapXBM(car914_bits, GLCD.CenterX - car914_width/2,GLCD.Top);
+	/*
+ 	 * If enough room draw another one along left edge
+	 */
 	if(GLCD.Height >=64)
-		GLCD.DrawBitmapXBM(car914_bits, 0, 32); 
+		GLCD.DrawBitmapXBM(car914_bits, GLCD.Left, GLCD.CenterY); 
+
+	/*
+	 * Now do it again, but inverted
+	 */
+	delay(2000);
+
+	/*
+	 * Display bitmap centered on Display
+	 */
+	GLCD.DrawBitmapXBM(car914_bits, GLCD.CenterX - car914_width/2,GLCD.Top, PIXEL_OFF);
+	/*
+ 	 * If enough room draw another one along left edge
+	 */
+	if(GLCD.Height >=64)
+		GLCD.DrawBitmapXBM(car914_bits, GLCD.Left, GLCD.CenterY, PIXEL_OFF); 
+
 
 	delay(DELAY);
 }

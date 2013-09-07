@@ -21,8 +21,6 @@
 
 void setup()
 {
-	Serial.begin(9600);
-
 	GLCD.Init();
 	GLCD.SelectFont(System5x7); // use SystemFont in "default" text area
 }
