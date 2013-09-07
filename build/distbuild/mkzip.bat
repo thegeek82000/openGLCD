@@ -1,4 +1,11 @@
 @echo off
+
+echo This is not yet working for openGLCD
+echo For the time being you must use a "unix" OS to build
+echo distribution zip images.
+pause
+goto alldone
+
 REM ##################################################################
 REM # Windows batch file wrapper to create openGLCD distribution zip image.
 REM #
