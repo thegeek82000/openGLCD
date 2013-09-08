@@ -33,7 +33,8 @@ vi:ts=4
 - New Demos
 	-iFPS (iFPS demo - NEW)
 	-cp437 font example
-	-openGLCDGraphics
+	-openGLCDGraphics (done)
+		called "GraphicAPI"
 	-openGLCDText
 
 - add API examples:
@@ -93,7 +94,7 @@ vi:ts=4
 	- micro is 32u4 variant same as "leonardo" except LED definitions.
 
 - change checks for pin/feature support.
-	- instead of checking for pin definitin,
+	- instead of checking for pin definition,
 	  change glcdio to define/not-define "function" macro based on
 	  pin defintion, then have mainline code check for existence
 	  of "function" macro vs checking for pin definition.
@@ -108,6 +109,7 @@ vi:ts=4
 	Also consider adding "PIXEL_ON" and "PIXEL_OFF" to simplify color usage. (DONE)
 	Also consider adding a color for "transparent" for DrawBitmapXBM()
 	Also consider adding a color "XOR" which allows drawing, across filled regions. (FUTURE...)
+	Also consider adding a color "TRANSPARENT" which allows leaving pixel alone. (useful for bitmaps)
 
 - update code to use C99 "fast" types: ??
 	uint_fast8_t

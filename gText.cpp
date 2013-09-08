@@ -49,35 +49,112 @@ extern "C"
 
 static FontCallback	FontRead;	// font callback shared across all instances
 
-// This constructor creates a text area using the entire display
-// The device pointer is initialized using the global GLCD instance
-// If the users requested area fails, we give him one with the entire display.
-// New constuctors can be added to take an exlicit glcd instance pointer
-// if multiple glcd instances need to be supported
+/**
+ * Constructor creates a default gText text area object with no font
+ *
+ * Constructor creates a text area using the entire display but does not
+ * assign any font to it.
+ * SelectFont() must be used to select a font for the area before any text can be output to the display.
+ *
+ * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "DefineArea()"
+ * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
+ */
 gText::gText()
 {
     this->DefineArea(0,0,DISPLAY_WIDTH -1,DISPLAY_HEIGHT -1, DEFAULT_gTEXTMODE); // this should never fail
 }
 
-// This constructor creates a text area with the given coordinates
-// full display area is used if any coordinate is invalid
+/**
+ * Constructor creates a gText text area object by coordinates
+ *
+ * @param x1 X coordinate of upper left corner
+ * @param y1 Y coordinate of upper left corner
+ * @param x2 X coordinate of lower right corner
+ * @param y2 Y coordinate of lower right corner
+ * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ *
+ * Creates a gText area object and then calls
+ * \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
+ * with the same parameters to initalize it.
+ *
+ * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "DefineArea()"
+ * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
+ */
+
 gText::gText(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) 
 {
 	this->DefineArea(x1,y1,x2,y2,mode);
 }
 
+/**
+ * Constructor creates a gText text area object by predefined area without font
+ *
+ * @param selection a value from @ref predefinedArea
+ * @param mode a value from @ref gTextMode
+ *
+ * Creates a gText area object and then calls
+ * \ref DefineArea(predefinedArea selection, gTextMode mode) "DefineArea()"
+ * with the same parameters to initalize it.
+ * Constructor does not assign any font to it.
+ * SelectFont() must be used to select a font for the area before any text can be output to the display.
+ *
+ * @see \ref DefineArea(predefinedArea selection, gTextMode mode) "DefineArea()"
+ * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
+ */
 gText::gText(predefinedArea selection, gTextMode mode)
 {
 	this->DefineArea(selection,mode);
 }
 
+/**
+ * Constructor creates a gText text area object by predefined area and font
+ *
+ * @param selection a value from @ref predefinedArea
+ * @param font a font definition
+ * @param mode a value from @ref gTextMode
+ *
+ * Creates a gText area object and then calls
+ * \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
+ * with the same parameters to initalize it.
+ *
+ * @see \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
+ * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
+ */
 gText::gText(predefinedArea selection, Font_t font, gTextMode mode)
 {
 	this->DefineArea(selection,font, mode);
 }
 
+/**
+ * Constructor creates a gText text area object by columns and rows
+ *
+ * @param x X coordinate of upper left corner
+ * @param y Y coordinate of upper left corner
+ * @param columns number of text columns
+ * @param rows number of text rows
+ * @param font a font definition
+ * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ *
+ *
+ * Creates a gText area object and then calls
+ * \ref DefineArea(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode) "DefineArea()"
+ * with the same parameters to initalize it.
+ *
+ * @see \ref DefineArea(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode) "DefineArea()"
+ * @see ClearArea()
+ * @see SetAreaMode()  ClearAreaMode()
+ * @see gTextMode
+ */
 
-gText::gText(uint8_t x1, uint8_t y1, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode)
+gText::gText(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode)
 {
 	this->DefineArea(x1,y1,columns,rows,font, mode);
 }
@@ -151,6 +228,7 @@ uint8_t color;
  * @see ClearArea()
  * @see SetAreaMode()  ClearAreaMode()
  * @see gTextMode
+ * @see \ref gText(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode) "gText()"
  */
 
 uint8_t
@@ -206,6 +284,7 @@ uint8_t width, height;
  * @see SetAreaMode()
  * @see ClearAreaMode()
  * @see gTextMode
+ * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "gText()"
  *
  */
 
@@ -278,6 +357,7 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
  * @see ClearAreaMode()
  * @see predefinedArea
  * @see gTextMode
+ * @see \ref gText::gText(predefinedArea selection, Font_t font, gTextMode mode) "gText()"
  *
  */
 
@@ -298,7 +378,7 @@ TareaToken tok;
 }
 
 /**
- * Define a predefined generic text area
+ * Define a predefined generic text area and font
  *
  * @param selection a value from @ref predefinedArea
  * @param font a font definition
@@ -2176,7 +2256,7 @@ uint8_t gText::CharWidth(uint8_t c)
  *
  * If there is no font selected, 0 will be returned.
  *
- * @see Charwidth()
+ * @see CharWidth()
  * @see StringWidth()
  * @see StringWidth_P()
  */

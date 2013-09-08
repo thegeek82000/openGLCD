@@ -339,12 +339,16 @@ class gText : public glcd_Device
 	void ScrollDown(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, uint8_t pixels, uint8_t color);
 
   public:
+/** @name CONSTRUCTORS
+ * The following gText class constructors are available
+ */
+/*@{*/
 	gText(); // default - uses the entire display
 	gText(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode=DEFAULT_gTEXTMODE);
 	gText(predefinedArea selection, gTextMode mode=DEFAULT_gTEXTMODE);
 	gText(predefinedArea selection, Font_t font, gTextMode mode=DEFAULT_gTEXTMODE);
 	gText(uint8_t x1, uint8_t y1, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode=DEFAULT_gTEXTMODE);
-
+/*@}*/
 
 /** @name TEXT FUNCTIONS
  * The following text functions are available
@@ -353,7 +357,7 @@ class gText : public glcd_Device
 	// Text area functions
 
 	uint8_t DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode=DEFAULT_gTEXTMODE);
-	uint8_t DefineArea(uint8_t x1, uint8_t y1, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode=DEFAULT_gTEXTMODE);
+	uint8_t DefineArea(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode=DEFAULT_gTEXTMODE);
 	uint8_t DefineArea(predefinedArea selection, Font_t font, gTextMode mode=DEFAULT_gTEXTMODE);
 	uint8_t DefineArea(predefinedArea selection, gTextMode mode=DEFAULT_gTEXTMODE);
 	void ClearArea(void);
