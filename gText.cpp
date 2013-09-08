@@ -156,7 +156,7 @@ gText::gText(predefinedArea selection, Font_t font, gTextMode mode)
 
 gText::gText(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode)
 {
-	this->DefineArea(x1,y1,columns,rows,font, mode);
+	this->DefineArea(x,y,columns,rows,font, mode);
 }
 
 /**

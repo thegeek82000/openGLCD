@@ -21,7 +21,6 @@ void setup()
 {
 	GLCD.Init();
 	IntroScreen();
-	GLCD.DrawString("Graphics Demo", gTextfmt_center, gTextfmt_bottom);
 	delay(3000);
 }
 void IntroScreen()
@@ -34,6 +33,9 @@ void IntroScreen()
 
 void loop()
 {
+	GLCD.ClearScreen();
+	GLCD.DrawString("Graphics Demo", gTextfmt_center, gTextfmt_center);
+	delay(3000);
 	DrawVLine();
 	DrawHLine();
 	DrawLine();
