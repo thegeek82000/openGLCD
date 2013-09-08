@@ -78,7 +78,7 @@ void setup()
 
 void FillTopLine()
 {
-int cols = GLCD.GetTextProp(gTextProp_cols); // get text colums in default text area
+int cols = GLCD.GetAreaProp(gTextProp_cols); // get text colums in default text area
 
 	/*
 	 * Top line of Default Text area with
