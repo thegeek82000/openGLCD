@@ -1,5 +1,3 @@
-
-
 /*
  *
  * Arial_14
@@ -36,9 +34,6 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ARIAL_14_H
 #define ARIAL_14_H
 
@@ -46,13 +41,12 @@
 #define ARIAL_14_HEIGHT 14
 
 /*
- * added to allow fontname to match header file name. 
- * as well as keep the old name for backward compability
+ * added for backward compability
  */
 
-#define Arial14 Arial_14 
+#define Arial_14 Arial14
 
-static uint8_t Arial_14[] PROGMEM = {
+GLCDFONTDECL(Arial14) = {
     0x1E, 0x6C, // size
     0x0D, // width
     0x0E, // height

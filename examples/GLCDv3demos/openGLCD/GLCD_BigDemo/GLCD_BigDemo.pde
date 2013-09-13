@@ -10,13 +10,6 @@
 
 #include <openGLCD.h>
 
-//#include "fonts/allFonts.h"         // system and arial14 fonts are used
-//#include "bitmaps/allBitmaps.h"   // all images in the bitmap dir 
-#include "bitmaps/ArduinoIcon64x64.h" 
-#include "bitmaps/ArduinoIcon64x32.h" 
-#include "fonts/SystemFont5x7.h"
-#include "fonts/Arial14.h"
-
 #include <Time.h>  // download from: http://www.arduino.cc/playground/Code/Time
 
 Image_t icon;
@@ -43,16 +36,13 @@ void setup()
   GLCD.ClearScreen();    
   GLCD.SelectFont(System5x7, BLACK); // font for the default text area
   clockBegin(); // start the clock
-#ifdef notdef
   clock(10); // show the clock to allow it to be set
-#endif
 
 }
 
 void  loop()
 {  
   GLCD.ClearScreen();  
-#ifdef notdef
   scribble(5000);  // run for 5 seconds
 
   GLCD.ClearScreen(); 
@@ -61,7 +51,7 @@ void  loop()
 
   showCharacters("5x7 font:", System5x7);
   countdown(3);
-  showCharacters("Arial_14:", Arial_14);
+  showCharacters("Arial14:", Arial14);
   countdown(3);
 
   clock(10); // show the clock given number of seconds
@@ -81,7 +71,6 @@ void  loop()
   scrollingDemo();
 
   GLCD.ClearScreen();   
-#endif
 
   if(GLCD.Width >= 192)
   {         
@@ -96,16 +85,14 @@ void  loop()
 
 void introScreen(){  
 
-  GLCD.SelectFont(Arial_14); // you can also make your own fonts, see playground for details   
+  GLCD.SelectFont(Arial14); // you can also make your own fonts, see playground for details   
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
   GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
   GLCD.DrawRoundRect(0+10,0, GLCD.Right-20, GLCD.CharHeight(0) *2 + 1, 5);  // rounded rectangle around text area   
   countdown(5);  
-#ifdef notdef
   GLCD.ClearScreen(); 
   GLCD.DrawBitmap(icon, GLCD.CenterX-32,0); //draw the bitmap at the given x,y position
   countdown(3);
-#endif
   GLCD.ClearScreen();
 }
 
@@ -232,7 +219,7 @@ void scrollingDemo()
   textAreaArray[1].CursorTo(0,0);
   textAreaArray[2].DefineArea(textAreaBOTTOM); 
 
-  textAreaArray[2].SelectFont(Arial_14, BLACK);
+  textAreaArray[2].SelectFont(Arial14, BLACK);
   textAreaArray[2].CursorTo(0,0);
 
   for(byte area = 0; area < 3; area++)

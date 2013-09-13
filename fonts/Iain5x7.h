@@ -1,7 +1,3 @@
-#ifndef IAIN5X7_H_INCLUDED
-#define IAIN5X7_H_INCLUDED
-
-
 /*
  *
  * Iain5x7
@@ -38,15 +34,15 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
+#ifndef IAIN5X7_H_INCLUDED
+#define IAIN5X7_H_INCLUDED
 
 #define IAIN5X7_WIDTH 5
 #define IAIN5X7_HEIGHT 7
 
 //#define SUBFONT
 
-static uint8_t Iain5x7[] PROGMEM = {
+GLCDFONTDECL(Iain5x7) = {
     0x09, 0x9D, // size
     0x05, // width
     0x07, // height

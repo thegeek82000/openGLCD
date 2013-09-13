@@ -16,12 +16,10 @@
  *	bperrybap@opensource.billsworld.billandterrie.com
  */
 
-// include the library code:
+// include the library header
+// no font headers have to be included
 #include <openGLCD.h>
 
-// include the font
-
-#include <fonts/SystemFont5x7.h>
 
 void setup() {
   // Initialize the GLCD 

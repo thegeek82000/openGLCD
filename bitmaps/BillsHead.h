@@ -1,10 +1,7 @@
 #ifndef _BillsHead_H 
 #define _BillsHead_H 
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
-static unsigned char BillsHead[] PROGMEM ={
+GLCDBMAPDECL(BillsHead) ={
 32,	// bitmap width
 54,	// bitmap height
 0x00, 0x00, 0x00, 0x80, 0xc0, 0x60, 0x20, 0x10, 0x98, 0x88, 0x88, 0x08, 0x08, 0x08, 0x08, 0x88, 

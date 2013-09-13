@@ -12,7 +12,7 @@
  *
  */
 
-static uint8_t lcdnums12x16[] PROGMEM =
+GLCDFONTDECL(lcdnums12x16) =
 {
   0x0, 0x0,	// size of zero indicates fixed width font
     11,		// width  (will be 12 with pad pixel on right)

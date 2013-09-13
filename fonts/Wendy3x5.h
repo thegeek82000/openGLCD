@@ -29,24 +29,13 @@
  *     uint8_t    font_data[];
  *                  // bit field of all characters
  */
-
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef Wendy3x5_H
 #define Wendy3x5_H
 
 #define Wendy3x5_WIDTH 3
 #define Wendy3x5_HEIGHT 5
 
-/*
- * added to allow fontname to match header file name. 
- * as well as keep the old name for backward compability
- */
-
-#define WendyFont3x5 Wendy3x5
-
-static uint8_t Wendy3x5[] PROGMEM = {
+GLCDFONTDECL(Wendy3x5) = {
     0x0, 0x0, // size of zero indicates fixed width font, actual length is width * height
     0x03, // width
     0x05, // height

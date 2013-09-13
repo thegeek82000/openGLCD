@@ -30,8 +30,6 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
-#include <fonts/cp437font8x8.h>
 
 #define DELAY 3000 // ms delay between examples
 
@@ -51,7 +49,6 @@ void setup()
 	textArea[1].DefineArea(textAreaTOPRIGHT, cp437font8x8);
 	textArea[2].DefineArea(textAreaBOTTOMLEFT, cp437font8x8);
 	textArea[3].DefineArea(textAreaBOTTOMRIGHT, cp437font8x8);
-
 }
 
 void ClearAreas()

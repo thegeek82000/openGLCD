@@ -11,7 +11,6 @@
  
 #include <openGLCD.h>    // Graphics LCD library   
 #include <Time.h>    // download from: http://www.arduino.cc/playground/Code/Time
-#include "fonts/SystemFont5x7.h"       // system font
 #include "AnalogClock.h"  // header file for the analog clock class
 
 #include "BigDemo.h"

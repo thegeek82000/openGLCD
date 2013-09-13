@@ -1,5 +1,3 @@
-
-
 /*
  *
  * CalLite24 Font
@@ -57,16 +55,13 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
+#ifndef _CalLite24_H
+#define _CalLite24_H
 
-//#ifndef NEW_FONT_H
-//#define NEW_FONT_H
+#define CalLite24_WIDTH 10
+#define CalLite24_HEIGHT 25
 
-//#define NEW_FONT_WIDTH 10
-//#define NEW_FONT_HEIGHT 25
-
-static uint8_t CalLite24[] PROGMEM = {
+GLCDFONTDECL(CalLite24) = {
     0x69, 0x7A, // size
     0x15, // width
     0x19, // height
@@ -184,4 +179,4 @@ static uint8_t CalLite24[] PROGMEM = {
     
 };
 
-//#endif
+#endif

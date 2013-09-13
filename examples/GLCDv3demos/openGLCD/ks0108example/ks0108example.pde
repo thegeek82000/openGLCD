@@ -10,8 +10,6 @@
  */
 
 #include <openGLCD.h>
-#include "fonts/SystemFont5x7.h"   // system font
-#include "bitmaps/ArduinoIcon.h"     // bitmap 
 
 /*
  * Check for small displays as this code was written

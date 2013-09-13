@@ -1,7 +1,7 @@
 #ifndef FONT8x8_H
 #define FONT8x8_H
 
-static uint8_t font8x8[] PROGMEM={
+GLCDFONTDECL(font8x8) = {
     0x0, 0x1, // size of one indicates fixed font width and no pixel padding
     0x08, // width
     0x08, // height

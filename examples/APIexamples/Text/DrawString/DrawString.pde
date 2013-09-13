@@ -45,7 +45,6 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
 
 #define DELAY 3000 // ms delay between examples
 
@@ -61,10 +60,10 @@ void setup()
 	/*
 	 * Create the text area regions in each quadrant and assign font
 	 */
-	textArea[0].DefineArea(textAreaTOPLEFT, SystemFont5x7);
-	textArea[1].DefineArea(textAreaTOPRIGHT, SystemFont5x7);
-	textArea[2].DefineArea(textAreaBOTTOMLEFT, SystemFont5x7);
-	textArea[3].DefineArea(textAreaBOTTOMRIGHT, SystemFont5x7);
+	textArea[0].DefineArea(textAreaTOPLEFT, System5x7);
+	textArea[1].DefineArea(textAreaTOPRIGHT, System5x7);
+	textArea[2].DefineArea(textAreaBOTTOMLEFT, System5x7);
+	textArea[3].DefineArea(textAreaBOTTOMRIGHT, System5x7);
 
 	/*
 	 * Set inverse colors on 2 quadrants to allow seeing separation
@@ -73,7 +72,6 @@ void setup()
 
 	textArea[1].SetFontColor(WHITE);
 	textArea[2].SetFontColor(WHITE);
-
 }
 
 void FillTopLine()

@@ -3,7 +3,7 @@
 Here are some additional resources that are related to or are known to work with
 with openGLCD.
 
-GLCD Font Creator: <a href="http://code.google.com/p/glcd-arduino/downloads/detail?name=GLCDFontCreator2.zip">FontCreator2</a>\n
+openGLCD Font Creator: <a href="https://bitbucket.org/bperrybap/openglcd/downloads/openGLCDFontCreator.zip">openGLCDFontCreator</a>\n
 Pixel/Bitmap fonts: <a href="http://www.1001freefonts.com/bitmap-pixel-fonts.php">1001 Free Fonts</a>\n
 Pixel/Bitmap as well as Dingbat fonts: <a href="http://www.dafont.com/bitmap.php">dafonts</a>\n
 Mighty1284p core:  <a href="https://github.com/maniacbug/mighty-1284p">Mighty1284p GitHub Repo</a>\n
@@ -12,6 +12,7 @@ Mighty1284p Blog:  <a href="http://maniacbug.wordpress.com/2011/11/27/arduino-on
 avrio (part of MCUIO): <a href="http://code.google.com/p/mcu-io/">MCUIO google project</a>\n
 
 GLCDv3 Project: <a href="http://code.google.com/p/glcd-arduino/">GLCD v3 Google Project</a>\n
+
 */
 
 @cond hide_from_doxygen

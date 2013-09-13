@@ -21,9 +21,9 @@ The configuration mechanism allows using a broad range of GLCD panels and Arduin
 
 @subpage page_configuring
 
-@subpage page_GLCD_methods
-
 @subpage page_FontsBitmaps
+
+@subpage page_GLCD_methods
 
 @subpage page_troubleshoot
 

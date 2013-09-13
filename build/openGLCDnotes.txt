@@ -19,7 +19,7 @@ vi:ts=4
 		- openGLCD/doc all of it
 		- openGLCD/readme.txt (which overwrites the VCS readme).
 
-		The build script would copy files from a doc area that include
+		The build script would copy files from a "release" area that includes
 			doc/*
 				html stuff
 			ReadMe.txt at root
@@ -67,6 +67,9 @@ vi:ts=4
 		- GotoXY
 		- ReadData
 		- WriteData
+
+- cleanup bmp2glcd 
+
 	
 - update doxgen for backlight functions to indicate that
   backlight must be configured in config files.
@@ -79,9 +82,6 @@ vi:ts=4
 	Pretty much need to update/replace all photos in doxygen
 
 - Clean up references to SCROLL_UP/SCROLL_DOWN
-
-- trace down progmem / const/ static stuff
-	warnings vs errors on AVR vs ARM.
 
 - look at pin order of config files
 	- Teensy vs others
@@ -115,16 +115,12 @@ vi:ts=4
 	uint_fast8_t
 	int_fast8_t
 
-- remove/illiminate FontRead access function ReadPgmData()
+- remove/eliminate FontRead access function ReadPgmData()
 	It is in glcd.cpp but used by gText.cpp
 	This is also used by things that need pgm data like bitmap functions.
 	use a glcdio macro instead?
 
 - remove Streaming.h from include directory
-
-- Update links to FontCreator2 in doxygen ("Additional Resources") [ it points to google code glcd-arduino]
-	Will need to point to place in new repository
-
 
 - Change inheritance  (has implications for doxygen stuff)
 	glcd: gText glcd_device
@@ -326,3 +322,41 @@ DONE-------------------------------------------------------------
 - FillCircle() and DrawCircle() are different boundaries. (FIXED)
  Fill circle is one pixel bigger on the bottom half.
  ellipse dimensions are 2 * xRad by 2 * yRad (center pixel shared vs extra)
+- trace down progmem / const/ static stuff (DONE)
+	warnings vs errors on AVR vs ARM.
+	using "static" creates warning:
+		'xxx" defined but not used if the var isn't used
+		If you add "const" to it, the warning goes away.
+
+	Creating a dummy reference to the static data will
+	eliminate the warning. If the dummy reference is not referenced
+	the dummy reference and static data is also removed by the linker.
+	i.e create a dummy function that assigns te font/bitmap to a dummy
+	variable.
+
+	on ARM if you don't use "const" then the data is put into RAM.
+	in c++ you have to use "extern" on declaration initialization as well to make a global.
+	if not it is the same as static and will be deleted if the local file does not reference it.
+	Trick is if you want to use the same declaration on C and C++ if you want a local in C
+	you must use 'static' which will then create a local (including with const) for C and C++
+
+	you cannot mix const and non const variables in same section or you get a linker error
+	i.e. if some PROGMEM vars are const and some aren't then it won't link.
+	the dreaded: "varname causes a section type conflict"
+	On ARM if PROGMEM is defined to be nothing, then no error but if const was not
+	used then vars end up in RAM.
+
+
+	Recommendation:
+	- put all openGLCD fonts and bitmaps in their own .progmem section with
+	  FONTDECL and BITMAPDECL
+
+	- define PROGMEM to use .rodata for ARM so that sloppy AVR users can
+	  get their data into flash instead of RAM.
+
+- update font doxygen page to reflect location of
+  of openGLCDFontCreator tool.
+	- Update links to FontCreator2 in doxygen ("Additional Resources")
+		 [ it points to google code glcd-arduino]
+	Will need to point to place in new repository
+

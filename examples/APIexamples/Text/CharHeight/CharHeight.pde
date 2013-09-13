@@ -28,7 +28,6 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
 
 #define DELAY 3000 // ms delay between examples
 
@@ -55,7 +54,7 @@ char c;
 
 	c = 'H'; // character to size
 
-	GLCD.println(F("SystemFont5x7 is"));
+	GLCD.println(F("System5x7 is"));
 	width = GLCD.CharHeight(0);  // get height of current font
 	GLCD.print(width);
 	GLCD.print(" pixels high");

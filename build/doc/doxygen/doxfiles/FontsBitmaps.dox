@@ -7,7 +7,10 @@
 
 While the openGLCD library distribution comes with a few fonts and bitmaps, 
 the library supports user defined custom fonts and bitmaps.
-Additional fonts and bitmaps can be added and included in sketches.
+Additional fonts and bitmaps can be added.
+To see which fonts come with the distribution see the file
+fonts/allFonts.h
+The name of each available font matches the name of each of the .h header files.
 
 @subpage page_Fonts
 
@@ -18,21 +21,27 @@ Additional fonts and bitmaps can be added and included in sketches.
 /**
 @page page_Fonts Using Fonts
 
-There is a free java application available that can convert PC fonts for use with this library. 
-The software is called FontCreator2 and it can produce a header file that can be included in your sketch.
+There is a free java application available (openGLCDFontCreator) that can convert PC fonts for use with this library. 
+
+<H1>
+Using openGLCDFontCreator
+</H1>
+
+openGLCDFontCreator is modified version of GLCDFontCreator2
+that can produce a header file suitable for directly using with the library.
 
 @note
-GLCDFontCreator2 should not be confused with GLCD FontCreator 1.1 mikroElektronica Edition, 
-which is an entirely different product/tool. FontCreator2 is a free open source Java based application
+openGLCDFontCreator & GLCDFontCreator2 should not be confused with GLCD FontCreator 1.1 mikroElektronica Edition, 
+which is an entirely different product/tool. GLCDFontCreator2 is a free open source Java based application
 while GLCD FontCreator 1.1 is a Windows based font tool for use with microElectronica s/w products.
 The mikroElektronica Edition s/w encodes the font data differently and the free
 version of the software does not allow saving a full character set.
 
-Here is a link to a zip image for FontCreator2: <a href="http://code.google.com/p/glcd-arduino/downloads/detail?name=GLCDFontCreator2.zip">FontCreator2 Zip Image</a>
+Here is a link to a zip image for openGLCDFontCreator: <a href="https://bitbucket.org/bperrybap/openglcd/downloads/openGLCDFontCreator.zip">openGLCDFontCreator Zip Image</a>
 
 To create a font click on [File]->[New Font]
 Type in the name of the font in the Name box that says "new Font".
-This will be the name you use for the SetFont() api call.
+This will be the name you use for the @ref gText::SelectFont() "SelectFont()" api call.\n
 DO NOT use spaces in the name.\n
 Example:
 @code
@@ -51,35 +60,37 @@ the font.
 
 When you are ready to create the .h file, simply click on [Export]->[Export Font]
 and type in the name of the .h file in the File Name box.
-For consistency it is recommended that you name the .h the same as the font name.
+For consistency it is highly recommended that you name the .h the same as the font name.
 DO NOT use spaces in the name.\n
 Example:
 @code
 myfont.h
 @endcode
 
+The font header files must be placed in the fonts directory.
+For example, if you create a font named @em myfont in a header named @em myfont.h then copy @em myfont.h
+to the fonts directory.
 
-The font header files created should be placed in the directory named fonts and included in your sketch.
-For example, if you create a font named myfont in a header named myfont.h then copy myfont.h
-to the fonts directory and in your sketch:
+The distribution contains a file named @em allFonts.h in the fonts directory
+that automatically includes all the distributed fonts
+to make them available for use by sketches.
+
+In order to make newly created fonts "known" by the library and sketches,
+the header file not only not has to be copied to the fonts directory
+but there must also be an include for that header file placed the allFonts.h file.
+
+Once this is done, sketches will be able to use the font by simply selecting it.
+Example:
 @code
-  #include "fonts/myfont.h"       // system font
-@endcode
-To use the font in your sketch you select the font as follows: 
-@code
-  GLCD.SelectFont(myfont);   // use myfont 
+    GLCD.SelectFont(myfont);
 @endcode
 
-Note that the distribution contains a file named allFonts.h that includes all the distributed fonts,
-so you can include these files instead of explicitly including the individual fonts
-@code
-#include "fonts/allFonts.h"       // all distributed fonts
-@endcode
-
-In order to make newly created installed fonts "known" by the allFonts.h you will need
-to not only copy the font header to the fonts directory
-but also place an include for the font header file in the allFonts.h file.
-
+If other font generation tools are used, the font header file may need to be modified
+to work with the library.\n
+Have a look at other font header files to see the general format.\n
+The font header file must contain a gaurd ifdef\n
+The font header must not include any other header files.\n
+The font header should use the GLCDFONTDECL() macro to declare the font.
 
 Font definitions are stored in program memory and this can be significant
 for larger fonts. The 7 pixel high system font uses under 500 bytes,
@@ -106,18 +117,8 @@ site.
 /**
 @page page_Bitmaps Using Bitmaps
 You can use the distributed bitmaps or create your own. 
-The distribution contains a file named allBitmaps.h that includes all the distributed bitmaps, 
-so you can include this to make the bitmaps available:
-@code
-#include "bitmaps/allBitmaps.h"  // all distributed bitmaps
-@endcode
 
-@note Included bitmaps will not consume any memory if they are not explicitly referenced in
-your sketch with the @ref glcd::DrawBitmap() "DrawBitmap()" function.
-
-You can also display your own images in your sketch.
-
-A utility located in the glcd/bitmaps/utils converts a gif,
+A utility located in bitmaps/utils converts a gif,
 jpg, bmp, tga or  png  file to a header file that can be used by your sketch.
 
 The utility is written in the Processing language; However, a java version of the utilty
@@ -136,31 +137,36 @@ Run the utility by either running the java jar file directly or loading the pde 
 
 Drop the image file to be converted into the window.
 If the image can be converted, the image will be displayed in the window
-and a header file is created in the bitmap directory.
+and a header file is created in the bitmaps directory.
 For example, if the image file name to be converted is named image.bmp, the header is named image.h
 
-To use the newly created bitmap, add the following line to the sketch:
+To use the newly created bitmap, the aggregate header file (named allBitmaps.h) must
+be updated.
+Add the following line to to the allbitmaps.h header file in the bitmaps directory:
 @code
-#include "bitmaps/image.h"
+#include "image.h"
 @endcode
-and display the image using the following code:
+
+Alternatively, 
+the utility can also update the aggregate header file automatically.
+To update allBitmaps.h to include all header files in the bitmap directory, click the window.
+
+Once the allbitmaps.h header has been updated, the sketch
+can display the image using the following code:
 @code
   GLCD.DrawBitmap(image, x, y);
 @endcode
 where x and y are the desired location of the upper left edge of the bitmap.
+@note
+Do not include the bitmap header in the sketch.
 
-The utility can also update the aggregate header file (named allBitmaps.h).
-Including allBitmaps.h in your sketch makes all images in the bitmaps directory available.
-Flash memory is only consumed for images that are explicitly used by your code so there
-is no penalty using this file instead of explicitly including header files.
-
-To update allBitmaps.h to include all header files in the bitmap directory, click the window.
-
+<h2>
+Bitmap Data Storage
+</h2>
 
 Images are stored in program memory, a 128x64 pixel image takes 1k bytes of flash.
 Bear in mind that each different image used in a sketch will reduce the amount of
 code in a sketch. The utility displays the amount of
 memory required for the image and other useful information when it does the conversion. 
-
 
 */

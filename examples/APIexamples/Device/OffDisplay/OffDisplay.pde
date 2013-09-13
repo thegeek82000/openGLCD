@@ -16,13 +16,12 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
 
 void setup()
 {
 
 	GLCD.Init();
-	GLCD.SelectFont(SystemFont5x7);
+	GLCD.SelectFont(System5x7);
 	GLCD.DrawString("OffDisplay test", gTextfmt_center, gTextfmt_center);
 
 }

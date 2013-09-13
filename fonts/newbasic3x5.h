@@ -1,5 +1,3 @@
-
-
 /*
  *
  * newbasic3x5
@@ -36,16 +34,13 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef NEWBASIC3X5_H
 #define NEWBASIC3X5_H
 
 #define NEWBASIC3X5_WIDTH 3
 #define NEWBASIC3X5_HEIGHT 6
 
-static uint8_t newbasic3x5[] PROGMEM = {
+GLCDFONTDECL(newbasic3x5) = {
     0x0, 0x0, // size
     0x03, // width
     0x06, // height

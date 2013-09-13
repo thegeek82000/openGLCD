@@ -51,18 +51,6 @@
 #error "Printf not supported: BigNums sketch requires Printf"
 #else
 
-/*
- * individual fonts don't have to be included
- * if you include the allFonts.h header
- */
-//#include "fonts/fixednums15x31.h"
-//#include "fonts/fixednums8x16.h"
-//#include "fonts/fixednums7x15.h"
-//#include "fonts/SystemFont5x7.h"
-
-#include "fonts/allFonts.h"
-
-
 void setup() {
 	GLCD.Init(NON_INVERTED);
 }
@@ -96,7 +84,9 @@ gText t4; // will define runtime later.
 void loop()
 {
 int hr, min, sec;
+#if DISPLAY_WIDTH < 128
 int counter = 0;;
+#endif
 
 	/*
 	 * Create 4 text areas in different ways
@@ -155,7 +145,7 @@ int counter = 0;;
 		/*
 		 * use a formatting string that is only in FLASH/(program memory) and *not* in RAM.
 		 */
-		t1.Printf_P(PSTR("%02d:%02d.%02d"), hr, min, sec);
+		t1.Printf(F("%02d:%02d.%02d"), hr, min, sec);
 
 #if DISPLAY_HEIGHT > 32
 		t2.CursorTo(0,0); // column & row is relative to text area

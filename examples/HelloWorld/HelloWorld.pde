@@ -10,10 +10,8 @@
  */
 
 // include the library header
+// no font headers have to be included
 #include <openGLCD.h>
-
-// include the fonts
-#include <fonts/SystemFont5x7.h>
 
 void setup()
 {

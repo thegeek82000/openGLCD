@@ -2,13 +2,10 @@
 /* Bitmap created from  GLCD\bitmaps\ArduinoIcon32x32.bmp    */
 /* Date: 12 Mar 2010                                         */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ArduinoIcon32x32_H
 #define ArduinoIcon32x32_H
 
-static uint8_t ArduinoIcon32x32[] PROGMEM = {
+GLCDBMAPDECL(ArduinoIcon32x32) = {
   32, // width
   32, // height
 

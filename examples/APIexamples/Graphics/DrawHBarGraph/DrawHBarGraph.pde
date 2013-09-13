@@ -35,7 +35,6 @@
 
 
 #include <openGLCD.h>
-#include "fonts/fixednums8x16.h"
 
 #define BARMAXVAL 100
 	

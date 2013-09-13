@@ -56,16 +56,13 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
+#ifndef CalBlk36_H
+#define CalBlk32_H
 
-#ifndef NEW_FONT_H
-#define NEW_FONT_H
+#define CalBlk36_WIDTH 28
+#define CalBlk36_HEIGHT 36
 
-#define NEW_FONT_WIDTH 28
-#define NEW_FONT_HEIGHT 36
-
-static uint8_t CalBlk36[] PROGMEM = {
+GLCDFONTDECL(CalBlk36) = {
     0x00, 0x32, // size
     0x1C, // width
     0x24, // height

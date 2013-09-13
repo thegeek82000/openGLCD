@@ -46,7 +46,32 @@
 #include "openGLCD_Buildinfo.h"
 #include "include/glcd_io.h"
 #include "include/glcd_errno.h"
-#include "fonts/SystemFont5x7.h"       // system font
+
+/*
+ * Nasty kludges for @#@#@ AVR progmem CRAP
+ * PSTR() macro uses static char instead of const char
+ * This matters on C++ so we can't use const on our progmem strings
+ * because you can't mix const and non const in the same section.
+ * It could be declared as "static" instead of "const" or
+ * alternatively you can use a different section.
+ * But we still need to redefine PROGMEM to keep from getting warnings
+ * for for each and every one of our PSTR strings.
+ */
+
+#if defined(__AVR__)
+#include <avr/pgmspace.h>
+#ifdef PROGMEM
+#undef PROGMEM
+#define PROGMEM __attribute__((section(".progmem.data")))
+#endif
+#define PROGMEMDIAG __attribute__((section(".progmem.diag")))
+#define P(name)   const char name[] PROGMEMDIAG   // declare a const string in AVR Progmem
+
+#else
+// The rest of the world is so much simpler and normal
+#define P(name)   const char name[]   // declare a const string
+#endif
+
 
 /*
  * Macros to convert chip#s to upper and lower pixel coordinates.
@@ -58,8 +83,6 @@
 #define chip2x2(chip) ((chip2x1(chip) + CHIP_WIDTH) >= DISPLAY_WIDTH ? DISPLAY_WIDTH-1 : chip2x1(chip) + CHIP_WIDTH-1)
 #define chip2y2(chip) ((chip2y1(chip) + CHIP_HEIGHT) >= DISPLAY_HEIGHT ? DISPLAY_HEIGHT-1 : chip2y1(chip) + CHIP_HEIGHT-1)
 
-#include <avr/pgmspace.h>
-#define P(name)   static char name[] PROGMEM   // declare a static string in AVR Progmem
 
 #define MAX_ERRORS 10
 

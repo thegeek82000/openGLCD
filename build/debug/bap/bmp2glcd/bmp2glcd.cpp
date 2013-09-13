@@ -29,7 +29,7 @@
  *         -v   (verbose mode)
  *         -pgm (create header with __attribute__ progmem for AVR)
  *         -pic30 (create header with __attribute__((space(auto_psv))) for PIC30
- *         -glcdlib (create bitmap data in glcd library format)
+ *         -openGLCD (create bitmap data in openGLCD library format)
  *
  *          (Note! there has to be space between switches -h and -w)
  *    
@@ -52,7 +52,7 @@ bool saveHeaderFile(string name, BMP &image);
 bool verbose=false;
 bool pgm=false;
 bool pic30=false;
-bool glcdlib=false;
+bool openGLCD=false;
 
 int main( int argc, char* argv[] )
 {
@@ -85,15 +85,15 @@ int main( int argc, char* argv[] )
       pgm=true;
 	else if(strcmp (argv[i],"-pic30")==0)
       pic30=true;      
-	else if(strcmp (argv[i],"-glcdlib")==0)
-      glcdlib=true;      
+	else if(strcmp (argv[i],"-openGLCD")==0)
+      openGLCD=true;      
   }
 
-  // Make sure no scaling when using glcdlib format
+  // Make sure no scaling when using openGLCD format
 
-  if(glcdlib && ((targetHeight > 00) || (targetWidth > 0)))
+  if(openGLCD && ((targetHeight > 00) || (targetWidth > 0)))
   {
-	cerr << "Error: -h or -w Scaling not allowed with glcdlib Mode" << endl;
+	cerr << "Error: -h or -w Scaling not allowed with openGLCD Mode" << endl;
 	return -1;
   }
 
@@ -163,7 +163,7 @@ int main( int argc, char* argv[] )
   imageOutput.WriteToFile (outname.c_str() );//the pixel data is updated only in write in EasyBMP
   imageOutput.ReadFromFile(outname.c_str() ); 
 
-  if(glcdlib)
+  if(openGLCD)
   	glcdname +="bmp"; // glcdname will be XXX_glcdbmp
 
   if (!saveHeaderFile(glcdname, imageOutput)){
@@ -186,7 +186,7 @@ void printHelp(void){
        << "\t-v\t\tverbose mode" << endl
        << "\t-pgm\t\tcreate header with __attribute__ ((progmem)) for AVR"<< endl
        << "\t-pic30\t\tcreate header whith __attribute__((space(auto_psv))) for PIC30" << endl
-       << "\t-glcdlib\tcreate bitmap data in GLCDlib format" << endl
+       << "\t-openGLCD\tcreate bitmap data in GLCDlib format" << endl
 	<<endl
        << "This program converts a bitmap to binary bitmap (black and white) with 8bit page"  
        <<endl
@@ -216,7 +216,7 @@ bool saveHeaderFile(string name, BMP &image){
   if(verbose)
     cout <<"writing header file as  \"" << name.c_str() << "\""<<endl;
   
-  if(!glcdlib)
+  if(!openGLCD)
   {
 
 	for(unsigned int i=0; i < basename.length(); i++)
@@ -228,7 +228,7 @@ bool saveHeaderFile(string name, BMP &image){
       << "//    A header datafile for glcd bitmap created with bmp2glcd by S.Varjo " 
       << endl;
 
-  if(glcdlib)
+  if(openGLCD)
   {
 	out << "//    The glcd bitmap data contained in this file is in a format"<< endl
 	    << "//    suitable for use by openGLCD." << endl
@@ -243,10 +243,8 @@ bool saveHeaderFile(string name, BMP &image){
 
       << "#ifndef _"<<basename.c_str()<<"_H " <<endl
       << "#define _"<<basename.c_str()<<"_H " <<endl<<endl;
-  if(glcdlib)
+  if(openGLCD)
   {
-	out << "#include <inttypes.h>" << endl
-		<< "#include <avr/pgmspace.h>" << endl
 		<< endl;
   }
   else
@@ -260,8 +258,8 @@ bool saveHeaderFile(string name, BMP &image){
 
   }
 
-  if (glcdlib)
-    out <<"static unsigned char " << basename.c_str() <<"[] PROGMEM ={"<<endl;
+  if (openGLCD)
+    out <<"GLCDBMAPDECL(" << basename.c_str() <<") ={"<<endl;
   else if (pgm)
     out <<"static unsigned char __attribute__ ((progmem)) " << basename.c_str() <<"_bmp[]={"<<endl;
   else if(pic30)
@@ -269,10 +267,10 @@ bool saveHeaderFile(string name, BMP &image){
   else
     out << "static char "<< basename.c_str() <<"_bmp[]={"<<endl;
 
-  if(glcdlib)
+  if(openGLCD)
   {
-	out << image.TellWidth() << ",\t// bitmap width  (glcdlib format)" << endl;
-	out << image.TellHeight() << ",\t// bitmap height (glcdlib format)" << endl;
+	out << image.TellWidth() << ",\t// bitmap width  (openGLCD format)" << endl;
+	out << image.TellHeight() << ",\t// bitmap height (openGLCD format)" << endl;
   }
 
   count=image.TellWidth()*image.TellHeight();
@@ -325,7 +323,7 @@ bool saveHeaderFile(string name, BMP &image){
   
   //transform(basename.begin(),basename.end(),basename.begin(), ::toupper);
 
-  if(!glcdlib)
+  if(!openGLCD)
   {
 	for(unsigned int i=0; i < basename.length(); i++)
 		basename[i]=toupper(basename[i]);

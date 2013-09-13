@@ -4,13 +4,10 @@
 /* Image Pixels = 1088    */
 /* Image Bytes  = 136     */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ArduinoIcon32_H
 #define ArduinoIcon32_H
 
-static uint8_t ArduinoIcon32[] PROGMEM = {
+GLCDBMAPDECL(ArduinoIcon32) = {
   34, // width
   32, // height
 

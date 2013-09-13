@@ -7,13 +7,10 @@
  *
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ArduinoIcon96x32_H
 #define ArduinoIcon96x32_H
 
-static unsigned char  ArduinoIcon96x32[] PROGMEM={
+GLCDBMAPDECL(ArduinoIcon96x32) = {
 	96, // width
 	32, //height
 0x00, 0x00, 0xc0, 0x20, 0x10, 0x08, 0xc8, 0x88, 0x08, 0x08, 0x10, 0x20, 0xc0, 0x00, 0x00, 0x00, 

@@ -34,7 +34,6 @@
  */
 
 #include <openGLCD.h>
-#include "fonts/fixednums8x16.h"
 
 #define MAXVAL 100
 	

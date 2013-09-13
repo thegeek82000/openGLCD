@@ -59,6 +59,13 @@
 #define __openGLCD_GLCDv3_H__
 
 #include <openGLCD.h>
+/*
+ * Note: openGLCD.h will include all the openGLCD fonts and bitmaps
+ * GLCDv3 sketches will attempt to include font and bitmap headers as well since that was
+ * requied in GLCDv3 but since all the font headers have already been included
+ * the #include(s) in the sketch will essentially be ignored by the include gaurd ifdef
+ * in the font/bitmap header.
+ */
 
 /*
  * map GLCDv3 function behvior to work in openGLCD

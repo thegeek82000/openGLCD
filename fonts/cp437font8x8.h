@@ -8,7 +8,7 @@
  * See wikipedia for further details about the cp437 font:
  * http://en.wikipedia.org/wiki/Code_page_437
  * 
- * Update for Arduino glcd library
+ * Update for openGLCD
  * Date: 2011-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
  */
@@ -16,11 +16,7 @@
 #ifndef CP437FONT8x8_H
 #define CP437FONT8x8_H
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
-
-static uint8_t cp437font8x8[] PROGMEM = {
+GLCDFONTDECL(cp437font8x8) = {
     0x0, 0x1, // size of one indicates fixed width no pixel pad font
     0x08, // width
     0x08, // height

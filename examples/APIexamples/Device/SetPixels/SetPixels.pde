@@ -19,13 +19,11 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
 
 void setup()
 {
-
 	GLCD.Init(); // default to "normal" (non inverted) mode
-	GLCD.SelectFont(SystemFont5x7);
+	GLCD.SelectFont(System5x7);
 }
 
 

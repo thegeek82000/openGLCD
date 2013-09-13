@@ -1,8 +1,6 @@
-
-
 /*
  *
- * Verdana28
+ * Verdana_digits_24
  *
  * created with FontCreator
  * written by F. Maximilian Thiele
@@ -37,9 +35,6 @@ row
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef VERDANA24_H
 #define VERDANA24_H
 
@@ -51,7 +46,7 @@ row
  */
 #define Verdana24 Verdana_digits_24
 
-static uint8_t Verdana_digits_24[] PROGMEM = {
+GLCDFONTDECL(Verdana_digits_24) = {
     0x0E, 0xF9, // size
     0x11, // width
     0x18, // height

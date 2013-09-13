@@ -16,6 +16,7 @@ and configurations to openGLCD.
 
 @subpage page_GLCDv3config\n
 @subpage page_GLCDv3sketch\n
+@subpage page_GLCDv3fontbitmap\n
 
 */
 
@@ -176,5 +177,18 @@ The results obtained from the functions will not match the openGLCD documenation
 Therefore, as stated above, this method of backward compability is not recommeded as a
 permanent solution.
 
+
+*/
+
+/*
+ * GLCDv3 Font & Bitmap Migration
+ */
+
+/**
+@page page_GLCDv3fontbitmap Fonts and Bitmaps
+
+Fonts and Bitmaps are handled differently in openGLCD.
+
+Sketches no longer have to include font or bitmap header files.
 
 */

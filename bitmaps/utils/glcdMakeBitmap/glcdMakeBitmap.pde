@@ -1,8 +1,10 @@
 /**
- * glcdBitmap. 
+ * glcdMakeBitmap.pde
  * 
  * Creates a bitmap definition file that can be included in an Arduino sketch
  * to display a bitmap image on a graphics LCD using the Arduino GLCD library.
+ *
+ * 2013-09-12 bperrybap  Modified for openGLCD
  *
  * Created  6 Nov  2008  Copyright Michael Margolis 2008,2010
  * updated  14 Feb 2010  
@@ -112,24 +114,21 @@ void writeFile()
   PrintWriter output;
   output = createWriter(outFileName);
 
-  output.println("/* " + imgData.baseName + " bitmap file for GLCD library */");
+  output.println("/* " + imgData.baseName + " bitmap file for openGLCD library */");
   output.println("/* Bitmap created from " +  imgData.sourceFileName + "      */");
   String[] monthName = { "","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"  };
   output.println("/* Date: " +  day() + " " + monthName[month()] +  " " +  year() + "      */" ); 
   output.println("/* Image Pixels = "  + imgData.pixels + "    */"); 
   output.println("/* Image Bytes  = "   + imgData.bytes  + "     */");   
   output.println();
-
-  output.println("#include <inttypes.h>");
-  output.println("#include <avr/pgmspace.h>");
   output.println();
   output.println("#ifndef " +  imgData.baseName + "_H");
   output.println("#define " +  imgData.baseName + "_H");
 
   output.println();
-  output.print("static uint8_t ");
+  output.print("GLCDBMAPDECL(");
   output.print( imgData.baseName);
-  output.println("[] PROGMEM = {");
+  output.println(") = {");
 
   output.print("  ");
   output.print(imgData.width);   // note width and height are bytes so 256 will be 0
@@ -246,7 +245,7 @@ void listImageHeaderFiles(String destination, String outFilename)
   String outPath = destination + outFilename;
   PrintWriter output;
   output = createWriter(outPath);
-  output.println("/* " + outFilename + " bitmap header for GLCD library */");
+  output.println("/* " + outFilename + " bitmap header for openGLCD library */");
   output.println("/* This file is created automatically by the glcdMakeBitmap utility */");
   output.println("/* Any edits to this file will be lost when glcdMakeBitmap is next run */");
   output.println();
@@ -292,6 +291,3 @@ void listImageHeaderFilesX(String destination, String outFileName)
   else
     println(destination + " is not a directory");
 }
-
-
-

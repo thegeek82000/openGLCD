@@ -1,12 +1,4 @@
 //---------------------------------------------------------------------------
-//    A header datafile for glcd bitmap created with bmp2glcd by S.Varjo 
-//    The glcd bitmap data contained in this file is in a format
-//    suitable for use by the Arduino GLCD lib.
-//    It contains embedded width and height format information.
-//
-//    Ardino bitmap format support added by Bill Perry
-//           (bperrybap@opensource.billsworld.billandterrie.com)
-//
 // 64x32 Arduino Icon.
 // This icon keeps the same "flavor" as the original Ardino Icon
 // but has been modified to fit on lcd displays that are only 32 pixels high
@@ -19,10 +11,7 @@
 #ifndef _ArduinoIcon64x32_H 
 #define _ArduinoIcon64x32_H 
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
-static unsigned char ArduinoIcon64x32[] PROGMEM ={
+GLCDBMAPDECL(ArduinoIcon64x32) ={
 64,	// bitmap width  (arduino glcdlib format)
 32,	// bitmap height (arduino glcdlib format)
 0x00, 0x00, 0xc0, 0x20, 0x10, 0x08, 0xc8, 0x88, 0x08, 0x08, 0x10, 0x20, 0xc0, 0x00, 0x00, 0x00, 

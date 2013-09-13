@@ -5,7 +5,6 @@
  */
 
 #include <openGLCD.h>
-#include "fonts/SystemFont5x7.h"       // system font
  
 /********* user configurable defines ************/
 #define CELL_SIZE 4        // the height and width of each cell

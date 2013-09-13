@@ -5,7 +5,6 @@
  */
 
 #include <openGLCD.h>
-#include "fonts/SystemFont5x7.h"       // system font
  
 /********* user configurable defines ************/
 #define CELL_SIZE 4          // the height and width of each cell
@@ -149,7 +148,7 @@ void life(unsigned long duration)
 #endif
 
   GLCD.ClearScreen();  
-  GLCD.SelectFont(Arial_14);
+  GLCD.SelectFont(Arial14);
   GLCD.DrawString("Arduino Life", gTextfmt_center, gTextfmt_center);
   delay(2000);
   seed(startSeed++);

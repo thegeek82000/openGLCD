@@ -1,5 +1,3 @@
-
-
 /*
  *
  * Arial Bold 14
@@ -36,16 +34,13 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ARIAL_BOLD_14_H
 #define ARIAL_BOLD_14_H
 
 #define ARIAL_BOLD_14_WIDTH 13
 #define ARIAL_BOLD_14_HEIGHT 14
 
-static uint8_t Arial_bold_14[] PROGMEM = {
+GLCDFONTDECL(Arial_bold_14) = {
     0x22, 0x08, // size
     0x0D, // width
     0x0E, // height

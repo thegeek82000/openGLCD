@@ -5,8 +5,8 @@
 #include <include/glcd_errno.h>
 #include <openGLCD_Buildinfo.h>
 
-//#include <bitmaps/allBitmaps.h>
-//#include <fonts/fonts/allFonts.h>
+#include <fonts/allFonts.h>
+#include <bitmaps/allBitmaps.h>
 
 #define GLCD_GLCDLIB_NAMESTR "openGLCD" // name of library
 

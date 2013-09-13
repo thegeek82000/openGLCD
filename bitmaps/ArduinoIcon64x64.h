@@ -2,13 +2,10 @@
 /* Bitmap created from GLCD\bitmaps\ArduinoIcon64x64.bmp   */
 /* Date: 12 Mar 2010                                       */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef ArduinoIcon64x64_H
 #define ArduinoIcon64x64_H
 
-static uint8_t ArduinoIcon64x64[] PROGMEM = {
+GLCDBMAPDECL(ArduinoIcon64x64) = {
   64, // width
   64, // height
 

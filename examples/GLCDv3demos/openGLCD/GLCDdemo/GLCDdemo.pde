@@ -10,12 +10,6 @@
 
 #include <openGLCD.h>
 
-#include "fonts/SystemFont5x7.h"
-#include "fonts/Arial14.h"         // system and arial14 fonts are used
-
-#include "bitmaps/ArduinoIcon64x64.h"
-#include "bitmaps/ArduinoIcon64x32.h"
-
 Image_t icon;
 
 gText textArea;              // a text area to be defined later in the sketch
@@ -97,7 +91,7 @@ void  loop()
 void introScreen()
 {  
   GLCD.ClearScreen();
-  GLCD.SelectFont(Arial_14); // you can also make your own fonts, see playground for details   
+  GLCD.SelectFont(Arial14); // you can also make your own fonts, see playground for details   
    
   GLCD.DrawString(GLCD_GLCDLIB_NAMESTR, gTextfmt_center, 3);
   GLCD.DrawString(GLCD_GLCDLIB_VERSIONSTR, gTextfmt_center, GLCD.CharHeight(0) + 2);
@@ -112,7 +106,7 @@ void introScreen()
   GLCD.SelectFont(System5x7);
   showCharacters("5x7 font:", System5x7);
   countdown(3);
-  showCharacters("Arial_14:", Arial_14);
+  showCharacters("Arial14:", Arial14);
   countdown(3);
   textAreaDemo();
   scrollingDemo();
@@ -230,7 +224,7 @@ void scrollingDemo()
   textAreaArray[1].CursorTo(0,0);
   textAreaArray[2].DefineArea(textAreaBOTTOM); 
 
-  textAreaArray[2].SelectFont(Arial_14, BLACK);
+  textAreaArray[2].SelectFont(Arial14, BLACK);
   textAreaArray[2].CursorTo(0,0);
 
   for(byte area = 0; area < 3; area++)

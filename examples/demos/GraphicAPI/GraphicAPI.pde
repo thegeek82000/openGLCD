@@ -10,10 +10,6 @@
 
 #include "openGLCD.h"
 
-#include "fonts/SystemFont5x7.h"
-#include "fonts/fixednums8x16.h"
-#include "fonts/Arial14.h"
-
 #define BARMAXVAL 100
 #define DELAY 1100 // delay between "demos"
 

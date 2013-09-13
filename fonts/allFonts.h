@@ -11,7 +11,8 @@
 #ifndef _allFonts_h_
 #define _allFonts_h_
 
-#include "SystemFont5x7.h"      // system font (fixed width)
+#include "System5x7.h" 	        // system font (fixed width)
+#include "SystemFont5x7.h"      // backward compability System5x7 header
 #include "Iain5x7.h"		// similar to system5x7 but proportional
 #include "Arial14.h"            // proportional font
 #include "Arial_bold_14.h"      // Bold proportional font
@@ -28,11 +29,12 @@
 #include "lcdnums14x24.h"	// font that looks like LCD digits
 #include "fixed_bold10x15.h"
 #include "Wendy3x5.h"
+#include "newbasic3x5.h"
 
 /*
- * These fonts require new no-pad rendering code
+ * These fonts require no-pad rendering code
  */
 #include "font8x8.h"		// fixed wider font but similar to system5x7 font
-#include "cp437font8x8.h"        // fixed Font from 80's IBM PC
+#include "cp437font8x8.h"       // fixed Font from 80's IBM PC
 
 #endif

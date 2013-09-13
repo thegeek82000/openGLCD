@@ -21,7 +21,6 @@
 //#define btnBack 3
  
 #include <openGLCD.h>    // Graphics LCD library   
-#include "fonts/SystemFont5x7.h"       // system font
 
 /*
  * download Time library from:

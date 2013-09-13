@@ -17,7 +17,6 @@
  */
 
 #include <openGLCD.h>
-#include <fonts/SystemFont5x7.h>
 
 #define DELAY 3000 // ms delay between examples
 

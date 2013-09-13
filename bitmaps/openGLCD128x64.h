@@ -11,10 +11,7 @@
 #ifndef _openGLCD128x64_H 
 #define _openGLCD128x64_H 
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
-static unsigned char openGLCD128x64[] PROGMEM ={
+GLCDBMAPDECL(openGLCD128x64) ={
 128,	// bitmap width  (openGLCD format)
 64,	// bitmap height (openGLCD format)
 0xf8, 0xfe, 0x1e, 0x07, 0x07, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 0x03, 

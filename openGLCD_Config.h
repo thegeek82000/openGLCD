@@ -151,6 +151,7 @@
 #undef PROGMEM
 #define PROGMEM __attribute__((section(".progmem.data")))
 #endif
+#define PROGMEMGLCD __attribute__((section(".progmem.openGLCD")))
 
 #else // non AVR
 #ifdef PROGMEM
@@ -160,6 +161,15 @@
 
 #endif
 
+#ifdef __AVR__
+#define GLCDFONTDECL(_n) const uint8_t PROGMEMGLCD _n[]
+#define GLCDBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
+#define GLCDXBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
+#else
+#define GLCDFONTDECL(_n) const uint8_t _n[]
+#define GLCDBMAPDECL(_n) const uint8_t _n[]
+#define GLCDXBMAPDECL(_n) const uint8_t _n[]
+#endif
 
 #endif // CONSIDER
 

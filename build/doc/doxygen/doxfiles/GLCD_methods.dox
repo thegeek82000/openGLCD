@@ -5,7 +5,9 @@
 
 
 /**
-@page page_GLCD_methods openGLCD Methods
+@page page_GLCD_methods openGLCD API
+
+@subpage page_coordinates
 
 @subpage page_GLCD_object
 
@@ -13,7 +15,6 @@
 
 @subpage page_arduino_print
 
-@subpage page_coordinates
 
 */
 
@@ -57,6 +58,8 @@ All of the Arduino print functions can be used in this library, see:
 
 The functions work with any selected font.
 All of these functions print from the current cursor position
+@see @ref gText::Printf() "Printf()"
+@see @ref gText::Puts() "Puts()"
 @see @ref gText::CursorTo() "CursorTo()", @ref gText::CursorToXY() "CursorToXY()"
 
 @code
@@ -70,6 +73,7 @@ GLCD.print(integer, BYTE); // prints the ASCII character represented by the inte
 GLCD.print(float);         // prints a floating point number using two decimal places
 GLCD.print(float, digits); // prints a floating point number using the given number of digits after the decimal point
 GLCD.print(string);        // prints the string
+GLCD.print("string");      // prints the literal string
 @endcode
 
 The println variants of these functions are also supported:
@@ -77,12 +81,15 @@ The println variants of these functions are also supported:
   GLCD.println(variable);  // will wrap to the next line at the end of the print.  
 @endcode
 
-Printing strings can consume a lot of RAM. Printing strings using the flashStr prefix results in the compiler using flash rather than RAM to store the string
+Because of the AVR processor architecture, character strings consume RAM.
+This is not the case for other processors like ARM or PIC32.
+The Arduino sytem includes a F() macro to help work around this AVR issue.
+Printing strings using the F() macro results in the compiler not using RAM
+on AVR based systems to store the string.
+The F() macro can also be used on non AVR based systems.
 @code
-  GLCD.print("string");             // string stored in RAM: the compiler reserves 7 bytes of RAM (string length + 1) to store the string
-  GLCD.print(F("string") );  // stores the string in Flash memory (Progmem) , no RAM  is used to store the string
-  GLCD.print(flashStr("string") );  // stores the string in Flash memory (Progmem) , no RAM  is used to store the string
-  GLCD.println(flashStr("another string") );  // as above, but wraps following text to the next line
+  GLCD.print("string");      // on AVR the compiler reserves 7 bytes of RAM (characters + 1) to store the string
+  GLCD.print(F("string") );  // no RAM is used to store the string, regardless of the processor
 @endcode
 
 */

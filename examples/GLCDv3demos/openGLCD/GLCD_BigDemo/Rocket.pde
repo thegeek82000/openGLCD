@@ -13,8 +13,7 @@
 
 
 #include <openGLCD.h>
-#include "fonts/SystemFont5x7.h"   // font
-#include "bitmaps.h"         // bitmaps
+#include "bitmaps.h"         // rocket bitmaps
 
 /*
 ******************************
@@ -61,7 +60,7 @@ byte brightness = 64;
 #define enemy1XOld trackerOld[3][1]
 #define enemy1YOld trackerOld[4][2]
 
-uint8_t lives = 3;
+int8_t lives = 3;
 uint8_t score = 0;
 uint8_t level = 0;
 uint8_t fastSpeed = 25;

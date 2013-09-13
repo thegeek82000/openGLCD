@@ -14,11 +14,7 @@
 #ifndef FIXEDNUMS7x15_H
 #define FIXEDNUMS7x15_H
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
-
-static uint8_t fixednums7x15[] PROGMEM = {
+GLCDFONTDECL(fixednums7x15) = {
     0x0, 0x0,	// size of zero indicates fixed width font
     7,		// width
     15,		// height
