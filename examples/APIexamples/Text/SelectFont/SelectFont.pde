@@ -37,7 +37,6 @@
  * note:
  * When the display is initilized in INVERTED mode,
  * the colors are reversed.
- * Output a NULL terminated character string
  *
  * note:
  * AVR systems require fonts to fit in lower 64k of program memory

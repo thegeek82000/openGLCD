@@ -2103,7 +2103,9 @@ void gText::EraseTextLine( uint8_t row)
  * @code
  *    GLCD.SelectFont(system5x7);            // fg pixels on, bg pixels off
  *    GLCD.SelectFont(system5x7, PIXEL_ON);  // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(system5x7, BLACK);     // fg pixels on, bg pixels off
  *    GLCD.SelectFont(system5x7, PIXEL_OFF); // fg pixels off, bg pixels on
+ *    GLCD.SelectFont(system5x7, WHITE);     // fg pixels off, bg pixels on
  *    GLCD.SelectFont(Arial14);
  *    textarea.SelectFont(fixednums7x15, PIXEL_OFF);
  * @endcode
@@ -2126,10 +2128,36 @@ void gText::SelectFont(Font_t font,uint8_t fgcolor, FontCallback callback)
 }
 
 /**
- * Select a font foreground color
+ * Set a font foreground color
  *
  * @param fgcolor  foreground font color
  *
+ * Set the font foreground color for the text area.
+ *
+ * fgcolor PIXEL_ON or BLACK renders "on" pixels on a "off" background,
+ * i.e. it turns on the pixels on the LCD for the pixels in the character glpyh
+ * and turns off all the background pixels.
+ *
+ * fgcolor PIXEL_OFF or WHITE renders "off" pixels on a "on" background;
+ * i.e. it turns off the pixels on the LCD for the pixels in the character glpyh
+ * and turns on all the background pixels.
+ *
+ * @b Examples:
+ * @code
+ *    GLCD.SetFontColor(PIXEL_ON);  // fg pixels on, bg pixels off
+ *    GLCD.SetFontColor(BLACK);     // fg pixels on, bg pixels off
+ *    GLCD.SetFontColor(PIXEL_OFF); // fg pixels off, bg pixels on
+ *    GLCD.SetFontColor(WHITE);     // fg pixels off, bg pixels on
+ *    textarea.SetFontColor(PIXEL_OFF);
+ * @endcode
+ *
+ * @note
+ *	The color becomes effective for all future text operations but
+ *	does not alter the area, including any existing text in the area.
+ *  This allows switching colors as printing is done within the area.
+ *	If a ClearScreen() is done, then the area is cleared according
+ *	to the color.
+ *   
  *
  * @see SelectFont()
  * @see SetAreaMode()
