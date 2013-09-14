@@ -2084,24 +2084,35 @@ void gText::EraseTextLine( uint8_t row)
  *
  * All subsequent printing functions will use this font. 
  *
- * Font definitions from included font definition files are stored in program memory 
- * You can have as many fonts defines as will fit in program memory up to 64k and can
- * switch between them with this function.
+ * Font definitions stored in program memory.
+ * You can have as many fonts defines as will fit in program memory
+ * can switch between them with this function.
  *
- * fgcolor PIXEL_ON or BLACK renders dark pixels on a light background,
+ * fgcolor PIXEL_ON or BLACK renders "on" pixels on a "off" background,
  * i.e. it turns on the pixels on the LCD for the pixels in the character glpyh
  * and turns off all the background pixels.
  *
- * fgcolor PIXEL_OFF or WHITE renders light pixels on dark background;
+ * fgcolor PIXEL_OFF or WHITE renders "off" pixels on a "on" background;
  * i.e. it turns off the pixels on the LCD for the pixels in the character glpyh
  * and turns on all the background pixels.
  *
  * If the optional callback argument is ommitted, a default routine
  * is selected that assumes that the font is in program memory (flash).
  *
+ * @b Examples:
+ * @code
+ *    GLCD.SelectFont(system5x7);            // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(system5x7, PIXEL_ON);  // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(system5x7, PIXEL_OFF); // fg pixels off, bg pixels on
+ *    GLCD.SelectFont(Arial14);
+ *    textarea.SelectFont(fixednums7x15, PIXEL_OFF);
+ * @endcode
+ *
  * @note
  * When the display is initilized in INVERTED mode,
  * the colors are reversed.
+ * @note
+ * AVR systems require fonts to fit in lower 64k of program memory
  *
  * @see SetFontColor()
  * @see SetAreaMode()
