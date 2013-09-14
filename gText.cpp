@@ -54,7 +54,8 @@ static FontCallback	FontRead;	// font callback shared across all instances
  *
  * Constructor creates a text area using the entire display but does not
  * assign any font to it.
- * SelectFont() must be used to select a font for the area before any text can be output to the display.
+ * SelectFont() must be used to select a font for the area before any text can
+ * be output to the display.
  *
  * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "DefineArea()"
  * @see ClearArea()
@@ -100,7 +101,8 @@ gText::gText(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode)
  * \ref DefineArea(predefinedArea selection, gTextMode mode) "DefineArea()"
  * with the same parameters to initalize it.
  * Constructor does not assign any font to it.
- * SelectFont() must be used to select a font for the area before any text can be output to the display.
+ * SelectFont() must be used to select a font for the area before any text can
+ * be output to the display.
  *
  * @see \ref DefineArea(predefinedArea selection, gTextMode mode) "DefineArea()"
  * @see ClearArea()
@@ -203,7 +205,8 @@ uint8_t color;
  * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
  *
  *
- * Defines a text area sized to hold columns characters across and rows characters tall.
+ * Defines a text area sized to hold columns characters across and rows
+ * characters tall.
  * It is properly sized for the specified font.
  * 
  * The area within the newly defined text area is intentionally not cleared.
@@ -223,7 +226,8 @@ uint8_t color;
  * otherwise returns non zero error code with the area set to the full display
  *
  * @note
- * Upon defining the text area, the cursor position for the text area will be set to x,y
+ * Upon defining the text area, the cursor position for the text area will be
+ * set to x,y
  *
  * @see ClearArea()
  * @see SetAreaMode()  ClearAreaMode()

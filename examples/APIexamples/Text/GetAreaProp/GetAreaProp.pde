@@ -1,5 +1,5 @@
 /*
- * GetAreProp - openGLCD API example
+ * GetAreaProp - openGLCD API example
  *
  * Example of using:
  * GetAreaProp()
