@@ -46,6 +46,8 @@
  *  a linker option must be changed. Currently,
  *  the Arduino IDE does not support modifying the linker options.
  *
+ *  AVR places string constants in RAM. To save space on AVR systems the F()
+ *  macro can be used to force the string constant to remain only in flash.
  *
  * Created by Bill Perry 2013-09-14
  * bperrybap@opensource.billsworld.billandterrie.com

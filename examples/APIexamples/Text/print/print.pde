@@ -8,11 +8,12 @@
  * print() is not really part of the openGLCD API.
  * It is part of the Arduino Print class.
  * Arduino doesn't have any documentation on the Print class.
- * However, refer to the Serial library for a description of the Print class capabilities.
+ * However, refer to the Serial library for a description of the Print class
+ * capabilities.
  * http://www.arduino.cc/en/Serial/Print
  *
  * The print() and println() functions can be used with the default text area or
- * with user define text areas.
+ * with user defined text areas.
  * i.e.
  * GLCD.print(...);
  * GLCD.println(...);
@@ -22,11 +23,10 @@
  * Examples:
  *    GLCD.print(character);     // print the character at the current cursor position
  *    GLCD.print(integer);       // print the decimal value of the integer 
- *    GLCD.print(integer,DEC);   // as above 
+ *    GLCD.print(integer, DEC);  // as above 
  *    GLCD.print(integer, HEX);  // print the hexadecimal value of the integer 
  *    GLCD.print(integer, OCT) ; // print the octal value of the integer
  *    GLCD.print(integer, BIN) ; // print the binary value of the integer
- *    GLCD.print(integer, BYTE); // print the ASCII character represented by the integer 
  *    GLCD.print(float);         // print a floating point number using two decimal places
  *    GLCD.print(float, places); // print a floating point number using 'places' decimal places
  *    GLCD.print(string);        // print the string
