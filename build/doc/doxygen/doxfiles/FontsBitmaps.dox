@@ -44,9 +44,7 @@ Type in the name of the font in the Name box that says "new Font".
 This will be the name you use for the @ref gText::SelectFont() "SelectFont()" api call.\n
 DO NOT use spaces in the name.\n
 Example:
-@code
-myfont
-@endcode
+@image html openGLCDFontCreator-Newfont.png
 
 If you do not wish to create an entire font yourself, you can
 import a font from one of the system fonts available by choosing a font

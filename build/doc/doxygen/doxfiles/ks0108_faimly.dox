@@ -135,7 +135,7 @@ The table below shows the Arduino pin to KS0108 Pin Function assignments for eac
 Each row represents the Arduino pin connections for the board type as indicated by the
 Board Type column.
 The columns to the right of the Board Type represent KS0108 pin functions.\n
-So for example:\n
+For example:\n
 Uno analog pin A3 is connected to the GLCD pin function D_I.\n
 Uno digital pin 8 is connected to the GLCD pin function D0 (data bit 0)\n
 Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <b> See important Teensy 3.0 warning below</b>\n
@@ -324,6 +324,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 </center>
 @warning
 <h2>Teensy 3.0 pins must NEVER be connected directly to the GLCD module pins.</h2>
+@warning
 This is because the GLCD is 5v and the Teensy 3.0 is 3v.
 The voltages must be mapped in order to avoid damaging the Teensy 3.0.
 Alternatively, each connection from Teensy 3.0 to the GLCD can be protected

@@ -5,7 +5,7 @@
 
 
 /**
-@page page_GLCD_methods openGLCD API
+@page page_GLCD_API openGLCD API
 
 @subpage page_coordinates
 
@@ -63,17 +63,17 @@ All of these functions print from the current cursor position
 @see @ref gText::CursorTo() "CursorTo()", @ref gText::CursorToXY() "CursorToXY()"
 
 @code
-GLCD.print(character);     // prints the character at the current cursor position
-GLCD.print(integer);       // prints the decimal value of the integer 
+GLCD.print(character);     // print the character at the current cursor position
+GLCD.print(integer);       // print the decimal value of the integer 
 GLCD.print(integer,DEC);   // as above 
-GLCD.print(integer, HEX);  // prints the hexadecimal value of the integer 
-GLCD.print(integer, OCT) ; // prints the octal value of the integer
-GLCD.print(integer, BIN) ; // prints the binary value of the integer
-GLCD.print(integer, BYTE); // prints the ASCII character represented by the integer 
-GLCD.print(float);         // prints a floating point number using two decimal places
-GLCD.print(float, digits); // prints a floating point number using the given number of digits after the decimal point
-GLCD.print(string);        // prints the string
-GLCD.print("string");      // prints the literal string
+GLCD.print(integer, HEX);  // print the hexadecimal value of the integer 
+GLCD.print(integer, OCT) ; // print the octal value of the integer
+GLCD.print(integer, BIN) ; // print the binary value of the integer
+GLCD.print(integer, BYTE); // print the ASCII character represented by the integer 
+GLCD.print(float);         // print a floating point number using two decimal places
+GLCD.print(float, digits); // print a floating point number using the given number of digits after the decimal point
+GLCD.print(string);        // print the string
+GLCD.print("string");      // print the literal string
 @endcode
 
 The println variants of these functions are also supported:
