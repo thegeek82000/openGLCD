@@ -2559,9 +2559,11 @@ extern "C"
  * @endcode
  *
  * @note
- *	By default @em printf() has no floating support in AVR enviornments.
- *	In order to enable this, a linker option must be changed. Currenly,
- *	the Arduino IDE does not support modifying the linker options.
+ *  By default the xxprintf() routines, which Printf() uses, have no floating
+ *  point support in AVR enviornments.  (Works for ARM and PIC32 by default)
+ *  In order to enable floating point support for AVR,
+ *  a linker option must be changed. Currently,
+ *  the Arduino IDE does not support modifying the linker options.
  *
  * @see Printf_P()
  */ 
