@@ -105,10 +105,10 @@ MYDATETIME=`date`
 PROGNAME=`basename $0`
 
 #
-# set PROGWD (program working directory) variable (grab it from current directory)
+# set PROGWD (program working directory) variable (grab it directory of script)
 #
 
-PROGWD=$(pwd)
+PROGWD=`dirname $0`
 
 #
 # LOG file name (create based on baename of script file)
