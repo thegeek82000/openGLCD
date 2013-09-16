@@ -2263,7 +2263,7 @@ void gText::SetFontColor(uint8_t fgcolor)
 /**
  * Set TextArea mode options
  *
- * @param mode  text area mode
+ * @param mode a value from @ref gTextMode
  *
  * @b Examples:
  * @code
@@ -2296,7 +2296,7 @@ void gText::SetAreaMode(gTextMode mode)
 /**
  * Clear TextArea mode options
  *
- * @param mode  text area mode
+ * @param mode a value from @ref gTextMode
  *
  * @b Examples:
  * @code

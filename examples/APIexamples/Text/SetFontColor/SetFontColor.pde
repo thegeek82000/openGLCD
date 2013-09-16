@@ -10,9 +10,9 @@
  *
  * Set the font foreground color for the text area.
  *
- * fgcolor PIXEL_ON or BLACK renders "on" pixels on a "off" background,
+ * fgcolor PIXEL_ON or BLACK renders "on" pixels on an "off" background,
  * i.e. it turns on the pixels on the LCD for the pixels in the character
- * glpyh* and turns off all the background pixels.
+ * glpyh and turns off all the background pixels.
  *
  * fgcolor PIXEL_OFF or WHITE renders "on" pixels on a "off" background;
  * i.e. it turns off the pixels on the LCD for the pixels in the character

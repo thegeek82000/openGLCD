@@ -2,6 +2,8 @@
  * cp437
  *
  * This sketch demonstrates using the cp437 font in place of graphics.
+ * For a a description of the cp437 font see:
+ * http://en.wikipedia.org/wiki/Code_page_437
  *
  * 2013-09-15 Bill Perry  - original creation
  *	bperrybap@opensource.billsworld.billandterrie.com
