@@ -80,7 +80,7 @@
  * // upper left is at x1,y1 lower left is at x2,y2
  * textarea.DefineArea(x1, y1, x2, y2);
  *
- * Created by Bill Perry 2013-09-13
+ * Created by Bill Perry 2013-09-15
  * bperrybap@opensource.billsworld.billandterrie.com
  */
 

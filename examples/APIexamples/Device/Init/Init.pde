@@ -56,8 +56,8 @@
  * This sketch prints "Hello World!" to the LCD
  * and shows the time in seconds since Arduino board was reset.
  * 
- *  2013-09-15 Bill Perry  - original creation
- *  	bperrybap@opensource.billsworld.billandterrie.com
+ * Created by Bill Perry 2013-08-01
+ * bperrybap@opensource.billsworld.billandterrie.com
  */
 
 #include <openGLCD.h>
