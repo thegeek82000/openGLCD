@@ -183,7 +183,7 @@ gText::gText(predefinedArea selection, Font_t font, gTextMode mode)
  * @param columns number of text columns
  * @param rows number of text rows
  * @param font a font definition
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
  *
  * Creates a gText area object and then calls

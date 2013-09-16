@@ -1,7 +1,7 @@
 vi:ts=4
 
 - Remove GLCDBigdemo???
-- Remove fonts/newbasix3x5.h font (Wendy3x5 is better)
+- Remove fonts/newbasic3x5.h font (Wendy3x5 is better)
 - rename config files
 	"Arduino" becomes "Uno" (done)
 	panel: [module]-{glcdChip}_AutoConfig_Panel.h
@@ -32,44 +32,13 @@ vi:ts=4
 
 - New Demos
 	-iFPS (iFPS demo - NEW)
-	-cp437 font example
+	-cp437 font example (done)
 	-openGLCDGraphics (done)
 		called "GraphicAPI"
 	-openGLCDText
 
-- add API examples:
-    - Text
-	gText
-	DefineArea
-	print (Print class)
-	Printf
-	Printf_P
-	SelectFont
-	SetFontColor
-	SetAreaMode
-	ClearAreaMode
-		low
-			EraseTextLine
-			DrawSring_P
-			printFlash ??
-			printFlashln ??
-			printNumber ??
-			Puts_P
-			Streaming i/o
-
-	- Graphics
-		- ClearScreen (done)
-		- DrawBitmap (done)
-		- DrawBitmapXBM (done)
-    - Device
-	Init
-		low priority
-		- GotoXY
-		- ReadData
-		- WriteData
-
 - cleanup bmp2glcd 
-
+	- move over under bitmaps/utility?
 	
 - update doxgen for backlight functions to indicate that
   backlight must be configured in config files.
@@ -81,12 +50,33 @@ vi:ts=4
 - need to add GLCD.top & GLCD.Left to coordinate system photo
 	Pretty much need to update/replace all photos in doxygen
 
-- Clean up references to SCROLL_UP/SCROLL_DOWN
+- Remove FontCallback routine
 
 - look at pin order of config files
 	- Teensy vs others
 	- consistency of CSEL3 & CSEL4
 	- Should pin order match pin configuration table order in doxygen? 
+
+- add API examples:
+    - Text
+		low
+			Printf_P
+			EraseTextLine
+			DrawSring_P
+			printFlash ??
+			printFlashln ??
+			printNumber ??
+			Puts_P
+			Streaming i/o
+
+	- Graphics
+		low
+			-DrawBitmapXBM_P
+    - Device
+		low priority
+			- GotoXY
+			- ReadData
+			- WriteData
 
 - Nano & Micro have their own variants
 	- have seperate pinconfig files?
@@ -114,6 +104,8 @@ vi:ts=4
 - update code to use C99 "fast" types: ??
 	uint_fast8_t
 	int_fast8_t
+
+- Add a "width" field to PrintNumber? or obsolete the function completely?
 
 - remove/eliminate FontRead access function ReadPgmData()
 	It is in glcd.cpp but used by gText.cpp
@@ -359,4 +351,6 @@ DONE-------------------------------------------------------------
 	- Update links to FontCreator2 in doxygen ("Additional Resources")
 		 [ it points to google code glcd-arduino]
 	Will need to point to place in new repository
+
+- Clean up references to SCROLL_UP/SCROLL_DOWN
 
