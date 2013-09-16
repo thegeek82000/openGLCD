@@ -104,8 +104,7 @@ int counter = 0;;
 	 * define t1 area based on a predefined area of the display
 	 */
 
-	t1.DefineArea(textAreaTOP);
-	t1.SelectFont(fixednums15x31);
+	t1.DefineArea(textAreaTOP, fixednums15x31);
 
 #if DISPLAY_HEIGHT > 32
 	/*

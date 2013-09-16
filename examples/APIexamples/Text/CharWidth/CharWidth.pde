@@ -5,7 +5,7 @@
  * CharWidth()
  *
  * width = CharWidth(c)
- * s     - character to size
+ * c     - character to size
  *
  * Returns:
  *    The width in pixels of the given character including any 

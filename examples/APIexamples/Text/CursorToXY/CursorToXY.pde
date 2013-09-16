@@ -5,6 +5,8 @@
  * CursorToXY()
  *
  * CursorToXY(x, y);
+ * x   - X pixel coordinate
+ * y   - Y pixel coordinate
  * 
  * Position the text cursor to a pixel based x,y coordinate.
  * It sets the cursor position for future text output.

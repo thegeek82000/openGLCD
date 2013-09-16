@@ -57,6 +57,12 @@ static FontCallback	FontRead;	// font callback shared across all instances
  * SelectFont() must be used to select a font for the area before any text can
  * be output to the display.
  *
+ * @b Examples:
+ * @code
+ *	// text area using full display
+ *	gText textarea;
+ * @endcode
+ *
  * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "DefineArea()"
  * @see ClearArea()
  * @see SetAreaMode()  ClearAreaMode()
@@ -74,11 +80,21 @@ gText::gText()
  * @param y1 Y coordinate of upper left corner
  * @param x2 X coordinate of lower right corner
  * @param y2 Y coordinate of lower right corner
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
  * Creates a gText area object and then calls
  * \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
  * with the same parameters to initalize it.
+ *
+ * @b Examples:
+ * @code
+ *	// upper left quardrant
+ *	textarea.DefineArea(GLCD.Left, GLCD.Top, GLCD.CenterX, GLCD.CenterY);
+ *
+ *	// Right half, reverse scroll
+ *	textarea.DefineArea(GLCD.CenterX, GLCD.Top, GLCD.Right, GLCD.Bottom, gTextMode_SCROLLDOWN);
+ * @endcode
+ * @note
  *
  * @see \ref gText::DefineArea(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode) "DefineArea()"
  * @see ClearArea()
@@ -104,6 +120,18 @@ gText::gText(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, gTextMode mode)
  * SelectFont() must be used to select a font for the area before any text can
  * be output to the display.
  *
+ * @b Examples:
+ * @code
+ *	// right side of display
+ *	textarea.DefineArea(textAreaRIGHT);
+ *
+ *	// top half of display
+ *	textarea.DefineArea(textAreaTOP);
+ *
+ *	// upper left quadrant reverse scroll
+ *	textarea.DefineArea(textAreaTOPLEFT, gTextMode_SCROLLDOWN);
+ * @endcode
+ *
  * @see \ref DefineArea(predefinedArea selection, gTextMode mode) "DefineArea()"
  * @see ClearArea()
  * @see SetAreaMode()  ClearAreaMode()
@@ -124,6 +152,18 @@ gText::gText(predefinedArea selection, gTextMode mode)
  * Creates a gText area object and then calls
  * \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
  * with the same parameters to initalize it.
+ *
+ * @b Examples:
+ * @code
+ *	// right side of display
+ *	textarea.DefineArea(textAreaRIGHT, System5x7);
+ *
+ *	// top half of display
+ *	textarea.DefineArea(textAreaTOP, System5x7);
+ *
+ *	// upper left quadrant reverse scroll
+ *	textarea.DefineArea(textAreaTOPLEFT, System5x7, gTextMode_SCROLLDOWN);
+ * @endcode
  *
  * @see \ref DefineArea(predefinedArea selection, Font_t font, gTextMode mode) "DefineArea()"
  * @see ClearArea()
@@ -149,6 +189,15 @@ gText::gText(predefinedArea selection, Font_t font, gTextMode mode)
  * Creates a gText area object and then calls
  * \ref DefineArea(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode) "DefineArea()"
  * with the same parameters to initalize it.
+ *
+ * @b Examples:
+ * @code
+ *	// top of right side of display, 10 columns by 2 lines
+ *	gText textarea(GLCD.CenterX, GLCD.Top, 10, 2, System5x7);
+ *
+ *	// top of right side of display, 10 columns by 2 lines, reverse scroll
+ *	gText textarea(GLCD.CenterX, GLCD.Top, 10, 2, System5x7, gTextMode_SCROLLDOWN);
+ * @endcode
  *
  * @see \ref DefineArea(uint8_t x, uint8_t y, uint8_t columns, uint8_t rows, Font_t font, gTextMode mode) "DefineArea()"
  * @see ClearArea()
@@ -202,10 +251,9 @@ uint8_t color;
  * @param columns number of text columns
  * @param rows number of text rows
  * @param font a font definition
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
- *
- * Defines a text area sized to hold columns characters across and rows
+ * Define a text area sized to hold columns characters across and rows
  * characters tall.
  * It is properly sized for the specified font.
  * 
@@ -225,6 +273,14 @@ uint8_t color;
  * @returns 0 with the desired area defined if all the coordinates are valid,
  * otherwise returns non zero error code with the area set to the full display
  *
+ * @b Examples:
+ * @code
+ *	// top of right side of display, 10 columns by 2 lines
+ *	textarea.DefineArea(GLCD.CenterX, GLCD.Top, 10, 2, System5x7);
+ *
+ *	// top of right side of display, 10 columns by 2 lines, reverse scrolling
+ *	textarea.DefineArea(GLCD.CenterX, GLCD.Top, 10, 2, System5x7, gTextMode_SCROLLDOWN);
+ * @endcode
  * @note
  * Upon defining the text area, the cursor position for the text area will be
  * set to x,y
@@ -265,9 +321,9 @@ uint8_t width, height;
  * @param y1 Y coordinate of upper left corner
  * @param x2 X coordinate of lower right corner
  * @param y2 Y coordinate of lower right corner
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
- * Defines a text area based on absolute coordinates.
+ * Define a text area based on absolute coordinates.
  * The pixel coordinates for the text area are inclusive so x2,y2 is the lower right
  * pixel of the text area.
  *
@@ -281,6 +337,15 @@ uint8_t width, height;
  * @returns 0 with the desired area defined if all the coordinates are valid,
  * otherwise returns non zero error code with the area set to the full display
  *
+
+ * @b Examples:
+ * @code
+ *	// upper left quardrant
+ *	textarea.DefineArea(GLCD.Left, GLCD.Top, GLCD.CenterX, GLCD.CenterY);
+ *
+ *	// Right half, reverse scroll
+ *	textarea.DefineArea(GLCD.CenterX, GLCD.Top, GLCD.Right, GLCD.Bottom, gTextMode_SCROLLDOWN);
+ * @endcode
  * @note
  * Upon creation of the text area, the cursor position for the text area will be set to x1, y1
  *
@@ -342,7 +407,8 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
  * @param selection a value from @ref predefinedArea
  * @param mode a value from @ref gTextMode
  *
- * Defines a text area using a selection form a set of predefined areas.
+ * Define a text area using a selection form a set of predefined areas
+ * without setting or altering the area's font.
  *
  * The area within the newly defined text area is intentionally not cleared.
  *
@@ -351,6 +417,17 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
  * @returns @em 0 with the desired area defined if all the coordinates are valid,
  * otherwise returns non zero error code with the area set to the full display
  *
+ * @b Examples:
+ * @code
+ *	// right side of display
+ *	textarea.DefineArea(textAreaRIGHT);
+ *
+ * // top half of display
+ *	textarea.DefineArea(textAreaTOP);
+ *
+ *	// upper left quadrant reverse scroll
+ *	textarea.DefineArea(textAreaTOPLEFT, gTextMode_SCROLLDOWN);
+ * @endcode
  *
  * @note
  * Upon defining the text area, the cursor position for the text area will be set to 
@@ -386,9 +463,9 @@ TareaToken tok;
  *
  * @param selection a value from @ref predefinedArea
  * @param font a font definition
- * @param mode constants SCROLL_DOWN and SCROLL_UP control scroll direction
+ * @param mode a value from @ref gTextMode
  *
- * Defines a text area using a selection form a set of predefined areas.
+ * Define a text area using a selection from a set of predefined areas.
  *
  * The area within the newly defined text area is intentionally not cleared.
  *
@@ -397,6 +474,17 @@ TareaToken tok;
  * @returns @em 0 with the desired area defined if all the coordinates are valid,
  * otherwise returns non zero error code with the area set to the full display
  *
+ * @b Examples:
+ * @code
+ *	// right side of display
+ *	textarea.DefineArea(textAreaRIGHT, System5x7);
+ *
+ *	// top half of display
+ *	textarea.DefineArea(textAreaTOP, System5x7);
+ *
+ *	// upper left quadrant reverse scroll
+ *	textarea.DefineArea(textAreaTOPLEFT, System5x7, gTextMode_SCROLLDOWN);
+ * @endcode
  *
  * @note
  * Upon defining the text area, the cursor position for the text area will be set to 

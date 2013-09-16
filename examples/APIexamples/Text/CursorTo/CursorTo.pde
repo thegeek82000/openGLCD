@@ -5,6 +5,8 @@
  * CursorTo()
  *
  * CursorTo(col, row);
+ * col  - 0 based text column
+ * row  - 0 based text row
  * 
  * Position the cursor to a character based column and row.
  * It Sets the cursor position for future text output.

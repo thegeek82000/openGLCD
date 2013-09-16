@@ -3,7 +3,7 @@
  *
  * This sketch demonstrates using the cp437 font in place of graphics.
  *
- * 2011-09-15 Bill Perry  - original creation
+ * 2013-09-15 Bill Perry  - original creation
  *	bperrybap@opensource.billsworld.billandterrie.com
  */
 
