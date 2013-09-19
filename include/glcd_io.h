@@ -44,7 +44,7 @@
  * Must set AVRIO modes before including avrio
  */
 
-#ifdef GLCD_ATOMIC_IO
+#ifdef GLCDCFG_ATOMIC_IO
 #define AVRIO_NO4BIT // for now disable nibble mode
 #endif
 

@@ -327,7 +327,7 @@ class gText : public glcd_Device
 	struct tarea tarea;
 	uint8_t			x;			// absolute X location on display (not relative to text area)
 	uint8_t			y;			// absolute Y location on display (not relative to text area)
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	uint8_t			need_scroll; // set when text scroll has been defered
 #endif
 
@@ -417,7 +417,7 @@ class gText : public glcd_Device
     void printFlashln(FLASHSTRING str);
 #endif
 
-#ifndef GLCD_NO_PRINTF
+#ifndef GLCDCFG_NO_PRINTF
 	void Printf(const char *format, ...);
 	void Printf(const __FlashStringHelper *format, ...);
 	void Printf_P(PGM_P format, ...);

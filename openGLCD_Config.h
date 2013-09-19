@@ -7,7 +7,7 @@
  * Use this file to select the active configuration file
  * Then edit the selected panel file to configure parameters for that panel.
  *
- * For Teensy devices the wiring selected matches the wiring documented
+ * For Teensy devices the default wiring matches the wiring documented
  * on the Teensy website.
  * http://www.pjrc.com/teensy/td_libs_GLCD.html
  *
@@ -28,7 +28,7 @@
 #include "include/glcd_arduino_io.h" // set up openGLCD Arduino core i/o defines for autoconfig
 
  /*
-  * You can select a configuration file by uncommenting one line to include the
+  * Select a configuration file by uncommenting one line to include the
   * the desired configuration file.
   *
   * Select 1 and only 1 configuration file.
@@ -105,28 +105,28 @@
 
 /*========================== Optional User Defines ==================================*/
 
-//#define GLCD_NO_PRINTF		// disable xxprintf() support
+//#define GLCDCFG_NO_PRINTF	// disable xxprintf() support
 
-//#define GLCD_NO_SCROLLDOWN    // disable reverse scrolling (saves ~600 bytes of code on AVR)
+//#define GLCDCFG_NO_SCROLLDOWN // disable reverse scrolling (saves ~600 bytes of code on AVR)
                                 // This will allow those tight on FLASH space to save a bit of code space
 
-//#define GLCD_ATOMIC_IO        // Generate code that ensures all pin i/o operations are atomic
+//#define GLCDCFG_ATOMIC_IO	// Generate code that ensures all pin i/o operations are atomic
                                 // including any potential nibble operations.
                                 // Without this option enabled, nibble operations will be slightly faster but
                                 // might have issues if a pin used shares a processor i/o port with an
                                 // interrupt routine that updates pins/bits on the same port.
 
 
-//#define GLCD_NODEFER_SCROLL    // uncomment to disable deferred newline processing
+//#define GLCDCFG_NODEFER_SCROLL // uncomment to disable deferred newline processing
 
-//#define GLCD_NOINIT_CHECKS	// uncomment to remove initialization busy status checks
+//#define GLCDCFG_NOINIT_CHECKS	// uncomment to remove initialization busy status checks
 				// this turns off the code in the low level init code that
 				// checks for a module stuck BUSY or stuck in RESET.
 				// This will save about 100 bytes of code space (on AVR) in normal sketches.
 				// and an additional 220 bytes in the diag sketch. This will cause
 				// diags to hang if wires are not correct vs return an error.
 
-//#define GLCD_READ_CACHE       // Turns on code that uses a frame buffer for a read cache
+//#define GLCDCFG_READ_CACHE	// Turns on code that uses a frame buffer for a read cache
 				// This adds only ~52 bytes of code (on AVR) but...
 				// will use DISPLAY_HEIGHT/8 * DISPLAY_WIDTH bytes of RAM
 				// A typical 128x64 ks0108 will use 1k of RAM for this.
@@ -146,10 +146,12 @@
 #if defined (__AVR__)
 // Workaround for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34734
 // to prevent: warning: only initialized variables can be placed into program memory area
+// In order to use this on AVR, ALL progmem variables must be declared the same with respect
+// to const since they will land in the same section. So all progmem variables should use const.
 
 #ifdef PROGMEM
-#undef PROGMEM
-#define PROGMEM __attribute__((section(".progmem.data")))
+//#undef PROGMEM
+//#define PROGMEM __attribute__((section(".progmem.data")))
 #endif
 #define PROGMEMGLCD __attribute__((section(".progmem.openGLCD")))
 
@@ -184,6 +186,3 @@
 #endif // __PIC32MX__
 
 #endif  // openGLCD_CONFIG_h
-
-
-

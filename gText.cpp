@@ -29,7 +29,7 @@
 #include "include/gText.h"
 #include "include/glcd_errno.h"
 
-#ifndef GLCD_NO_PRINTF
+#ifndef GLCDCFG_NO_PRINTF
 #ifdef __AVR__
 extern "C"
 {
@@ -40,12 +40,6 @@ extern "C"
 #include <stdarg.h> // ARM tools don't include this in stdio.h WTF!
 #endif
 #endif
-
-/*
- * Experimental defines
- */
-
-//#define GLCD_OLD_FONTDRAW    // uncomment this define to get old font rendering (not recommended)
 
 static FontCallback	FontRead;	// font callback shared across all instances
 
@@ -392,7 +386,7 @@ uint8_t ret = GLCD_ENOERR; // assume call will work
 	this->x = x1;
 	this->y = y1;	
 	
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	/*
 	 * Make sure to clear a deferred scroll operation when re defining areas.
 	 */
@@ -742,7 +736,7 @@ uint8_t col;
 
 }
 
-#ifndef GLCD_NO_SCROLLDOWN
+#ifndef GLCDCFG_NO_SCROLLDOWN
 
 void gText::ScrollDown(uint8_t x1, uint8_t y1, uint8_t x2, uint8_t y2, 
 	uint8_t pixels, uint8_t color)
@@ -901,7 +895,7 @@ uint8_t gText::SpecialChar(uint8_t c)
 		/*
 		 * Check for scroll up vs scroll down (scrollup is normal)
 		 */
-#ifndef GLCD_NO_SCROLLDOWN
+#ifndef GLCDCFG_NO_SCROLLDOWN
 		if(!(this->tarea.mode & SCROLL_DOWN))
 #endif
 		{
@@ -918,7 +912,7 @@ uint8_t gText::SpecialChar(uint8_t c)
 			 */
 			if(this->y + 2*height >= this->tarea.y2)
 			{
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 					if(!this->need_scroll)
 					{
 						this->need_scroll = 1;
@@ -979,7 +973,7 @@ uint8_t gText::SpecialChar(uint8_t c)
 				this->y = this->y+height+1;
 			}
 		}
-#ifndef GLCD_NO_SCROLLDOWN
+#ifndef GLCDCFG_NO_SCROLLDOWN
 		else
 		{
 			/*
@@ -1004,7 +998,7 @@ uint8_t gText::SpecialChar(uint8_t c)
 			}
 			else
 			{
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 					if(!this->need_scroll)
 					{
 						this->need_scroll = 1;
@@ -1148,7 +1142,7 @@ int gText::PutChar(uint8_t c)
 	if(!width) // no glyph definition for character?
 		return(0);
 
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	/*
 	 * check for a defered scroll
 	 * If there is a deferred scroll,
@@ -1187,7 +1181,7 @@ int gText::PutChar(uint8_t c)
 	if(this->x + width - (isNoPadFixedFont(this->Font)) > this->tarea.x2)
 	{
 		this->PutChar('\n'); // fake a newline to cause wrap/scroll
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 		/*
 		 * We can't defer a scroll at this point since we need to ouput
 		 * a character right now.
@@ -1211,70 +1205,6 @@ int gText::PutChar(uint8_t c)
 	}
 
 	// last but not least, draw the character
-
-#ifdef GLCD_OLD_FONTDRAW
-/*================== OLD FONT DRAWING ============================*/
-	glcd_Device::GotoXY(this->x, this->y);
-
-	/*
-	 * Draw each column of the glyph (character) horizontally
-	 * 8 bits (1 page) at a time.
-	 * i.e. if a font is taller than 8 bits, draw upper 8 bits first,
-	 * Then drop down and draw next 8 bits and so on, until done.
-	 * This code depends on WriteData() doing writes that span LCD
-	 * memory pages, which has issues because the font data isn't
-	 * always a multiple of 8 bits.
-	 */
-
-	for(uint8_t i=0; i<bytes; i++)	/* each vertical byte */
-	{
-		uint16_t page = i*width; // page must be 16 bit to prevent overflow
-		for(uint8_t j=0; j<width; j++) /* each column */
-		{
-			uint8_t data = FontRead(this->Font+index+page+j);
-		
-			/*
-			 * This funkyness is because when the character glyph is not a
-			 * multiple of 8 in height, the residual bits in the font data
-			 * were aligned to the incorrect end of the byte with respect 
-			 * to the GLCD. I believe that this was an initial oversight (bug)
-			 * in Thieles font creator program. It is easily fixed
-			 * in the font program but then creates a potential backward
-			 * compatiblity problem.
-			 *	--- bperrybap
-			 */
-
-			if(height > 8 && height < (i+1)*8)	/* is it last byte of multibyte tall font? */
-			{
-				data >>= (i+1)*8-height;
-			}
-			
-			if(this->FontColor == BLACK)
-			{
-				glcd_Device::WriteData(data);
-			}
-			else
-			{
-				glcd_Device::WriteData(~data);
-			}
-		}
-		// 1px gap between chars
-		if(this->FontColor == BLACK)
-		{
-			glcd_Device::WriteData(0x00);
-		}
-		else
-		{
-			glcd_Device::WriteData(0xFF);
-		}
-		glcd_Device::GotoXY(this->x, glcd_Device::Coord.y+8);
-	}
-	this->x = this->x+width+1;
-
-/*================== END of OLD FONT DRAWING ============================*/
-#else
-
-/*================== NEW FONT DRAWING ===================================*/
 
 	/*
 	 * Paint font data bits and write them to LCD memory 1 LCD page at a time.
@@ -1553,10 +1483,6 @@ int gText::PutChar(uint8_t c)
 	if(!isNoPadFixedFont(this->Font))
 		this->x++; // skip over pad pixel we rendered
 
-/*================== END of NEW FONT DRAWING ============================*/
-
-#endif // NEW_FONTDRAW
-
 	return 1; // valid char
 }
 
@@ -1691,25 +1617,6 @@ uint8_t fx, fy; // x & y pixel formatting positions
 
 	llen = this->tarea.x2 - this->tarea.x1 + 1;
 
-//#define SERIALDEBUG
-#ifdef SERIALDEBUG
-Serial.print("x1,y1 x2,y2  ");
-Serial.print(this->tarea.x1);
-Serial.print(",");
-Serial.print(this->tarea.y1);
-Serial.print("  ");
-Serial.print(this->tarea.x2);
-Serial.print(",");
-Serial.println(this->tarea.y2);
-
-Serial.print("slen: ");
-Serial.print(slen);
-Serial.print(" llen: ");
-Serial.println(llen);
-#endif
-
-
-
 	/*
 	 * There is no real good way to deal with strings that are wider than
 	 * the text area.
@@ -1775,31 +1682,8 @@ Serial.println(llen);
 			}
 	}
 
-#ifdef SERIALDEBUG
-Serial.print("CharHeight: ");
-Serial.println(this->CharHeight(0));
-
-Serial.print("fx: ");
-Serial.println(fx);
-Serial.print("fy: ");
-Serial.println(fy);
-#endif
-
 	this->CursorToXY(fx,fy);
-
-#ifdef SERIALDEBUG
-Serial.print("thisX, thisY: ");
-Serial.print(this->x);
-Serial.print(",");
-Serial.println(this->y);
-#endif
 	this->EraseTextLine(erase);
-#ifdef SERIALDEBUG
-Serial.print("thisX, thisY: ");
-Serial.print(this->x);
-Serial.print(",");
-Serial.println(this->y);
-#endif
 }
 
 /*
@@ -1993,7 +1877,7 @@ uint8_t width, height;
 		this->y = this->tarea.y1;
 	}
 
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	/*
 	 * Make sure to clear a deferred scroll operation when repositioning
 	 */
@@ -2044,7 +1928,7 @@ uint8_t width;
 	else
    	  this->x -= column * width;   	
 
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	/*
 	 * Make sure to clear a deferred scroll operation when repositioning
 	 */
@@ -2087,7 +1971,7 @@ void gText::CursorToXY( uint8_t x, uint8_t y)
 	this->x = this->tarea.x1 + x;
 	this->y = this->tarea.y1 + y;
 
-#ifndef GLCD_NODEFER_SCROLL
+#ifndef GLCDCFG_NODEFER_SCROLL
 	/*
 	 * Make sure to clear a deferred scroll operation when repositioning
 	 */
@@ -2599,7 +2483,7 @@ void gText::printFlashln(FLASHSTRING str)
 #endif
 
 
-#ifndef GLCD_NO_PRINTF
+#ifndef GLCDCFG_NO_PRINTF
 #ifdef __AVR__
 /*
  * Support for printf() when using AVRs

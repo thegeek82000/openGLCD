@@ -322,7 +322,7 @@ int status;
 #endif
     status = GLCD.Init();   // initialise the library, non inverted writes pixels onto a clear screen
 
-#ifndef GLCD_NOINIT_CHECKS
+#ifndef GLCDCFG_NOINIT_CHECKS
     if(status) // did the initialization fail?
     {
 	SerialPrintQ("GLCD initialization Failed: ");
@@ -1035,7 +1035,7 @@ showGLCDconfig(void)
       AVRDATA_4BITLO(glcdPinData0, glcdPinData1, glcdPinData2, glcdPinData3))
     {
       SerialPrintQ("nibble mode");
-#ifndef GLCD_ATOMIC_IO
+#ifndef GLCDCFG_ATOMIC_IO
       SerialPrintQ("-Non-Atomic");
 #else
       SerialPrintQ("-disabled (ATOMIC MODE)"); // for now this "knows" avrio disabled nibbles when in atomic mode.
@@ -1052,7 +1052,7 @@ showGLCDconfig(void)
       AVRDATA_4BITLO(glcdPinData4, glcdPinData5, glcdPinData6, glcdPinData7))
     {
       SerialPrintQ("nibble mode");
-#ifndef GLCD_ATOMIC_IO
+#ifndef GLCDCFG_ATOMIC_IO
       SerialPrintQ("-Non-Atomic");
 #else
       SerialPrintQ("-disabled (ATOMIC MODE)"); // for now this "knows" avrio disabled nibbles when in atomic mode.
@@ -1091,26 +1091,17 @@ showGLCDconfig(void)
   Serial.println();
 
   /*
-   * Show font rendering:
-   */
-
-#ifdef GLCD_OLD_FONTDRAW
-  SerialPrintQ("Text Render: ");
-  SerialPrintQ("OLD\n");
-#endif
-
-  /*
    * show no scroll down if disabled.
    */
 
-#ifdef GLCD_NO_SCROLLDOWN
+#ifdef GLCDCFG_NO_SCROLLDOWN
   SerialPrintQ("NO Down Scroll\n");
 #endif
 
   /*
    * show READ CACHE if enabled
    */
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
   SerialPrintQ("READ CACHE enabled\n");
 #endif
 

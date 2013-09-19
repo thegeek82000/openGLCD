@@ -476,7 +476,7 @@ int glcd_Device::Init(glcd_device_mode invert)
 	{
 	uint8_t status;
 
-#ifndef GLCD_NOINIT_CHECKS
+#ifndef GLCDCFG_NOINIT_CHECKS
 		/*
 		 * At this point RESET better be complete and the glcd better have
 		 * cleared BUSY status for the chip and be ready to go.
