@@ -106,7 +106,7 @@ lcdCoord  	glcd_Device::Coord;
 							// enabled.
 
 
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
 /*
  * Declare a static buffer for the Frame buffer for the Read Cache
  */
@@ -772,7 +772,7 @@ uint8_t glcd_Device::DoReadData()
  * @see WriteData()
  */
 
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
 uint8_t glcd_Device::ReadData()
 {
 uint8_t x, data;
@@ -903,7 +903,7 @@ void glcd_Device::WriteData(uint8_t data)
 		glcdio_WriteByte( displayData);					// write data
 		glcdio_DelayNanoseconds(GLCD_tWH);
 		glcdDev_ENstrobeLo(chip);
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
 		glcd_rdcache[this->Coord.y/8][this->Coord.x] = displayData; // save to read cache
 #endif
 
@@ -945,7 +945,7 @@ void glcd_Device::WriteData(uint8_t data)
 		glcdio_WriteByte(displayData);		// write data
 		glcdio_DelayNanoseconds(GLCD_tWH);
 		glcdDev_ENstrobeLo(chip);
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
 		glcd_rdcache[this->Coord.y/8][this->Coord.x] = displayData; // save to read cache
 #endif
 		this->GotoXY(this->Coord.x+1, ysave);
@@ -969,7 +969,7 @@ void glcd_Device::WriteData(uint8_t data)
 		glcdio_DelayNanoseconds(GLCD_tWH);
 
 		glcdDev_ENstrobeLo(chip);
-#ifdef GLCD_READ_CACHE
+#ifdef GLCDCFG_READ_CACHE
 		glcd_rdcache[this->Coord.y/8][this->Coord.x] = data; // save to read cache
 #endif
 

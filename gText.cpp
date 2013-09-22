@@ -849,7 +849,7 @@ uint8_t col;
 	}
 
 }
-#endif //GLCD_NO_SCROLLDOWN
+#endif //GLCDCFG_NO_SCROLLDOWN
 
 
 /*
@@ -1744,13 +1744,6 @@ void gText::DrawString(const char *str, int hpos, int vpos, eraseLine_t erase)
 uint8_t slen;
 
 	slen = StringWidth(str);
-#ifdef SERIALDEBUG
-Serial.print("String:<");
-Serial.print(str);
-Serial.print("> ");
-Serial.print("Width: ");
-Serial.println(slen);
-#endif
 	DrawStringSetXY(slen, hpos, vpos, erase);
 	this->Puts(str);
 }
