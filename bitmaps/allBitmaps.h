@@ -14,7 +14,7 @@
 #include "openGLCD64x32.h"
 
 // goofy images of me -- bperrybap
-#include "BillsHead128x64_xbm.h"
+#include "BillsHead_xbm.h"
 #include "BillsHead.h"
 
 // extra XBM images

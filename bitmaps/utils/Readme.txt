@@ -1,5 +1,14 @@
-This directory contains a utility that will convert bitmap image files to 
-a header file that can be used in an Arduino sketch with the glcd library.
+This directory contains utilites that will convert bitmap image files to 
+a header file that can be used in an Arduino sketch with openGLCD.
+
+- bmp2glcd
+	A commandline tool.
+	To build the tool see the readme in the bmp2glcd directory.
+	In order to use the created header file, it must placed in the
+	bitmaps directory and the allBitmaps.h header file in the bitmaps
+	directory must be updated to include it.
+
+- glcdMakeBitmap
 
 The utility is written in the Processing language; the glcdMakeBitmap.pde file runs
 in the Processing environment on your computer - its not an Arduino sketch.
