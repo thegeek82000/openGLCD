@@ -1,6 +1,6 @@
 vi:ts=4
 
-- Remove GLCDBigdemo???
+- update openGLCD wiki
 - Remove fonts/newbasic3x5.h font (Wendy3x5 is better)
 - rename config files
 	"Arduino" becomes "Uno" (done)
@@ -37,9 +37,6 @@ vi:ts=4
 		called "GraphicAPI"
 	-openGLCDText
 
-- cleanup bmp2glcd 
-	- move over under bitmaps/utility?
-	
 - update doxgen for backlight functions to indicate that
   backlight must be configured in config files.
 
@@ -99,7 +96,8 @@ vi:ts=4
 	Also consider adding "PIXEL_ON" and "PIXEL_OFF" to simplify color usage. (DONE)
 	Also consider adding a color for "transparent" for DrawBitmapXBM()
 	Also consider adding a color "XOR" which allows drawing, across filled regions. (FUTURE...)
-	Also consider adding a color "TRANSPARENT" which allows leaving pixel alone. (useful for bitmaps)
+		This is easy. It only requires updating SetDot() SetPixels().
+	Also consider adding a color "TRANSPARENT" or "PIXEL_CLEAR" which allows leaving pixel alone. (useful for bitmaps)
 
 - update code to use C99 "fast" types: ??
 	uint_fast8_t
@@ -118,8 +116,6 @@ vi:ts=4
 	glcd: gText glcd_device
 	gText: Print
 	glcd_device: (none)
-
-- cleanup/remove old font rendering code in gText.cpp
 
 - track down why DrawString() uses 242 bytes of RAM and HelloWorld only uses 94
 	(some of this was debugging in gText.cpp)
@@ -353,4 +349,6 @@ DONE-------------------------------------------------------------
 	Will need to point to place in new repository
 
 - Clean up references to SCROLL_UP/SCROLL_DOWN
-
+- cleanup/remove old font rendering code in gText.cpp
+- cleanup bmp2glcd  (done)
+	- move over under bitmaps/utility? (done)

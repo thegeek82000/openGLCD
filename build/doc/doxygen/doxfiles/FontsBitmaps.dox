@@ -116,11 +116,20 @@ site.
 @page page_Bitmaps Using Bitmaps
 You can use the distributed bitmaps or create your own. 
 
-A utility located in bitmaps/utils converts a gif,
-jpg, bmp, tga or  png  file to a header file that can be used by your sketch.
+There are two utilities located in bitmaps/utils to convert
+bitmap files to files that can be used by your sketch.
 
-The utility is written in the Processing language; However, a java version of the utilty
-is also provided.
+- bmp2glcd
+- glcdMakeBitmap
+
+bmp2glcd is a commandline tool.
+
+glcdMakeBitmap is a utility written in the Processing language;
+However, a java version of the utilty is also provided.
+
+glcdMakeBitmap converts a gif,
+jpg, bmp, tga or png file to a header file that can be used by your sketch.
+
 The Processing file glcdMakeBitmap.pde located in the glcdMakeBitmap subdirectory runs
 in the Processing environment on your computer - its not an Arduino sketch.
 See: http://processing.org/
@@ -128,8 +137,7 @@ See: http://processing.org/
 The java runtime (glcdMakeBitmap.jar) and java source (glcdMakeBitmap.java) are located
 in the Java subdirectory.
 
-
-Run the utility by either running the java jar file directly or loading the pde file into Processing.
+Run glcdMakeBitmap by either running the java jar file directly or loading the pde file into Processing.
 
 @image html glcdMakeBitmap.png
 
@@ -146,7 +154,7 @@ Add the following line to to the allbitmaps.h header file in the bitmaps directo
 @endcode
 
 Alternatively, 
-the utility can also update the aggregate header file automatically.
+glcdMakeBitmap can also update the aggregate header file automatically.
 To update allBitmaps.h to include all header files in the bitmap directory, click the window.
 
 Once the allbitmaps.h header has been updated, the sketch
@@ -164,7 +172,7 @@ Bitmap Data Storage
 
 Images are stored in program memory, a 128x64 pixel image takes 1k bytes of flash.
 Bear in mind that each different image used in a sketch will reduce the amount of
-code in a sketch. The utility displays the amount of
+code in a sketch. The glcdMakeBitmap displays the amount of
 memory required for the image and other useful information when it does the conversion. 
 
 */
