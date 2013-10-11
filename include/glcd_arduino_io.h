@@ -82,7 +82,12 @@
 //#define GLCD_CORE_LILLYPAD_USB
 //#endif
 
+#elif defined(__PIC32MX__) // assume chipkit for mips pic32 processor
+#define GLCD_CORE_CHIPKIT
+#else
 
+// default to using Arduino core code routines
+#define GLCD_CORE_CORECODE
 #endif
 
 
@@ -454,7 +459,8 @@
 	0) // dummy entry (should never happen)
 
 #else	
-#error "Arduino pin mapping not defined for this core"
+//#error "Arduino pin mapping not defined for this core"
+#warning "Using Arduino Core-Code Mode for this core"
 #endif
 
 #endif

@@ -17,8 +17,8 @@ glcd	KEYWORD1
 ###########################################
 #glcd functions
 ClearScreen	KEYWORD2
-DrawVline	KEYWORD2
-DrawHline	KEYWORD2
+DrawVLine	KEYWORD2
+DrawHLine	KEYWORD2
 DrawLine	KEYWORD2
 DrawRect	KEYWORD2
 FillRect	KEYWORD2

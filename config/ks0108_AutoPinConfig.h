@@ -29,8 +29,12 @@
 #include "config/ks0108_Sanguino.h"	// config for Sanguino ATmega644/p or avr_dev mighty1284p core
 #elif defined(GLCD_CORE_BOBDUINO)
 #include "config/ks0108_Bobduino.h"	// config for bobduino with mighty1284p core
+#elif defined(GLCD_CORE_CHIPKIT)
+#include "config/ks0108_chipKIT.h"	// config for chipKIT
 #else
-#error Unsupported Arduino board type
+//#error Unsupported Arduino board type
+#warning using Arduino CoreCode pin config file
+#include "config/ks0108_CoreCode.h"
 #endif
 
 #endif // GLCD_AUTOPINCONFIG_H

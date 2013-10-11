@@ -1566,7 +1566,7 @@ void gText::Puts(const String &str)
  */
 void gText::Puts(const __FlashStringHelper *str)
 {
-	Puts_P((const prog_char *)str);
+	Puts_P((PGM_P)str);
 }
 
 /**
@@ -1784,7 +1784,7 @@ uint8_t slen;
 void gText::DrawString(const __FlashStringHelper *str, int hpos, int vpos, eraseLine_t erase)
 
 {
-	DrawString_P((const prog_char *)str, hpos, vpos, erase);
+	DrawString_P((PGM_P)str, hpos, vpos, erase);
 }
 #endif
 
@@ -1798,7 +1798,7 @@ void gText::DrawString(const __FlashStringHelper *str, int hpos, int vpos, erase
 void gText::DrawString(FLASHSTRING str, int hpos, int vpos, eraseLine_t erase)
 
 {
-	DrawString_P((const prog_char *)str, hpos, vpos, erase);
+	DrawString_P((PGM_P)str, hpos, vpos, erase);
 }
 #endif
 
@@ -2378,7 +2378,7 @@ uint16_t gText::StringWidth(String &str)
 
 uint16_t gText::StringWidth(const __FlashStringHelper *str)
 {
-	return(StringWidth_P((const prog_char *)str));
+	return(StringWidth_P((PGM_P)str));
 }
 
 

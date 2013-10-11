@@ -1,5 +1,36 @@
 vi:ts=4
 
+- Create a "known issues"
+	- Some cores only work on 1.x+
+		- mighty1284p 
+			Because they don't include support for pre 1.x
+	- pre 0019 IDE is no longer supported
+		to simplify the openglcd API and make it consistent across pre/post 1.x,
+		no support for pre 0019
+		- before 0019 the analog pin constants didn't exist
+		- before 0019 the String class didn't exist.
+	- 0019,0020,0021, 0022, 0023 pre 1.x IDEs won't work with newer versions of avr-libC
+		Header file nightmares! 
+		 (new <util/delay.h> uses math.h )
+			- comment out #include <util/delay.h> in wiring_private.h
+				(none of the core code uses/needs it)
+			OR if wanting to make util/delay functions available:
+			- must add #include <math.h> to top of wiring.h
+				wiring.h #defines the math functions and breaks math.h
+				math.h must be included before defines stomp on math functions
+
+	- GLCD_Bigdemo does not fit on Leonardo
+
+	- chipKIT MPIDE issues
+		- has #error in <avr/pgmspace.h>
+			all the pgmspace types/defines should be here not wiring.h
+			wiring.h should then include <avr/pgmspace.h> 
+		- missing
+			- PGM_P
+				#define PGM_P const char *
+			- PSTR()
+				#define PSTR(s) ((const char *)(s))
+
 - update openGLCD wiki
 - Remove fonts/newbasic3x5.h font (Wendy3x5 is better)
 - rename config files
@@ -47,6 +78,9 @@ vi:ts=4
 - need to add GLCD.top & GLCD.Left to coordinate system photo
 	Pretty much need to update/replace all photos in doxygen
 
+- need to add example of wiring up using real datasheet.
+	- need to mention active low vs active high chip select signals
+
 - Remove FontCallback routine
 
 - look at pin order of config files
@@ -88,6 +122,9 @@ vi:ts=4
 
 - move LCD_OFF checks & code to glcdio and new glcdio  "function" macro
 
+
+- GLCDmakeBitmap not reporting data size
+
 - Verify ARM delay code
  (seems to be fairly accurate, 450ns delay is about 480 or so)
 
@@ -119,6 +156,14 @@ vi:ts=4
 
 - track down why DrawString() uses 242 bytes of RAM and HelloWorld only uses 94
 	(some of this was debugging in gText.cpp)
+
+- track down why HelloWorld is larger with openGLCD
+	- UNO
+		- 0022  650 bytes larger 
+		- 1.0 6682 vs  6014 (668 bytes)
+		- 1.0.5 6660 vs  5992 (668 bytes)
+	- Teensy2++
+		- 1.0 7788 vs 7128 (660 bytes)
 
 - eliminate tAS delays on writes? Seems to work on Teensy3
 (didn't make much performance difference, 9.97 to 10.02 FPS)

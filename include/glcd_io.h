@@ -48,7 +48,7 @@
 #define AVRIO_NO4BIT // for now disable nibble mode
 #endif
 
-#ifdef __AVR__
+#if defined(__AVR__) && !defined(GLCD_CORE_CORECODE)
 #include "include/avrio.h"         // these macros do AVR direct port io    
 #endif
 

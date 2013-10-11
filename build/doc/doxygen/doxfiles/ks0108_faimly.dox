@@ -273,6 +273,22 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 25 </center></td> <!-- CSEL2 -->
 </tr>
 <tr>
+	<td><center> Sanguino</center></td>
+	<td><center> 27 </center></td> <!-- D_I -->
+	<td><center> 26 </center></td> <!-- R_W -->
+	<td><center> 28 </center></td> <!-- EN -->
+	<td><center> 0 </center></td> <!-- D0 -->
+	<td><center> 1 </center></td> <!-- D1 -->
+	<td><center> 2 </center></td> <!-- D2 -->
+	<td><center> 3 </center></td> <!-- D3 -->
+	<td><center> 4 </center></td> <!-- D4 -->
+	<td><center> 5 </center></td> <!-- D5 -->
+	<td><center> 6 </center></td> <!-- D6 -->
+	<td><center> 7 </center></td> <!-- D7 -->
+	<td><center> 24 </center></td> <!-- CSEL1 -->
+	<td><center> 25 </center></td> <!-- CSEL2 -->
+</tr>
+<tr>
 	<td><center> Bobuino </center></td>
 	<td><center> A3 </center></td> <!-- D_I -->
 	<td><center> A2 </center></td> <!-- R_W -->
@@ -289,20 +305,20 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> A1 </center></td> <!-- CSEL2 -->
 </tr>
 <tr>
-	<td><center> Sanguino</center></td>
-	<td><center> 27 </center></td> <!-- D_I -->
-	<td><center> 26 </center></td> <!-- R_W -->
-	<td><center> 28 </center></td> <!-- EN -->
-	<td><center> 0 </center></td> <!-- D0 -->
-	<td><center> 1 </center></td> <!-- D1 -->
-	<td><center> 2 </center></td> <!-- D2 -->
-	<td><center> 3 </center></td> <!-- D3 -->
+	<td><center> chipKIT </center></td>
+	<td><center> A3 </center></td> <!-- D_I -->
+	<td><center> A2 </center></td> <!-- R_W -->
+	<td><center> A4 </center></td> <!-- EN -->
+	<td><center> 8 </center></td> <!-- D0 -->
+	<td><center> 9 </center></td> <!-- D1 -->
+	<td><center> 10 </center></td> <!-- D2 -->
+	<td><center> 11 </center></td> <!-- D3 -->
 	<td><center> 4 </center></td> <!-- D4 -->
 	<td><center> 5 </center></td> <!-- D5 -->
 	<td><center> 6 </center></td> <!-- D6 -->
 	<td><center> 7 </center></td> <!-- D7 -->
-	<td><center> 24 </center></td> <!-- CSEL1 -->
-	<td><center> 25 </center></td> <!-- CSEL2 -->
+	<td><center> A0 </center></td> <!-- CSEL1 -->
+	<td><center> A1 </center></td> <!-- CSEL2 -->
 </tr>
 <tr>
 	<td><center> DUE\n(NOT SUPPORTED)</center></td>

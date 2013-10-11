@@ -105,7 +105,8 @@ The coordinate system used by the library assigns (0,0) to the upper left
 corner. Y values grow down instead of the normal up direction, but X values
 increment left to right as in normal cartesian coordinates.
 
-Below is an example of the coordinate system which also includes the libraries properties.
+Below is an example of the coordinate system for a 128x64 glcd.
+It also includes the geometry properties.
 
 @image html Coordinates.jpg
 0,0 is the upper left edge of the display.

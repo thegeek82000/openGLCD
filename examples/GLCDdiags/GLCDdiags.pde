@@ -139,10 +139,10 @@ P(GLCDlibBuild) = GLCD_GLCDLIB_BUILD_BUILDSTR;
  */
 
 void
-SerialPrintP(const prog_char * str )
+SerialPrintP(PGM_P str )
 {
   char c;
-  const prog_char *p = str;
+  PGM_P p = str;
 
   while ((c = pgm_read_byte(p++)))
   {
@@ -820,11 +820,17 @@ showGLCDconfig(void)
 #ifdef ARDUINO
   SerialPrintP(hline);
   SerialPrintQ("Reported Arduino Revision: ");
+#if ARDUINO > 100
   Serial.print(ARDUINO/100);
   Serial.print('.');
   Serial.print((ARDUINO%100)/10);
   Serial.print('.');
   Serial.println((ARDUINO%100)%10);
+#else
+  SerialPrintQ("0.");
+  Serial.println(xstr(ARDUINO)); // print the raw string vs as a number
+#endif
+
 #endif
 
   SerialPrintQ("F_CPU: ");

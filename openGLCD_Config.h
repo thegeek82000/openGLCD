@@ -20,7 +20,7 @@
  * Include core definitions
  */
 #if ARDUINO < 100
-#include "wiring.h"
+#include "WProgram.h"
 #else
 #include "Arduino.h"
 #endif
@@ -163,7 +163,7 @@
 
 #endif
 
-#ifdef __AVR__
+#if __AVR__
 #define GLCDFONTDECL(_n) const uint8_t PROGMEMGLCD _n[]
 #define GLCDBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
 #define GLCDXBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
@@ -181,7 +181,10 @@
 
 #if defined(__PIC32MX__)
 #ifndef PGM_P
-#define PGM_P prog_char *
+#define PGM_P const char *
+#endif
+#ifndef PSTR
+#define 	PSTR(s)   ((const char *)(s))
 #endif
 #endif // __PIC32MX__
 
