@@ -41,7 +41,7 @@ uint32_t startTicks = ReadCoreTimer();
 
 	while((ReadCoreTimer() - startTicks) < _IOticks)
 	{
-		; // do nothing, and wait
+		; // do nothing, while spinning
 	}
 #else
 
