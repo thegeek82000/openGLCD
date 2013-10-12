@@ -1,10 +1,37 @@
+OVERVIEW
+========
+openGLCD is an open source project.
+
+openGLCD makes it easy to use Graphical LCDs (GLCD) with Arduino.
+The library supports several different chips and is easy to integrate with
+different GLCD panels.
+The configuration mechanism allows using a broad range of GLCD panels
+and Arduino controllers.
+
 LICENSE
+=======
 The Arduino openGLCD library files are part of the openGLCD project.
 openGLCD is an open source project licensed for use in open source projects
 under the terms of the GNU General Public License.
 See License.txt for details.
 
-INSTALL 
+DOCUMENTATION
+=============
+The documentation can be found in the doc directory. There is
+detailed reference material in openGLCDref.htm.
+
+
+INSTALL (Newer Arduino Releases)
+================================
+On newer Arduino releases (1.0.5 and newer) the library can be
+installed using the IDE.
+
+Use: [Sketch]->[Import Library]->[Add Library...]
+
+To install the library from a downloaded pre-built zip file.
+
+INSTALL (Older Arduino Releases)
+================================
 This library should be unziped into a folder named openGLCD in the libraries
 directory. If you already have a folder called libraries in your Arduino 
 sketchbook directory, unzip the glcd files there. If not, create a
@@ -32,12 +59,9 @@ So you will end up with {Arduino install directory}/libraries/openGLCD ...
 Then re-start the Arduino programming environment (IDE), and you should see the openGLCD 
 library in the Sketch > Import Library menu. 
 
-DOCUMENTATION
-The documentation can be found in the doc directory. There is
-detailed reference material in openGLCDref.htm.
-
-CONFIG
-Configuration files for defining pins and panel charactoristics are in the
+CONFIGURE
+=========
+Configuration files for defining pins and panel characteristics are in the
 config folder. The library is capable of auto-configuring when using a
 standard processor and panel with the suggested wiring.
 If you need to modify the configuration see the documentation for details
@@ -57,15 +81,18 @@ Other example sketches and demos are provided that show how to use various
 capabilities of the library.
 
 FONTS
+=====
 The library is supplied with fixed and variable width font definitons 
 located in the fonts folder. See the documentation for information on adding
 your own fonts to this folder.
 
 BITMAPS
+=======
 Bitmap images are stored in the bitmaps folder. The documentation 
 describes how to create you own bitmaps using a utility provided in the 
 bitmaps/glcdMakeBitmaps folder
 
 OTHER FOLDERS
+=============
 The include and device folders contain low level system files.
 These do not need to be modifed for normal operation.
