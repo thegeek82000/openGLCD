@@ -44,6 +44,8 @@ vi:ts=4
 - update comment in header of pinconfig files
   to reflect boards it works with.
 
+- fix hd44102 autoconfig file to use its own pin config rather than ks0108
+
 - build change (consider)
 	Consider having "readme" in VCS be a readme for openGLCD
 	Have the build script create

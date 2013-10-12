@@ -45,21 +45,27 @@
   * The auto configuration file (default is named  "config/ks0108_Panel.h") selects the appropriate board
   * pin configuration file based on the current board selection in the Arduino IDE.
   *   
-  * The auto configuration panel configuration files can be found in the "config" directory, the naming is:
-  *  "{PANELNAME}_Panel.h"
+  * The auto configuration panel configuration files can be found under the "config" directory,
+  * the naming is:
+  *  config/{PANELNAME}/AutoConfig_"{PANELNAME}-{MODELNAME}_Panel.h"
   * Where:
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
+  *   -{MODELNAME} is optional and is a model name of the glcd (for example, 128x64, JHD19264A)
   *
   * The pin configuration files for each board type can also be found in the "config" directory, the naming is:
-  *  "{PANELNAME}_{BOARDNAME}.h"
+  *  config/{PANELNAME}/"PinConfig_{PANELNAME}-{BOARDNAME}.h"
   * Where:
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
-  *   {BOARDNAME} is the name of the board (as selected in the Arduino IDE).
+  *   {BOARDNAME} is the name of the board (or board family as selected in the Arduino IDE).
   *
-  * So for example, the auto configuration file name for a ks0108 panel
-  * would be: "ks0108_Panel.h"
-  * The ks0108 pin configuration file for a "Uno" board would be: "ks0108_Uno.h"
-  * and the pin configuration file for a "Mega": "ks0108_Mega.h"
+  * So for example, the auto configuration file name for the default ks0108 panel
+  * is: "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
+  * The ks0108 pin configuration file for a "Uno" board is:
+  *  "config/ks0108/PinConfig_ks0108-Uno.h"
+  * The pin configuration file for a "Mega" board:
+  *  "config/ks0108/PinConfig_ks0108-Mega.h"
+  * Teensy boards are an exception as all boards share a common pinconfig file:
+  *  "config/ks0108/PinConfig_ks0108-Teensy.h"
   * 
   */
 
@@ -74,10 +80,11 @@
  /*
   * autoconfig includes - (comment this out if using manual configurations, see below)
   */
-#include "config/ks0108_Panel.h"          // automatically configure library for a ks0108 panel
-//#include "config/ks0108-192x64_Panel.h"   // automatically configure library for a ks0108 192x64 panel
-//#include "config/ks0108-JHD19264A_Panel.h"   // automatically configure library for a ks0108 JHD19264A panel
-//#include "config/hd44102_Manual_Config.h"    
+//#include "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"    // automatically configure library for a ks0108 128x64 panel
+//#include "config/ks0108/AutoConfig_ks0108-192x64_Panel.h"    // automatically configure library for a ks0108 192x64 panel
+//#include "config/ks0108/AutoConfig_ks0108-JHD19264A_Panel.h" // automatically configure library for a ks0108 JHD19264A panel
+//#include "config/ks0108/AutoConfig_ks0108-HJ19264A_Panel.h"  // automatically configure library for a ks0108 HJ19264A panel
+//#include "config/hd44102/AutoConfig_hd44102_Panel.h"    
 
 /*
  * If you want to explicitly select a manual configuration, you can edit the desired manual configuration
@@ -88,11 +95,11 @@
  * and make sure that all the other config  #includes are commented (including the autoconfig above) 
  */
 
-//#include "config/ks0108_Manual_Config.h"       // generic ks0108 configuration
+//#include "config/ks0108/ManualConfig_ks0108.h"       // generic ks0108 configuration
 
-//#include "config/Modadm12864f_Manual_Config.h" // configuration for BGMicro 128x64 display with pinout diagram
-//#include "config/Modvk5121_Manual_Config.h"    // configuration for vk5121 122x32 display with pinout diagram
-//#include "config/Modmt12232d_Manual_Config.h" // configuration for Russian mt12232 display with pinout diagram
+//#include "config/ks0108/ManualConfig_ks0108-agm1264f.h" // configuration for BGMicro 128x64 display with pinout diagram
+//#include "config/sed1520/ManualConfig_sed1520-vk5121.h"  // configuration for vk5121 122x32 display with pinout diagram
+#include "config/mt12232d/ManualConfig_mt12232d.h"       // configuration for Russian mt12232 display with pinout diagram
 
 /*
  * For debugging

@@ -145,7 +145,7 @@
 #define glcdPinCSEL3		    PIN_F6
 #define glcdPinCSEL4		    PIN_F5
 
-#define glcdRES 		    PIN_F4
+#define glcdPinRES 		    PIN_F4
 
 #define glcdPinCSEL1		    PIN_F3
 #define glcdPinCSEL2		    PIN_F2

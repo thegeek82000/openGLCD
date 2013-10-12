@@ -28,7 +28,7 @@
 #elif defined(GLCD_CORE_SANGUINO)
 #include "PinConfig_ks0108-Sanguino.h"	// config for Sanguino ATmega644/p or avr_dev mighty1284p core
 #elif defined(GLCD_CORE_BOBDUINO)
-#include "PinConfig_ks0108-Bobduino.h"	// config for bobduino with mighty1284p core
+#include "PinConfig_ks0108-Bobuino.h"	// config for bobuino with mighty1284p core
 #elif defined(GLCD_CORE_CHIPKIT)
 #include "PinConfig_ks0108-chipKIT.h"	// config for chipKIT
 #else

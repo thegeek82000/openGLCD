@@ -112,14 +112,14 @@
 /*
  * Data pin definitions
  */
-#define glcdData0Pin        8
-#define glcdData1Pin        9
-#define glcdData2Pin        10
-#define glcdData3Pin        11
-#define glcdData4Pin        4
-#define glcdData5Pin        5
-#define glcdData6Pin        6
-#define glcdData7Pin        7
+#define glcdPinData0        8
+#define glcdPinData1        9
+#define glcdPinData2        10
+#define glcdPinData3        11
+#define glcdPinData4        4
+#define glcdPinData5        5
+#define glcdPinData6        6
+#define glcdPinData7        7
 
 /*
  * Arduino pins used for control
