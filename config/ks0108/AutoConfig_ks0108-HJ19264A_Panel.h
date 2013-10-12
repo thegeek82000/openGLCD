@@ -1,11 +1,12 @@
 /*
- * ks0108-192x64_HJ19264A_Panel.h - User specific configuration for openGLCD library
+ * AutoConfig_ks0108-HJ19264A_Panel.h - configuration for openGLCD library
  *
  * Use this file to set LCD panel parameters
- * This version is for a 192x64 ks0108 display
- * This file uses a board specific pin assignment file based on the board selected in the IDE
+ * This version is for a HJ19264A ks0108 display
+ * This file uses a board specific pin assignment file based
+ * on the board selected in the IDE
  *
-*/
+ */
 
 #ifndef GLCD_PANEL_CONFIG_H
 #define GLCD_PANEL_CONFIG_H
@@ -13,7 +14,7 @@
 /*
  * define name for panel configuration
  */
-#define glcd_PanelConfigName "ks0108-192x64-HJ19264A"
+#define glcd_PanelConfigName "ks0108-HJ19264A"
 
 /*********************************************************/
 /*  Configuration for LCD panel specific configuration   */
@@ -135,6 +136,6 @@
 #define GLCD_tWL     450    /* E lo level width (minimum E lo pulse width)        */
 
 
-#include "config/ks0108_AutoPinConfig.h"
+#include "AutoPinConfig_ks0108.h"
 #include "device/ks0108_Device.h"
 #endif //GLCD_PANEL_CONFIG_H

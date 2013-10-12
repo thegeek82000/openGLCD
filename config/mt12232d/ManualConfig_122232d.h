@@ -1,5 +1,5 @@
 /*
- * Modmt12232d_Manual_Config.h - User specific Custom configuration for Arduino openGLCD library
+ * ManualConfig_mt12232d.h - Custom configuration for Arduino openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
  *

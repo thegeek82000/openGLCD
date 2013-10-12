@@ -1,9 +1,10 @@
 /*
- * ks0108-JHD19264A_Panel.h - User specific configuration for openGLCD library
+ * AutoConfig_ks0108-JHD19264A_Panel.h - configuration for openGLCD library
  *
  * Use this file to set LCD panel parameters
  * This config file is for a JHD19264A ks0108 display
- * This file uses a board specific pin assignment file based on the board selected in the IDE
+ * This file uses a board specific pin assignment file based
+ * on the board selected in the IDE
  *
  * NOTE: that CSA should be connected to glcdPinCSEL2 and CSB is connected to glcdPinCSEL1
  *
@@ -198,6 +199,6 @@
 #define GLCD_tWL    450    /* E lo level width (minimum E lo pulse width)        */
 
 
-#include "config/ks0108_AutoPinConfig.h"
+#include "AutoPinConfig_ks0108.h"
 #include "device/ks0108_Device.h"
 #endif //GLCD_PANEL_CONFIG_H

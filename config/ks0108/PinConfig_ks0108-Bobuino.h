@@ -1,5 +1,5 @@
 /*
- * ks0108_bobuino.h - User specific configuration for openGLCD library
+ * ks0108_Bobuino.h - configuration for openGLCD library
  *
  * Use this file to set io pins
  * when using the "bobuino" variant with the Mighty1284p core
@@ -25,7 +25,7 @@
 /*
  * define name for pin configuration
  */
-#define glcd_PinConfigName "ks0108-bobuino"
+#define glcd_PinConfigName "ks0108-Bobuino"
 
 /*********************************************************/
 /*  Configuration for assigning LCD bits to Arduino Pins */

@@ -8,7 +8,7 @@
  * The pins have been picked to be pin/shield compatible with
  * "Uno" form factor boards rather than for performance.
  *
- * This allows moving connections from a working Uno board
+ * This allows moving connections from a working Uno/2009 board
  * to a Leonardo
  *
  */

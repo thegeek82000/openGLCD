@@ -1,5 +1,5 @@
 /*
- * ks0108_Panel.h - User specific configuration for openGLCD library
+ * AutoConfig_ks0108-128x64_Panel.h - configuration for openGLCD library
  *
  * Use this file to set LCD panel parameters
  * This version is for a standard ks0108 display
@@ -13,7 +13,7 @@
 /*
  * define name for panel configuration
  */
-#define glcd_PanelConfigName "ks0108"
+#define glcd_PanelConfigName "ks0108-128x64"
 
 /*********************************************************/
 /*  Configuration for LCD panel specific configuration   */
@@ -134,6 +134,6 @@
 #define GLCD_tWL    450    /* E lo level width (minimum E lo pulse width)        */
 
 
-#include "config/ks0108_AutoPinConfig.h" 
+#include "AutoPinConfig_ks0108.h" 
 #include "device/ks0108_Device.h"
 #endif //GLCD_PANEL_CONFIG_H

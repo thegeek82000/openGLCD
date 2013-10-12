@@ -1,11 +1,10 @@
 /*
- * ks0108_Manual_Config.h - User specific configuration for openGLCD library
+ * ManualConfig_ks0108.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
- * This version is for a standard ks0108 display
- * connected using the default Arduino wiring
+ * This version is for a standard/generic ks0108 display
  *
-*/
+ */
 
 #ifndef GLCD_PANEL_CONFIG_H
 #define GLCD_PANEL_CONFIG_H
@@ -13,7 +12,7 @@
 /*
  * define name for panel configuration
  */
-#define glcd_PanelConfigName "ks0108-Manual"
+#define glcd_ConfigName "ks0108-Manual"
 
 /*********************************************************/
 /*  Configuration for LCD panel specific configuration   */
@@ -28,11 +27,6 @@
 /*********************************************************/
 /*  Configuration for assigning LCD bits to Arduino Pins */
 /*********************************************************/
-
-/*
- * define name for pin configuration
- */
-#define glcd_PinConfigName "ks0108-Manual"
 
 /*
  * Pins can be assigned using Arduino pin numbers 0-n

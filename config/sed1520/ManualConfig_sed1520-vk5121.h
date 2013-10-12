@@ -1,5 +1,5 @@
 /*
- * Modvk5121_Manual_Config.h - User specific Custom configuration for openGLCD library
+ * ManualConfig_sed1520-vk5121.h - Custom configuration for openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
  *

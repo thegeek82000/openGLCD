@@ -1,9 +1,10 @@
 /*
- * Modagm1264f_Manual_Config.h - User specific configuration for openGLCD library
+ * ManualConfig_Modagm1264f.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
  *
- *    This configuration file is for the AGM1264F module manufactured by AZ Displays.
+ *    This configuration file is for the AGM1264F module manufactured by
+ *    AZ Displays.
  *    This module uses 2 ks0108 chips each controlling one half of the display.
  *
  *    This is the 128x64 GLCD that was sold by BGmicro

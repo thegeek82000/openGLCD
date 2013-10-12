@@ -1,9 +1,10 @@
 /*
- * hd44102_Panel.h - User specific configuration for openGLCD library
+ * AutoConfig_hd44102_Panel.h - User specific configuration for openGLCD library
  *
  * Use this file to set LCD panel parameters
  * This version is for a standard hd44102 display
  * This file uses a board specific pin assignment file based on the board selected in the IDE
+ * FIXME: For now, it borrows the pin config files from the ks0108
  *
 */
 
@@ -134,6 +135,6 @@
 #define GLCD_tWL    450    /* E lo level width (minimum E lo pulse width)        */
 
 
-#include "config/ks0108_AutoPinConfig.h"  // use same pin configs as ks0108
+#include "../ks0108/AutoPinConfig_ks0108.h"  // cheat and use same pin configs as ks0108
 #include "device/hd44102_Device.h"
 #endif //GLCD_PANEL_CONFIG_H

@@ -2,9 +2,9 @@
  * ks0108_CoreCode.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
- * This pinconfig file used when running in CoreCode mode
+ * This pinconfig file used when running in Arduino CoreCode mode
  *
-*/
+ */
 
 #ifndef GLCD_PIN_CONFIG_H
 #define GLCD_PIN_CONFIG_H
@@ -20,6 +20,7 @@
 
 /*
  * Pins can be assigned using Arduino pin numbers 0-n
+ * On AVR processors,
  * Pins can also be assigned using PIN_Pb 
  *    where P is port A-L and b is bit 0-7
  *    Example: port D bit 3 is PIN_D3
