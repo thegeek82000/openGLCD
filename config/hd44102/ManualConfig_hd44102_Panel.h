@@ -1,11 +1,10 @@
 /*
- * hd44102_Manual_Config.h - User specific configuration for openGLCD library
+ * ManualConfig_hd44102_Panel.h - Custom configuration for openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
  * This version is for a standard hd44102 display
- * connected using the default Arduino wiring
  *
-*/
+ */
 
 #ifndef GLCD_PANEL_CONFIG_H
 #define GLCD_PANEL_CONFIG_H
