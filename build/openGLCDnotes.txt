@@ -4,6 +4,7 @@ vi:ts=4
 	- Some cores only work on 1.x+
 		- mighty1284p 
 			Because they don't include support for pre 1.x
+		- Leonardo
 	- pre 0019 IDE is no longer supported
 		to simplify the openglcd API and make it consistent across pre/post 1.x,
 		no support for pre 0019
@@ -33,14 +34,6 @@ vi:ts=4
 
 - update openGLCD wiki
 - Remove fonts/newbasic3x5.h font (Wendy3x5 is better)
-- rename config files
-	"Arduino" becomes "Uno" (done)
-	panel: [module]-{glcdChip}_AutoConfig_Panel.h
-	autopinconfig: [module]-{glcdChip}_AutoConfig_Pins.h
-	pinconfig: [module]-{glcdChip}_PinConfig_{BoardType}.h
-	manualconfig: [module]-{glcdchip}_ManualConfig.h
-	[module] name is optional
-
 - update comment in header of pinconfig files
   to reflect boards it works with.
 
@@ -181,6 +174,7 @@ Core support:
 - Teensy v3 support
 - Leonardo support
 - Sanguino, Mighty1284p, Bobuino
+- Chipkit support
 - Arduino core code fall back mode so it works on any "Arduino" board.
 
 Device:
@@ -220,8 +214,6 @@ other
     - one single revision for the "library".
 - many bug fixes
 
-not yet
-- Chipkit support
 
 ---------------------------------------------------------------------------
 
@@ -399,3 +391,11 @@ DONE-------------------------------------------------------------
 - cleanup/remove old font rendering code in gText.cpp
 - cleanup bmp2glcd  (done)
 	- move over under bitmaps/utility? (done)
+- rename config files (done)
+	"Arduino" becomes "Uno" (done)
+	panel: [module]-{glcdChip}_AutoConfig_Panel.h
+	autopinconfig: [module]-{glcdChip}_AutoConfig_Pins.h
+	pinconfig: [module]-{glcdChip}_PinConfig_{BoardType}.h
+	manualconfig: [module]-{glcdchip}_ManualConfig.h
+	[module] name is optional
+

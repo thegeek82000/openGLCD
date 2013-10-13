@@ -20,6 +20,9 @@
  * Include core definitions
  */
 #if ARDUINO < 100
+#if ARDUINO < 19
+#error openGLCD requires Arduino 0019 or later
+#endif
 #include "WProgram.h"
 #else
 #include "Arduino.h"

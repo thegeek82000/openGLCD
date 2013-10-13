@@ -25,21 +25,24 @@ for your panel to verify the timing values in the panel configuration file.
 
 The active configuration when the sketch is compiled is selected
 in a master configuration file named openGLCD_Config.h.
-The default configuration file (named "config/ks0108_Panel.h")  is for 128x64 ks0108 type panel.  
+The default configuration file (named "config/ks0108/AutoConfig_ks0108-128x64_Panel.h")  is for 128x64 ks0108 type panel.  
 The panel configuration file naming is:
-  "{PANELNAME}_Panel.h"
+  "config/{PANELNAME}/AutoConfig_{PANELNAME}-{MODEL}_Panel.h"
  Where:
     {PANELNAME} is the glcd panel type. (for example, ks0108)
+    {MODEL} is the glcd module type. (for example, 128x64, 192x64, JHD12864H, etc...)
 
 The panel configuration file includes a board specific configuration file that specifies the
 pins used for each specific board type.
 The pin configuration file naming is a follows:
-  "{PANELNAME}_{BOARDNAME}.h"
+  "config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h"
     {PANELNAME} is the glcd panel type. (for example, ks0108)
     {BOARDNAME} is the name of the board (as selected in the Arduino IDE).
 
-For example, the ks0108 pin configuration file name for a standard Arduino board is: "ks0108_Uno.h"
-The equivalent file for the "Mega" board is: "ks0108_Mega.h"
+For example, the ks0108 pin configuration file name for a standard Arduino board is: "PinConfig_ks0108-Uno.h"
+The equivalent file for the "Mega" board is: "PinConfig_ks0108-Mega.h"
+Teensy boards are an exception. All Teensy boards share the same pin configuration file:
+"PinConfig_ks0108-Teensy.h"
 
 If you change the active configuration in the master configuration file openGLCD_Config.h,
 make sure that one and only one configuration file is included.
@@ -54,13 +57,14 @@ Pin mapping/numbering for the following board types are supported:
 - Sanguino (ATmega644P, Atmega1284P)
 - Bobuino (ATmega644P, Atmega1284P)
 - Mighty1284 (ATmega644P, Atmega1284P)
+- ChipKit (Uno32,  & others)
 
 
 In summary:
 
-openGLCD_Config.h includes a panel file "config/{PANELNAME}_Panel.h" (the active configuration)
+openGLCD_Config.h includes a panel file "config/{PANELNAME}/AutoConfig_{PANELNAME}{MODEL}_Panel.h" (the active configuration)
 that in turn includes a board specific pin mapping file based on arduino board type, 
-"config/{PANELNAME}_{BOARDNAME}.h"
+"config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h"
 
 @subpage page_pindefines "Specifying Pins"
 
@@ -76,7 +80,7 @@ The syntax used for specifying Arduino pin number is:
 #define glcdpinCSEL1	14 //example of using Arduino pin number
 @endcode
 
-The syntax used for avr port and pin number is @em PIN_Pb where Pb represents a PORT and a bit#.\n
+The syntax used for AVR port and pin number is @em PIN_Pb where Pb represents a PORT and a bit#.\n
 For example, to specify port C bit 0 you would use PIN_C0
 The following sets glcdpinCSEL1 (the first chip select) to port C bit 0 which is the same
 as arduino digital pin 14 on a m328 processor.
