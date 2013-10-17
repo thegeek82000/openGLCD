@@ -48,10 +48,6 @@
 
 #include <inttypes.h>
 
-#ifndef F_CPU
-# warning "Macro F_CPU must be defined"
-#endif
-
 /*
  * Forward declaration for all functions with attribute
  * 'always_inline' enforces GCC to inline the code (even

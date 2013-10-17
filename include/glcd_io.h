@@ -52,6 +52,10 @@
 #include "include/avrio.h"         // these macros do AVR direct port io    
 #endif
 
+#if defined(GLCD_CORE_CHIPKIT)
+#include "pic32FastDigital.h" // definitions for digitalReadFAST()/digitalWriteFast()
+#endif
+
  
 /*
  * Map a glcd status bit to a pin.
@@ -125,22 +129,41 @@
 
 #else // ================= non _AVRIO_AVRIO_ below here =============================
 
-#define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
 
-// FIXME, switch this #if below to use CORE type for TEENSY when its available
+// FIXME, switch this #if below to use CORE type for TEENSY3 when its available
 #if defined(CORE_TEENSY)  && defined(__MK20DX128__)  // teensy3 has builtin digitalXXXFast() routines
-#define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
 #define glcdio_ReadPin(pin)				digitalReadFast(pin)
+#define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
+#define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
 
 #define GLCDIO_DIGITALXXXFAST  // FIXME kludge to indicate using digitalxxxFast() routines (used by diags)
 
-#else // default back to regular Arduino digital core io routines
-#define glcdio_WritePin(pin, pinval)	digitalWrite(pin, pinval)
+// if digitalWriteFast and digitalReadFast are defined, use them
+#elif defined(digitalWriteFast) && defined(digitalReadFast)
+#define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
+#define glcdio_ReadPin(pin)				digitalReadFast(pin)
+#if defined (pinModeFast)
+// check for pinModeFast, as not all of them contain this
+#define glcdio_PinMode(pin, pinval)		pinModeFast(pin, pinval)
+#else
+#define glcdio_PinMode(pin, pinval)		pinMode(pin, pinval)
+#endif
+
+#define GLCDIO_DIGITALXXXFAST  // FIXME kludge to indicate using digitalxxxFast() routines (used by diags)
+
+// default back to regular Arduino digital core io routines
+#else
 #define glcdio_ReadPin(pin)				digitalRead(pin)
+#define glcdio_WritePin(pin, pinval)	digitalWrite(pin, pinval)
+#define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
 #endif
 
 /*
  * write byte to the configured LCD data lines 
+ * WARNING: this violates the digitalWrite() API in
+ * that it does not use HIGH/LOW for the value.
+ * All the iplementations so var, seem to only look if
+ * if the value is non-zero rather than for HIGH.
  */
 
 #define glcdio_WriteByte(data) 					\

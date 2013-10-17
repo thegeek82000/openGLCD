@@ -49,15 +49,8 @@
 #define _delayNanoseconds(__ns)     _delay_cycles( (double)(F_CPU)*((double)__ns)/1.0e9 + 0.5 )
 
 #elif defined(__PIC32MX__) // for pic32 (chipKIT)
-
-// FIME later
-#if 0
 #include "delay_cycles_pic32.h"
 #define _delayNanoseconds(__ns)     _delay_cycles( (double)(F_CPU/2)*((double)__ns)/1.0e9 + 0.5 )
-#else
-// Arduino digitalxxx() functions being used are so slow that we don't need any additional delays
-#define _delayNanoseconds(__ns)
-#endif
 
 #else
 #warning "No delay_cycle support for MCU"
