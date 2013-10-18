@@ -2,10 +2,9 @@
  * ks0108_Uno.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
- * This version is for a standard ks0108 display
- * connected using the Uno wiring
+ * when using an Uno, 2009, or any AVR m168/m328 based board
  *
-*/
+ */
 
 #ifndef GLCD_PIN_CONFIG_H
 #define GLCD_PIN_CONFIG_H

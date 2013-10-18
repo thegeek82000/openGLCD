@@ -7,7 +7,7 @@
  * Note that each board uses different pin numbers 
  * so make sure that your wiring matches the device you are using
  *
-*/
+ */
 
 #ifndef GLCD_PIN_CONFIG_H
 #define GLCD_PIN_CONFIG_H

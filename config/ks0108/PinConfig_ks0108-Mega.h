@@ -2,11 +2,11 @@
  * ks0108_Mega.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
+ * when using an Arduino Mega1280 or Mega2560 board
  *
  * The configuration below uses a single port for data 
- * and has the same wiring as the mega config from the previous ks0108 library 
  *
-*/
+ */
 
 #ifndef GLCD_PIN_CONFIG_H
 #define GLCD_PIN_CONFIG_H
