@@ -4,7 +4,7 @@
  * This file is shipped to automatically configure the library for a 
  * 128x64 ks0108 panel using the wiring described in the documentation.
  *
- * Use this file to select the active configuration file
+ * Use this file to select the active panel configuration file
  * Then edit the selected panel file to configure parameters for that panel.
  *
  * For Teensy devices the default wiring matches the wiring documented
@@ -16,22 +16,8 @@
 #ifndef openGLCD_CONFIG_H
 #define openGLCD_CONFIG_H
 
-/*
- * Include core definitions
- */
-#if ARDUINO < 100
-#if ARDUINO < 19
-#error openGLCD requires Arduino 0019 or later
-#endif
-#include "WProgram.h"
-#else
-#include "Arduino.h"
-#endif
-
-#include "include/glcd_arduino_io.h" // set up openGLCD Arduino core i/o defines for autoconfig
-
  /*
-  * Select a configuration file by uncommenting one line to include the
+  * Select a configuration file by uncommenting one line to define the
   * the desired configuration file.
   *
   * Select 1 and only 1 configuration file.
@@ -45,19 +31,16 @@
   * NOTE: if you have a panel that has different dimensions than the distributed configuration, you can either
   * edit the supplied configuration file for that board type or create a fully custom configuration file.
   *
-  * The auto configuration file (default is named  "config/ks0108_Panel.h") selects the appropriate board
-  * pin configuration file based on the current board selection in the Arduino IDE.
-  *   
   * The auto configuration panel configuration files can be found under the "config" directory,
   * with a seperate directory for the files related to each panel type.
   * The naming is:
-  *  config/{PANELNAME}/AutoConfig_"{PANELNAME}-{MODELNAME}_Panel.h"
+  *  config/{PANELNAME}/AutoConfig_{PANELNAME}-{MODELNAME}_Panel.h
   * Where:
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
   *   -{MODELNAME} is optional and is a model name of the glcd (for example, 128x64, JHD19264A)
   *
   * The pin configuration files for each board type can also be found in the same directory, the naming is:
-  *  config/{PANELNAME}/"PinConfig_{PANELNAME}-{BOARDNAME}.h"
+  *  config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h
   * Where:
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
   *   {BOARDNAME} is the name of the Arduino board (or board family as selected in the Arduino IDE).
@@ -75,43 +58,59 @@
 
 /***********************************************************************************************************
  *
- * Additional "autoconfig" files can be created, there is an example for 192x64 panels in this distribution.
- * In the future there will be more for different panel types, like sed1520, ks0713, etc..
+ * Autoconfig files
  *
  ***********************************************************************************************************/
 
+// automatically configure library for a ks0108 128x64 panel
+#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
 
- /*
-  * autoconfig includes - (comment this out if using manual configurations, see below)
-  */
-#include "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"    // automatically configure library for a ks0108 128x64 panel
-//#include "config/ks0108/AutoConfig_ks0108-192x64_Panel.h"    // automatically configure library for a ks0108 192x64 panel
-//#include "config/ks0108/AutoConfig_ks0108-JHD19264A_Panel.h" // automatically configure library for a ks0108 JHD19264A panel
-//#include "config/ks0108/AutoConfig_ks0108-HJ19264A_Panel.h"  // automatically configure library for a ks0108 HJ19264A panel
-//#include "config/hd44102/AutoConfig_hd44102_Panel.h"    
+// automatically configure library for a ks0108 192x64 panel
+//#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-192x64_Panel.h"
+
+// automatically configure library for a ks0108 JHD19264A panel
+//#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-JHD19264A_Panel.h"
+
+// automatically configure library for a ks0108 HJ19264A panel
+//#define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-HJ19264A_Panel.h"
+
+// automatically configure library for a hd44102 panel
+//#define GLCDCFG_GLCDCONFIG "config/hd44102/AutoConfig_hd44102_Panel.h"    
+
+/***********************************************************************************************************
+ *
+ * Manual config files
+ *
+ ***********************************************************************************************************/
 
 /*
  * If you want to explicitly select a manual configuration, you can edit the desired manual configuration
  * to fill in or modify the configuration information to meet your needs.
  * You can also use these files as a template to make customized copies to hold specific configurations.
  *
- * Remember that to activate your manual configuration you uncomment the #include for the desired file
+ * Remember that to activate your manual configuration you uncomment the #define for the desired file
  * and make sure that all the other config  #includes are commented (including the autoconfig above) 
  */
 
-//#include "config/ks0108/ManualConfig_ks0108_Panel.h"       // generic ks0108 configuration
+// generic ks0108 configuration
+//#define GLCDCFG_GLCDCONFIG "config/ks0108/ManualConfig_ks0108_Panel.h"
 
-//#include "config/ks0108/ManualConfig_ks0108-agm1264f_Panel.h"  // configuration for BGMicro 128x64 display with pinout diagram
-//#include "config/sed1520/ManualConfig_sed1520-vk5121_Panel.h"  // configuration for vk5121 122x32 display with pinout diagram
-//#include "config/mt12232d/ManualConfig_mt12232d_Panel.h" // configuration for Russian mt12232 display with pinout diagram
+// configuration for BGMicro 128x64 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/ks0108/ManualConfig_ks0108-agm1264f_Panel.h"
+
+// configuration for vk5121 122x32 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-vk5121_Panel.h"
+
+// configuration for Russian mt12232 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/mt12232d/ManualConfig_mt12232d_Panel.h"
 
 /*
  * For debugging
  */
-//#include "build/debug/bap/bapdebug.h"
-//#include "build/debug/bap/config/Modvk5121_AutoConfig_Config.h"
-//#include "build/debug/bap/config/Modagm1264f_AutoConfig_Config.h"
-//#include "build/debug/bap/config/Modagm1264f_TeensyBB128_Config.h"
+//#define GLCDCFG_GLCDCONFIG "build/debug/bap/bapdebug.h"
+//#define GLCDCFG_GLCDCONFIG "build/debug/bap/config/Modvk5121_AutoConfig_Config.h"
+//#define GLCDCFG_GLCDCONFIG "build/debug/bap/config/Modagm1264f_AutoConfig_Config.h"
+//#define GLCDCFG_GLCDCONFIG "build/debug/bap/config/Modagm1264f_TeensyBB128_Config.h"
 
 
 /*========================== Optional User Defines ==================================*/
@@ -121,9 +120,9 @@
 //#define GLCDCFG_NO_SCROLLDOWN // disable reverse scrolling (saves ~600 bytes of code on AVR)
                                 // This will allow those tight on FLASH space to save a bit of code space
 
-//#define GLCDCFG_ATOMIC_IO	// Generate code that ensures all pin i/o operations are atomic
+//#define GLCDCFG_ATOMIC_IO	// Generate code that ensures all AVR pin i/o operations are atomic
                                 // including any potential nibble operations.
-                                // Without this option enabled, nibble operations will be slightly faster but
+                                // Without this option enabled, AVR nibble operations will be slightly faster but
                                 // might have issues if a pin used shares a processor i/o port with an
                                 // interrupt routine that updates pins/bits on the same port.
 
@@ -147,56 +146,7 @@
 
 /*========================== End of Optional User Defines ==================================*/
 
-
-/*
- * do not modify below here
- */
-
-#if 1
-
-#if defined (__AVR__)
-// Workaround for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34734
-// to prevent: warning: only initialized variables can be placed into program memory area
-// In order to use this on AVR, ALL progmem variables must be declared the same with respect
-// to const since they will land in the same section. So all progmem variables should use const.
-
-#ifdef PROGMEM
-//#undef PROGMEM
-//#define PROGMEM __attribute__((section(".progmem.data")))
-#endif
-#define PROGMEMGLCD __attribute__((section(".progmem.openGLCD")))
-
-#else // non AVR
-#ifdef PROGMEM
-#undef PROGMEM
-#define PROGMEM __attribute__((section(".rodata"))) // put into read-only data section so it doesn't end up in RAM
-#endif
-
-#endif
-
-#if __AVR__
-#define GLCDFONTDECL(_n) const uint8_t PROGMEMGLCD _n[]
-#define GLCDBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
-#define GLCDXBMAPDECL(_n) const uint8_t PROGMEMGLCD _n[]
-#else
-#define GLCDFONTDECL(_n) const uint8_t _n[]
-#define GLCDBMAPDECL(_n) const uint8_t _n[]
-#define GLCDXBMAPDECL(_n) const uint8_t _n[]
-#endif
-
-#endif // CONSIDER
-
-/*
- * Kludge macros for missing stuff in ChipKit 
- */
-
-#if defined(__PIC32MX__)
-#ifndef PGM_P
-#define PGM_P const char *
-#endif
-#ifndef PSTR
-#define 	PSTR(s)   ((const char *)(s))
-#endif
-#endif // __PIC32MX__
+#include "include/glcd_arduino_io.h" // set up openGLCD Arduino core i/o defines for autoconfig
+#include "include/glcd_types.h"
 
 #endif  // openGLCD_CONFIG_h

@@ -30,7 +30,6 @@
 #define GTEXT_H
 
 #include <inttypes.h>
-#include <avr/pgmspace.h>
 
 #include "WString.h"
 #include "include/Streaming.h" 
@@ -39,7 +38,6 @@
 
 #ifndef USE_ARDUINO_FLASHSTR
 // these should be replaced when Arduino supports FLASH strings in the base print class
-#include <avr/pgmspace.h>
 typedef class _FlashString {} *FLASHSTRING;
 #define flashStr(x) ((FLASHSTRING)(PSTR((x))))
 #endif

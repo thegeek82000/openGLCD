@@ -34,7 +34,6 @@
   
 */
 
-#include <avr/pgmspace.h>
 #include "include/glcd.h"
 
 #define BITMAP_FIX // enables a bitmap rendering fix/patch

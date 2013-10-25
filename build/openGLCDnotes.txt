@@ -3,7 +3,7 @@ vi:ts=4
 - Create a "known issues"
 	- Some cores only work on 1.x+
 		- mighty1284p 
-			Because they don't include support for pre 1.x
+			Because they don't include support for pre 1.x IDE
 		- Leonardo
 	- pre 0019 IDE is no longer supported
 		to simplify the openglcd API and make it consistent across pre/post 1.x,
@@ -13,29 +13,66 @@ vi:ts=4
 	- 0019,0020,0021, 0022, 0023 pre 1.x IDEs won't work with newer versions of avr-libC
 		Header file nightmares! 
 		 (new <util/delay.h> uses math.h )
-			- comment out #include <util/delay.h> in wiring_private.h
+			- comment out #include <avr/delay.h> in wiring_private.h
 				(none of the core code uses/needs it)
 			OR if wanting to make util/delay functions available:
 			- must add #include <math.h> to top of wiring.h
 				wiring.h #defines the math functions and breaks math.h
 				math.h must be included before defines stomp on math functions
 
-	- GLCD_Bigdemo does not fit on Leonardo
-
 	- chipKIT MPIDE issues
-		- has #error in <avr/pgmspace.h>
-			all the pgmspace types/defines should be here not wiring.h
-			wiring.h should then include <avr/pgmspace.h> 
+		- has #error in <avr/pgmspace.h> down in compiler tools
+			hardware/pic32/compiler/pic32-tools/pic32mx/include/avr/pgmspace.h
+			all the pgmspace types/defines should be in pgmspacd.h not wiring.h
+			wiring.h should then include <avr/pgmspace.h>  if necessary
+			Best option would be to create a avr directory under the core library
+			and put a pgmspace.h there with all the AVR mappings and 
+			leave the one with the #error down in the compiler tools alone.
+			The new pgmspace.h will override the one down in the compiler tools
+			and that will offer AVR compatiblity for Arduno environment.
 		- missing
 			- PGM_P
 				#define PGM_P const char *
 			- PSTR()
 				#define PSTR(s) ((const char *)(s))
 
+	- GLCD_Bigdemo does not fit on Leonardo
+		(GLCDv3 version fits, openGLCD version does not)
+
+	- potential duplicate declarations of fonts & bitmaps
+		Currently if a font header or bitmap header is used is seperate
+		seperate compilation units, there will be duplicate data.
+		In Arduino all modules are combined by the IDE into a single .cpp so that while the
+		seperate "modules" may include a font or bitmap header again,
+		the gaurd ifdefs will prevent its actual inclusion.
+		If the IDE is not being used there is the potential that multiple
+		data declarations happens.
+		The long term strategy to address this is to have a .cpp file that inclues the
+		allFonts and allBitmaps files for the data declarations.
+		the allbitmaps.h and allFonts.h files will use an ifdef to determine whether to include
+		the fonts or to just declare extern references to the objects.
+		There will be no impact to any user code.
+		It will impact the JAVA tool that creates the allBitmaps.h header file.
+
 - update openGLCD wiki
-- Remove fonts/newbasic3x5.h font (Wendy3x5 is better)
-- update comment in header of pinconfig files
-  to reflect boards it works with.
+
+- create glcd types to replace PSTR and PGM_P
+	 so that mainline code does not depend on proprietary types.
+
+- needs fixes for when user does "import library" of openGLCD
+	This inserts includes for all libraries in the openGLCD root
+	which will cause code to drop back to GLCDv3 mode.
+	possible choices:
+		- move openGLCD_GLCDv3.h to include directory
+			Not sure if this will get found by IDE.
+			NOTE: This does not work! IDE does not find files below root
+
+		- play games with gaurd defines since openGLCD.h is included
+			before openGLCD_GLCDv3.h
+
+- Rendering issues for fixed witdh fonts smaller than 7/8 bits tall (in bitbucket)
+	- inverse is messed up.
+	- examine newbasic3x5 & Wendy3x5
 
 - fix hd44102 autoconfig file to use its own pin config rather than ks0108
 
@@ -53,8 +90,6 @@ vi:ts=4
 		It would be a directory tree for each type of release
 		"Arduino" being the only one right now.
 			
-
-- Arduino core code fall back mode so it works on any "Arduino" board.
 
 - New Demos
 	-iFPS (iFPS demo - NEW)
@@ -109,6 +144,8 @@ vi:ts=4
 	- nano is m328 variant same as "standard" but defines 8 analog pins
 	- micro is 32u4 variant same as "leonardo" except LED definitions.
 
+- Arduino core code fall back mode override to force its use?
+
 - change checks for pin/feature support.
 	- instead of checking for pin definition,
 	  change glcdio to define/not-define "function" macro based on
@@ -116,9 +153,6 @@ vi:ts=4
 	  of "function" macro vs checking for pin definition.
 
 - move LCD_OFF checks & code to glcdio and new glcdio  "function" macro
-
-
-- GLCDmakeBitmap not reporting data size
 
 - Verify ARM delay code
  (seems to be fairly accurate, 450ns delay is about 480 or so)
@@ -159,6 +193,11 @@ vi:ts=4
 		- 1.0.5 6660 vs  5992 (668 bytes)
 	- Teensy2++
 		- 1.0 7788 vs 7128 (660 bytes)
+
+	- Related to emptysketch that includes <openGLCD>
+		~5k of code
+			Seems to go away if PutChar() in write() is commented out.
+			For some reason Print class write() is being drug in.
 
 - eliminate tAS delays on writes? Seems to work on Teensy3
 (didn't make much performance difference, 9.97 to 10.02 FPS)
@@ -398,4 +437,14 @@ DONE-------------------------------------------------------------
 	pinconfig: [module]-{glcdChip}_PinConfig_{BoardType}.h
 	manualconfig: [module]-{glcdchip}_ManualConfig.h
 	[module] name is optional
+
+- update comment in header of pinconfig files (done)
+  to reflect boards it works with.
+
+- add digitalFastxx routines to chipKIT core (done)
+
+- Move extra fonts in "Fonts" subdirectory somewhere else until
+  verified & converted to openGLCD (done)
+
+- Arduino core code fall back mode so it works on any "Arduino" board. (Done)
 

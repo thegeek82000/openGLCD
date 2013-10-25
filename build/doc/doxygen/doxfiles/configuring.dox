@@ -32,7 +32,7 @@ The panel configuration file naming is:
     {PANELNAME} is the glcd panel type. (for example, ks0108)
     {MODEL} is the glcd module type. (for example, 128x64, 192x64, JHD12864H, etc...)
 
-The panel configuration file includes a board specific configuration file that specifies the
+The panel configuration file defines a board specific configuration file that specifies the
 pins used for each specific board type.
 The pin configuration file naming is a follows:
   "config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h"
@@ -45,7 +45,7 @@ Teensy boards are an exception. All Teensy boards share the same pin configurati
 "PinConfig_ks0108-Teensy.h"
 
 If you change the active configuration in the master configuration file openGLCD_Config.h,
-make sure that one and only one configuration file is included.
+make sure that one and only one configuration file is defined.
 
 Processor type is automatically determined from the board selected when the sketch is built, 
 this allows Arduino style pin numbers to be mapped to fast direct port IO used by the library.
@@ -62,7 +62,7 @@ Pin mapping/numbering for the following board types are supported:
 
 In summary:
 
-openGLCD_Config.h includes a panel file "config/{PANELNAME}/AutoConfig_{PANELNAME}{MODEL}_Panel.h" (the active configuration)
+openGLCD_Config.h defines a panel file "config/{PANELNAME}/AutoConfig_{PANELNAME}{MODEL}_Panel.h" (the active configuration)
 that in turn includes a board specific pin mapping file based on arduino board type, 
 "config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h"
 
