@@ -33,6 +33,7 @@
 #define GLCD_DEVICE_H
 
 #include "openGLCD_Config.h"
+#include "include/glcd_types.h"
 #include "include/glcd_io.h"
 
 #if defined (ARDUINO)
