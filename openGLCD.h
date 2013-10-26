@@ -1,6 +1,7 @@
 #ifndef __openGLCD_H__
 #define __openGLCD_H__
 
+#include <include/glcd_types.h>
 #include <include/glcd.h>
 #include <include/glcd_errno.h>
 #include <openGLCD_Buildinfo.h>

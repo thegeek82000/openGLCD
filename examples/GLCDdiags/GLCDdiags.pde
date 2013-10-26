@@ -1032,7 +1032,7 @@ showGLCDconfig(void)
     /*
      * full 8 bit mode
      */
-    SerialPrintQ("byte\n");
+    SerialPrintQ("byte");
   }
   else
   {

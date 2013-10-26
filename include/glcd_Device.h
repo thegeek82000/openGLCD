@@ -33,7 +33,7 @@
 #define GLCD_DEVICE_H
 
 #include "openGLCD_Config.h"
-#include GLCDCFG_GLCDCONFIG // include glcd panel config file
+#include "include/glcd_io.h"
 
 #if defined (ARDUINO)
 #include "Print.h" // used when deriving this class in Arduino 

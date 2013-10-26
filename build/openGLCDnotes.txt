@@ -56,6 +56,15 @@ vi:ts=4
 
 - update openGLCD wiki
 
+- consider adding a "libinfo" sketch
+	This can print out all the openGLCD libary information
+	like diags does but not require any hardware.
+	It could also print out the exact config file in use
+	as well as the exact location of the html documentation
+	or even a file://xxxxx line that can be cut & pasted into
+	the browser.
+	OR maybe just added to diags?
+
 - create glcd types to replace PSTR and PGM_P
 	 so that mainline code does not depend on proprietary types.
 

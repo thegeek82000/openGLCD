@@ -44,6 +44,13 @@
 #endif
 
 
+/*
+ * Map a bit to a bit mask
+ */
+#ifndef _BV
+#define _BV(_bit) (1 << _bit)
+#endif
+
 #if defined (__AVR__)
 // Workaround for http://gcc.gnu.org/bugzilla/show_bug.cgi?id=34734
 // to prevent: warning: only initialized variables can be placed into program memory area

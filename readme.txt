@@ -80,6 +80,11 @@ diagnostic information that can help with troubleshooting.
 Other example sketches and demos are provided that show how to use various
 capabilities of the library.
 
+The subfolder GLCDv3Demos contains subfolders with the demos from the GLCDv3 library.
+
+    * GLCDv3 are the demos running in GLCDv3 compability mode
+    * openGLCD are the GLCDv3 demos converted over to openGLCD 
+
 FONTS
 =====
 The library is supplied with fixed and variable width font definitons 

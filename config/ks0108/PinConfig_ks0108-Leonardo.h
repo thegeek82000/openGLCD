@@ -2,8 +2,7 @@
  * ks0108_Leonardo.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
- * This version is for a standard ks0108 display
- * connected using the Leonardo wiring
+ * when using an Arduino Leonardo, Yun, Esplora, LillyPadUSB, Micro boards.
  *
  * The pins have been picked to be pin/shield compatible with
  * "Uno" form factor boards rather than for performance.

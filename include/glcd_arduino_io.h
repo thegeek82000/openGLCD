@@ -33,7 +33,14 @@
 #ifndef ARDUINO_IO_H
 #define ARDUINO_IO_H
 
+#ifdef __cplusplus
+extern "C" {
+#endif
 #include "pins_arduino.h" // comes from Arduino core/variant 
+#ifdef __cplusplus
+}
+#endif
+
 
 /*
  * Figure which Arduino core we are using
@@ -58,7 +65,7 @@
 #elif (analogInputToDigitalPin(0) == 31 )
 #define GLCD_CORE_SANGUINO // avr mighty1284p avr_developers pin mapping (SANGUINO)
 #elif (analogInputToDigitalPin(0) == 21 )
-#define GLCD_CORE_BOBDUINO // avr mighty1284p "BobDuino" pin mapping
+#define GLCD_CORE_BOBUINO // avr mighty1284p "bobuino" pin mapping
 #endif
 #endif
 
@@ -317,7 +324,7 @@
 #define digitalPinToBit(P) \
      (((P) >= 0 && (P) <= 23) ? (P%8) : (7-(P%8)) )
 
-#elif defined(GLCD_CORE_BOBDUINO) // "bobduino" variant mighty-1284p core ------
+#elif defined(GLCD_CORE_BOBUINO) // "bobuino" variant mighty-1284p core ------
 #define digitalPinToPortReg(P) \
 	(\
 	(P) == 0 ? &PORTD :\

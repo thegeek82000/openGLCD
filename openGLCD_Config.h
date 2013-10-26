@@ -28,8 +28,9 @@
   * These configurations match the the panel and pin configurations
   * in the library documentation based on the type of board selected in the Arduino IDE.
   *
-  * NOTE: if you have a panel that has different dimensions than the distributed configuration, you can either
-  * edit the supplied configuration file for that board type or create a fully custom configuration file.
+  * NOTE: if you have a panel that has different dimensions than the distributed configuration,
+  * you can either edit the supplied configuration file for that board type or create a fully
+  * custom configuration file.
   *
   * The auto configuration panel configuration files can be found under the "config" directory,
   * with a seperate directory for the files related to each panel type.
@@ -39,7 +40,8 @@
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
   *   -{MODELNAME} is optional and is a model name of the glcd (for example, 128x64, JHD19264A)
   *
-  * The pin configuration files for each board type can also be found in the same directory, the naming is:
+  * The pin configuration files for each board type can also be found in the same directory,
+  * the naming is:
   *  config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h
   * Where:
   *   {PANELNAME} is the glcd panel type. (for example, ks0108)
@@ -56,11 +58,11 @@
   * 
   */
 
-/***********************************************************************************************************
+/****************************************************************************************************
  *
  * Autoconfig files
  *
- ***********************************************************************************************************/
+ ****************************************************************************************************/
 
 // automatically configure library for a ks0108 128x64 panel
 #define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
@@ -77,16 +79,17 @@
 // automatically configure library for a hd44102 panel
 //#define GLCDCFG_GLCDCONFIG "config/hd44102/AutoConfig_hd44102_Panel.h"    
 
-/***********************************************************************************************************
+/****************************************************************************************************
  *
  * Manual config files
  *
- ***********************************************************************************************************/
+ ****************************************************************************************************/
 
 /*
- * If you want to explicitly select a manual configuration, you can edit the desired manual configuration
- * to fill in or modify the configuration information to meet your needs.
- * You can also use these files as a template to make customized copies to hold specific configurations.
+ * If you want to explicitly select a manual configuration, you can edit the desired manual
+ * configuration to fill in or modify the configuration information to meet your needs.
+ * You can also use these files as a template to make customized copies to hold specific
+ * configurations.
  *
  * Remember that to activate your manual configuration you uncomment the #define for the desired file
  * and make sure that all the other config  #includes are commented (including the autoconfig above) 
@@ -116,15 +119,18 @@
 /*========================== Optional User Defines ==================================*/
 
 //#define GLCDCFG_NO_PRINTF	// disable xxprintf() support
+				// does not save any code space if no xxprintf() routines
+				// are not being used.
 
 //#define GLCDCFG_NO_SCROLLDOWN // disable reverse scrolling (saves ~600 bytes of code on AVR)
-                                // This will allow those tight on FLASH space to save a bit of code space
+                                // Allows those tight on FLASH space to save a bit of code space
 
 //#define GLCDCFG_ATOMIC_IO	// Generate code that ensures all AVR pin i/o operations are atomic
                                 // including any potential nibble operations.
-                                // Without this option enabled, AVR nibble operations will be slightly faster but
-                                // might have issues if a pin used shares a processor i/o port with an
-                                // interrupt routine that updates pins/bits on the same port.
+                                // Without this option enabled, AVR nibble operations will be
+                                // slightly faster but might have issues if a pin used shares a
+                                // processor i/o port with an interrupt routine that
+                                // updates pins/bits on the same port.
 
 
 //#define GLCDCFG_NODEFER_SCROLL // uncomment to disable deferred newline processing
@@ -132,9 +138,10 @@
 //#define GLCDCFG_NOINIT_CHECKS	// uncomment to remove initialization busy status checks
 				// this turns off the code in the low level init code that
 				// checks for a module stuck BUSY or stuck in RESET.
-				// This will save about 100 bytes of code space (on AVR) in normal sketches.
-				// and an additional 220 bytes in the diag sketch. This will cause
-				// diags to hang if wires are not correct vs return an error.
+				// This will save about 100 bytes of code space (on AVR) in normal
+                                // sketches and an additional 220 bytes in the diag sketch.
+                                // This will cause diags to hang if wires are not correct vs
+                                // return an error.
 
 //#define GLCDCFG_READ_CACHE	// Turns on code that uses a frame buffer for a read cache
 				// This adds only ~52 bytes of code (on AVR) but...
@@ -145,8 +152,5 @@
 				// have 1k of RAM total.
 
 /*========================== End of Optional User Defines ==================================*/
-
-#include "include/glcd_arduino_io.h" // set up openGLCD Arduino core i/o defines for autoconfig
-#include "include/glcd_types.h"
 
 #endif  // openGLCD_CONFIG_h

@@ -38,7 +38,9 @@
 #include "Arduino.h"
 #endif
 
-#include "include/glcd_arduino_io.h"    // these macros map arduino pins
+#include "include/glcd_arduino_io.h"    // these macros map arduino pins & set CORE defines
+#include GLCDCFG_GLCDCONFIG				// include glcd panel config file
+
 
 /*
  * Must set AVRIO modes before including avrio
@@ -136,20 +138,20 @@
 #define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
 #define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
 
-#define GLCDIO_DIGITALXXXFAST  // FIXME kludge to indicate using digitalxxxFast() routines (used by diags)
+#define GLCDIO_DIGITALXXXFAST  // indicate using digitalxxxFast() routines (used by diags)
 
 // if digitalWriteFast and digitalReadFast are defined, use them
 #elif defined(digitalWriteFast) && defined(digitalReadFast)
 #define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
 #define glcdio_ReadPin(pin)				digitalReadFast(pin)
-#if defined (pinModeFast)
-// check for pinModeFast, as not all of them contain this
+
+#if defined (pinModeFast) // check for pinModeFast, as not all of them contain this
 #define glcdio_PinMode(pin, pinval)		pinModeFast(pin, pinval)
 #else
 #define glcdio_PinMode(pin, pinval)		pinMode(pin, pinval)
 #endif
 
-#define GLCDIO_DIGITALXXXFAST  // FIXME kludge to indicate using digitalxxxFast() routines (used by diags)
+#define GLCDIO_DIGITALXXXFAST  // indicate using digitalxxxFast() routines (used by diags)
 
 // default back to regular Arduino digital core io routines
 #else
