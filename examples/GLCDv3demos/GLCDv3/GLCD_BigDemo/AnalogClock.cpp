@@ -5,7 +5,8 @@
 
 #include "AnalogClock.h"
 // this clock uses the Graphics LCD library for display
-#include <openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
 
 /* Look-up sine table for integer math */
 byte byteSine[16] = {0,  27,  54,  79, 104, 128, 150, 171, 190, 201, 221, 233, 243, 250, 254, 255} ;

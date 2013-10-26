@@ -8,7 +8,8 @@
  * number of frames drawn per second.  
  */
 
-#include <openGLCD_GLCDv3.h> // GLCDv3 compatibilty mode
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // GLCDv3 compatibilty mode
 
 #include "fonts/allFonts.h"         // system and arial14 fonts are used
 #include "bitmaps/allBitmaps.h"       // all images in the bitmap dir 

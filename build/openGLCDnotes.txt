@@ -73,8 +73,23 @@ vi:ts=4
 	which will cause code to drop back to GLCDv3 mode.
 	possible choices:
 		- move openGLCD_GLCDv3.h to include directory
-			Not sure if this will get found by IDE.
-			NOTE: This does not work! IDE does not find files below root
+			To do this, there could be a define like GLCDCFG_GLCDv3Mode
+			that is used by openGLCD.h to include <include/openGLCD_GLCDv3.h>
+			Sketches that want GLCDv3 compatibilty would simply turn on
+			the defne before including openGLCD.h
+
+			The optional user created glcd.h header would contain:
+			#define GLCDCFG_GLCDv3Mode
+			#include <openGLCD.h>
+
+			Alternatively, rather than an ifdef the sketch could simply include both for compatibility:
+			#include <openGLCD.h>
+			#include <include/openGLCD_GLCDv3.h>
+
+			Seems cleaner to include both as it keeps the openGLCD.h header "pure".
+
+			Note: that this only works if there is NEVER any code in the actual
+			library that changes for GLCDv3 compatibilty. which is probabaly as it should be.
 
 		- play games with gaurd defines since openGLCD.h is included
 			before openGLCD_GLCDv3.h

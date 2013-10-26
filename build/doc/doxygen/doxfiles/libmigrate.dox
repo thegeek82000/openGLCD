@@ -128,16 +128,19 @@ true on success and false on failure.
 
 openGLCD provides a header file to temporarily aid in transitioning existing GLCDv3 sketches
 to openGLCD.
-Sketches may include the GLCDv3 compatibility header file to automatically
+Sketches may include the GLCDv3 compatibility header file just after
+the main openGLCD header to automatically
 map the sketches use of GLCDv3 functions and parameters to openGLCD.
 
 \code
-#include <openGLCD_GLCDv3.h> // header to provide GLCDv3 compatibility
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // header to provide GLCDv3 compatibility
 \endcode
 
 Notable exceptions are the following functions:\n
 - \ref gText::DefineArea() "DefineArea()
-for which there is no backward compatibilty.
+for which there is no backward compatibilty.\n
+The returns status from this funtion has changed.
 
 @warning
 While using this compatibility header should allow most existing GLCDv3 sketches to
@@ -163,13 +166,13 @@ vs parameters passed, vs the documenation.
 For even greater temporary GLCDv3 compatibility,
 a dummy glcd.h file can be created with the following contents:
 @code
-#include <openGLCD_GLCDv3.h>
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h>
 @endcode
 which should allow most existing GLCDv3 sketches to work "as is". However, if this is
-done, GLCDv3 and openGLCD cannot both be installed at the same time.\n
+done, GLCDv3 and openGLCD cannot both be installed at the same time
+since the sketch cannot be assured to get the glcd.h from the openGLCD library.\n
 @warning
-<b>DO NOT</b> rename openGLCD_GLCDv3.h to glcd.h as it will break
-the included GLCDv3 demos.\n
 While creating a glcd.h compatibility file can provide instant backward compatiblity
 to most existing GLCDv3 sketches, it should be cautioned, as mentioned above,
 that those sketches will be using the functions and parameters as defined in GLCDv3 vs openGLCD.

@@ -12,7 +12,9 @@
  */
 
 
-#include <openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
+
 #include "fonts/SystemFont5x7.h"   // font
 #include "bitmaps.h"         // bitmaps
 

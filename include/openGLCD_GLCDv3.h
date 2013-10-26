@@ -23,7 +23,7 @@
 
  -----------------------------------------------------------------------
 
-	Including this header file in a sketch instead of <openGLCD.h> will
+	Including this header file in a sketch just after <openGLCD.h> will
 	provide GLCDv3 library compatibility for the routines that
 	have changed or have been eliminated in openGLCD
 
@@ -31,14 +31,14 @@
 		For even greater temporary GLCDv3 compatibility,
 		a dummy glcd.h header file can be created with the folling
 		contents:
-		#include <openGLCD_GLCDv3.h>
+		#include <openGLCD.h>
+		#include <include/openGLCD_GLCDv3.h>
 		which should allow most existing GLCDv3 sketches to work "as is". 
 		However, if this is done, GLCDv3 and openGLCD cannot both be
-		installed at the same time.
+		installed at the same time since the sketch cannot be assured
+		to get the glcd.h from the openGLCD library.
 
 	Warning:
-		DO NOT rename openGLCD_GLCDv3.h to glcd.h as it will break
-		the included GLCDv3 demos.
 
 		While creating a glcd.h compatibility file can provide instant
 		backward compatiblity to most existing GLCDv3 sketches,
@@ -49,7 +49,8 @@
 		Therefore, this method of backward compability is not recommeded as a
 		permanent solution.
 
-		The return status of DefineArea() will not be the same as GLCDv3.
+		Also note that the
+		return status of DefineArea() will not be the same as GLCDv3.
 
 		See the openGLCD documentation for further details.
 
@@ -58,7 +59,6 @@
 #ifndef __openGLCD_GLCDv3_H__
 #define __openGLCD_GLCDv3_H__
 
-#include <openGLCD.h>
 /*
  * Note: openGLCD.h will include all the openGLCD fonts and bitmaps
  * GLCDv3 sketches will attempt to include font and bitmap headers as well since that was

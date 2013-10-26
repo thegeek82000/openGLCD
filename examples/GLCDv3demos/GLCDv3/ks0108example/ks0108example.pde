@@ -9,10 +9,12 @@
  *  number of frames drawn per second.  
  */
 
-#include <openGLCD_GLCDv3.h>
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // enable GLCDv3 compatibilty
+
 #include "fonts/Arial14.h"         // proportional font
 #include "fonts/SystemFont5x7.h"   // system font
-#include "bitmaps/ArduinoIcon.h"     // bitmap 
+#include "bitmaps/ArduinoIcon.h"   // bitmap 
 
 /*
  * Check for small displays as this code was written

@@ -8,7 +8,8 @@
  *
  */
 
-#include <openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
 #include <Time.h>  // download from: http://www.arduino.cc/playground/Code/Time
 
 #include "fonts/allFonts.h"         // system and arial14 fonts are used
