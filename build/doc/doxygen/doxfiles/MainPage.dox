@@ -1,7 +1,7 @@
 /**
 @mainpage openGLCD Graphical LCD Library
 
-@image html glcdlib-2.png
+@image html openGLCDr.png
 <H1>Overview</H1>
 openGLCD makes it easy to use Graphical LCDs (GLCD) with Arduino.
 The library supports several different chips and is easy to integrate with different panels.
