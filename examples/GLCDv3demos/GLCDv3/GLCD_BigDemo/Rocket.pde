@@ -30,6 +30,13 @@
 
 byte brightness = 64;
 
+/*
+ * macro to force a cast on random() return value
+ * NOTE: This was added from original code to allow code
+ * to compile on Teensy boards with new AVR compiler.
+ */
+#define random (uint8_t)random
+
 #define PLAYER 0
 #define ROCK1 1
 #define ROCK2 2
