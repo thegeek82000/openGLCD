@@ -37,5 +37,6 @@ For a full GPL/LGPL compatibilty matrix see:
 http://www.gnu.org/licenses/gpl-faq.html#AllCompatibility
 
 Furthermore, none of the code, including any additions and improvements in
-openGLCD over GLCDv3 can be moved back into GLCDv3 or into any other LGPL, BSD, or closed source compatible licensed project or library
+openGLCD over GLCDv3 can be moved back into GLCDv3 or into any other LGPL, BSD,
+or closed source compatible licensed project or library
 without violating the GPLv3 licensing terms.

@@ -13,7 +13,10 @@
 # - remove any uneeded/unwanted subdirectories from the tmp working directory
 #      (currently the build directory)
 # - remove the VCS tracking stuff from the tmp working directory
-# - create a zip file of the tmp working directory.
+# - create 3 zip images from tmp working directory.
+# 	- the working directory.
+# 	- only the doc directory of the working directory. (DocOnly)
+# 	- the working directory without the doc directory (NoDoc)
 # - remove the tmp working directory.
 #
 # It is a bit complicated/messy because it has to capabable of running in
@@ -105,10 +108,11 @@ MYDATETIME=`date`
 PROGNAME=`basename $0`
 
 #
-# set PROGWD (program working directory) variable (grab it directory of script)
+# set PROGWD (program working directory) variable
 #
 
-PROGWD=`dirname $0`
+#PROGWD=`dirname $0`
+PROGWD=$(pwd)
 
 #
 # LOG file name (create based on baename of script file)
@@ -235,14 +239,18 @@ if [ $? != 0 ]; then
 	exit 1
 fi
 
+echo ======== Working tree is ready for processing >> "$LOGFILE"
 echo Working tree is ready for processing
 
 # 
 # Must deal with and grab VCS build number string before we do any mucking around with tree
+# note: VCSBUILDSTR and VCSBUILDREV have commands in them
+# that must be run in the distribution directory.
 #
 cd "$GLCDDISTDIR"
 GLCDBUILDSTR=$VCSBUILDSTR
 GLCDBUILDREV=$VCSBUILDREV
+
 
 cd "$PROGWD"
 
@@ -300,7 +308,7 @@ for unwanted in $GLCDUNWANTED; do\
 	rm -rf $unwanted ;\
 done
 #
-# Remove the VCS control/trash directories from the distribution like "build" and "debug"
+# Remove the VCS control/trash directories from the distribution like .svn
 #
 echo Removing VCS control files/directories "($GLCDTRASH)" from VCS working tree
 echo ======== Removing trash directories "($GLCDTRASH)" from $GLCDDISTDIR >> "$LOGFILE"
@@ -308,22 +316,58 @@ for trash in $GLCDTRASH; do\
 	find . -depth -name $trash -exec rm -rf '{}' ';' ;\
 done
 
+
+#
+# BaseName of ZIP files
+#
+
+#GLCDZIPBASENAME="$GLCDLIBNAME-$MYDATE.zip"
+GLCDZIPBASENAME="$GLCDLIBNAME-$GLCDBUILDSTR"
+
+#
+# The created Zip files will reside in a sub directory
+# by the same name as basname of the zip files.
+# 
+
 cd "$PROGWD"
+rm -rf $GLCDZIPBASENAME
+mkdir $GLCDZIPBASENAME
+cd $GLCDZIPBASENAME
 
 #
-# Name of ZIP file
-#
+# Create 3 zip images
+#	- 1 that includes documeantion (doc directory)
+#	- 1 that is just the documenation (doc directory)
+#	- 1 that does not include the documenation (doc directory)
 
-#GLCDZIPNAME="$GLCDLIBNAME-$MYDATE.zip"
-GLCDZIPNAME="$GLCDLIBNAME-$GLCDBUILDSTR.zip"
+GLCDZIPNAME="$GLCDZIPBASENAME.zip"
+GLCDZIPNAME_DOCONLY="$GLCDZIPBASENAME-DocOnly.zip"
+GLCDZIPNAME_NODOC="$GLCDZIPBASENAME-NoDoc.zip"
 
-echo Creating Zip file
-echo ======== Creating Zip file from $GLCDDISTDIR >> "$LOGFILE"
-rm -f $GLCDZIPNAME
+
+echo Creating Zip files
+echo ======== Creating Zip files from $GLCDDISTDIR >> "$LOGFILE"
+rm -f $GLCDZIPNAME $GLCDZIPNAME_DOCONLY $GLCDZIPNAME_NODOC
+
+echo ======== Creating full Zip file from $GLCDDISTDIR >> "$LOGFILE"
 $ZIPCMD $GLCDZIPNAME "$GLCDDISTDIR" >> "$LOGFILE"
-
 echo Zip file $GLCDZIPNAME created
 echo ======== Zip file $GLCDZIPNAME created >> "$LOGFILE"
+
+echo ======== Creating Doc only Zip file from $GLCDDISTDIR >> "$LOGFILE"
+$ZIPCMD $GLCDZIPNAME_DOCONLY "$GLCDDISTDIR/doc/*" >> "$LOGFILE"
+echo Zip file $GLCDZIPNAME_DOCONLY created
+echo ======== Zip file $GLCDZIPNAME_DOCONLY created >> "$LOGFILE"
+
+echo ======== Creating NoDoc only Zip file from $GLCDDISTDIR >> "$LOGFILE"
+#remove doc directory and create a dummy readme indicating no docs
+rm -rf "$GLCDDISTDIR/doc"
+mkdir "$GLCDDISTDIR/doc"
+echo "This version of the distribution contains no documenation" >> "$GLCDDISTDIR/doc/ReadMe.txt"
+
+$ZIPCMD $GLCDZIPNAME_NODOC "$GLCDDISTDIR" >> "$LOGFILE"
+echo Zip file $GLCDZIPNAME_NODOC created
+echo ======== Zip file $GLCDZIPNAME_NODOC created >> "$LOGFILE"
 
 echo Removing VCS working tree $GLCDDISTDIR
 rm -rf "$GLCDDISTDIR"
@@ -331,5 +375,12 @@ echo ======== Removed VCS working tree $GLCDDISTDIR >> "$LOGFILE"
 
 echo ======== $PROGNAME completed normally >> "$LOGFILE"
 
+#
+# move log file into zip distribution directory
+#
+cd "$PROGWD"
+mv "$LOGFILE" "$GLCDZIPBASENAME"
+
 echo $PROGNAME Finished
+
 exit 0

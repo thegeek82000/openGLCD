@@ -1,6 +1,11 @@
 vi:ts=4
 
-- Create a "known issues"
+- modify build script to work even if not using a git tree
+	Should be able to just check for .git file and then make up
+	version stuff if it doesn't exist.
+
+
+- Create a "known issues" "file" that can be read into doxygen as well
 	- Some cores only work on 1.x+
 		- mighty1284p 
 			Because they don't include support for pre 1.x IDE
@@ -54,8 +59,6 @@ vi:ts=4
 		There will be no impact to any user code.
 		It will impact the JAVA tool that creates the allBitmaps.h header file.
 
-- update openGLCD wiki
-
 - consider adding a "libinfo" sketch
 	This can print out all the openGLCD libary information
 	like diags does but not require any hardware.
@@ -72,7 +75,7 @@ vi:ts=4
 	This inserts includes for all libraries in the openGLCD root
 	which will cause code to drop back to GLCDv3 mode.
 	possible choices:
-		- move openGLCD_GLCDv3.h to include directory
+		- move openGLCD_GLCDv3.h to include directory (done)
 			To do this, there could be a define like GLCDCFG_GLCDv3Mode
 			that is used by openGLCD.h to include <include/openGLCD_GLCDv3.h>
 			Sketches that want GLCDv3 compatibilty would simply turn on

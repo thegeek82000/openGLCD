@@ -32,11 +32,11 @@ To install the library from a downloaded pre-built zip file.
 
 INSTALL (Older Arduino Releases)
 ================================
-This library should be unziped into a folder named openGLCD in the libraries
-directory. If you already have a folder called libraries in your Arduino 
+This library should be unziped into a directory named openGLCD in the libraries
+directory. If you already have a directory called libraries in your Arduino 
 sketchbook directory, unzip the glcd files there. If not, create a
-folder called libraries in the sketchbook folder, and drop the library
-folder here.
+directory called libraries in the sketchbook directory, and drop the library
+directory here.
 
 To locate your sketchbook directory
 bring up the IDE and click on [File]->Preferences
@@ -46,13 +46,14 @@ The location where the IDE is looking for your sketchbook directory is
 in the text box right there at the top of the "preferences" dialog.
 
 Wherever that directory is, you will need to create a directory called
-"libraries", then extract the zip image into that directory.
-So you will end up with {sketchbook directory}/libraries/glcd ...
+"libraries", if it doesn't alraedy exist, 
+then extract the zip image into that directory.
+So you will end up with {sketchbook directory}/libraries/openGLCD ...
 
 Alternatively you can install the openGLCD library directly in the Arduino
 distribution by placing it in the libraries directory where the
 Arduino distribution was installed.
-For Arduino release 0018 and later that would be:
+For Arduino release 0019 and later that would be:
 {Arduino install directory}/libraries
 So you will end up with {Arduino install directory}/libraries/openGLCD ...
 
@@ -62,16 +63,16 @@ library in the Sketch > Import Library menu.
 CONFIGURE
 =========
 Configuration files for defining pins and panel characteristics are in the
-config folder. The library is capable of auto-configuring when using a
+config subdirectory. The library is capable of auto-configuring when using a
 standard processor and panel with the suggested wiring.
 If you need to modify the configuration see the documentation for details
 on how to do this.
 
 EXAMPLES
-The example sketches are in the examples folder and can be accessed from 
+The example sketches are in the examples subdirectory and can be accessed from 
 the IDE menu by selecting File > Examples > openGLCD
 
-Within the examples folder is a subfolder called APIexamples
+Within the examples subdirectory is a subdirectory called APIexamples
 that has an example sketch for most of each of the openGLCD functions.
 
 GLCDdiags is a test sketch to help get things up and running and provides
@@ -80,7 +81,7 @@ diagnostic information that can help with troubleshooting.
 Other example sketches and demos are provided that show how to use various
 capabilities of the library.
 
-The subfolder GLCDv3Demos contains subfolders with the demos from the GLCDv3 library.
+The subdirectory GLCDv3Demos contains subdirectories with the demos from the GLCDv3 library.
 
     * GLCDv3 are the demos running in GLCDv3 compability mode
     * openGLCD are the GLCDv3 demos converted over to openGLCD 
@@ -88,16 +89,16 @@ The subfolder GLCDv3Demos contains subfolders with the demos from the GLCDv3 lib
 FONTS
 =====
 The library is supplied with fixed and variable width font definitons 
-located in the fonts folder. See the documentation for information on adding
-your own fonts to this folder.
+located in the fonts subdirectory. See the documentation for information on adding
+your own fonts to this subdirectory.
 
 BITMAPS
 =======
-Bitmap images are stored in the bitmaps folder. The documentation 
+Bitmap images are stored in the bitmaps subdirectory. The documentation 
 describes how to create you own bitmaps using a utility provided in the 
-bitmaps/glcdMakeBitmaps folder
+bitmaps/glcdMakeBitmaps subdirectory
 
 OTHER FOLDERS
 =============
-The include and device folders contain low level system files.
+The include and device subdirectories contain low level system files.
 These do not need to be modifed for normal operation.

@@ -862,11 +862,6 @@ void glcd_Device::WriteData(uint8_t data)
 	//showHex("wrData",data);
     //showXY("wr", this->Coord.x,this->Coord.y);
 
-#ifdef GLCD_DEBUG
-	volatile uint16_t i;
-	for(i=0; i<5000; i++);
-#endif
-
 	if(this->Coord.x >= DISPLAY_WIDTH)
 	{
 		return;
