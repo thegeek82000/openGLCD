@@ -58,7 +58,7 @@
  */
 gText textAreaFull; // Creates an area for the full display, but no font yet
 gText textAreaBot(textAreaBOTTOM, System5x7); // bottom half of display
-gText textAreaNums(GLCD.Left, GLCD.Top, 8, 1, fixednums7x15); // 8 columns, 1 line in upper left corner
+gText textAreaNums(GLCD.Left, GLCD.Top, 7, 1, fixednums7x15); // 7 columns, 1 line in upper left corner
 gText textAreaUpRt(GLCD.CenterX, 0, GLCD.Right, GLCD.CenterY); // upper right quadrant, no font yet
 
 void setup()
