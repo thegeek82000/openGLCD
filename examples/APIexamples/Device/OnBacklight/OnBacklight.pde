@@ -11,8 +11,12 @@
  * OnBacklight() turns on the backlight if backlight control is configured
  * OffBacklight() turns off the backlight if backlight control is configured
  *
- * Note: Backlight control also requires additional circuitry
+ * Note: Backlight control requires additional circuitry
+ *       It also requires that the glcdPinBL pin be enabled in the config file
+ *       and that whatever pin is used for glcdPinBL be connected to the
+ *       BL input of the backlight circuit.
  *
+ * Example Backlight Circuits:
  *
  * N-CH Mosfet version: (More costly but less power draw and lower part count)
  * ---------------------------------------------------------------------------

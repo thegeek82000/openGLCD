@@ -4,7 +4,7 @@
  * Example of using:
  * DrawBitmapXBM()
  *
- * DrawBitmapXBM(bitmap, x, y, [color);
+ * DrawBitmapXBM(bitmap, x, y, [color]);
  *
  * bitmap a ponter to the XBM bitmap data
  * x X coordinate of the upper left corner of the bitmap
