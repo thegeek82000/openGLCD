@@ -317,7 +317,7 @@ struct tarea
  */
   
  // graphical device text routines
-class gText : public glcd_Device
+class gText : public glcd_Device , public Print
 {
   private:
     //FontCallback	FontRead;     // now static, move back here if each instance needs its own callback
