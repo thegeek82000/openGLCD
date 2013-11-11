@@ -118,6 +118,14 @@
 
 /*========================== Optional User Defines ==================================*/
 
+//#define GLCDCFG_READ_CACHE	// Turns on code that uses a frame buffer for a read cache
+				// This adds only ~52 bytes of code (on AVR) but...
+				// will use DISPLAY_HEIGHT/8 * DISPLAY_WIDTH bytes of RAM
+				// A typical 128x64 ks0108 will use 1k of RAM for this.
+				// performance increase is quite noticeable (double or so on FPS test)
+				// This will not work on smaller AVRs like the mega168 that only
+				// have 1k of RAM total.
+
 //#define GLCDCFG_NO_PRINTF	// disable xxprintf() support
 				// does not save any code space if no xxprintf() routines
 				// are not being used.
@@ -143,13 +151,12 @@
                                 // This will cause diags to hang if wires are not correct vs
                                 // return an error.
 
-//#define GLCDCFG_READ_CACHE	// Turns on code that uses a frame buffer for a read cache
-				// This adds only ~52 bytes of code (on AVR) but...
-				// will use DISPLAY_HEIGHT/8 * DISPLAY_WIDTH bytes of RAM
-				// A typical 128x64 ks0108 will use 1k of RAM for this.
-				// performance increase is quite noticeable (double or so on FPS test)
-				// This will not work on smaller AVRs like the mega168 that only
-				// have 1k of RAM total.
+//#define GLCDCFG_FORCE_CORECODE // Forces library to use generic i/o routines rather than
+				// faster direct port i/o routines
+				// The config file used when in CORECODE mode is 
+				// config/{PANELNAME}/PinConfig_{PANELNAME}-CoreCode.h
+				// While much slower, this mode can be useful if there
+				// are direct port i/o mapping issues.
 
 /*========================== End of Optional User Defines ==================================*/
 

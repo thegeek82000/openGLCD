@@ -4,7 +4,6 @@ vi:ts=4
 	Should be able to just check for .git file and then make up
 	version stuff if it doesn't exist.
 
-
 - Create a "known issues" "file" that can be read into doxygen as well
 	- Some cores only work on 1.x+
 		- mighty1284p 
@@ -15,7 +14,7 @@ vi:ts=4
 		no support for pre 0019
 		- before 0019 the analog pin constants didn't exist
 		- before 0019 the String class didn't exist.
-	- 0019,0020,0021, 0022, 0023 pre 1.x IDEs won't work with newer versions of avr-libC
+	- 0019,0020,0021, 0022, 0023 pre 1.x IDEs won't work with newer avr-libC
 		Header file nightmares! 
 		 (new <util/delay.h> uses math.h )
 			- comment out #include <avr/delay.h> in wiring_private.h
@@ -45,17 +44,18 @@ vi:ts=4
 		(GLCDv3 version fits, openGLCD version does not)
 
 	- potential duplicate declarations of fonts & bitmaps
-		Currently if a font header or bitmap header is used is seperate
+		Currently if a font header or bitmap header is used in seperate
 		seperate compilation units, there will be duplicate data.
-		In Arduino all modules are combined by the IDE into a single .cpp so that while the
-		seperate "modules" may include a font or bitmap header again,
-		the gaurd ifdefs will prevent its actual inclusion.
+		In Arduino all modules are combined by the IDE into a single .cpp so
+		that while the seperate "modules" may include a font or bitmap header
+		again, the gaurd ifdefs will prevent its actual inclusion.
 		If the IDE is not being used there is the potential that multiple
 		data declarations happens.
-		The long term strategy to address this is to have a .cpp file that inclues the
-		allFonts and allBitmaps files for the data declarations.
-		the allbitmaps.h and allFonts.h files will use an ifdef to determine whether to include
-		the fonts or to just declare extern references to the objects.
+		The long term strategy to address this is to have a .cpp file that
+		includes the allFonts and allBitmaps files for the data declarations.
+		the allbitmaps.h and allFonts.h files will use an ifdef to determine
+		whether to include the fonts or to just declare extern references to
+		the objects.
 		There will be no impact to any user code.
 		It will impact the JAVA tool that creates the allBitmaps.h header file.
 
@@ -85,14 +85,16 @@ vi:ts=4
 			#define GLCDCFG_GLCDv3Mode
 			#include <openGLCD.h>
 
-			Alternatively, rather than an ifdef the sketch could simply include both for compatibility:
+			Alternatively, rather than an ifdef the sketch could simply
+			include both for compatibility:
 			#include <openGLCD.h>
 			#include <include/openGLCD_GLCDv3.h>
 
 			Seems cleaner to include both as it keeps the openGLCD.h header "pure".
 
 			Note: that this only works if there is NEVER any code in the actual
-			library that changes for GLCDv3 compatibilty. which is probabaly as it should be.
+			library that changes for GLCDv3 compatibilty, 
+			which is probabaly as it should be.
 
 		- play games with gaurd defines since openGLCD.h is included
 			before openGLCD_GLCDv3.h
@@ -474,4 +476,13 @@ DONE-------------------------------------------------------------
   verified & converted to openGLCD (done)
 
 - Arduino core code fall back mode so it works on any "Arduino" board. (Done)
+- chase down gcc macro expansion issue when using MPIDE (Done)
+	for some reason the pic32 compiler is fully expanding macros
+	when doing stringification.
+	This breaks diags as it can't display pins like A0, A1, etc...
+	They get improperly expanded as their pin #s.
+
+	This is due to chipkit using #defines for A0-An instead of
+	const int declarations. When using #defines the pre-processor
+	recursively replaces the macro to get the final result.
 

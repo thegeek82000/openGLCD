@@ -46,7 +46,10 @@ extern "C" {
  * Figure which Arduino core we are using
  */
 
-#if defined(__AVR_ATmega8__) || defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__)
+#if defined(GLCDCFG_FORCE_CORECODE) // force core code mode?
+#define GLCD_CORE_CORECODE
+
+#elif defined(__AVR_ATmega8__) || defined(__AVR_ATmega168__) || defined(__AVR_ATmega328P__)
 #define GLCD_CORE_UNO
 
 #elif defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -93,8 +96,11 @@ extern "C" {
 #define GLCD_CORE_CHIPKIT
 #else
 
-// default to using Arduino core code routines
+// Fallback to using Arduino core code routines digitalWrite()/digitalRead()
+// instead of faster direct port i/o
 #define GLCD_CORE_CORECODE
+#warning "Using Arduino Core-Code Mode"
+
 #endif
 
 
@@ -465,9 +471,6 @@ extern "C" {
 	(P) == 29 ? 6 : \
 	0) // dummy entry (should never happen)
 
-#else	
-//#error "Arduino pin mapping not defined for this core"
-#warning "Using Arduino Core-Code Mode for this core"
 #endif
 
 #endif

@@ -32,8 +32,11 @@
 #elif defined(GLCD_CORE_CHIPKIT)
 #include "PinConfig_ks0108-chipKIT.h"	// config for chipKIT
 #else
-//#error Unsupported Arduino board type
+
+// Issue warning if user isn't forcing CORECODE mode
+#ifndef GLCDCFG_FORCE_CORECODE
 #warning using Arduino CoreCode pin config file
+#endif
 #include "PinConfig_ks0108-CoreCode.h"
 #endif
 
