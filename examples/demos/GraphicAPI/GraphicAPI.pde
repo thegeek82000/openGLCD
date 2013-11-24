@@ -11,13 +11,14 @@
 #include "openGLCD.h"
 
 #define BARMAXVAL 100
-#define DELAY 1100 // delay between "demos"
+#define DELAY 900 // delay between "demos"
+#define SDELAY DELAY/6
 
 void setup()
 {
 	GLCD.Init();
 	IntroScreen();
-	delay(3000);
+	delay(DELAY*3);
 }
 void IntroScreen()
 {
@@ -30,8 +31,9 @@ void IntroScreen()
 void loop()
 {
 	GLCD.ClearScreen();
+  	GLCD.SelectFont(Arial14);
 	GLCD.DrawString("Graphics Demo", gTextfmt_center, gTextfmt_center);
-	delay(3000);
+	delay(DELAY*3);
 	DrawVLine();
 	DrawHLine();
 	DrawLine();
@@ -69,7 +71,7 @@ void DrawCircle(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2; i +=4)
 	{
 		GLCD.DrawCircle(GLCD.CenterX,GLCD.CenterY, (GLCD.Bottom - 2*i)/2);
-		delay(200);
+		delay(SDELAY);
 	}
 	delay(DELAY);
 }
@@ -84,7 +86,7 @@ void DrawEllipse(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2; i +=4)
 	{
 		GLCD.DrawEllipse(GLCD.CenterX,GLCD.CenterY, (GLCD.Right - 2*i)/2, (GLCD.Bottom - 2*i)/2);
-		delay(200);
+		delay(SDELAY);
 	}
 	delay(DELAY);
 }
@@ -153,7 +155,7 @@ void DrawHBarGraph()
 #if (DISPLAY_HEIGHT < 64)
 		delay(DELAY/30);
 	}
-	delay(1000);
+	delay(DELAY);
 	GLCD.ClearScreen();
 	for(int num = 0; num <= BARMAXVAL; num++)
 	{
@@ -223,7 +225,7 @@ void DrawHLine(void)
 	for(uint8_t y = 0; y < GLCD.Height; y+=4)
 	{
 		GLCD.DrawHLine(0, y, GLCD.Width);
-		delay(100);
+		delay(SDELAY/2);
 	}
 	delay(DELAY);
 }
@@ -238,7 +240,7 @@ void DrawLine(void)
 	for(uint8_t y = 0; y < GLCD.Height; y+=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, GLCD.Left,y);
-		delay(100);
+		delay(SDELAY/2);
 	}
 	/*
 	 * Draw lines from center connecting to the 8th pixels along bottom
@@ -246,7 +248,7 @@ void DrawLine(void)
 	for(uint8_t x = 0; x < GLCD.Width; x+=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, x,GLCD.Bottom);
-		delay(100);
+		delay(SDELAY/2);
 	}
 
 	/*
@@ -255,7 +257,7 @@ void DrawLine(void)
 	for(int y = GLCD.Bottom; y > 0; y -=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, GLCD.Right,y);
-		delay(100);
+		delay(SDELAY/2);
 	}
 
 	/*
@@ -264,7 +266,7 @@ void DrawLine(void)
 	for(uint8_t x = GLCD.Right; x > 7; x -=8)
 	{
 		GLCD.DrawLine(GLCD.CenterX,GLCD.CenterY, x,GLCD.Top);
-		delay(100);
+		delay(SDELAY/2);
 	}
 	
 	delay(DELAY);
@@ -280,7 +282,7 @@ void DrawRect(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2; i +=4)
 	{
 		GLCD.DrawRect(GLCD.Left+i, GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i);
-		delay(150);
+		delay(SDELAY);
 	}
 	delay(DELAY);
 }
@@ -295,7 +297,7 @@ void DrawRoundRect(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2-8; i +=8)
 	{
 		GLCD.DrawRoundRect(GLCD.Left + i,GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i, 5);
-		delay(200);
+		delay(SDELAY);
 	}
 
 	delay(2000);
@@ -310,7 +312,7 @@ void DrawRoundRect(void)
 	for(uint8_t i = 0; i < GLCD.Bottom/2-8; i +=8)
 	{
 		GLCD.DrawRoundRect(GLCD.Left + i,GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i, 15);
-		delay(200);
+		delay(SDELAY);
 	}
 	delay(DELAY);
 }
@@ -326,7 +328,7 @@ void DrawTriangle(void)
 	for(uint8_t i=0; i< GLCD.Bottom/2; i +=8)
 	{
 	    GLCD.DrawTriangle(GLCD.Left+2*i+1, GLCD.Bottom-i, GLCD.CenterX, GLCD.Top+i, GLCD.Right-2*i, GLCD.Bottom-i);
-	    delay(200);
+	    delay(SDELAY);
 	}
 
 	delay(DELAY);
@@ -436,7 +438,7 @@ void DrawVLine(void)
 	for(uint8_t x = 0; x < GLCD.Width; x+=4)
 	{
 		GLCD.DrawVLine(x, 0, GLCD.Height-1);
-		delay(100);
+		delay(SDELAY/2);
 	}
 	delay(DELAY);
 }
@@ -448,14 +450,14 @@ void FillCircle(void)
 	 */
 
 	GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-1);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * Draw filled circle in center of display
 	 */
 
 	GLCD.FillCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-1);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * A little animation for eye candy
@@ -469,7 +471,7 @@ void FillCircle(void)
 	for(int r = 1; r < GLCD.Height/2; r++)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-r);
-		delay(30);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -478,7 +480,7 @@ void FillCircle(void)
 	for(int r = GLCD.Height/2 -1; r > 0; r--)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-r, PIXEL_OFF);
-		delay(30);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -487,7 +489,7 @@ void FillCircle(void)
 	for(int r = 1; r < GLCD.Height/2 -1; r++)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, r);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -496,7 +498,7 @@ void FillCircle(void)
 	for(int r = 1; r < GLCD.Height/2 -1; r++)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, r, PIXEL_OFF);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -505,7 +507,7 @@ void FillCircle(void)
 	for(int r = 1; r < GLCD.Height/2 -1; r++)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, r);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -514,7 +516,7 @@ void FillCircle(void)
 	for(int r = 1; r < GLCD.Height/2 -1; r++)
 	{
 		GLCD.DrawCircle(GLCD.CenterX, GLCD.CenterY, r, WHITE);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	delay(DELAY);
@@ -528,7 +530,7 @@ void FillEllipse(void)
 	 */
 
 	GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, 32, 14);
-	delay(1000);
+	delay(DELAY);
 	GLCD.ClearScreen();
 
 	/*
@@ -536,7 +538,7 @@ void FillEllipse(void)
 	 */
 
 	GLCD.FillEllipse(GLCD.CenterX, GLCD.CenterY, 32, 14);
-	delay(1000);
+	delay(DELAY);
 	GLCD.ClearScreen();
 
 	/*
@@ -544,7 +546,7 @@ void FillEllipse(void)
 	 * Note: DrawCircle() is more efficient
 	 */
 	GLCD.FillEllipse(GLCD.CenterX, GLCD.CenterY, 10, 10);
-	delay(1000);
+	delay(DELAY);
 	GLCD.ClearScreen();
 
 	/*
@@ -562,7 +564,7 @@ void FillEllipse(void)
 	for(int x = 1; x < GLCD.Height/2; x++)
 	{
 		GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, GLCD.Width/2-x, GLCD.Height/2-x);
-		delay(30);
+		delay(SDELAY/10);
 	}
 	/*
 	 * remove pixels from inside out
@@ -570,7 +572,7 @@ void FillEllipse(void)
 	for(int x = GLCD.Height/2; x > 0; x--)
 	{
 		GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, GLCD.Width/2-x, GLCD.Height/2-x, PIXEL_OFF);
-		delay(30);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -579,7 +581,7 @@ void FillEllipse(void)
 	for(int x = 1; x < GLCD.Height/2 -1; x++)
 	{
 		GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, x, x);
-		delay(20);
+		delay(SDELAY/10);
 	}
 	/*
 	 * remove pixels from inside out (as a circle)
@@ -587,7 +589,7 @@ void FillEllipse(void)
 	for(int x = GLCD.Height/2 -1; x > 1; x--)
 	{
 		GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, GLCD.Height/2-x, GLCD.Height/2-x, PIXEL_OFF);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	/*
@@ -599,7 +601,7 @@ void FillEllipse(void)
 			GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, x, GLCD.Height/2-1);
 		else
 			GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, x, x);
-		delay(20);
+		delay(SDELAY/10);
 	}
 	/*
 	 * erase pixels from inside out starting as circle then expanding to ellipse
@@ -610,7 +612,7 @@ void FillEllipse(void)
 			GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, x, GLCD.Height/2-1,PIXEL_OFF);
 		else
 			GLCD.DrawEllipse(GLCD.CenterX, GLCD.CenterY, x, x,PIXEL_OFF);
-		delay(20);
+		delay(SDELAY/10);
 	}
 
 	delay(DELAY);
@@ -629,7 +631,7 @@ void FillRect(void)
 	 * 25 pixels in from each end
 	 */
 	GLCD.FillRect(GLCD.Left+25, GLCD.Top+2, GLCD.Width-25*2, 8);
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * Fill a rectangle 
@@ -637,7 +639,7 @@ void FillRect(void)
 	 * 25 pixels in from each end
 	 */
 	GLCD.FillRect(GLCD.Left+25, GLCD.Bottom-8-2+1, GLCD.Width-25*2, 8);
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * Create a filled rectangle 15x15 pixels in each corner
@@ -649,7 +651,7 @@ void FillRect(void)
 	 */
 	draw4corners_FillRect(10, PIXEL_OFF); // turn off the pixels
 
-	delay(2000);
+	delay(DELAY/2);
 
 	/*
  	 * Now do it all over again in INVERTED mode
@@ -666,7 +668,7 @@ void FillRect(void)
 	 */
 	GLCD.FillRect(GLCD.Left+25, GLCD.Top+2, GLCD.Width-25*2, 8);
 
-	delay(500);
+	delay(DELAY/2);
 	/*
 	 * Fill a rectangle 
 	 * 8 pixels in height 2 pixels from bottom of display
@@ -674,7 +676,7 @@ void FillRect(void)
 	 */
 	GLCD.FillRect(GLCD.Left+25, GLCD.Bottom-8-2+1, GLCD.Width-25*2, 8);
 
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * Create a filled rectangle 15x15 pixels in each corner
@@ -700,25 +702,25 @@ void draw4corners_FillRect(uint8_t size, uint8_t color)
 	 * upper left corner
 	 */
 	GLCD.FillRect(GLCD.Left, GLCD.Top, size, size, color);
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * upper right corner
 	 */
 	GLCD.FillRect(GLCD.Right-size+1,GLCD.Top, size, size, color);
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * lower left corner
 	 */
 	GLCD.FillRect(GLCD.Left,GLCD.Bottom-size+1, size, size, color);
-	delay(500);
+	delay(DELAY/2);
 
 	/*
 	 * Lower right corner
 	 */
 	GLCD.FillRect(GLCD.Right-size+1,GLCD.Bottom-size+1, size, size, color);
-	delay(500);
+	delay(DELAY/2);
 }
 void FillRoundRect(void)
 {
@@ -738,7 +740,7 @@ uint8_t color;
 	 */
 	GLCD.FillRoundRect(GLCD.CenterX+4, GLCD.Top+4, GLCD.Width/2 -2*4, GLCD.Height -2*4, 10);
 
-	delay(1500);
+	delay(DELAY);
 
 	GLCD.ClearScreen();
 
@@ -756,10 +758,10 @@ uint8_t color;
 		else
 			color=PIXEL_ON;
 
-		delay(500);
+		delay(DELAY/2);
 	}
 
-	delay(1500);
+	delay(DELAY);
 
 	GLCD.ClearScreen();
 
@@ -777,7 +779,7 @@ uint8_t color;
 			color = PIXEL_OFF;
 		else
 			color=PIXEL_ON;
-		delay(500);
+		delay(DELAY/2);
 	}
 
 	
@@ -802,7 +804,7 @@ void FillTriangle(void)
 	 */
 	GLCD.DrawTriangle(GLCD.Left,GLCD.Bottom, GLCD.CenterX,GLCD.CenterY, GLCD.Right,GLCD.Bottom);
 
-	delay(2000);
+	delay(DELAY);
 
 
 	/*
@@ -837,60 +839,60 @@ void InvertRect(void)
 		GLCD.DrawRect(GLCD.Left+i, GLCD.Top+i, GLCD.Width - 2*i, GLCD.Height - 2*i);
 	}
 
-	delay(1000);
+	delay(DELAY);
 	/*
 	 * invert the entire display
 	 */
 
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width, GLCD.Height);
-	delay(750);
+	delay(DELAY/2);
 	/*
 	 * invert the entire display to put it back
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width, GLCD.Height);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * invert the left side of display
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width/2, GLCD.Height);
-	delay(750);
+	delay(DELAY/2);
 
 	/*
 	 * invert the left side of display to put it back
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width/2, GLCD.Height);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * invert the right side of display
 	 */
 	GLCD.InvertRect(GLCD.CenterX, GLCD.Top, GLCD.Width/2, GLCD.Height);
-	delay(750);
+	delay(DELAY/2);
 
 	/*
 	 * invert the right side of display to put it back
 	 */
 	GLCD.InvertRect(GLCD.CenterX, GLCD.Top, GLCD.Width/2, GLCD.Height);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * invert the top half of display
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width, GLCD.Height/2);
-	delay(750);
+	delay(DELAY/2);
 
 	/*
 	 * invert the top half of display to put it back
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.Top, GLCD.Width, GLCD.Height/2);
-	delay(1000);
+	delay(DELAY);
 
 	/*
 	 * invert the Bottom half of display
 	 */
 	GLCD.InvertRect(GLCD.Left, GLCD.CenterY, GLCD.Width, GLCD.Height/2);
-	delay(750);
+	delay(DELAY/2);
 
 	/*
 	 * invert the Bottom half of display to put it back
