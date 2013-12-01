@@ -34,6 +34,8 @@
 
 AnalogClock analogClock = AnalogClock();  // this creates an instance of the analog clock display. 
 
+tmElements_t tm;
+
 void setup(){
 #ifdef btnForward
   digitalWrite(btnForward, PULL_UP);  // enable internal pull-up resistors
@@ -45,7 +47,16 @@ void setup(){
   GLCD.Init(); // start the GLCD code
   GLCD.SelectFont(System5x7);
 
-  setTime(4,37,0,2,1,10); // set time to 4:37 am Jan 2 2010  
+  /*
+   * get time & date from compiled date time.
+   * this will make the time look correct when the sketcth
+   * is uploaded from the IDE.
+   * (obviously it won't be correct when the board is powerd up)
+   */
+  getDate(__DATE__);
+  getTime(__TIME__);
+  setTime(tm.Hour,tm.Minute,tm.Second, tm.Day, tm.Month, tm.Year);
+//  setTime(4,37,0,2,1,10); // set time to 4:37 am Jan 2 2010  
   analogClock.Init(GLCD.CenterX,GLCD.CenterY,GLCD.CenterY-4);  // draw the clock face  
 }
 
@@ -102,3 +113,37 @@ int step = 0; // counts steps between each index increment
      } 
   }   
 }
+
+const char *monthName[12] = {
+  "Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+};
+
+bool getTime(const char *str)
+{
+  int Hour, Min, Sec;
+
+  if (sscanf(str, "%d:%d:%d", &Hour, &Min, &Sec) != 3) return false;
+  tm.Hour = Hour;
+  tm.Minute = Min;
+  tm.Second = Sec;
+  return true;
+}
+
+bool getDate(const char *str)
+{
+  char Month[12];
+  int Day, Year;
+  uint8_t monthIndex;
+
+  if (sscanf(str, "%s %d %d", Month, &Day, &Year) != 3) return false;
+  for (monthIndex = 0; monthIndex < 12; monthIndex++) {
+    if (strcmp(Month, monthName[monthIndex]) == 0) break;
+  }
+  if (monthIndex >= 12) return false;
+  tm.Day = Day;
+  tm.Month = monthIndex + 1;
+  tm.Year = CalendarYrToTm(Year);
+  return true;
+}
+
