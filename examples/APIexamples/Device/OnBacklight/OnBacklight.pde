@@ -16,7 +16,7 @@
  *       and that whatever pin is used for glcdPinBL be connected to the
  *       BL input of the backlight circuit.
  *
- * Example Backlight Circuits:
+ * Here are two example backlight circuits that can be used:
  *
  * N-CH Mosfet version: (More costly but less power draw and lower part count)
  * ---------------------------------------------------------------------------
@@ -36,8 +36,6 @@
  *
  * NOTE: Gate resistor not needed as the mosfet is voltage fed and only really
  *       pulls current while switching.
- *
- * Here are two example backlight circuits that can be used:
  *
  *
  * NPN Transistor version: (Cheaper but more power draw and higher part count)

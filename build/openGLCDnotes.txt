@@ -173,8 +173,6 @@ vi:ts=4
 	- nano is m328 variant same as "standard" but defines 8 analog pins
 	- micro is 32u4 variant same as "leonardo" except LED definitions.
 
-- Arduino core code fall back mode override to force its use?
-
 - change checks for pin/feature support.
 	- instead of checking for pin definition,
 	  change glcdio to define/not-define "function" macro based on
@@ -485,4 +483,8 @@ DONE-------------------------------------------------------------
 	This is due to chipkit using #defines for A0-An instead of
 	const int declarations. When using #defines the pre-processor
 	recursively replaces the macro to get the final result.
+
+- Arduino core code fall back mode override to force its use? (done)
+
+- update clock demos to extract time from sketch __TIME__/__DATE__ (done)
 
