@@ -2,7 +2,7 @@
  * ks0108_Teensy.h - User specific configuration for openGLCD library
  *
  * Use this file to set io pins
- * when using a Teensy, Teensy++, or Teensy3
+ * when using a Teensy, Teensy++, or Teensy3/3.1
  *
  * Note that each board uses different pin numbers 
  * so make sure that your wiring matches the device you are using
@@ -62,15 +62,15 @@
 
 //#warning "KS0108 using pins for teensy++"
 
-/*********************************************************/
-/*  Initial attempt for Teensy 3.0 default pins          */
-/*********************************************************/
-#elif defined(__MK20DX128__)   // Teensy 3.0
+/***********************************************************/
+/*  Configuration for assigning LCD pins to Teensy 3.0/3.1 */
+/***********************************************************/
+#elif defined(__MK20DX128__)   || defined(__MK20DX256__) // Teensy 3.0/Teensy 3.1
 
 #define glcd_PinConfigName "ks0108-Teensy3"   // define name for configuration
 
-// "default" Teensy 3.0 connections
-// used on demo board for Bill Perry
+// "default" Teensy 3.0/3.1 connections
+// used on GLCD demo board for Bill Perry
 
 #define glcdPinData0      16
 #define glcdPinData1      17

@@ -44,7 +44,7 @@ typedef class _FlashString {} *FLASHSTRING;
 #endif
 
 /*
- * On pre Arduino 1.0, define the F() flash string stuff if not alread defined
+ * On pre Arduino 1.0, define the F() flash string stuff if not already defined
  * (Teensy defines this in pre 1.0)
  */
 #if ARDUINO < 100

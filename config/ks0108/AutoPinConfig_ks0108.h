@@ -21,7 +21,7 @@
 #include "PinConfig_ks0108-Mega.h"      // config for mega 1280/2560 board
 #elif defined(GLCD_CORE_LEONARDO)
 #include "PinConfig_ks0108-Leonardo.h"	// config for Leonardo/micro
-#elif defined(CORE_TEENSY)
+#elif defined(CORE_TEENSY) && !defined(GLCD_CORE_CORECODE)
 #include "PinConfig_ks0108-Teensy.h"	// config for Teensy, Teensy++  and Teensy3
 #elif defined(GLCD_CORE_MIGHTY1284P)
 #include "PinConfig_ks0108-Mighty1284p.h" // config for "standard" mighty1284p core

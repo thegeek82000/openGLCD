@@ -77,8 +77,13 @@ extern "C" {
 #define GLCD_CORE_TEENSY2pp
 #elif defined(__AVR_ATmega32U4__)   // Teensy 2.0
 #define GLCD_CORE_TEENSY2
-#elif defined(__MK20DX128__) // Teensy 3
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) // Teensy 3/3.1
 #define GLCD_CORE_TEENSY3
+#else
+// For unknown Teensy boards, Fallback to using Arduino core code routines digitalWrite()/digitalRead()
+// instead of faster direct port i/o
+#define GLCD_CORE_CORECODE
+#warning "Uknown Teensy: Using Arduino Core-Code Mode"
 #endif
 
 #elif defined(__AVR_ATmega32U4__)
