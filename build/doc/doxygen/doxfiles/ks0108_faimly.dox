@@ -241,7 +241,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 19 </center></td> <!-- CSEL2 -->
 </tr>
 <tr>
-	<td><center> Teensy 3.0</center></td>
+	<td><center> Teensy 3.0/3.1</center></td>
 	<td><center> 9* </center></td> <!-- D_I -->
 	<td><center> 8* </center></td> <!-- R_W -->
 	<td><center> 7* </center></td> <!-- EN -->
