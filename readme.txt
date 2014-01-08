@@ -1,6 +1,8 @@
 OVERVIEW
 ========
 openGLCD is an open source project.
+The repository can be found here:
+https://bitbucket.org/bperrybap/openglcd
 
 openGLCD makes it easy to use Graphical LCDs (GLCD) with Arduino.
 The library supports several different chips and is easy to integrate with
