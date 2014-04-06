@@ -159,6 +159,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<th><center> D7 </center></th>
 	<th><center> CSEL1 </center></th>
 	<th><center> CSEL2 </center></th>
+	<th><center> CSEL3* </center></th>
 </tr>
 <tr>
 	<td><center> Uno </center></td>
@@ -175,6 +176,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> A0 </center></td> <!-- CSEL1 -->
 	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Leonardo </center></td>
@@ -191,6 +193,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> A0 </center></td> <!-- CSEL1 -->
 	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Mega </center></td>
@@ -207,6 +210,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 29 </center></td> <!-- D7 -->
 	<td><center> 33 </center></td> <!-- CSEL1 -->
 	<td><center> 34 </center></td> <!-- CSEL2 -->
+	<td><center> 32* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Teensy 2.0</center></td>
@@ -223,6 +227,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 4 </center></td> <!-- D7 -->
 	<td><center> 7 </center></td> <!-- CSEL1 -->
 	<td><center> 8 </center></td> <!-- CSEL2 -->
+	<td><center> (no default)* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Teensy ++ 2.0</center></td>
@@ -239,6 +244,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 17 </center></td> <!-- D7 -->
 	<td><center> 18 </center></td> <!-- CSEL1 -->
 	<td><center> 19 </center></td> <!-- CSEL2 -->
+	<td><center> (no default)* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Teensy 3.0/3.1</center></td>
@@ -255,6 +261,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 23* </center></td> <!-- D7 -->
 	<td><center> 3* </center></td> <!-- CSEL1 -->
 	<td><center> 2* </center></td> <!-- CSEL2 -->
+	<td><center> (no default)* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Mighty1284p</center></td>
@@ -271,6 +278,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> 24 </center></td> <!-- CSEL1 -->
 	<td><center> 25 </center></td> <!-- CSEL2 -->
+	<td><center> 29* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Sanguino</center></td>
@@ -287,6 +295,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> 24 </center></td> <!-- CSEL1 -->
 	<td><center> 25 </center></td> <!-- CSEL2 -->
+	<td><center> 29* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> Bobuino </center></td>
@@ -303,6 +312,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> A0 </center></td> <!-- CSEL1 -->
 	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> chipKIT </center></td>
@@ -319,6 +329,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 7 </center></td> <!-- D7 -->
 	<td><center> A0 </center></td> <!-- CSEL1 -->
 	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
 	<td><center> DUE\n(NOT SUPPORTED)</center></td>
@@ -335,9 +346,15 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> - </center></td> <!-- D7 -->
 	<td><center> - </center></td> <!-- CSEL1 -->
 	<td><center> - </center></td> <!-- CSEL2 -->
+	<td><center> - </center></td> <!-- CSEL3 -->
 </tr>
 </table>
 </center>
+
+@note
+<h2>CSEL3</h2>
+CSEL3 is only used on some 192x64 displays
+
 @warning
 <h2>Teensy 3.0 pins must NEVER be connected directly to the GLCD module pins.</h2>
 @warning
