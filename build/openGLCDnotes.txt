@@ -59,6 +59,14 @@ vi:ts=4
 		There will be no impact to any user code.
 		It will impact the JAVA tool that creates the allBitmaps.h header file.
 
+- support sketch pin configuration.
+	possible:
+		glcdio_xxx() becomes either a function or a macro.
+		The current glcd__xxx() macro mappings need to reference _glcdio_xxx()
+		that way the glcd_xxx() functions can use the _glcdio_xxx() macros.
+		So the top level glcdio_xxx() "functions" are either a macro that call _glcdio_xxx()
+		or a function that also calls _glcdio_xxx().
+
 - consider adding a "libinfo" sketch
 	This can print out all the openGLCD libary information
 	like diags does but not require any hardware.
@@ -233,6 +241,42 @@ GLCD issues to solve:
 47 - move SetDisplayMode() from glcd to glcd_device
 53 - e-gizmo gizduino support 
 	http://www.e-gizmo.com/KIT/gizDuino%20X.html
+===========================================================================
+Alternate Ellipse function from:
+https://github.com/krupski/Noritake_VFD_GUU100
+
+void Noritake_VFD_GUU100::drawEllipse (uint8_t xm, uint8_t ym, uint8_t a, uint8_t b, uint8_t on)
+{
+	long x = -a, y = 0; /* II. quadrant from bottom left to top right */
+	long e2 = b, dx = (1 + 2 * x) * e2 * e2; /* error increment */
+	long dy = x * x, err = dx + dy; /* error of 1 step */
+
+	do {
+		setDot (xm - x, ym + y, on); /* I. Quadrant */
+		setDot (xm + x, ym + y, on); /* II. Quadrant */
+		setDot (xm + x, ym - y, on); /* III. Quadrant */
+		setDot (xm - x, ym - y, on); /* IV. Quadrant */
+
+		e2 = 2 * err;
+
+		if (e2 >= dx) {
+			x++;
+			err += dx += 2 * (long) b * b;
+		} /* x step */
+
+		if (e2 <= dy) {
+			y++;
+			err += dy += 2 * (long) a * a;
+		} /* y step */
+
+	} while (x <= 0);
+
+	while (y++ < b) { /* too early stop for flat ellipses with a=1, */
+		setDot (xm, ym + y, on); /* -> finish tip of ellipse */
+		setDot (xm, ym - y, on);
+	}
+}
+===========================================================================
 
 NEW FEATURES:--------------------------------------------------------------
 Some of the new capabilities include:
