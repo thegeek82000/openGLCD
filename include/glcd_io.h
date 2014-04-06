@@ -125,7 +125,7 @@
 #define glcdio_WritePin(pin, pinval) avrio_WritePin(pin, pinval)
 #define glcdio_ReadPin(pin) avrio_ReadPin(pin)
 #define glcdio_WriteByte(data) glcdio_avrWriteByte(data)
-#define glcdio_ReadByte(data) glcdio_avrReadByte(data)
+#define glcdio_ReadByte() glcdio_avrReadByte()
 #define	glcdio_DataDirOut() glcdio_avrDataDir(0xff)
 #define	glcdio_DataDirIn() glcdio_avrDataDir(0x00)
 
