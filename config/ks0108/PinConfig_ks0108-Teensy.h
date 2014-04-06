@@ -74,8 +74,8 @@
 
 #define glcdPinData0      16
 #define glcdPinData1      17
-#define glcdPinData2      18
-#define glcdPinData3      19
+#define glcdPinData2      18 // i2c SDA0
+#define glcdPinData3      19 // i2c SCL0
 #define glcdPinData4      20
 #define glcdPinData5      21
 #define glcdPinData6      22
@@ -87,6 +87,15 @@
 #define glcdPinEN          7
 #define glcdPinCSEL1       3
 #define glcdPinCSEL2       2
+#if NBR_CHIP_SELECT_PINS > 2
+#error Missing glcdPinCSEL3 define
+//#define glcdPinCSEL3    ?   // third chip select if needed
+#endif
+
+#if NBR_CHIP_SELECT_PINS > 3
+#error Missing glcdPinCSEL4 define
+//#define glcdPinCSEL4    ?   // fourth chip select if needed
+#endif
 
 //#define glcdPinBL          ?      //  optional backlight control pin controls BL circuit
 //#define glcdPinRES         ?      //  optional s/w reset control
@@ -112,8 +121,8 @@
 #define glcdPinData6    15       // PIN_B6
 #define glcdPinData7    4        // PIN_B7
 
-#define glcdPinDI       5        // PIN_D0
-#define glcdPinRW       6        // PIN_D1
+#define glcdPinDI       5        // PIN_D0 (i2c SCL)
+#define glcdPinRW       6        // PIN_D1 (i2c SDA)
 #define glcdPinEN       9        // PIN_C6
 #define glcdPinCSEL1    7        // PIN_D2    // normal connection for control signals
 #define glcdPinCSEL2    8        // PIN_D3
