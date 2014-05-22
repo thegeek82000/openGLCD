@@ -29,6 +29,8 @@
 #include "PinConfig_ks0108-Sanguino.h"	// config for Sanguino ATmega644/p or avr_dev mighty1284p core
 #elif defined(GLCD_CORE_BOBUINO)
 #include "PinConfig_ks0108-Bobuino.h"	// config for bobuino with mighty1284p core
+#elif defined(GLCD_CORE_SBEAUTY)
+#include "PinConfig_ks0108-SBeauty.h"	// config for SleepingBeauty with mighty1284p core
 #elif defined(GLCD_CORE_CHIPKIT)
 #include "PinConfig_ks0108-chipKIT.h"	// config for chipKIT
 #else

@@ -315,6 +315,23 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> 3* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
+	<td><center> SleepingBeauty </center></td>
+	<td><center> A3 </center></td> <!-- D_I -->
+	<td><center> A2 </center></td> <!-- R_W -->
+	<td><center> A4 </center></td> <!-- EN -->
+	<td><center> 8 </center></td> <!-- D0 -->
+	<td><center> 9 </center></td> <!-- D1 -->
+	<td><center> 10 </center></td> <!-- D2 -->
+	<td><center> 11 </center></td> <!-- D3 -->
+	<td><center> 4 </center></td> <!-- D4 -->
+	<td><center> 5 </center></td> <!-- D5 -->
+	<td><center> 6 </center></td> <!-- D6 -->
+	<td><center> 7 </center></td> <!-- D7 -->
+	<td><center> A0 </center></td> <!-- CSEL1 -->
+	<td><center> A1 </center></td> <!-- CSEL2 -->
+	<td><center> 3* </center></td> <!-- CSEL3 -->
+</tr>
+<tr>
 	<td><center> chipKIT </center></td>
 	<td><center> A3 </center></td> <!-- D_I -->
 	<td><center> A2 </center></td> <!-- R_W -->

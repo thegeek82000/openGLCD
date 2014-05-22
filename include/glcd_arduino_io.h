@@ -67,8 +67,13 @@ extern "C" {
 #define GLCD_CORE_MIGHTY1284P // avr mighty1284p "standard" pin mapping
 #elif (analogInputToDigitalPin(0) == 31 )
 #define GLCD_CORE_SANGUINO // avr mighty1284p avr_developers pin mapping (SANGUINO)
-#elif (analogInputToDigitalPin(0) == 21 )
+#elif (analogInputToDigitalPin(0) == 21 && analogInputToDigitalPin(7) == 14)
 #define GLCD_CORE_BOBUINO // avr mighty1284p "bobuino" pin mapping
+#elif (analogInputToDigitalPin(0) == 21 && analogInputToDigitalPin(7) == 31)
+#define GLCD_CORE_SBEAUTY // "SleepBeauty" variant mighty-1284p core ------
+#else
+#warning "Uknown 644/1284 core: Using Arduino Core-Code Mode"
+#define GLCD_CORE_CORECODE
 #endif
 #endif
 
@@ -404,6 +409,78 @@ extern "C" {
 	(P) == 28 ? 6 :\
 	(P) == 29 ? 7 :\
 	(P) == 30 ? 4 :\
+	(P) == 31 ? 7 :\
+	0) // dummy entry (should never happen)
+
+#elif defined(GLCD_CORE_SBEAUTY) // "SleepBeauty" variant mighty-1284p core ------
+#define digitalPinToPortReg(P) \
+	(\
+	(P) == 0 ? &PORTD :\
+	(P) == 1 ? &PORTD :\
+	(P) == 2 ? &PORTD :\
+	(P) == 3 ? &PORTD :\
+	(P) == 4 ? &PORTB :\
+	(P) == 5 ? &PORTB :\
+	(P) == 6 ? &PORTB :\
+	(P) == 7 ? &PORTB :\
+	(P) == 8 ? &PORTD :\
+	(P) == 9 ? &PORTD :\
+	(P) == 10 ? &PORTB :\
+	(P) == 11 ? &PORTB :\
+	(P) == 12 ? &PORTB :\
+	(P) == 13 ? &PORTB :\
+	(P) == 14 ? &PORTC :\
+	(P) == 15 ? &PORTC :\
+	(P) == 16 ? &PORTA :\
+	(P) == 17 ? &PORTA :\
+	(P) == 18 ? &PORTA :\
+	(P) == 19 ? &PORTA :\
+	(P) == 20 ? &PORTA :\
+	(P) == 21 ? &PORTA :\
+	(P) == 22 ? &PORTD :\
+	(P) == 23 ? &PORTD :\
+	(P) == 24 ? &PORTC :\
+	(P) == 25 ? &PORTC :\
+	(P) == 26 ? &PORTC :\
+	(P) == 27 ? &PORTC :\
+	(P) == 28 ? &PORTC :\
+	(P) == 29 ? &PORTC :\
+	(P) == 30 ? &PORTA :\
+	(P) == 31 ? &PORTA :\
+	&PORTA) // dummy entry (should never happen)
+#define digitalPinToBit(P) \
+	(\
+	(P) == 0 ? 0 :\
+	(P) == 1 ? 1 :\
+	(P) == 2 ? 2 :\
+	(P) == 3 ? 3 :\
+	(P) == 4 ? 0 :\
+	(P) == 5 ? 1 :\
+	(P) == 6 ? 2 :\
+	(P) == 7 ? 3 :\
+	(P) == 8 ? 6 :\
+	(P) == 9 ? 5 :\
+	(P) == 10 ? 4 :\
+	(P) == 11 ? 5 :\
+	(P) == 12 ? 6 :\
+	(P) == 13 ? 7 :\
+	(P) == 14 ? 7 :\
+	(P) == 15 ? 6 :\
+	(P) == 16 ? 5 :\
+	(P) == 17 ? 4 :\
+	(P) == 18 ? 3 :\
+	(P) == 19 ? 2 :\
+	(P) == 20 ? 1 :\
+	(P) == 21 ? 0 :\
+	(P) == 22 ? 4 :\
+	(P) == 23 ? 7 :\
+	(P) == 24 ? 2 :\
+	(P) == 25 ? 3 :\
+	(P) == 26 ? 4 :\
+	(P) == 27 ? 5 :\
+	(P) == 28 ? 1 :\
+	(P) == 29 ? 0 :\
+	(P) == 30 ? 6 :\
 	(P) == 31 ? 7 :\
 	0) // dummy entry (should never happen)
 
