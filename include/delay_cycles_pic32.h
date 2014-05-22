@@ -33,6 +33,16 @@ extern "C" {
 #ifdef __cplusplus
 }
 #endif
+
+/*
+ * plib is no longer used in newer rleases, so this checks for that
+ * and makes adjustments.
+ * apparently, the non plib function to read the timer is readCoreTimer() 
+ */
+#ifndef _PERIPHERAL_LIBRARY_MASTER_HEADER_FILE
+#define ReadCoreTimer() readCoreTimer()
+#endif
+
 static __inline__ void
 _delay_cycles(uint32_t _IOticks)
 {
