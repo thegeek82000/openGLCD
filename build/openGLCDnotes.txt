@@ -25,6 +25,8 @@ vi:ts=4
 				math.h must be included before defines stomp on math functions
 
 	- chipKIT MPIDE issues
+		- with recent drop of plib support, openGLCD now no longer supports
+			MPIDE versions prior to 0023 2013-07-15
 		- has #error in <avr/pgmspace.h> down in compiler tools
 			hardware/pic32/compiler/pic32-tools/pic32mx/include/avr/pgmspace.h
 			all the pgmspace types/defines should be in pgmspacd.h not wiring.h
