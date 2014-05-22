@@ -18,12 +18,16 @@
  *  Perform an accurate delay of a given number of i/o cycles.
  *  NOTE: i/o cycles are half the processor pic32 clock
  *
- *  All the floating point arithmetic will be handled by the
- *  GCC Preprocessor and no floating point code will be generated.
- *  Allthough the parameter __ticks_d is of type 'double' this
- *  function can be called with any constant integer value, too.
- *  GCC will handle the casting appropriately.
- *
+ */
+
+#ifdef MAGICDEFINE_GOES_HERE
+// Try to figure this out someday
+// In the mean time, without this magic define, MPIDE must have Wsystem.c
+// which started in the 2013-07-15 release
+
+/*
+ * plib is no longer used in newer rleases,
+ * for the older releases we use the plib ReadCoreTimer() function
  */
 
 #ifdef __cplusplus
@@ -34,22 +38,17 @@ extern "C" {
 }
 #endif
 
-/*
- * plib is no longer used in newer rleases, so this checks for that
- * and makes adjustments.
- * apparently, the non plib function to read the timer is readCoreTimer() 
- */
-#ifndef _PERIPHERAL_LIBRARY_MASTER_HEADER_FILE
-#define ReadCoreTimer() readCoreTimer()
+#define readCoreTimer() ReadCoreTimer()
 #endif
+
 
 static __inline__ void
 _delay_cycles(uint32_t _IOticks)
 {
-#if 1
-uint32_t startTicks = ReadCoreTimer();
+#if defined(ARDUINO)
+uint32_t startTicks = readCoreTimer();
 
-	while((ReadCoreTimer() - startTicks) < _IOticks)
+	while((readCoreTimer() - startTicks) < _IOticks)
 	{
 		; // do nothing, while spinning
 	}
