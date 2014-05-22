@@ -16,53 +16,66 @@
 #ifndef openGLCD_CONFIG_H
 #define openGLCD_CONFIG_H
 
- /*
-  * Select a configuration file by uncommenting one line to define the
-  * the desired configuration file.
-  *
-  * Select 1 and only 1 configuration file.
-  *
-  * The "AutoConfig" configuration files will configure the library based on a set of
-  * pre-customized configurations for the supported Arduino board type. 
-  *
-  * These configurations match the the panel and pin configurations
-  * in the library documentation based on the type of board selected in the Arduino IDE.
-  *
-  * NOTE: if you have a panel that has different dimensions than the distributed configuration,
-  * you can either edit the supplied configuration file for that board type or create a fully
-  * custom configuration file.
-  *
-  * The auto configuration panel configuration files can be found under the "config" directory,
-  * with a seperate directory for the files related to each panel type.
-  * The naming is:
-  *  config/{PANELNAME}/AutoConfig_{PANELNAME}-{MODELNAME}_Panel.h
-  * Where:
-  *   {PANELNAME} is the glcd panel type. (for example, ks0108)
-  *   -{MODELNAME} is optional and is a model name of the glcd (for example, 128x64, JHD19264A)
-  *
-  * The pin configuration files for each board type can also be found in the same directory,
-  * the naming is:
-  *  config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h
-  * Where:
-  *   {PANELNAME} is the glcd panel type. (for example, ks0108)
-  *   {BOARDNAME} is the name of the Arduino board (or board family as selected in the Arduino IDE).
-  *
-  * So for example, the auto configuration file name for the default ks0108 panel
-  * is: "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
-  * The ks0108 pin configuration file for a "Uno" board is:
-  *  "config/ks0108/PinConfig_ks0108-Uno.h"
-  * The pin configuration file for a "Mega" board:
-  *  "config/ks0108/PinConfig_ks0108-Mega.h"
-  * Teensy boards are an exception as all boards share a common pinconfig file:
-  *  "config/ks0108/PinConfig_ks0108-Teensy.h"
-  * 
-  */
+/*
+ * Select a configuration file by uncommenting one line to define the
+ * the desired configuration file.
+ *
+ * Select 1 and only 1 configuration file.
+ *
+ * configurations can be "Manual" or "AutoConfig".
+ *
+ * The "Manual" configuration files configure the library in a fixed configuration
+ * regardless of Arduino board type. Everything to configure the panel and pins is
+ * in a single file.
+ *
+ * The "AutoConfig" configuration files will configure the library based on a set of
+ * pre-customized configurations for the supported Arduino board type. Autonfiguration
+ * files break out the panel confuration from the pin configuration and allows the
+ * Arduino pins selected to be based on the Arduino board type.
+ *
+ */
 
 /****************************************************************************************************
  *
  * Autoconfig files
  *
  ****************************************************************************************************/
+
+/*
+ *
+ * These configurations match the the panel and pin configurations
+ * in the library documentation based on the type of board selected in the Arduino IDE.
+ *
+ * NOTE: if you have a panel that has different dimensions than the distributed configuration,
+ * you can either edit the supplied configuration file for that board type or create a fully
+ * custom configuration file.
+ *
+ * The auto configuration panel configuration files can be found under the "config" directory,
+ * with a seperate directory for the files related to each panel type.
+ * The naming is:
+ *  config/{PANELNAME}/AutoConfig_{PANELNAME}-{MODELNAME}_Panel.h
+ * Where:
+ *   {PANELNAME} is the glcd panel type. (for example, ks0108)
+ *   -{MODELNAME} is optional and is a model name of the glcd (for example, 128x64, JHD19264A)
+ *
+ * The pin configuration files for each board type can also be found in the same directory,
+ * the naming is:
+ *  config/{PANELNAME}/PinConfig_{PANELNAME}-{BOARDNAME}.h
+ * Where:
+ *   {PANELNAME} is the glcd panel type. (for example, ks0108)
+ *   {BOARDNAME} is the name of the Arduino board (or board family as selected in the Arduino IDE).
+ *
+ * So for example, the auto configuration file name for the default ks0108 panel
+ * is: "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
+ * The ks0108 pin configuration file for a "Uno" board is:
+ *  "config/ks0108/PinConfig_ks0108-Uno.h"
+ * The pin configuration file for a "Mega" board:
+ *  "config/ks0108/PinConfig_ks0108-Mega.h"
+ * Teensy boards are an exception as all boards share a common pinconfig file:
+ *  "config/ks0108/PinConfig_ks0108-Teensy.h"
+ * 
+ */
+
 
 // automatically configure library for a ks0108 128x64 panel
 #define GLCDCFG_GLCDCONFIG "config/ks0108/AutoConfig_ks0108-128x64_Panel.h"
@@ -95,7 +108,7 @@
  * and make sure that all the other config  #includes are commented (including the autoconfig above) 
  */
 
-// generic ks0108 configuration
+// generic ks0108 configuration (currently this uses same pins as the UNO autoconfiguration)
 //#define GLCDCFG_GLCDCONFIG "config/ks0108/ManualConfig_ks0108_Panel.h"
 
 // configuration for BGMicro 128x64 display with pinout diagram
