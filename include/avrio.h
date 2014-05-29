@@ -4,7 +4,7 @@
  *
  * vi:ts=4
  *
- *	Copyright (C) 2009-2013 Bill Perry.
+ *	Copyright (C) 2009-2014 Bill Perry.
  *	 (bperrybap@opensource.billsworld.billandterrie.com)
  *
  *      This file is part of AVRIO.

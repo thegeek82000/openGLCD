@@ -1,6 +1,6 @@
 /*
   openGLCD_GLCDv3.h - openGLCD library support - GLCDv3 compability
-  Copyright (c) 2013 Bill Perry
+  Copyright (c) 2013-2014 Bill Perry
 
   vi:ts=4
  

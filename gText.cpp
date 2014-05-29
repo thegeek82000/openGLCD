@@ -1,6 +1,6 @@
 /*
   gText.cpp - openGLCD library support - Text output routines
-  Copyright (c) 2011-2013  Bill Perry
+  Copyright (c) 2011-2014  Bill Perry
   Copyright (c) 2009,2010  Bill Perry and Michael Margolis
 
   vi:ts=4
@@ -2070,11 +2070,11 @@ void gText::EraseTextLine( uint8_t row)
  *
  * @b Examples:
  * @code
- *    GLCD.SelectFont(system5x7);            // fg pixels on, bg pixels off
- *    GLCD.SelectFont(system5x7, PIXEL_ON);  // fg pixels on, bg pixels off
- *    GLCD.SelectFont(system5x7, BLACK);     // fg pixels on, bg pixels off
- *    GLCD.SelectFont(system5x7, PIXEL_OFF); // fg pixels off, bg pixels on
- *    GLCD.SelectFont(system5x7, WHITE);     // fg pixels off, bg pixels on
+ *    GLCD.SelectFont(System5x7);            // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(System5x7, PIXEL_ON);  // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(System5x7, BLACK);     // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(System5x7, PIXEL_OFF); // fg pixels off, bg pixels on
+ *    GLCD.SelectFont(System5x7, WHITE);     // fg pixels off, bg pixels on
  *    GLCD.SelectFont(Arial14);
  *    textarea.SelectFont(fixednums7x15, PIXEL_OFF);
  * @endcode

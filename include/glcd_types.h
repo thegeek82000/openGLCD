@@ -1,6 +1,6 @@
 /*
   glcd_types.h - openGLCD library support
-  Copyright (c) 2013 Bill Perry
+  Copyright (c) 2013-2014 Bill Perry
   
   vi:ts=4
 

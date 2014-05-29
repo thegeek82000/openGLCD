@@ -1,6 +1,6 @@
 /*
   glcd_arduino_io.h - openGLCD library support - map arduino pins
-  Copyright (c) 2009-2013 Bill Perry
+  Copyright (c) 2009-2014 Bill Perry
 
   vi:ts=4
  

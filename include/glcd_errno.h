@@ -1,6 +1,6 @@
 /*
   glcd_errno.h
-  Copyright (c) 2011-2013 Bill Perry
+  Copyright (c) 2011-2014 Bill Perry
   
   vi:ts=4
 

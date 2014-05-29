@@ -1,6 +1,6 @@
 /*
   glcd_Device.h - support for specific graphical LCDs
-  Copyright (c) 2011-2013 Bill Perry
+  Copyright (c) 2011-2014 Bill Perry
   Copyright (c) 2009, 2010 Michael Margolis and Bill Perry
 
   vi:ts=4

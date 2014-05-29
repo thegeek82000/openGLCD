@@ -1,6 +1,6 @@
 /*
   glcd_io.h - openGLCD library support
-  Copyright (c) 2009-2013 Bill Perry
+  Copyright (c) 2009-2014 Bill Perry
   
   vi:ts=4
 

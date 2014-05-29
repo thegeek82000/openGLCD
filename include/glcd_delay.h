@@ -1,6 +1,6 @@
 /*
  * glcd_delay.h -  openGLCD library support- provides accurate delays
- * Copyright (c) 2011-2013 Bill Perry
+ * Copyright (c) 2011-2014 Bill Perry
  *
  * vi:ts=4
  *

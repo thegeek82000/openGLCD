@@ -1,6 +1,6 @@
 /*
  *  delay_cycles_arm.h
- *  Copyright (c) 2013 Bill Perry
+ *  Copyright (c) 2013-2014 Bill Perry
  *  Copyright (c) 2013 Paul Stoffregen paul@pjrc.com
  *
  * vi:ts=4

@@ -1,6 +1,6 @@
 /*
   gText.h - openGLCD library support - Text output routines
-  Copyright (c) 2011-2013  Bill Perry
+  Copyright (c) 2011-2014  Bill Perry
   Copyright (c) 2009,2010  Bill Perry and Michael Margolis
 
   vi:ts=4
