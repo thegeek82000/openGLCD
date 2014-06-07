@@ -28,9 +28,9 @@
  * glpyh and turns on all the background pixels.
  *
  * Examples:
- *    GLCD.SelectFont(system5x7);            // fg pixels on, bg pixels off
- *    GLCD.SelectFont(system5x7, PIXEL_ON);  // fg pixels on, bg pixels off
- *    GLCD.SelectFont(system5x7, PIXEL_OFF); // fg pixels off, bg pixels on
+ *    GLCD.SelectFont(System5x7);            // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(System5x7, PIXEL_ON);  // fg pixels on, bg pixels off
+ *    GLCD.SelectFont(System5x7, PIXEL_OFF); // fg pixels off, bg pixels on
  *    GLCD.SelectFont(Arial14);
  *    textarea.SelectFont(fixednums7x15, PIXEL_OFF);
  *

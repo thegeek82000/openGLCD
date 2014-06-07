@@ -11,7 +11,7 @@
  *  height pixels tall starting from the pixel at x,y.
  *
  *  The upper left corner at x,y and the lower right corner at 
- *  x+width-1,y+width-1.
+ *  x+width-1,y+height-1.
  *
  *  The length of the horizontal sides will be width pixels
  *  The length of the vertical sides will be height pixels

@@ -33,7 +33,7 @@
  *    GLCD.print("string");      // print the literal string (consumes ram on AVR)
  *    GLCD.print(F("string"));   // print a string from AVR progrem space
  *    textarea.print(integer);   // print the decimal value of the integer in textarea
- *    textarea.print("string);   // print the literal string in textarea
+ *    textarea.print("string");   // print the literal string in textarea
  *
  * Note:
  *     println() works the same as print() but wraps the line after printing.

@@ -3,6 +3,7 @@
  *
  * Use this file to set LCD panel parameters
  * This version is for a HJ19264A ks0108 display
+ * Note: This also works for BLY19264A displays as well.
  * This file uses a board specific pin assignment file based
  * on the board selected in the IDE
  *

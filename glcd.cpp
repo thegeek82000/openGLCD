@@ -201,7 +201,7 @@ int8_t error, ystep;
  *
  * Draw a rectangle with the specified width and height.
  * The upper left corner at x,y and the lower right
- * corner at x+width-1, y+width-1.\n
+ * corner at x+width-1, y+height-1.\n
  * The left and right edges of the rectangle are at x and x+width-1.\n
  * The top and bottom edges of the rectangle ar at y and y+height -1.\n
  *
