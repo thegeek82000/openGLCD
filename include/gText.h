@@ -32,7 +32,6 @@
 #include <inttypes.h>
 
 #include "WString.h"
-#include "include/Streaming.h" 
 #include "openGLCD_Config.h"
 #include "include/glcd_types.h"
 #include "include/glcd_Device.h"

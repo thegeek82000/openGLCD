@@ -5,6 +5,10 @@ vi:ts=4
 	version stuff if it doesn't exist.
 
 - Create a "known issues" "file" that can be read into doxygen as well
+	- Streaming support is no longer included in the library.
+		users that wish to use stream must install Mikal Hart's Streaming library:
+			http://arduiniana.org/libraries/streaming
+			
 	- Some cores only work on 1.x+
 		- mighty1284p 
 			Because they don't include support for pre 1.x IDE

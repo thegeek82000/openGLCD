@@ -10,6 +10,7 @@
 
 #include <openGLCD.h>
 
+//#include <Streaming.h>  // uncomment to use Streaming library for streaming
 #include <Time.h>  // download from: http://www.arduino.cc/playground/Code/Time
 
 Image_t icon;
@@ -187,7 +188,12 @@ void showLines(int lines)
 {
   for(int i = 1; i <= lines; i++)
   { 
-    textArea << " Line  " << i << endl;  
+#ifdef ARDUINO_STREAMING
+    textArea << " Line  " << i << endl;   // if using streaming support
+#else
+    textArea.print(" Line  "); // Print class
+    textArea.println(i);
+#endif
     delay(theDelay);  // brief pause between lines
   }
 }

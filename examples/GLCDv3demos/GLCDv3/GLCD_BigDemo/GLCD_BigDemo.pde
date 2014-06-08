@@ -10,6 +10,7 @@
 
 #include <openGLCD.h>
 #include <include/openGLCD_GLCDv3.h> // use openGLCD GLCDv3 compatibilty mode
+//#include <Streaming.h> // uncomment to use Streaming library for streaming
 #include <Time.h>  // download from: http://www.arduino.cc/playground/Code/Time
 
 #include "fonts/allFonts.h"         // system and arial14 fonts are used
@@ -197,7 +198,12 @@ void showLines(int lines)
 {
   for(int i = 1; i <= lines; i++)
   { 
-    textArea << " Line  " << i << endl;  
+#ifdef ARDUINO_STREAMING
+    textArea << " Line  " << i << endl;   // if using streaming support
+#else
+    textArea.print(" Line  "); // Print class
+    textArea.println(i);
+#endif
     delay(theDelay);  // brief pause between lines
   }
 }

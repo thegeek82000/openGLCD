@@ -11,6 +11,8 @@
  * can be found here:
  * http://arduiniana.org/libraries/streaming/
  *
+ * Streaming can be used on the GLCD object as well as text areas.
+ *
  * Examples:
  *
  *    GLCD << character;             // print the character at the current cursor position
@@ -24,8 +26,9 @@
  *    GLCD << string;                // print the string
  *    GLCD << "string";              // print the literal string (consumes ram on AVR)
  *    GLCD << F("string");           // print a string from AVR progrem space
- *    textarea << integer;       // print the decimal value of the integer in textarea
- *    textarea << "string";       // print the literal string in textarea
+ *    textarea << F("string");       // print a string from AVR progrem space
+ *    textarea << integer;           // print the decimal value of the integer in textarea
+ *    textarea << "string";          // print the literal string in textarea
  *
  *    GLCD << "Counter: " << counter;
  *    textarea << "Byte value: " << _HEX(byteval) << endl; // sends newline as well
@@ -42,7 +45,7 @@
 #include <Streaming.h> // Streaming library for streaming support (must download and install)
 
 #ifndef ARDUINO_STREAMING
-#error Streaming library required for this example
+#error Arduino Streaming library required for this example
 #endif
 
 #define DELAY 3000 // ms delay between examples
