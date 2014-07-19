@@ -162,6 +162,9 @@ VCSCMD="cp -r"
 VCSBUILDSTR=$(git describe --dirty)
 # strip out leading "v" and remove trailing git stuff
 VCSBUILDREV=$(echo $VCSBUILDSTR | sed -e "s/^v//" -e "s/-g.*//")
+# tool to create change log from commit comments
+VCSGENCHANGELOG="$PROGWD/mkChangeLog.sh"
+VCSCHANGELOGFILE="$PROGWD/ChangeLog.txt"
 
 #
 # zip command
@@ -251,6 +254,10 @@ cd "$GLCDDISTDIR"
 GLCDBUILDSTR=$VCSBUILDSTR
 GLCDBUILDREV=$VCSBUILDREV
 
+echo Creating ChangeLog
+echo ======== Creating ChangeLog >> "$LOGFILE"
+$VCSGENCHANGELOG > "$VCSCHANGELOGFILE"
+
 
 cd "$PROGWD"
 
@@ -297,6 +304,7 @@ echo "PROJECT_NAME=$DOXYPROJNAME"
 echo "PROJECT_NUMBER=$DOXYPROJNUM"
 (cat $DOXYGENCFG ; echo "PROJECT_NAME=\"$DOXYPROJNAME\""  ; echo "PROJECT_NUMBER=\"$DOXYPROJNUM\"" ) | $DOXYGEN - >> "$LOGFILE" 2>&1
 cd "$PROGWD"
+
 
 #
 # Remove the unwanted directories from the distribution like "build" and "debug"
@@ -380,6 +388,7 @@ echo ======== $PROGNAME completed normally >> "$LOGFILE"
 #
 cd "$PROGWD"
 mv "$LOGFILE" "$GLCDZIPBASENAME"
+mv "$VCSCHANGELOGFILE" "$GLCDZIPBASENAME"
 
 echo $PROGNAME Finished
 

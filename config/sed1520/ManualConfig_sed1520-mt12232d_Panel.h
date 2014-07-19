@@ -1,5 +1,5 @@
 /*
- * ManualConfig_mt12232d.h - Custom configuration for Arduino openGLCD library
+ * ManualConfig_sed1520-mt12232d_Panel.h - Custom configuration for Arduino openGLCD library
  *
  * Use this file to set io pins and LCD panel parameters
  *
@@ -80,7 +80,7 @@
  *    +-------------------------------------------+
  *    |17 | RES  | Reset signal                   | Direct to +5v (or glcdPinRES for s/w control)
  *    +-------------------------------------------+
- *    |18 | CS  | Chip Select H=chip0, L=chip1    | Direct to +5v
+ *    |18 | CS  | Chip Select H=chip0, L=chip1    | glcdPinCSEL1
  *    +-------------------------------------------+
  *
  * Note:
@@ -174,5 +174,6 @@
 // calculate number of chips & round up if width is not evenly divisable
 #define glcd_CHIP_COUNT (((DISPLAY_WIDTH + CHIP_WIDTH - 1)  / CHIP_WIDTH) * ((DISPLAY_HEIGHT + CHIP_HEIGHT -1) / CHIP_HEIGHT))
 
-#include "device/mt12232d_Device.h"
+#define GLCD_MT12232D_MODE // tell sed1520 code to use mt12232d mode
+#include "device/sed1520_Device.h"
 #endif //GLCD_PANEL_CONFIG_H
