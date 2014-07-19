@@ -8,11 +8,18 @@
 @image html panel_vk5121.jpg "SED1520 based vk5121 panel"
 The SED1520 uses different timing commands, and control pins than the \ref page_ks0108_family "KS0108"
 and the most common panels have fewer pixels.
-The distribution contains a generic manual configuration file named 
-Modvk5121_Manual_Config.h for the VK5121 panel. 
+The control signals on sed1520 based modules seem to vary substantially from module to module
+so the distribution contains manual configuration files for a few sed1520 based modules as well as a generic manual configuration file.
+- ManualConfig_sed1520-4GLM12232_Panel.h
+- ManualConfig_sed1520-mt12232d_Panel.h
+- ManualConfig_sed1520-mtb368_Panel.h
+- ManualConfig_sed1520-vk5121_Panel.h
+- ManualConfig_sed1520_Panel.h
+
+See the individual configuration files for how to hook up the panel.
 
 @note
 Manual configuration files are different from auto configuration files in that they
-do not auto configure based on board or processor type.
+do not auto configure the pins based on board or processor type.
 
 */

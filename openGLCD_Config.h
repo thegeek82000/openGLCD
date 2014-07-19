@@ -114,14 +114,21 @@
 // configuration for BGMicro 128x64 display with pinout diagram
 //#define GLCDCFG_GLCDCONFIG "config/ks0108/ManualConfig_ks0108-agm1264f_Panel.h"
 
-// configuration for vk5121 122x32 display with pinout diagram
+// configuration for sed1520 based 4GLM12232 122x32 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-4GLM12232_Panel.h"
+
+// configuration for Russian "sed1520" based mt12232 122x32 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-mt12232d_Panel.h"
+
+// configuration for sed1520 basaed mtb-368 122x32 display with pinout diagram
+//#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-mtb368_Panel.h"
+
+// configuration for sed1520 basaed vk5121 120x32 display with pinout diagram
 //#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-vk5121_Panel.h"
 
-// configuration for Russian mt12232 display with pinout diagram
-//#define GLCDCFG_GLCDCONFIG "config/mt12232d/ManualConfig_mt12232d_Panel.h"
 
 /*
- * For debugging
+ * For s/w development debugging
  */
 //#define GLCDCFG_GLCDCONFIG "build/debug/bap/bapdebug.h"
 //#define GLCDCFG_GLCDCONFIG "build/debug/bap/config/Modvk5121_AutoConfig_Config.h"

@@ -75,7 +75,7 @@ vi:ts=4
 
 - consider adding a "libinfo" sketch
 	This can print out all the openGLCD libary information
-	like diags does but not require any hardware.
+	like diags does but not require any GLCD hardware.
 	It could also print out the exact config file in use
 	as well as the exact location of the html documentation
 	or even a file://xxxxx line that can be cut & pasted into
@@ -171,7 +171,7 @@ vi:ts=4
 			printFlashln ??
 			printNumber ??
 			Puts_P
-			Streaming i/o
+			Streaming i/o (done)
 
 	- Graphics
 		low
@@ -216,8 +216,6 @@ vi:ts=4
 	It is in glcd.cpp but used by gText.cpp
 	This is also used by things that need pgm data like bitmap functions.
 	use a glcdio macro instead?
-
-- remove Streaming.h from include directory
 
 - Change inheritance  (has implications for doxygen stuff)
 	glcd: gText glcd_device
@@ -296,7 +294,11 @@ Core support:
 Device:
 - backlight support (on/off, brightness)
 - enable/disable display (on/off)
-- support for hd44102 display
+- support for addtional displays:
+ - hd44102 display
+ - sed1520 4GLM12232
+ - sed1520 mt12232d
+ - sed1520 mtb368
 
 Graphics:
 - draw/fill triangles, ellipses
@@ -537,4 +539,6 @@ DONE-------------------------------------------------------------
 - Arduino core code fall back mode override to force its use? (done)
 
 - update clock demos to extract time from sketch __TIME__/__DATE__ (done)
+
+- remove Streaming.h from include directory (done)
 
