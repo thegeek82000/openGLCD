@@ -126,6 +126,9 @@
 // configuration for sed1520 basaed vk5121 120x32 display with pinout diagram
 //#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520-vk5121_Panel.h"
 
+// generic sed1520 configuration (may required some amount of editing before using)
+//#define GLCDCFG_GLCDCONFIG "config/sed1520/ManualConfig_sed1520_Panel.h"
+
 
 /*
  * For s/w development debugging

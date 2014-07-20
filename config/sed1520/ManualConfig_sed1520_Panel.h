@@ -55,7 +55,7 @@
  *
  */
 
-#define NBR_CHIP_SELECT_PINS ??? // fill in with how many chip selects
+#define NBR_CHIP_SELECT_PINS 2 // fill in with how many chip selects
 
 #if  NBR_CHIP_SELECT_PINS == 0
 // no chipselects so use dual enables
@@ -67,6 +67,11 @@
 #define glcdPinCSEL1   A0
 #define glcdPinCSEL2   A1
 #define glcdPinEN      A4
+// chipselect definitions for each chip
+#define glcd_CHIP0 glcdPinCSEL1,LOW,   glcdPinCSEL2,HIGH
+#define glcd_CHIP1 glcdPinCSEL1,HIGH,  glcdPinCSEL2,LOW    
+
+
 #else
 #error unsupported number of chipselects
 #endif
@@ -82,7 +87,7 @@
 #define glcd_BLctl glcdPinBL, HIGH, LOW
 
 
-// defines for panel specific timing 
+// defines for panel specific timing (times in nano seconds)
 #define GLCD_tDDR    290    /* tACC6: Data Delay time (E high to valid read data)             */
 #define GLCD_tAS      20    /* tAW6:  Address setup time (ctrl line changes to E high)        */
 #define GLCD_tDSW    200    /* tDS6:  Data setup time (Write data lines setup to dropping E)  */
