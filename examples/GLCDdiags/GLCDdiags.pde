@@ -985,32 +985,51 @@ showGLCDconfig(void)
 
 
 #ifdef glcd_CHIP0
-  SerialPrintQ("ChipSelects:");
+  SerialPrintQ("ChipSelects:\n");
   SerialPrintQ(" CHIP0:(");
   SerialPrintQ(xstr(glcd_CHIP0));
-  SerialPrintQ(")");
+  SerialPrintQ(")\n");
 #endif
 #ifdef glcd_CHIP1
   SerialPrintQ(" CHIP1:(");
   SerialPrintQ(xstr(glcd_CHIP1));
-  SerialPrintQ(")");
+  SerialPrintQ(")\n");
 #endif
 #ifdef glcd_CHIP2
   SerialPrintQ(" CHIP2:(");
   SerialPrintQ(xstr(glcd_CHIP2));
-  SerialPrintQ(")");
+  SerialPrintQ(")\n");
 #endif
 #ifdef glcd_CHIP3
   SerialPrintQ(" CHIP3:(");
   SerialPrintQ(xstr(glcd_CHIP3));
-  SerialPrintQ(")");
+  SerialPrintQ(")\n");
 #endif
-
-#ifdef glcd_CHIP0
-  Serial.println();
+#ifdef glcd_CHIP4
+  SerialPrintQ(" CHIP4:(");
+  SerialPrintQ(xstr(glcd_CHIP4));
+  SerialPrintQ(")\n");
 #endif
-
-
+#ifdef glcd_CHIP5
+  SerialPrintQ(" CHIP5:(");
+  SerialPrintQ(xstr(glcd_CHIP5));
+  SerialPrintQ(")\n");
+#endif
+#ifdef glcd_CHIP6
+  SerialPrintQ(" CHIP6:(");
+  SerialPrintQ(xstr(glcd_CHIP6));
+  SerialPrintQ(")\n");
+#endif
+#ifdef glcd_CHIP7
+  SerialPrintQ(" CHIP7:(");
+  SerialPrintQ(xstr(glcd_CHIP7));
+  SerialPrintQ(")\n");
+#endif
+#ifdef glcd_CHIP8
+  SerialPrintQ(" CHIP8:(");
+  SerialPrintQ(xstr(glcd_CHIP8));
+  SerialPrintQ(")\n");
+#endif
 
   SerialPrintQ("Data mode: ");
 

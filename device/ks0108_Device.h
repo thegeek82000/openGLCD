@@ -21,16 +21,36 @@
  *
  */
 
-#if glcd_CHIP_COUNT == 2 && !defined(glcd_CHIP1)
-#error "2 chips defined but glcd_CHIP1 chip selects not defined"
+#if glcd_CHIP_COUNT >= 2 && !defined(glcd_CHIP1)
+#error "2 or more chips defined but glcd_CHIP1 chip selects not defined"
 #endif
 
-#if glcd_CHIP_COUNT == 3 && !defined(glcd_CHIP2)
-#error "3 chips defined but glcd_CHIP2 chip selects not defined"
+#if glcd_CHIP_COUNT >= 3 && !defined(glcd_CHIP2)
+#error "3 or more chips defined but glcd_CHIP2 chip selects not defined"
 #endif
 
-#if glcd_CHIP_COUNT == 4 && !defined(glcd_CHIP3)
-#error "4 chips defined but glcd_CHIP3 chip selects not defined"
+#if glcd_CHIP_COUNT >= 4 && !defined(glcd_CHIP3)
+#error "4 or more chips defined but glcd_CHIP3 chip selects not defined"
+#endif
+
+#if glcd_CHIP_COUNT >= 5 && !defined(glcd_CHIP4)
+#error "5 or more chips defined but glcd_CHIP4 chip selects not defined"
+#endif
+
+#if glcd_CHIP_COUNT >= 6 && !defined(glcd_CHIP5)
+#error "6 or more chips defined but glcd_CHIP5 chip selects not defined"
+#endif
+
+#if glcd_CHIP_COUNT >= 7 && !defined(glcd_CHIP6)
+#error "7 or more chips defined but glcd_CHIP6 chip selects not defined"
+#endif
+
+#if glcd_CHIP_COUNT >= 8 && !defined(glcd_CHIP7)
+#error "8 or more chips defined but glcd_CHIP7 chip selects not defined"
+#endif
+
+#if glcd_CHIP_COUNT >= 9 && !defined(glcd_CHIP8)
+#error "9 or more chips defined but glcd_CHIP8 chip selects not defined"
 #endif
 
 #if defined(glcd_CHIP3) && glcd_CHIP_COUNT < 4
@@ -114,7 +134,7 @@
  * on the ks0108 are powers of 2
  */
 #if CHIP_HEIGHT < DISPLAY_HEIGHT
-#define glcdDev_XYval2Chip(x,y) ((x/CHIP_WIDTH) + ((y/CHIP_HEIGHT) * (DISPLAY_HEIGHT/CHIP_HEIGHT)))
+#define glcdDev_XYval2Chip(x,y) ((x/CHIP_WIDTH) + ((y/CHIP_HEIGHT) * (DISPLAY_WIDTH/CHIP_WIDTH)))
 #else
 #define glcdDev_XYval2Chip(x,y)		((x/CHIP_WIDTH))	
 #endif

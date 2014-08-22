@@ -418,6 +418,31 @@ int glcd_Device::Init(glcd_device_mode invert)
 	glcdio_WritePin(glcdPinCSEL4, LOW);
 #endif
 
+#ifdef glcdPinCSEL5
+	glcdio_PinMode(glcdPinCSEL5,OUTPUT);
+	glcdio_WritePin(glcdPinCSEL5, LOW);
+#endif
+
+#ifdef glcdPinCSEL6
+	glcdio_PinMode(glcdPinCSEL6,OUTPUT);
+	glcdio_WritePin(glcdPinCSEL6, LOW);
+#endif
+
+#ifdef glcdPinCSEL7
+	glcdio_PinMode(glcdPinCSEL7,OUTPUT);
+	glcdio_WritePin(glcdPinCSEL7, LOW);
+#endif
+
+#ifdef glcdPinCSEL8
+	glcdio_PinMode(glcdPinCSEL8,OUTPUT);
+	glcdio_WritePin(glcdPinCSEL8, LOW);
+#endif
+
+#ifdef glcdPinCSEL9
+	glcdio_PinMode(glcdPinCSEL9,OUTPUT);
+	glcdio_WritePin(glcdPinCSEL9, LOW);
+#endif
+
 	/*
 	 * If reset control
 	 */
@@ -685,6 +710,21 @@ int glcd_Device::Off(void)
 __inline__ void glcd_Device::SelectChip(uint8_t chip)
 {  
 
+#ifdef glcd_CHIP8
+	if(chip == 8) glcdio_ChipSelect(glcd_CHIP8); else
+#endif
+#ifdef glcd_CHIP7
+	if(chip == 7) glcdio_ChipSelect(glcd_CHIP7); else
+#endif
+#ifdef glcd_CHIP6
+	if(chip == 6) glcdio_ChipSelect(glcd_CHIP6); else
+#endif
+#ifdef glcd_CHIP5
+	if(chip == 5) glcdio_ChipSelect(glcd_CHIP5); else
+#endif
+#ifdef glcd_CHIP4
+	if(chip == 4) glcdio_ChipSelect(glcd_CHIP4); else
+#endif
 #ifdef glcd_CHIP3
 	if(chip == 3) glcdio_ChipSelect(glcd_CHIP3); else
 #endif

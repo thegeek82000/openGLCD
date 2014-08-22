@@ -309,11 +309,21 @@ do {									\
  * functions to set the pin values.
  */
 
-#if (glcd_CHIP_COUNT > 4)
-#error GLCD chip count beyond max of 4
+#if (glcd_CHIP_COUNT > 9)
+#error GLCD chip count beyond max of 9
 #endif
 
-#if defined(glcdPinCSEL4)
+#if defined(glcdPinCSEL9)
+#define glcdio_ChipSelect(cselstr) glcdio_ChipSelect9(cselstr)
+#elif defined(glcdPinCSEL8)
+#define glcdio_ChipSelect(cselstr) glcdio_ChipSelect8(cselstr)
+#elif defined(glcdPinCSEL7)
+#define glcdio_ChipSelect(cselstr) glcdio_ChipSelect7(cselstr)
+#elif defined(glcdPinCSEL6)
+#define glcdio_ChipSelect(cselstr) glcdio_ChipSelect6(cselstr)
+#elif defined(glcdPinCSEL5)
+#define glcdio_ChipSelect(cselstr) glcdio_ChipSelect5(cselstr)
+#elif defined(glcdPinCSEL4)
 #define glcdio_ChipSelect(cselstr) glcdio_ChipSelect4(cselstr)
 #elif defined(glcdPinCSEL3)
 #define glcdio_ChipSelect(cselstr) glcdio_ChipSelect3(cselstr)
@@ -326,13 +336,72 @@ do {									\
 #define glcdio_ChipSelect1(p,v) glcdio_WritePin(p,v)
 
 #define glcdio_ChipSelect2(p1,v1, p2,v2) \
- do {glcdio_ChipSelect1(p1, v1); glcdio_ChipSelect1(p2,v2);} while(0)
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+} while(0)
 
 #define glcdio_ChipSelect3(p1,v1, p2,v2, p3,v3) \
- do {glcdio_ChipSelect1(p1, v1); glcdio_ChipSelect1(p2,v2); glcdio_ChipSelect1(p3,v3);} while(0)
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+} while(0)
 
 #define glcdio_ChipSelect4(p1,v1, p2,v2, p3,v3, p4,v4) \
- do {glcdio_ChipSelect1(p1, v1); glcdio_ChipSelect1(p2,v2); glcdio_ChipSelect1(p3,v3); glcdio_ChipSelect1(p4,v4);} while(0)
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+} while(0)
+
+#define glcdio_ChipSelect5(p1,v1, p2,v2, p3,v3, p4,v4, p5,v5) \
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+	glcdio_ChipSelect1(p5,v5);\
+} while(0)
+
+#define glcdio_ChipSelect6(p1,v1, p2,v2, p3,v3, p4,v4, p5,v5, p6,v6) \
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+	glcdio_ChipSelect1(p5,v5);\
+	glcdio_ChipSelect1(p6,v6);\
+} while(0)
+
+#define glcdio_ChipSelect7(p1,v1, p2,v2, p3,v3, p4,v4, p5,v5, p6,v6, p7,v7) \
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+	glcdio_ChipSelect1(p5,v5);\
+	glcdio_ChipSelect1(p6,v6);\
+	glcdio_ChipSelect1(p7,v7);\
+} while(0)
+
+#define glcdio_ChipSelect8(p1,v1, p2,v2, p3,v3, p4,v4, p5,v5, p6,v6, p7,v7, p8,v8) \
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+	glcdio_ChipSelect1(p5,v5);\
+	glcdio_ChipSelect1(p6,v6);\
+	glcdio_ChipSelect1(p7,v7);\
+	glcdio_ChipSelect1(p8,v8);\
+} while(0)
+
+#define glcdio_ChipSelect9(p1,v1, p2,v2, p3,v3, p4,v4, p5,v5, p6,v6, p7,v7, p8,v8, p9,v9) \
+do{	glcdio_ChipSelect1(p1,v1);\
+	glcdio_ChipSelect1(p2,v2);\
+	glcdio_ChipSelect1(p3,v3);\
+	glcdio_ChipSelect1(p4,v4);\
+	glcdio_ChipSelect1(p5,v5);\
+	glcdio_ChipSelect1(p6,v6);\
+	glcdio_ChipSelect1(p7,v7);\
+	glcdio_ChipSelect1(p8,v8);\
+	glcdio_ChipSelect1(p9,v9);\
+} while(0)
 
 #endif // glcd_CHIP0
 
