@@ -6,8 +6,12 @@ with openGLCD.
 openGLCD Font Creator: <a href="https://bitbucket.org/bperrybap/openglcd/downloads/openGLCDFontCreator.zip">openGLCDFontCreator</a>\n
 Pixel/Bitmap fonts: <a href="http://www.1001freefonts.com/bitmap-pixel-fonts.php">1001 Free Fonts</a>\n
 Pixel/Bitmap as well as Dingbat fonts: <a href="http://www.dafont.com/bitmap.php">dafonts</a>\n
-Mighty1284p core:  <a href="https://github.com/maniacbug/mighty-1284p">Mighty1284p GitHub Repo</a>\n
-Mighty1284p Blog:  <a href="http://maniacbug.wordpress.com/2011/11/27/arduino-on-atmega1284p-4/">Mighty1284p Blog</a>\n
+ManiacBug Mighty1284p core:  <a href="https://github.com/maniacbug/mighty-1284p">Mighty1284p GitHub Repo</a>\n
+ManiacBug Mighty1284p Blog:  <a href="http://maniacbug.wordpress.com/2011/11/27/arduino-on-atmega1284p-4/">Mighty1284p Blog</a>\n
+Updated 1284core (recommended over ManiacBug):
+Mighty1284P  Repo<a href="https://github.com/JChristensen/mighty-1284p">Mighty 1284P Git Repository</a>\n
+Mighty1284P  Forum<a href="http://forum.arduino.cc/index.php?topic=235521.0">Mighty 1284P Arduino Forum Thread</a>\n
+
 
 avrio (part of MCUIO): <a href="http://code.google.com/p/mcu-io/">MCUIO google project</a>\n
 
