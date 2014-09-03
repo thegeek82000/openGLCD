@@ -1391,9 +1391,13 @@ static uint8_t ucode = 0;
 					 * Have to shift font data because Thiele shifted residual
 					 * font bits the wrong direction for LCD memory.
 					 *
+					 * Note: the 8+1 is there vs 8 because we are fetching the font
+					 * data byte for the next pixel, but tfp has not yet incremented yet
+					 * so it is one less then it should be. We add 1 to the 8
+					 * to account for this.
 					 */
 
-					if((thielefont) && ((height - tfp) < 8))
+					if((thielefont) && ((height - tfp) < (8+1)))
 					{
 						fdata >>= (8 - (height & 7));
 					}
