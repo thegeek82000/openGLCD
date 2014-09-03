@@ -258,6 +258,12 @@ echo Creating ChangeLog
 echo ======== Creating ChangeLog >> "$LOGFILE"
 $VCSGENCHANGELOG > "$VCSCHANGELOGFILE"
 
+# copy change log to distribution tree so it will be
+# part of the final image.
+echo ======== Copying ChangeLog to working tree >> "$LOGFILE"
+echo cp "$VCSCHANGELOGFILE" "$GLCDDISTDIR" >> "$LOGFILE"
+cp "$VCSCHANGELOGFILE" "$GLCDDISTDIR" >> "$LOGFILE"
+
 
 cd "$PROGWD"
 
