@@ -149,6 +149,14 @@
 				// This will not work on smaller AVRs like the mega168 that only
 				// have 1k of RAM total.
 
+//#define GLCDCFG_UTF8		// Turns on code that will process character codes as UTF8
+				// encoded characters. Note that due to the the current font header,
+				// only UTF8 code points from 0-255 will be supported.
+				// Also, note that when enabled, raw character codes from 0x80-0xff 
+				// can still be used with the exception of 0xc2 and 0xc3 which are
+				// the 0x80-0x7ff UTF8 markers.
+
+
 //#define GLCDCFG_NO_PRINTF	// disable xxprintf() support
 				// does not save any code space if no xxprintf() routines
 				// are not being used.

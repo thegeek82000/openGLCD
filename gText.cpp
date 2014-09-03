@@ -1070,6 +1070,35 @@ int gText::PutChar(uint8_t c)
 		if(SpecialChar(c))
 			return 1;
 	}
+
+#ifdef GLCDCFG_UTF8
+	/*
+	 * UTF8 character decode processing
+	 * For now this is a crude hack that assumes no threading and that the UTF character
+	 * codes are only 0-255.
+	 * To go beyond 255 is a BIG deal since the font header currently only supports up to
+	 * 256 characters. (it is only an 8 bit field)
+	 * Also by only supporting 0-255 codes, when UTF8 processing is enable raw code processing
+	 * can also be supported for characters above 0x7f with the exception that codes
+	 * 0xc2 and 0xc3 will be lost.
+	 */
+static uint8_t ucode = 0;
+
+	if((c == 0xc2) || (c == 0xc3)) // is it a UTF 80-7ff code point start?
+	{
+		ucode = (c & 0x1f) << 6;
+		return(1); // lie and say we printed it
+	}
+	else
+	{
+		if(ucode)
+			c = (c & 0x3f) | ucode; // create final code point
+	}
+#endif
+
+#ifdef GLCDCFG_UTF8
+	ucode = 0;
+#endif
 	   
 	uint8_t width = 0;
 	uint8_t height = FontRead(this->Font+FONT_HEIGHT);
@@ -2216,6 +2245,11 @@ void gText::ClearAreaMode(gTextMode mode)
 uint8_t gText::CharWidth(uint8_t c)
 {
 	uint8_t width = 0;
+
+#ifdef GLCDCFG_UTF8
+	if( c == 0xc2 || c == 0xc3) // throw away UTF8 0x80-0x7ff start indicators
+		return(0);
+#endif
 	
     if(isFixedWidthFont(this->Font))
 	{
