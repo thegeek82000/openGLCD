@@ -42,3 +42,7 @@ static char buf[64];
                 bapprintf("<OK>\n");                                   \
         } while (0)
 
+
+#define DBG(fmt, ...)\
+        Serial.printf("%s:%d: " fmt "\n", __func__, __LINE__, ##__VA_ARGS__);
+
