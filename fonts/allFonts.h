@@ -37,4 +37,11 @@
 #include "font8x8.h"		// fixed wider font but similar to system5x7 font
 #include "cp437font8x8.h"       // fixed Font from 80's IBM PC
 
+/*
+ * These fonts require UTF8 encoding support
+ */
+
+#include "utf8font10x16.h"	// UTF8 font up to U+00FF
+				// http://www.fileformat.info/info/charset/UTF-8/list.htm
+
 #endif
