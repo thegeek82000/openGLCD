@@ -21,6 +21,9 @@
  *      x2 = textarea.GetAreaProp(gTextProp_x2);     // lower right x coordinate
  *      y2 = textarea.GetAreaProp(gTextProp_y2);     // lower right y coordinate
  *   width = textarea.GetAreaProp(gTextProp_FontWidth);// rendered fixed width
+ *   minC  = textarea.GetAreaProp(gTextProp_minC);   // minimum font character code
+ *   maxC  = textarea.GetAreaProp(gTextProp_maxC);   // maximum font character code
+
  *
  * Note:
  *   The value returned for gTextProp_cols is based on the fixed width 
@@ -123,6 +126,14 @@ void loop()
 
 	GLCD.print("FontH: ");
 	GLCD.println(GLCD.GetAreaProp(gTextProp_FontHeight));
+	delay(DELAY/2);
+
+	GLCD.print("minC: ");
+	GLCD.println(GLCD.GetAreaProp(gTextProp_minC));
+	delay(DELAY/2);
+
+	GLCD.print("maxC: ");
+	GLCD.println(GLCD.GetAreaProp(gTextProp_maxC));
 	delay(DELAY/2);
 
 

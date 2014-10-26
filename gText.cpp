@@ -570,6 +570,8 @@ gText::DefineArea(predefinedArea selection, Font_t font, gTextMode mode)
  *    x2  = textarea.GetAreaProp(gTextProp_x2);       // lower right x coordinate
  *    y2  = textarea.GetAreaProp(gTextProp_y2);       // lower right y coordinate
  * width  = textarea.GetAreaProp(gTextProp_FontWidth);// font rendered fixed width
+ *  minC  = textarea.GetAreaProp(gTextProp_minC);     // minimum font character code
+ *  maxC  = textarea.GetAreaProp(gTextProp_maxC);     // maximum font character code
  * @endcode
  *
  * @note
@@ -645,6 +647,14 @@ int rval;
 
 		case gTextProp_FontHeight:
 			rval = this->CharHeight(0);
+			break;
+
+		case gTextProp_minC:
+			return(FontRead(this->Font+FONT_FIRST_CHAR));
+			break;
+
+		case gTextProp_maxC:
+			return(FontRead(this->Font+FONT_FIRST_CHAR) + FontRead(this->Font+FONT_CHAR_COUNT) -1);
 			break;
 
 		default:

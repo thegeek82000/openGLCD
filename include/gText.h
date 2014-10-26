@@ -288,6 +288,8 @@ enum gTextProp_t
 	gTextProp_rows,		 		/**< Text Rows in text area */
 	gTextProp_FontWidth,		/**< Current Font rendered max fixed width */
 	gTextProp_FontHeight,		/**< Current Font rendered height */
+	gTextProp_minC,				/**< Minimum character code for current font */
+	gTextProp_maxC,				/**< Maximum character code for current font */
 };
 
 typedef const uint8_t* Font_t;  	
