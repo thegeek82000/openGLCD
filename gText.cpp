@@ -2313,6 +2313,7 @@ void gText::ClearAreaMode(gTextMode mode)
  * @see CharHeight()
  * @see StringWidth()
  * @see StringWidth_P()
+ * @see GetAreaProp()
  */
 
 uint8_t
@@ -2375,8 +2376,8 @@ gText::CharWidth(uint8_t c)
  * rendered on the display. 
  *
  * @note The font for the character is the most recently selected font
- * and while individual characters may actually render different pixel heights,
- * the returned value is actually the height of the font row. i.e a '.' (period)
+ * and while individual character glyphs will actually render different pixel heights,
+ * the returned value is actually the height of the text font row. i.e a '.' (period)
  * will return the same height as a '@' (at sign).
  *
  * If there is no font selected, 0 will be returned.
@@ -2384,6 +2385,7 @@ gText::CharWidth(uint8_t c)
  * @see CharWidth()
  * @see StringWidth()
  * @see StringWidth_P()
+ * @see GetAreaProp()
  */
 
 uint8_t

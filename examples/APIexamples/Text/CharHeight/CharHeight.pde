@@ -16,12 +16,20 @@
  *
  * Note:
  *   The font for the character is the most recently selected font and 
- *   while individual characters may actually render different pixel heights,
+ *   while individual character glyphs will actually render different pixel heights,
  *   the returned value is actually the height of the font row.
  *   i.e a '.' (period) will return the same height as a '@' (at sign).
  *
+ *   The value 0 (zero) can be used instead of an actual character value to
+ *   return the size of the font.
+ *
  *   If there is no font selected or if the character code does not have
  *   a valid definition in the selected font, 0 will be returned.
+ *
+ * See Also:
+ *  CharWidth()
+ *  StringWidth()
+ *  GetAreaProp()
  *
  * Created by Bill Perry 2013-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
@@ -39,7 +47,7 @@ void setup()
 
 void loop()
 {
-int width;
+int height;
 char c;
 
 	GLCD.ClearScreen();
@@ -52,11 +60,19 @@ char c;
 	
 	GLCD.println(); // wrap to next line
 
+
+	/*
+	 * Note:
+	 * All characters will return the same height,
+	 */
 	c = 'H'; // character to size
 
-	GLCD.println(F("System5x7 is"));
-	width = GLCD.CharHeight(0);  // get height of current font
-	GLCD.print(width);
+	GLCD.print('\'');
+	GLCD.print(c);
+	GLCD.print('\'');
+	GLCD.println(" is");
+	height = GLCD.CharHeight(c); 
+	GLCD.print(height);
 	GLCD.print(" pixels high");
 
 	delay(DELAY);
