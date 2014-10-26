@@ -17,6 +17,13 @@
  * If there is no font selected or if the character code does not have
  * a valid definition in the selected font, 0 will be returned.
  *
+ *  UTF8 character encoding is supported only if it is enabled in the library config file.
+ *  When UTF8 encoding is enabled, CharWidth() will support receiving the UTF8 encoding
+ *  as a single character or as multi character byte stream. 
+ *  If the UTF8 encoding is sent as multiple bytes, only the last byte of the multi-byte
+ *  sequence will return a a non zero width.
+ *  All other bytes will return a width of zero.
+ *
  * Created by Bill Perry 2013-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
  */

@@ -34,6 +34,7 @@
  *	GLCD.DrawString("Hello", gTextfmt_col(20), gTextfmt_row(2), eraseFULL_LINE); 	// text column=20, row=2
  *	GLCD.DrawString("Hello", gTextfmt_col(col), gTextfmt_row(row), eraseFULL_LINE); // text column=col, row=row
  *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_center);			// center on display
+ *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_current);			// center on current line of display
  *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_bottom);			// center on bottom line of display
  *	GLCD.DrawString("Hello", gTextfmt_right, gTextfmt_top);				// right adjust on top line of display
  *	GLCD.DrawString(F("Hello"), gTextfmt_right, gTextfmt_top);			// right adjust on top line of display

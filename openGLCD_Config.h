@@ -150,11 +150,15 @@
 				// have 1k of RAM total.
 
 //#define GLCDCFG_UTF8		// Turns on code that will process character codes as UTF8
-				// encoded characters. Note that due to the the current font header,
-				// only UTF8 code points from 0-255 will be supported.
+				// encoded characters & character strings.
+				// Note that due to the the current font header,
+				// only UTF8 code points from 0-255 can be supported.
 				// Also, note that when enabled, raw character codes from 0x80-0xff 
 				// can still be used with the exception of 0xc2 and 0xc3 which are
-				// the 0x80-0x7ff UTF8 markers.
+				// the 0x80-0xff UTF8 markers.
+				// When enabled, the functions writeUTF8(c) and PutChar(c)
+				// can be used to output extended (multi-byte)
+				// encoded UTF8 character codes.
 
 
 //#define GLCDCFG_NO_PRINTF	// disable xxprintf() support

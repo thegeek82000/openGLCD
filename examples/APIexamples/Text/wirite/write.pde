@@ -27,14 +27,16 @@
  * UTF8 encoding.
  *
  * Note:
- * multibyte wide UTF8 characters are not supported as the interface
- * to write() is limited to 8 bit data.
+ *  multibyte wide UTF8 characters are not supported as the interface
+ *  to write() is limited to 8 bit data.
  *
- * UTF8 characters, can be used when the optional UTF8 library support is enabled.
- * However since the write() interface is 8 bit data, each byte of the
- * UTF8 multibyte character must be sent seperately.
- * When UTF8 support enabled, writeUTF8() and PutChar() can be used to output
- * UTF8 encoded characters, including multibyte wide UTF8 character codes 
+ *  UTF8 characters, can be used when the optional UTF8 library support is enabled.
+ *  However since the write() interface is 8 bit data, each byte of the
+ *  UTF8 multibyte character must be sent seperately.
+ *  When UTF8 support enabled, writeUTF8() and PutChar() can be used to output
+ *  UTF8 encoded characters, including multibyte wide UTF8 character codes 
+ *
+ *  For addtional information on utf8 character handling see writeUTF8()
  *
  * Created by Bill Perry 2014-09-06
  * bperrybap@opensource.billsworld.billandterrie.com
@@ -81,7 +83,7 @@ void loop()
 	 * Put text in center of display using default text area
 	 */
 
-	GLCD.DrawString(F("PutChar"), gTextfmt_center, gTextfmt_center);
+	GLCD.DrawString(F("write"), gTextfmt_center, gTextfmt_center);
 	delay(DELAY);
 
 	GLCD.println(); // wrap to new line
@@ -91,41 +93,41 @@ void loop()
 	 */
 	for(uint8_t c = 0x20; c < 0x80; c++)
 	{
-		GLCD.PutChar(c);
+		GLCD.write(c);
 		delay(50); // slow down for effect
 	}
 
 	delay(DELAY);
 	ClearAreas();
 
-	textArea[0].PutChar(0x03); // cp437 heart symbol
+	textArea[0].write(0x03); // cp437 heart symbol
 	delay(500);
 	textArea[0].println(" heart");
-	textArea[0].PutChar(0x01); // cp437 smile symbol
+	textArea[0].write(0x01); // cp437 smile symbol
 	delay(500);
 	textArea[0].print(" smile");
 	delay(300);
 
-	textArea[1].PutChar(0x0b); // cp437 male symbol
+	textArea[1].write(0x0b); // cp437 male symbol
 	delay(500);
 	textArea[1].println(" boy");
-	textArea[1].PutChar(0x0c); // cp437 female symbol
+	textArea[1].write(0x0c); // cp437 female symbol
 	delay(500);
 	textArea[1].print(" girl");
 	delay(300);
 
-	textArea[2].PutChar(0x0d); // cp437 note symbol
+	textArea[2].write(0x0d); // cp437 note symbol
 	delay(500);
 	textArea[2].println(" note");
-	textArea[2].PutChar(0x9b); // cp437 cent symbol
+	textArea[2].write(0x9b); // cp437 cent symbol
 	delay(500);
 	textArea[2].println(" cent");
 	delay(300);
 
-	textArea[3].PutChar(0xe3); // cp437 pi symbol
+	textArea[3].write(0xe3); // cp437 pi symbol
 	delay(500);
 	textArea[3].println(" pi");
-	textArea[3].PutChar(0xea); // cp437 ohm symbol
+	textArea[3].write(0xea); // cp437 ohm symbol
 	delay(500);
 	textArea[3].print(" ohm");
 	delay(300);

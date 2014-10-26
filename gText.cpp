@@ -43,6 +43,56 @@ extern "C"
 
 static FontCallback	FontRead;	// font callback shared across all instances
 
+
+#ifdef GLCDCFG_UTF8
+/**
+ * UTF8 character decoding
+ *
+ * @param c next character in UTF8 stream to process
+ *
+ * UTF8 character decode processing
+ * For now this is a crude hack that assumes no threading or reentrancy
+ * and that the UTF character codes are only 0-255.
+ * To go beyond 255 is a BIG deal since the font header currently only supports up to
+ * 256 characters. (it is only an 8 bit field)
+ * Also by only supporting 0-255 codes, when UTF8 processing is enable raw code processing
+ * can also be supported for characters above 0x7f with the exception that codes
+ * 0xc2 and 0xc3 will be lost.
+ *
+ * This code can process each byte seperately, or as a single 16bit UTF8 code.
+ * This allows using UTF8 wide character codes directly which is what is used
+ * when using a single UTF8 literal character.
+ *
+ * @returns < 0 if processing still on going, otherwise the final decoded character code.
+ */
+
+int
+gText::UTF8decode(wchar_t c)
+{
+static uint8_t ucode = 0; // decoded character code
+
+	if((uint16_t)c > (uint8_t)0xff) // support sending UTF8 code as one 16 bit value
+	{
+		UTF8decode((uint8_t)(c >> 8));
+		return(UTF8decode((uint8_t)(c & 0xff)));
+	}
+
+	if((c == 0xc2) || (c == 0xc3)) // is it a UTF 80-7ff code point start?
+	{
+		ucode = (c & 0x1f) << 6;
+		return(-1); // still decoding
+	}
+	else
+	{
+		if(ucode)
+			c = (c & 0x3f) | ucode; // create final code point
+	}
+	ucode = 0; // done decoding
+	return(c);
+}
+#endif
+	   
+
 /**
  * Constructor creates a default gText text area object with no font
  *
@@ -1050,13 +1100,35 @@ uint8_t gText::SpecialChar(uint8_t c)
  * undefined characters to zero.
  *
  * @returns 1 if a character was rendered, 0 if a character was not rendered
+ *
+ * @note
+ * UTF8 character encoding is supported only if it is enabled in the library config file.
+ * When UTF8 encoding is enabled, PutChar() will support receiving the UTF8 encoding
+ * as a single wide UTF8 character or as individual bytes in a multi byte data stream. 
+ * If the UTF8 encoding is sent to PutChar() as multiple individul bytes,
+ * only the last byte of the multi-byte sequence will actually print a character.
+ * All other bytes of the multibyte sequence will silently print nothing as
+ * they are used to decode the character code.\n\n
+ * For more information on UTF8 and UTF8 font see here:\n
+ *  http://en.wikipedia.org/wiki/UTF-8 \n
+ *  http://www.fileformat.info/info/charset/UTF-8/list.htm
+ *
+ * @warning
+ * When UTF8 encoding support is enabled, the raw 8 bit character codes 0xc2 and 0xc3
+ * can no longer be sent as those are used for UTF8 encoding.
  * 
  * @see Puts()
  * @see Puts_P()
  * @see write()
+ * @see writeUTF8()
  */
 
-int gText::PutChar(uint8_t c)
+int 
+#ifdef GLCDCFG_UTF8
+gText::PutChar(wchar_t c)
+#else
+gText::PutChar(uint8_t c)
+#endif
 {
     if(this->Font == 0)
 	  return 0; // no font selected
@@ -1067,39 +1139,17 @@ int gText::PutChar(uint8_t c)
 
 	if(c < 0x20)
 	{
-		if(SpecialChar(c))
+		if(SpecialChar((uint8_t)c))
 			return 1;
 	}
-
 #ifdef GLCDCFG_UTF8
-	/*
-	 * UTF8 character decode processing
-	 * For now this is a crude hack that assumes no threading and that the UTF character
-	 * codes are only 0-255.
-	 * To go beyond 255 is a BIG deal since the font header currently only supports up to
-	 * 256 characters. (it is only an 8 bit field)
-	 * Also by only supporting 0-255 codes, when UTF8 processing is enable raw code processing
-	 * can also be supported for characters above 0x7f with the exception that codes
-	 * 0xc2 and 0xc3 will be lost.
-	 */
-static uint8_t ucode = 0;
-
-	if((c == 0xc2) || (c == 0xc3)) // is it a UTF 80-7ff code point start?
-	{
-		ucode = (c & 0x1f) << 6;
-		return(1); // lie and say we printed it
-	}
-	else
-	{
-		if(ucode)
-			c = (c & 0x3f) | ucode; // create final code point
-	}
+	// must use tmp var since wchar is not guaranteed to be signed.
+	int tc  = UTF8decode(c);
+	if(tc < 0)
+		return(1); // processing still on going, so lie and say we processed it
+	c = tc;
 #endif
 
-#ifdef GLCDCFG_UTF8
-	ucode = 0;
-#endif
-	   
 	uint8_t width = 0;
 	uint8_t height = FontRead(this->Font+FONT_HEIGHT);
 	uint8_t bytes = (height+7)/8; /* calculates height in rounded up bytes */
@@ -1749,6 +1799,7 @@ uint8_t fx, fy; // x & y pixel formatting positions
  *	GLCD.DrawString("Hello", gTextfmt_col(20), gTextfmt_row(2), eraseFULL_LINE); 	// text column=20, row=2
  *	GLCD.DrawString("Hello", gTextfmt_col(col), gTextfmt_row(row), eraseFULL_LINE); 	// text column=col, row=row
  *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_center);					// center on display
+ *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_current);				// center on the current line of display
  *	GLCD.DrawString("Hello", gTextfmt_center, gTextfmt_bottom);					// center on bottom line of display
  *	GLCD.DrawString("Hello", gTextfmt_right, gTextfmt_top);						// right adjust on top line of display
  *	GLCD.DrawString(F("Hello"), gTextfmt_right, gTextfmt_top);					// right adjust on top line of display
@@ -2239,20 +2290,38 @@ void gText::ClearAreaMode(gTextMode mode)
  * rendered on the display.
  *
  * @note The font for the character is the most recently selected font.
- * If there is no font selected or if the character code does not have a valid definition in the selected font, 0 will be returned.
+ * If there is no font selected or if the character code does not have a valid definition in the selected font,
+ * 0 will be returned.\n\n
+ * UTF8 character encoding is supported only if it is enabled in the library config file.
+ * When UTF8 encoding is enabled, CharWidth() will support receiving the UTF8 encoding
+ * as a single character or as multi character byte stream. 
+ * If the UTF8 encoding is sent as multiple bytes, only the last byte of the multi-byte
+ * sequence will return a a non zero width for the decoded character.
+ * All other bytes within the UTF8 multi-byte sequence will return a width of zero.
+
  *
  * @see CharHeight()
  * @see StringWidth()
  * @see StringWidth_P()
  */
 
-uint8_t gText::CharWidth(uint8_t c)
+uint8_t
+#ifdef GLCDCFG_UTF8
+gText::CharWidth(wchar_t c)
+#else
+gText::CharWidth(uint8_t c)
+#endif
 {
 	uint8_t width = 0;
 
 #ifdef GLCDCFG_UTF8
-	if( c == 0xc2 || c == 0xc3) // throw away UTF8 0x80-0x7ff start indicators
-		return(0);
+	// must use tmp var since wchar is not guaranteed to be signed.
+	int tc  = UTF8decode(c);
+	if(tc < 0)
+	{
+		return(0); // processing still on going, so lie and say zero width
+	}
+	c = tc;
 #endif
 	
     if(isFixedWidthFont(this->Font))
@@ -2307,7 +2376,12 @@ uint8_t gText::CharWidth(uint8_t c)
  * @see StringWidth_P()
  */
 
-uint8_t gText::CharHeight(uint8_t c)
+uint8_t
+#ifdef GLCDCFG_UTF8
+gText::CharHeight(wchar_t c)
+#else
+gText::CharHeight(uint8_t c)
+#endif
 {
 	uint8_t height = 0;
 	
@@ -2317,6 +2391,7 @@ uint8_t gText::CharHeight(uint8_t c)
  	 * For now, ignore the character passed and use the overall height
 	 * of the font.
 	 * Later we may actually use the character but 0/NULL must be supported.
+	 * When this is added, UTF8 processing will also have to be done.
 	 */
 		height = FontRead(this->Font+FONT_HEIGHT);
 
@@ -2463,6 +2538,15 @@ uint8_t i=0;
  * Carriage returns are swallowed to prevent println() from
  * printing the 0xd character if the font contains this character.
  * To actually print the 0xd character use PutChar().
+ *
+ * @note
+ * multibyte wide UTF8 characters are not supported as the interface
+ * to write() is limited to 8 bit data.\n\n
+ * UTF8 characters, can be used when the optional UTF8 library support is enabled.
+ * However since the write() interface is 8 bit data, each byte of the multibyte character
+ * must be sent seperately.\n
+ * When UTF8 support enabled, writeUTF8() and PutChar() can be used to output UTF8 encoded characters.
+ * including multibyte wide UTF8 character codes 
  *
  * @see PutChar()
  */

@@ -329,6 +329,9 @@ class gText : public glcd_Device , public Print
 	uint8_t			need_scroll; // set when text scroll has been defered
 #endif
 
+#ifdef GLCDCFG_UTF8
+	int UTF8decode(wchar_t c);
+#endif
 	uint8_t SpecialChar(uint8_t c);
 
 	void DrawStringSetXY(int slen, int hpos, int vpos, eraseLine_t erase = eraseNONE);
@@ -366,7 +369,11 @@ class gText : public glcd_Device , public Print
 	// Font Functions
 	void SelectFont(Font_t font, uint8_t fgcolor=BLACK, FontCallback callback=ReadPgmData); // default arguments added, callback now last arg
 	void SetFontColor(uint8_t fgcolor);
+#ifdef GLCDCFG_UTF8
+	int PutChar(wchar_t c);
+#else
 	int PutChar(uint8_t c);
+#endif
 	void Puts(const char *str);
 	void Puts(const String &str); // for Arduino String Class
 	void Puts_P(PGM_P str);
@@ -387,15 +394,26 @@ class gText : public glcd_Device , public Print
 
 #if ARDUINO < 100
 	void write(uint8_t c);  // character output for print base class
+#ifdef GLCDCFG_UTF8
+	void writeUTF8(wchar_t utfc) { PutChar(utfc); }
+#endif
 #else
 	size_t write(uint8_t c);  // character output for print base class
+#ifdef GLCDCFG_UTF8
+	size_t writeUTF8(wchar_t utfc) { return(PutChar(utfc)); }
+#endif
 #endif
 
 	void CursorTo( uint8_t column, uint8_t row); // 0 based coordinates for character columns and rows
 	void CursorTo( int8_t column); // move cursor on the current row
 	void CursorToXY( uint8_t x, uint8_t y); // coordinates relative to active text area
+#ifdef GLCDCFG_UTF8
+	uint8_t CharWidth(wchar_t c);
+	uint8_t CharHeight(wchar_t c); // 0 returns default height of font
+#else
 	uint8_t CharWidth(uint8_t c);
 	uint8_t CharHeight(uint8_t c); // 0 returns default height of font
+#endif
 	uint16_t StringWidth(const char* str);
 	uint16_t StringWidth_P(PGM_P str);
 	uint16_t StringWidth(String &str);

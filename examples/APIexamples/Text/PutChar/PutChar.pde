@@ -25,6 +25,22 @@
  * Returns:
  *  1 if a character was rendered, 0 if a character was not rendered
  *
+ * Note:
+ *  UTF8 character encoding is supported only if it is enabled in the library config file.
+ *  When UTF8 encoding is enabled, PutChar() will support receiving the UTF8 encoding
+ *  as a single wide UTF8 character or as individual bytes in a multi byte data stream. 
+ *  If the UTF8 encoding is sent to PutChar() as multiple individual bytes,
+ *  only the last byte of the multi-byte sequence will actually print a character.
+ *  All other bytes of the multibyte sequence will silently print nothing as
+ *  they are used to decode the character code.
+ *
+ *  For addtional information on utf8 character handling see writeUTF8()
+ *
+ * Warning
+ * When UTF8 encoding support is enabled, the raw 8 bit character codes 0xc2 and 0xc3
+ * can no longer be sent as those are used for UTF8 encoding.
+ *
+ *
  * Created by Bill Perry 2013-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
  */
