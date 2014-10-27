@@ -1,5 +1,14 @@
 vi:ts=4
 
+1.0 release fixes:
+
+- decide how to handle the writeUTF8() function with doxygen.
+	Should it exist for documention even though it is disabled by default?
+	Should it exist and map to write() or should it not exist to cause a link error.
+	I'm leaning tward a link error when not enabled.
+
+==============================================================================
+
 - modify build script to work even if not using a git tree
 	Should be able to just check for .git file and then make up
 	version stuff if it doesn't exist.
@@ -84,34 +93,6 @@ vi:ts=4
 
 - create glcd types to replace PSTR and PGM_P
 	 so that mainline code does not depend on proprietary types.
-
-- needs fixes for when user does "import library" of openGLCD
-	This inserts includes for all libraries in the openGLCD root
-	which will cause code to drop back to GLCDv3 mode.
-	possible choices:
-		- move openGLCD_GLCDv3.h to include directory (done)
-			To do this, there could be a define like GLCDCFG_GLCDv3Mode
-			that is used by openGLCD.h to include <include/openGLCD_GLCDv3.h>
-			Sketches that want GLCDv3 compatibilty would simply turn on
-			the defne before including openGLCD.h
-
-			The optional user created glcd.h header would contain:
-			#define GLCDCFG_GLCDv3Mode
-			#include <openGLCD.h>
-
-			Alternatively, rather than an ifdef the sketch could simply
-			include both for compatibility:
-			#include <openGLCD.h>
-			#include <include/openGLCD_GLCDv3.h>
-
-			Seems cleaner to include both as it keeps the openGLCD.h header "pure".
-
-			Note: that this only works if there is NEVER any code in the actual
-			library that changes for GLCDv3 compatibilty, 
-			which is probabaly as it should be.
-
-		- play games with gaurd defines since openGLCD.h is included
-			before openGLCD_GLCDv3.h
 
 - Rendering issues for fixed witdh fonts smaller than 7/8 bits tall (in bitbucket)
 	- inverse is messed up.
@@ -541,4 +522,35 @@ DONE-------------------------------------------------------------
 - update clock demos to extract time from sketch __TIME__/__DATE__ (done)
 
 - remove Streaming.h from include directory (done)
+
+- needs fixes for when user does "import library" of openGLCD (done)
+	FIX: moved compat header to include directory
+	FIX: provided a compat header named glcd.h.compat that can be renamed glcd.h
+
+	This inserts includes for all libraries in the openGLCD root
+	which will cause code to drop back to GLCDv3 mode.
+	possible choices:
+		- move openGLCD_GLCDv3.h to include directory (done)
+			To do this, there could be a define like GLCDCFG_GLCDv3Mode
+			that is used by openGLCD.h to include <include/openGLCD_GLCDv3.h>
+			Sketches that want GLCDv3 compatibilty would simply turn on
+			the defne before including openGLCD.h
+
+			The optional user created glcd.h header would contain:
+			#define GLCDCFG_GLCDv3Mode
+			#include <openGLCD.h>
+
+			Alternatively, rather than an ifdef the sketch could simply
+			include both for compatibility:
+			#include <openGLCD.h>
+			#include <include/openGLCD_GLCDv3.h>
+
+			Seems cleaner to include both as it keeps the openGLCD.h header "pure".
+
+			Note: that this only works if there is NEVER any code in the actual
+			library that changes for GLCDv3 compatibilty, 
+			which is probabaly as it should be.
+
+		- play games with gaurd defines since openGLCD.h is included
+			before openGLCD_GLCDv3.h
 

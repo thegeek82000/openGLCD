@@ -7,7 +7,8 @@
  */
 
 
-#include <openGLCD_GLCDv3.h>
+#include <openGLCD.h>
+#include <include/openGLCD_GLCDv3.h>
 #include "fonts/Arial14.h"             // proportional font
 #include "fonts/SystemFont5x7.h"       // system font
 #include "bitmaps/ArduinoIcon64x64.h"  // 64x64 bitmap 
@@ -49,10 +50,10 @@ long longnumber;
 char     charstring[] = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
 uint8_t uint8string[] = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
 
-char     charstring_P[] PROGMEM = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
-uint8_t uint8string_P[] PROGMEM = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
+const char     charstring_P[] PROGMEM = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
+const uint8_t uint8string_P[] PROGMEM = {'h', 'e', 'l', 'l', 'o', 0x81, 0x82, 0};
 
-prog_char teststring[] PROGMEM = "hello";
+const char teststring[] PROGMEM = "hello";
 
 #define Fmacro_string F("Hello")
 
@@ -146,7 +147,7 @@ void regression(void)
 	GLCD.StringWidth(Fmacro_string);
 	GLCD.StringWidth_P(PSTR("dummy stringwidth String"));
 	GLCD.StringWidth_P(charstring_P);
-	GLCD.StringWidth_P((prog_char*)uint8string_P);			// CAST REQUIRED
+	GLCD.StringWidth_P((const char *)uint8string_P);			// CAST REQUIRED
 	
 	/*
 	 * Check aliases
@@ -195,7 +196,7 @@ void regression(void)
 	
 	predefTA.Puts_P(PSTR("dummy puts_p string"));
 	predefTA.Puts_P(charstring_P);
-	predefTA.Puts_P((prog_char*)uint8string_P);			//CAST REQUIRED
+	predefTA.Puts_P((const char *)uint8string_P);			//CAST REQUIRED
 	predefTA.printFlash(flashStr("hello"));
 	predefTA.printFlashln(flashStr("hello"));
 
@@ -208,7 +209,7 @@ void regression(void)
 	
 	predefTA.DrawString_P(PSTR("dummy drawstring_p string"),0,0);	// not in GLCD
 	predefTA.DrawString_P(charstring_P,0,0);			// not in GLCD
-	predefTA.DrawString_P((prog_char*)uint8string_P,0,0);		// not in GLCD		//CAST REQUIRED
+	predefTA.DrawString_P((const char*)uint8string_P,0,0);		// not in GLCD		//CAST REQUIRED
 
 	predefTA.write('c');
 	predefTA.write(0xfe);
@@ -225,7 +226,7 @@ void regression(void)
 	predefTA.StringWidth(Fmacro_string);
 	predefTA.StringWidth_P(PSTR("dummy stringwidth String"));
 	predefTA.StringWidth_P(charstring_P);
-	predefTA.StringWidth_P((prog_char*)uint8string_P);			// CAST REQUIRED
+	predefTA.StringWidth_P((const char*)uint8string_P);			// CAST REQUIRED
 
 	predefTA.EraseTextLine(eraseTO_EOL);
 	predefTA.EraseTextLine(eraseFROM_BOL);
@@ -242,7 +243,7 @@ void regression(void)
 	
 	predefTA.Printf_P(PSTR("dummy printf string"));
 	predefTA.Printf_P(charstring_P);
-	predefTA.Printf_P((prog_char *)uint8string_P);			//CAST REQUIRED
+	predefTA.Printf_P((const char *)uint8string_P);			//CAST REQUIRED
 
 #endif
 
