@@ -19,6 +19,26 @@
 #include "Corsiva_12.h"
 #include "Verdana_digits_24.h"  // large proportional font contains [0-9] and :
 
+#include "Callibri10.h"
+#include "Callibri11.h"
+#include "Callibri11_bold.h"
+#include "Callibri11_italic.h"
+#include "Callibri14.h"
+#include "Callibri15.h"
+#include "Cooper19.h"
+#include "Cooper21.h"
+#include "Cooper26.h"
+#include "TimesNewRoman13.h"
+#include "TimesNewRoman13_italic.h"
+#include "TimesNewRoman16.h"
+#include "TimesNewRoman16_bold.h"
+#include "TimesNewRoman16_italic.h"
+#include "Verdana12.h"
+#include "Verdana12_bold.h"
+#include "Verdana12_italic.h"
+#include "Roosewood22.h"
+#include "Roosewood26.h"
+
 #include "fixednums7x15.h"       // fixed width font - + , - . / [0-9] and :
 #include "fixednums8x16.h"       // fixed width font - + , - . / [0-9] and :
 #include "fixednums15x31.h"      // fixed width font - + , - . / [0-9] and :
