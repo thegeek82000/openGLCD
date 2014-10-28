@@ -33,9 +33,6 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef _Callibri10_H
 #define _Callibri10_H
 

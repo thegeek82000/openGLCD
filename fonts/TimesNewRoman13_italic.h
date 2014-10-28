@@ -34,9 +34,6 @@
  *                  // bit field of all characters
  */
 
-#include <inttypes.h>
-#include <avr/pgmspace.h>
-
 #ifndef _TimesNewRoman13_italic_H
 #define _TimesNewRoman13_italic_H
 
