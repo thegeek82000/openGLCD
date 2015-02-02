@@ -9,6 +9,7 @@ The KS0108 is a popular controller chip used in GLCD displays but
 the wiring for these panels is not standardized and it is important
 to check the datasheet for your panel to confirm how it should be wired.
 Incorrect connections of the signal lines are the most common cause of problems.
+Also, it as odd as it sounds ensure that the display is actually a KS0108 display.
 
 @warning
 Particular care should be taken with the power leads and Vee/Vout as wiring these incorrectly can destroy a panel.
@@ -34,6 +35,19 @@ Notice that there are no GLCD module pin numbers in the table.
 This is because pin locations for the functions is not standardized.
 The datasheet for the specific GLCD must be consulted to know which
 function has been connected to which GLCD pin number.
+Pay close attention to the signals in the table.
+
+@warning
+It is important to verify that the display is really a KS0108 based module
+not some other type of display.
+While a ST7920 display will have a very similar pinout,
+a KS0108 glcd uses chip select lines whereas the ST7920 does not.
+Typically a ST7920 will have two
+pins labled PSB (parallel/serial select) and NC (not connected).
+Do not attempt to wire up a ST7920 as if it were a ks0108 attempting
+to use the PSB and NC pins as if they were chip select lines.
+Doing so could potentially damage the display or the Arduino.
+
 
 <center>
 <table>
