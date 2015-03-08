@@ -261,7 +261,7 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 	<td><center> (no default)* </center></td> <!-- CSEL3 -->
 </tr>
 <tr>
-	<td><center> Teensy 3.0/3.1</center></td>
+	<td><center> Teensy 3.0/3.1/LC</center></td>
 	<td><center> 9* </center></td> <!-- D_I -->
 	<td><center> 8* </center></td> <!-- R_W -->
 	<td><center> 7* </center></td> <!-- EN -->
@@ -387,13 +387,19 @@ Teensy 3.0 pin 3 is connected to the GLCD pin function CSEL1 (chip select 1) - <
 CSEL3 is only used on some 192x64 displays
 
 @warning
-<h2>Teensy 3.0 pins must NEVER be connected directly to the GLCD module pins.</h2>
+<h2>Teensy 3.0 and Teensy LC pins must NEVER be connected directly to the GLCD module data pins.</h2>
 @warning
-This is because the GLCD is 5v and the Teensy 3.0 is 3v.
-The voltages must be mapped in order to avoid damaging the Teensy 3.0.
-Alternatively, each connection from Teensy 3.0 to the GLCD can be protected
+This is because the GLCD is 5v while the Teensy 3.0 and LC are 3v and not 5v tolerant.
+The voltages must be mapped using a voltage level shifter in order to avoid damaging the Teensy 3.0/LC.
+The voltage level shifter must be bi-directional on the 8 bit data lines.
+Alternatively, each connection from Teensy 3.0/LC to the GLCD can be protected
 by going go through a 10k resistor in series.\n
-i.e. [Teensy 3.0 pin]<--- 10k Resistor (Brown/Black/Orange) --->[GLCD pin]
+i.e. [Teensy 3.0/LC pin]<--- 10k Resistor (Brown/Black/Orange) --->[GLCD pin] \n
+Note: With the Teensy LC, you must also enable the read cache
+(config file symbol GLCDCFG_READ_CACHE) as the LC
+is unable to reliably read the data lines through the series resistors.
+The read cache will offer a considerable performance increase
+but will consume 1 bit of ram per pixel or 1k for a 128x64 glcd.
 
 
 Mega, Mighty1284p, Sanguino, and Teensy boards provide faster performance by allowing
