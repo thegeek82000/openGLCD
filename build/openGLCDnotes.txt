@@ -7,6 +7,25 @@ vi:ts=4
 	Should it exist and map to write() or should it not exist to cause a link error.
 	I'm leaning tward a link error when not enabled.
 
+- fix the html/doxygen documenation for the GLCD control/glcd_device functions.
+For some reason in the newest doxygen, you don't automatically get the hyperlinks anymore.
+
+
+- Fix glcd_Devide.cpp getStatus() function to ensure pullups are on.
+This is only done to ensure that users get a BUSY/RESET status when things are miswired
+or when no GLCD is attached. 
+Currently it is done by setting the bits in the port register which sets pullups
+on the AVR. This should be handled in a better more portable way.
+
+- think about changing FORCE_CORECODE mode.
+It might be useful to force core code mode but still use
+the board specific pin config file.
+currently it also forces the use of the "corecode" pin config file.
+Maybe there needs to be 2 seperate defines?
+
+- update diags to show glcd config defines.
+Several currently are not indicated by diags
+
 ==============================================================================
 
 - modify build script to work even if not using a git tree
@@ -126,6 +145,8 @@ vi:ts=4
   backlight must be configured in config files.
 
 - update doxygen for how to install???
+This makes more sense when documenation is hosted on line
+since you can read the documenation without having to install the s/w.
 
 - Update diags text output in doxygen (to show new version info)
 
