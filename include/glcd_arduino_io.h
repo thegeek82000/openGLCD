@@ -66,7 +66,7 @@ extern "C" {
 #define GLCD_CORE_MIGHTY1284P // avr mighty1284p "standard" pin mapping
 #elif (analogInputToDigitalPin(0) == 31 )
 #define GLCD_CORE_SANGUINO // avr mighty1284p avr_developers pin mapping (SANGUINO)
-#elif (analogInputToDigitalPin(0) == 21 && analogInputToDigitalPin(7) == 14)
+#elif (analogInputToDigitalPin(0) == 14 && analogInputToDigitalPin(7) == 21)
 #define GLCD_CORE_BOBUINO // avr mighty1284p "bobuino" pin mapping
 #elif (analogInputToDigitalPin(0) == 21 && analogInputToDigitalPin(7) == 31)
 #define GLCD_CORE_SBEAUTY // "SleepBeauty" variant mighty-1284p core ------
@@ -81,7 +81,7 @@ extern "C" {
 #define GLCD_CORE_TEENSY2pp
 #elif defined(__AVR_ATmega32U4__)   // Teensy 2.0
 #define GLCD_CORE_TEENSY2
-#elif defined(__MK20DX128__) || defined(__MK20DX256__) // Teensy 3/3.1
+#elif defined(__MK20DX128__) || defined(__MK20DX256__) || defined(__MKL26Z64__) // Teensy 3/3.1/LC
 #define GLCD_CORE_TEENSY3
 #else
 // For unknown Teensy boards, Fallback to using Arduino core code routines digitalWrite()/digitalRead()
@@ -323,6 +323,95 @@ extern "C" {
 	(P) == 69 ? 7 : \
 	0) // dummy entry (should never happen)
 
+// check for using Jack's mighty-1284p vendor core
+// Jack's mighty-1284p vendor core has a PORT_TO_OUTPUT macro
+// that can be used to get the address of the port register
+#elif defined(PORT_TO_OUTPUT)
+#warning using new 1284 pasting macros
+// The reasn there is a sub macro here is that 
+// macro and if the parameter to digitalPinToPortReg() is not
+// a naked constant, then pasting cannot be used to look upt the port index define name
+// Code that depends on compile time optimazation vs cpp time optimization may do this.
+// Having the extra macro can use the cpp pasting to create a giagantic ternary
+// that will still work at compile time when constants but not naked constants are used.
+// This allows using things like the A0 arduino symbol which is a const int 
+// rather than a simple naked numeric define
+#define _digitalPinToPortReg(p) PORT_TO_OUTPUT(PORT_D ## p)
+#define digitalPinToPortReg(P) \
+	(\
+		(P) ==  0 ? _digitalPinToPortReg(0)  : \
+		(P) ==  1 ? _digitalPinToPortReg(1)  : \
+		(P) ==  2 ? _digitalPinToPortReg(2)  : \
+		(P) ==  3 ? _digitalPinToPortReg(3)  : \
+		(P) ==  4 ? _digitalPinToPortReg(4)  : \
+		(P) ==  5 ? _digitalPinToPortReg(5)  : \
+		(P) ==  6 ? _digitalPinToPortReg(6)  : \
+		(P) ==  7 ? _digitalPinToPortReg(7)  : \
+		(P) ==  8 ? _digitalPinToPortReg(8)  : \
+		(P) ==  9 ? _digitalPinToPortReg(9)  : \
+		(P) == 10 ? _digitalPinToPortReg(10) : \
+		(P) == 11 ? _digitalPinToPortReg(11) : \
+		(P) == 12 ? _digitalPinToPortReg(12) : \
+		(P) == 13 ? _digitalPinToPortReg(13) : \
+		(P) == 14 ? _digitalPinToPortReg(14) : \
+		(P) == 15 ? _digitalPinToPortReg(15) : \
+		(P) == 16 ? _digitalPinToPortReg(16) : \
+		(P) == 17 ? _digitalPinToPortReg(17) : \
+		(P) == 18 ? _digitalPinToPortReg(18) : \
+		(P) == 19 ? _digitalPinToPortReg(19) : \
+		(P) == 20 ? _digitalPinToPortReg(20) : \
+		(P) == 21 ? _digitalPinToPortReg(22) : \
+		(P) == 22 ? _digitalPinToPortReg(22) : \
+		(P) == 23 ? _digitalPinToPortReg(23) : \
+		(P) == 24 ? _digitalPinToPortReg(24) : \
+		(P) == 25 ? _digitalPinToPortReg(25) : \
+		(P) == 26 ? _digitalPinToPortReg(26) : \
+		(P) == 27 ? _digitalPinToPortReg(27) : \
+		(P) == 28 ? _digitalPinToPortReg(28) : \
+		(P) == 29 ? _digitalPinToPortReg(29) : \
+		(P) == 30 ? _digitalPinToPortReg(30) : \
+		(P) == 31 ? _digitalPinToPortReg(31) : \
+	&PORTA) // dummy entry (should never happen)
+
+#define _digitalPinToBit(p) (BIT_D ## p)
+#define digitalPinToBit(P) \
+	(\
+		(P) ==  0 ? _digitalPinToBit(0)  : \
+		(P) ==  1 ? _digitalPinToBit(1)  : \
+		(P) ==  2 ? _digitalPinToBit(2)  : \
+		(P) ==  3 ? _digitalPinToBit(3)  : \
+		(P) ==  4 ? _digitalPinToBit(4)  : \
+		(P) ==  5 ? _digitalPinToBit(5)  : \
+		(P) ==  6 ? _digitalPinToBit(6)  : \
+		(P) ==  7 ? _digitalPinToBit(7)  : \
+		(P) ==  8 ? _digitalPinToBit(8)  : \
+		(P) ==  9 ? _digitalPinToBit(9)  : \
+		(P) == 10 ? _digitalPinToBit(10) : \
+		(P) == 11 ? _digitalPinToBit(11) : \
+		(P) == 12 ? _digitalPinToBit(12) : \
+		(P) == 13 ? _digitalPinToBit(13) : \
+		(P) == 14 ? _digitalPinToBit(14) : \
+		(P) == 15 ? _digitalPinToBit(15) : \
+		(P) == 16 ? _digitalPinToBit(16) : \
+		(P) == 17 ? _digitalPinToBit(17) : \
+		(P) == 18 ? _digitalPinToBit(18) : \
+		(P) == 19 ? _digitalPinToBit(19) : \
+		(P) == 20 ? _digitalPinToBit(20) : \
+		(P) == 21 ? _digitalPinToBit(22) : \
+		(P) == 22 ? _digitalPinToBit(22) : \
+		(P) == 23 ? _digitalPinToBit(23) : \
+		(P) == 24 ? _digitalPinToBit(24) : \
+		(P) == 25 ? _digitalPinToBit(25) : \
+		(P) == 26 ? _digitalPinToBit(26) : \
+		(P) == 27 ? _digitalPinToBit(27) : \
+		(P) == 28 ? _digitalPinToBit(28) : \
+		(P) == 29 ? _digitalPinToBit(29) : \
+		(P) == 30 ? _digitalPinToBit(30) : \
+		(P) == 31 ? _digitalPinToBit(31) : \
+	0) // dummy entry (should never happen)
+
+// If not using Jack's core, try to fall back to
+// seperate mapping tables.	
 #elif defined(GLCD_CORE_MIGHTY1284P) // "standard" variant mighty-1284p core ----
 
 #define digitalPinToPortReg(P) \

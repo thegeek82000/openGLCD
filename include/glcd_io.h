@@ -132,7 +132,7 @@
 
 
 // FIXME, switch this #if below to use CORE type for TEENSY3 when its available
-#if defined(CORE_TEENSY)  && defined(__MK20DX128__)  // teensy3 has builtin digitalXXXFast() routines
+#if defined(CORE_TEENSY)  && defined(GLCD_CORE_TEENSY3) // teensy3 core has builtin digitalXXXFast() routines
 #define glcdio_ReadPin(pin)				digitalReadFast(pin)
 #define glcdio_WritePin(pin, pinval)	digitalWriteFast(pin, pinval)
 #define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
@@ -145,9 +145,9 @@
 #define glcdio_ReadPin(pin)				digitalReadFast(pin)
 
 #if defined (pinModeFast) // check for pinModeFast, as not all of them contain this
-#define glcdio_PinMode(pin, pinval)		pinModeFast(pin, pinval)
+#define glcdio_PinMode(pin, mode)		pinModeFast(pin, mode)
 #else
-#define glcdio_PinMode(pin, pinval)		pinMode(pin, pinval)
+#define glcdio_PinMode(pin, mode)		pinMode(pin, mode)
 #endif
 
 #define GLCDIO_DIGITALXXXFAST  // indicate using digitalxxxFast() routines (used by diags)

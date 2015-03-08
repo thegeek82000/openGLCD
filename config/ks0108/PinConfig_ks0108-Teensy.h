@@ -63,9 +63,9 @@
 //#warning "KS0108 using pins for teensy++"
 
 /***********************************************************/
-/*  Configuration for assigning LCD pins to Teensy 3.0/3.1 */
+/*  Configuration for LCD pins to Teensy 3.0/3.1/LC        */
 /***********************************************************/
-#elif defined(__MK20DX128__)   || defined(__MK20DX256__) // Teensy 3.0/Teensy 3.1
+#elif defined(__MK20DX128__)   || defined(__MK20DX256__) || defined(__MKL26Z64__) // Teensy 3.0/Teensy 3.1/LC
 
 #define glcd_PinConfigName "ks0108-Teensy3"   // define name for configuration
 

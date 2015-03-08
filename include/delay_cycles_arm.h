@@ -151,7 +151,11 @@ _delay_loop_2_x( uint32_t __n )
 {                                               /* cycles per loop      */
     __asm__ volatile (                          /* __n..one        zero */
                 "L_%=__delay_loop_2_x:"               "\n\t"
+#if  defined(__MKL26Z64__)  // uses thumb16 mode which uses different neumonic
+                "sub   %0, #1"                         "\n\t"
+#else
                 "subs   %0, #1"                         "\n\t"
+#endif
 //                "nop"                                   "\n\t"
                 "bne    L_%=__delay_loop_2_x"         "\n"
                 : "+r" (__n) :
