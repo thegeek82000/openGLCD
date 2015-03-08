@@ -1304,6 +1304,12 @@ uint8_t ReadPgmData(const uint8_t* ptr)  // note this is a static function
 // override GotoXY to also call CursorToxy for backward compability 
 // with older v2 ks0108 library
 // (older library didn't have seperate x & y for hardware/graphics vs text )
+
+/**
+ * Set x,y coordinates for both Graphics and Text
+ *
+ * @copydetails glcd_Device::GotoXY()
+ */
 void glcd::GotoXY(uint8_t x, uint8_t y)
 {
 	glcd_Device::GotoXY(x, y);
