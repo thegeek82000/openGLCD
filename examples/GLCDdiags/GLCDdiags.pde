@@ -4,6 +4,17 @@
  * This sketch tests the memory and interface to the GLCD module as well as
  * report the current openGLCD library configuration to the serial port.
  *
+ * It is recommended to run the sketch with a serial monitor
+ * to be able to see the diagnostic messages.
+ * When using the Arduino IDE, start the serial monitor afer
+ * the upload finishes.
+ *
+ * While the sketch will work without a serial monitor connection,
+ * on some USB based boards like the Teensy or Leonardo,
+ * if there is no USB serial port connection,
+ * the code will wait up to 10 seconds for a USB serial
+ * connection before starting.
+ *
  * The serial port is configured to 9600 baud.
  *
  * It also displays a set of visual screens on the GLCD that can aid in
@@ -84,7 +95,7 @@
 #define chip2y2(chip) ((chip2y1(chip) + CHIP_HEIGHT) >= DISPLAY_HEIGHT ? DISPLAY_HEIGHT-1 : chip2y1(chip) + CHIP_HEIGHT-1)
 
 
-#define MAX_ERRORS 10
+#define MAX_ERRORS 10 // maximum errors per indivual test
 
 #ifdef _AVRIO_AVRIO_
 void _SerialPrintPINstr(avrpin_t pin, const char *pinstr, uint8_t avrport,
@@ -206,16 +217,14 @@ void setup()
   delay(5);	// allow the hardware time settle
   Serial.begin(9600);
 
-#ifdef CORE_TEENSY
-  delay(2000);    // allow USB time to come up.
-                  // plus give user time to start serial monitor
-                  // NOTE: for Teensy users:
-                  //       Watch for the serial monitor icon in the IDE
-                  //       to briefly "flash". When it does, USB is up and the IDE
-                  //       has noticed the Teensy board. You can then click on the icon
-                  //       to connect the teensy board virtual com port.
-#elif defined(__AVR_ATmega32U4__)
-  while(!Serial) {}; // wait on USB serial port to be ready on Leonardo
+#if defined(CORE_TEENSY) || defined(__AVR_ATmega32U4__)
+  do
+  {
+	// wait on USB serial port to be ready but timout out after 10 seconds
+	if(millis() > 10000) // millis starts at 0 after reset
+		break;
+  } while(!Serial);
+
 #endif
 
   SerialPrintQ("Serial initialized\n");
@@ -293,7 +302,8 @@ void
 loop()
 {   // run over and over again
 
-int lcount = 1;
+int lcount = 1; // total loop count
+int lfcount = 0; //  fail count
 unsigned int glcdspeed, kops, kops_fract;
 int status;
 
@@ -338,6 +348,7 @@ int status;
 	SerialPrintQ(" (status code: ");
 	Serial.print(status);
 	Serial.println(')');
+        lfcount++;
     	goto finished;
     }
 #endif
@@ -348,7 +359,12 @@ int status;
     SerialPrintQ("Displaying Library version Screen\n");
     showlibinfo();
 
-    SerialPrintQ("Turning display & backlight on/off\n");
+    SerialPrintQ("Turning display ");
+#ifdef glcdPinBL
+    SerialPrintQ("& backlight ");
+#endif
+    SerialPrintQ("on/off\n");
+
     for(uint8_t x = 0; x < 5; x++)
     {
 	GLCD.Off(); // turn off display pixels and backlight(if supported)
@@ -367,19 +383,23 @@ int status;
        * memory tests failed.
        */
       SerialPrintQ("TEST FAILED\n");
+      lfcount++;
     }
     else
     {
-      SerialPrintQ("Tests PASSED\n");
+      SerialPrintQ("TEST PASSED\n");
 
       /*
        * Diags report loop count on completion
        */
       GLCD.ClearScreen();
       GLCD.CursorTo(0,0);
-      GLCD.print("Diag Loop: ");
+      GLCD.print("Diag Loop:");
       GLCD.println(lcount);
-      GLCD.println("Tests PASSED");
+      GLCD.print(lcount - lfcount);
+      GLCD.print(" PASSED");
+      GLCD.print(lfcount);
+      GLCD.println(" FAILED");
 
       /*
        * All GLCD tests passed so now
@@ -410,6 +430,11 @@ int status;
     }
 
 finished:
+    Serial.print("Test Count: ");
+    Serial.print(lcount - lfcount);
+    Serial.print(" PASSED ");
+    Serial.print(lfcount);
+    Serial.println(" FAILED");
 
     delay(5000);
     lcount++;
@@ -1128,6 +1153,13 @@ showGLCDconfig(void)
    */
 #ifdef GLCDCFG_READ_CACHE
   SerialPrintQ("READ CACHE enabled\n");
+#endif
+
+  /*
+   * show if UTF8 support is enabled
+   */
+#ifdef GLCDCFG_UTF8
+  SerialPrintQ("UTF8 support enabled\n");
 #endif
 
 
