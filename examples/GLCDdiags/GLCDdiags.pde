@@ -54,8 +54,7 @@
  */
 
 #include <openGLCD.h>
-#include "openGLCD_Buildinfo.h"
-#include "include/glcd_io.h"
+#include "include/glcd_io.h" // normal sketches don't need this.
 #include "include/glcd_errno.h"
 
 /*
