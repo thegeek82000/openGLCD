@@ -844,7 +844,13 @@ showGLCDconfig(void)
 #ifdef ARDUINO
   SerialPrintP(hline);
   SerialPrintQ("Reported Arduino Revision: ");
-#if ARDUINO > 100
+#if ARDUINO > 158 // ARDUINO rev format changed after 1.5.8 to #.##.## (breaks after 3.x.x for 16 int bit calc)
+  Serial.print(ARDUINO/10000);
+  Serial.print('.');
+  Serial.print((ARDUINO%10000)/100);
+  Serial.print('.');
+  Serial.println((ARDUINO%10000)%100);
+#elif ARDUINO > 100 // 1.0.0 to 1.5.8 uses rev format #.#.#
   Serial.print(ARDUINO/100);
   Serial.print('.');
   Serial.print((ARDUINO%100)/10);
