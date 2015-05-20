@@ -360,7 +360,7 @@ extern "C" {
 		(P) == 18 ? _digitalPinToPortReg(18) : \
 		(P) == 19 ? _digitalPinToPortReg(19) : \
 		(P) == 20 ? _digitalPinToPortReg(20) : \
-		(P) == 21 ? _digitalPinToPortReg(22) : \
+		(P) == 21 ? _digitalPinToPortReg(21) : \
 		(P) == 22 ? _digitalPinToPortReg(22) : \
 		(P) == 23 ? _digitalPinToPortReg(23) : \
 		(P) == 24 ? _digitalPinToPortReg(24) : \
@@ -397,7 +397,7 @@ extern "C" {
 		(P) == 18 ? _digitalPinToBit(18) : \
 		(P) == 19 ? _digitalPinToBit(19) : \
 		(P) == 20 ? _digitalPinToBit(20) : \
-		(P) == 21 ? _digitalPinToBit(22) : \
+		(P) == 21 ? _digitalPinToBit(21) : \
 		(P) == 22 ? _digitalPinToBit(22) : \
 		(P) == 23 ? _digitalPinToBit(23) : \
 		(P) == 24 ? _digitalPinToBit(24) : \
