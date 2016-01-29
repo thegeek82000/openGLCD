@@ -111,7 +111,12 @@ void _SerialPrintPINstr(const char *pinstr);
 
 /*
  * Prototypes
+ * The IDE will screw up inserting prototypes if the return type is not on the
+ * same line as the rest of the function definition, so we will declare all
+ * the prototypes here to avoid any issues.
  */
+void setup();
+void loop();
 void showGLCDconfig(void);
 uint8_t lcdmemtest(void);
 uint16_t getglcdspeed();
@@ -121,6 +126,7 @@ int lcdhpagetest(uint8_t x1, uint8_t x2, uint8_t spage, uint8_t epage,
 	 uint8_t sval, uint8_t eval);
 int lcdvpagetest(uint8_t x1, uint8_t x2, uint8_t spage, uint8_t epage,
 	 uint8_t sval, uint8_t eval);
+void SerialPrintP(PGM_P str );
 
 /*
  * declare a string for a horizontal line in program memory
