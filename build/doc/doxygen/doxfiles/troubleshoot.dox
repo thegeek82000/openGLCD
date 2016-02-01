@@ -5,6 +5,7 @@
 /**
 @page page_troubleshoot Troubleshooting
 - No pixels visible on the display
+	-# Check all solder connections to GLCD module (all connections to PCB must be soldered)
 	-# Check +5v and Gnd connections between Arduino and GLCD panel
 	-# Check all data and command pins are wired according to the datasheet and matching the configuration settings (This is the most common cure to this problem)
 	-# Check the datasheet for your panel to verify appropriate timing values are set in the configuration file
