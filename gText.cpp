@@ -54,7 +54,7 @@ static FontCallback	FontRead;	// font callback shared across all instances
  * and that the UTF character codes are only 0-255.
  * To go beyond 255 is a BIG deal since the font header currently only supports up to
  * 256 characters. (it is only an 8 bit field)
- * Also by only supporting 0-255 codes, when UTF8 processing is enable raw code processing
+ * Also by only supporting 0-255 codes, when UTF8 processing is enabled, raw code processing
  * can also be supported for characters above 0x7f with the exception that codes
  * 0xc2 and 0xc3 will be lost.
  *
@@ -1936,14 +1936,8 @@ uint8_t width, height;
 	if(this->Font == 0)
 		return; // no font selected
 
-	width = FontRead(this->Font+FONT_FIXED_WIDTH);
-	height = FontRead(this->Font+FONT_HEIGHT);
-
-	if(!isNoPadFixedFont(this->Font)) // all fonts excepth NoPadFixed fonts get pad pixels
-	{
-		width++;
-		height++;
-	}
+	width = GetAreaProp(gTextProp_FontWidth);
+	height = GetAreaProp(gTextProp_FontHeight);
 
 	/*
 	 * Text position is relative to current text area
@@ -2003,7 +1997,7 @@ uint8_t width;
 	if(this->Font == 0)
 		return; // no font selected
 
-	width = FontRead(this->Font+FONT_FIXED_WIDTH);
+	width = GetAreaProp(gTextProp_FontWidth);
 
 	/*
 	 * Text position is relative to current text area
@@ -2545,6 +2539,10 @@ uint8_t i=0;
  *
  * This method is needed for the Print base class
  *
+ * @returns
+ * On pre 1.0 it is a void function\n
+ * On 1.0 and beyond it returns 1 if a character is rendered, 0 if a character was not rendered
+ *
  * @warning
  * Carriage returns are swallowed to prevent println() from
  * printing the 0xd character if the font contains this character.
@@ -2553,8 +2551,8 @@ uint8_t i=0;
  * @note
  * multibyte wide UTF8 characters are not supported as the interface
  * to write() is limited to 8 bit data.\n\n
- * UTF8 characters, can be used when the optional UTF8 library support is enabled.
- * However since the write() interface is 8 bit data, each byte of the multibyte character
+ * UTF8 characters can be used when the optional UTF8 library support is enabled.
+ * However, since the write() interface is 8 bit data, each byte of the multibyte character
  * must be sent seperately.\n
  * When UTF8 support enabled, writeUTF8() and PutChar() can be used to output UTF8 encoded characters.
  * including multibyte wide UTF8 character codes 
@@ -2576,6 +2574,39 @@ size_t gText::write(uint8_t c)
 	return(this->PutChar(c));
 } 
 #endif
+
+/**
+ * output a UTF8 encoded character to the text area
+ * @param utfc the UTF8 character to output
+ *
+ * used to output UTF8 encoded characters including multibyte wide UTF8 character codes.\n
+ * The UTF character codes are limited to 0-255.
+ * To go beyond 255 is a BIG deal since the font header currently only supports up to
+ * 256 characters. (it is only an 8 bit field)\n
+ * Also by only supporting 0-255 codes, when UTF8 processing is enabled, raw code processing
+ * can also be supported for characters above 0x7f with the exception that codes
+ * 0xc2 and 0xc3 will be lost.
+ * @note
+ * This function exists only when UTF8 support is enabled.
+ *
+ * @see write()
+ * @see PutChar()
+ */
+
+#if defined(GLCDCFG_UTF8) || defined(DOXYGEN)
+#if ARDUINO < 100
+void gText::writeUTF8(wchar_t utfc) 
+{
+		this->PutChar(c);
+} 
+#else
+size_t gText::writeUTF8(wchar_t utfc) 
+{
+	return(this->PutChar(c));
+} 
+#endif
+#endif
+
 
 #ifndef USE_ARDUINO_FLASHSTR
 // functions to print strings in Progmem
