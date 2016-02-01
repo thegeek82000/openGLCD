@@ -9,7 +9,9 @@
 #include <fonts/allFonts.h>
 #include <bitmaps/allBitmaps.h>
 
-#define GLCD_GLCDLIB_NAMESTR "openGLCD" // name of library
+// name of library
+// get it from the build info
+#define GLCD_GLCDLIB_NAMESTR GLCD_GLCDLIB_BUILD_LIBNAMESTR
 
 // library version
 // get it from the build info

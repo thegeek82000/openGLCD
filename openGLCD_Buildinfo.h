@@ -13,6 +13,8 @@
   
 #ifndef __openGLCD_Buildinfo_H__  
 #define __openGLCD_Buildinfo_H__  
+
+#define GLCD_GLCDLIB_BUILD_LIBNAMESTR "openGLCD"  // development lib name
   
 #define GLCD_GLCDLIB_BUILD_DATESTR __DATE__ " " __TIME__
   

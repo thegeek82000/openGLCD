@@ -109,6 +109,7 @@ PROGNAME=`basename $0`
 
 #
 # set PROGWD (program working directory) variable
+# This is the directory of where this script lives
 #
 
 #PROGWD=`dirname $0`
@@ -167,6 +168,31 @@ VCSGENCHANGELOG="$PROGWD/mkChangeLog.sh"
 VCSCHANGELOGFILE="$PROGWD/ChangeLog.txt"
 
 #
+# create a RETARDED SemVer compliant Revision string from git describe string
+# http://semver.org/
+# this uses sed to alter a git describe string to be @#$@$ SEMVER compliant
+# it will work as long as the git tags used start with a version number that is
+# either 2 digits or 3 digits. Example 1.0 1.0.0 
+# string will be massaged to ensure compliance should tags used not be SEMVER
+# compliant. i.e. v1.2rc1 will be turned into 1.2.0-rc1
+#
+# shown here is how each "-e" works:
+# - strip out leading a leading leading non numeric chars (like 'v')
+#  will change a tag of v1.0 to 1.0 trailing strings after digits are left alone
+#
+# - convert 2 digit version numbers to 3 digit numbers
+#  will change #.# to #.#.0 trailing strings are left alone
+#
+# - change a period after the 3rd version digit to a dash
+#  will change #.#.#.foo to #.#.#-foo
+#
+# - insert a "-" afer the 3rd version digit if the character is not already a - or a +
+#   handles case of changing #.#.#foo to #.#.#-foo
+#
+#
+SEMVERSTR=$(echo $VCSBUILDSTR | sed -e 's/^\([^0-9]*\)\(.*\)/\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*\)\($\|[^\.].*\|\.[^0-9].*\)/\1.0\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\.\(.*\)/\1-\2/' -e 's/^\([0-9][0-9]*\.[0-9][0-9]*.[0-9][0-9]*\)\([^\+\-].*\)/\1-\2/')
+
+#
 # zip command
 #
 ZIPCMD="7z a"
@@ -178,7 +204,6 @@ ZIPCMD="7z a"
 #  windows long path issue but it only kicks in on absolute paths.
 #
 GLCDDISTDIR="$PROGTEMP/$GLCDLIBNAME"
-
 
 #
 # Doxygen command and config file stuff
@@ -207,9 +232,29 @@ GLCDBUILDINFO_HDR_GUARD=__$(basename "$GLCDBUILDINFO_HDR" .h)_h__
 #
 # names of build string defines
 #
+GLCD_GLCDLIB_LIBNAMESTR_NAME=GLCD_GLCDLIB_BUILD_LIBNAMESTR
 GLCD_GLCDLIB_DATESTR_NAME=GLCD_GLCDLIB_BUILD_DATESTR
 GLCD_GLCDLIB_BUILDSTR_NAME=GLCD_GLCDLIB_BUILD_BUILDSTR
 GLCD_GLCDLIB_REVSTR_NAME=GLCD_GLCDLIB_BUILD_REVSTR
+
+#
+# name of Arduino 1.5x library properties file
+#
+GLCDLIBPROPFILE="$GLCDDISTDIR/library.properties"
+
+# properties
+
+GLCDLIBPROPNAME=$GLCDLIBNAME
+# Version will use SEMVERSTR 
+GLCDLIBPROPVERSION="$SEMVERSTR"
+GLCDLIBPROPAUTHOR="Bill Perry <bperrybap@opensource.billsworld.billandterrie.com>"
+GLCDLIBPROPMAINTAINER="Bill Perry <bperrybap@opensource.billsworld.billandterrie.com>"
+GLCDLIBPROPSENTENCE="An openSource library for graphical LCDs"
+GLCDLIBPROPPARAGRAPH="The library supports several different chips and is easy to integrate with different GLCD panels. The configuration mechanism allows using a broad range of GLCD panels and Arduino controllers."
+GLCDLIBPROPCATEGORY="Display"
+GLCDLIBPROPURL="https://bitbucket.org/bperrybap/openglcd"
+GLCDLIBPROPARCHITECTURES="*"
+
 
 #
 # list of unwanted directories
@@ -290,6 +335,8 @@ echo >> "$GLCDBUILDINFO_HDR"
 echo "#ifndef $GLCDBUILDINFO_HDR_GUARD"  >> "$GLCDBUILDINFO_HDR"
 echo "#define $GLCDBUILDINFO_HDR_GUARD"  >> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
+printf "#define $GLCD_GLCDLIB_LIBNAMESTR_NAME\\t\"$GLCDLIBNAME\"">> "$GLCDBUILDINFO_HDR"
+echo  >> "$GLCDBUILDINFO_HDR"
 printf "#define $GLCD_GLCDLIB_DATESTR_NAME\\t\"$MYDATETIME\"">> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
 printf "#define $GLCD_GLCDLIB_REVSTR_NAME\\t\"$GLCDBUILDREV\"" >> "$GLCDBUILDINFO_HDR"
@@ -297,6 +344,18 @@ echo  >> "$GLCDBUILDINFO_HDR"
 printf "#define $GLCD_GLCDLIB_BUILDSTR_NAME\\t\"$GLCDBUILDSTR\"" >> "$GLCDBUILDINFO_HDR"
 echo  >> "$GLCDBUILDINFO_HDR"
 echo "#endif" >> "$GLCDBUILDINFO_HDR"
+
+echo Creating Arduino Library Properties file
+echo ======== Creating Arduino Library Properties File "$GLCDLIBPROPFILE" >> "$LOGFILE"
+echo name=$GLCDLIBPROPNAME > "$GLCDLIBPROPFILE"
+echo version=$GLCDLIBPROPVERSION >> "$GLCDLIBPROPFILE"
+echo author=$GLCDLIBPROPAUTHOR >> "$GLCDLIBPROPFILE"
+echo maintainer=$GLCDLIBPROPMAINTAINER >> "$GLCDLIBPROPFILE"
+echo sentence=$GLCDLIBPROPSENTENCE >> "$GLCDLIBPROPFILE"
+echo paragraph=$GLCDLIBPROPPARAGRAPH >> "$GLCDLIBPROPFILE"
+echo category=$GLCDLIBPROPCATEGORY >> "$GLCDLIBPROPFILE"
+echo url=$GLCDLIBPROPURL >> "$GLCDLIBPROPFILE"
+echo architectures=$GLCDLIBPROPARCHITECTURES >> "$GLCDLIBPROPFILE"
 
 #
 # Must build doxygen docs before build directory is removed
