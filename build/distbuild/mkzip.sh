@@ -113,6 +113,7 @@ PROGNAME=`basename $0`
 #
 
 #PROGWD=`dirname $0`
+cd `dirname $0`
 PROGWD=$(pwd)
 
 #
