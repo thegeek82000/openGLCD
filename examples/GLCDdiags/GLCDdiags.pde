@@ -1173,6 +1173,43 @@ showGLCDconfig(void)
   SerialPrintQ("UTF8 support enabled\n");
 #endif
 
+  /*
+   * show if NO_PRINTF
+   */
+#ifdef GLCDCFG_NO_PRINTF
+  SerialPrintQ("NO_PRINTF\n");
+#endif
+
+
+  /*
+   * show if NO_SCROLLDOWN
+   */
+#ifdef GLCDCFG_NO_SCROLLDOWN
+  SerialPrintQ("NO_SCROLLDOWN\n");
+#endif
+
+  /*
+   * show if NODEFER_SCROLL
+   */
+#ifdef GLCDCFG_NODEFER_SCROLL
+  SerialPrintQ("NODEFER_SCROLL\n");
+#endif
+
+
+  /*
+   * show if init selftest disabled
+   */
+#ifdef GLCDCFG_NOINIT_CHECKS
+  SerialPrintQ("NOINIT_CHECKS\n");
+#endif
+
+  /*
+   * show if forcing CORECODE mode
+   */
+#ifdef GLCDCFG_FORCE_CORECODE
+  SerialPrintQ("FORCE CORECODE mode\n");
+#endif
+
 
 }
 
