@@ -126,7 +126,12 @@
 #define glcdio_WriteByte(data) glcdio_avrWriteByte(data)
 #define glcdio_ReadByte() glcdio_avrReadByte()
 #define	glcdio_DataDirOut() glcdio_avrDataDir(0xff)
-#define	glcdio_DataDirIn() glcdio_avrDataDir(0x00)
+#define	glcdio_DataDirIn(_ENpullups)	\
+do {									\
+		glcdio_avrDataDir(0x00);		\
+		if(_ENpullups)					\
+			glcdio_avrWriteByte(0xff);	\
+}while (0)
 
 #else // ================= non _AVRIO_AVRIO_ below here =============================
 
@@ -200,9 +205,42 @@ do {											\
 
 /*
  * Configure the direction of the data pins.
+ * If the IDE/core does not support INPUT_PULLUP then
+ * you don't get the pullups. It was added in IDE 1.0.2 so most users will
+ * be using something newer. It isn't really needed by the glcd device code,
+ * It is only used by the initial selftest in Init() and even then,
+ * it only comes into play if the user wired up things incorrectly.
+ * So its not a big deal if the pullups don't get enabled.
  */
-#define glcdio_DataDirIn()					\
-do {									\
+#ifdef INPUT_PULLUP
+#define glcdio_DataDirIn(_ENpullups)					\
+do {													\
+	if(_ENpullups)										\
+	{													\
+			glcdio_PinMode(glcdPinData0, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData1, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData2, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData3, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData4, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData5, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData6, INPUT_PULLUP);	\
+			glcdio_PinMode(glcdPinData7, INPUT_PULLUP);	\
+	}													\
+	else												\
+	{													\
+			glcdio_PinMode(glcdPinData0, INPUT);		\
+			glcdio_PinMode(glcdPinData1, INPUT);		\
+			glcdio_PinMode(glcdPinData2, INPUT);		\
+			glcdio_PinMode(glcdPinData3, INPUT);		\
+			glcdio_PinMode(glcdPinData4, INPUT);		\
+			glcdio_PinMode(glcdPinData5, INPUT);		\
+			glcdio_PinMode(glcdPinData6, INPUT);		\
+			glcdio_PinMode(glcdPinData7, INPUT);		\
+	}													\
+}while (0)
+#else
+#define glcdio_DataDirIn(_ENpullups)		\
+do {										\
 	glcdio_PinMode(glcdPinData0, INPUT);	\
 	glcdio_PinMode(glcdPinData1, INPUT);	\
 	glcdio_PinMode(glcdPinData2, INPUT);	\
@@ -212,6 +250,7 @@ do {									\
 	glcdio_PinMode(glcdPinData6, INPUT);	\
 	glcdio_PinMode(glcdPinData7, INPUT);	\
 }while (0)
+#endif
 
 #define glcdio_DataDirOut()				\
 do {									\

@@ -743,13 +743,7 @@ uint8_t glcd_Device::GetStatus(uint8_t chip)
 uint8_t status;
 
 	glcdDev_SelectChip(chip);
-	glcdio_DataDirIn();				// input mode
-//	glcdio_WriteByte(0xff);			// FIXME: turn on pullups to pre set "BUSY"
-									// this is only here it create a "BUSY" when
-									// users miswire the pins. This should
-									// still be done but needs to be handled
-									// properly without assuming AVR registers
-									// must be addressed before the 1.0 release.
+	glcdio_DataDirIn(1);			// input mode with pullups enabled
 	glcdio_SetRWDI(HIGH, LOW);		// R/W = HIGH, D/I = LOW
 //	glcdio_DelayNanoseconds(GLCD_tAS);
 	glcdDev_ENstrobeHi(chip);
@@ -766,7 +760,7 @@ uint8_t status;
 void glcd_Device::WaitReady( uint8_t chip)
 {
 	glcdDev_SelectChip(chip);
-	glcdio_DataDirIn();
+	glcdio_DataDirIn(0);				// without pullups enabled
 	glcdio_SetRWDI(HIGH, LOW);			// R/W = HIGH, D/I = LOW
 //	glcdio_DelayNanoseconds(GLCD_tAS);
 	glcdDev_ENstrobeHi(chip);
