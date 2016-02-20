@@ -247,8 +247,8 @@ enum gTextfmt_t
 	gTextfmt_left,		 		/**< horizontal left adjust */
 	gTextfmt_right,				/**< horizontal right adjust */
 	gTextfmt_top,				/**< vertical top */
-	gTextfmt_bottom,				/**< vertical bottom */
-	gTextfmt_center,				/**< horizonal/vertical center */
+	gTextfmt_bottom,			/**< vertical bottom */
+	gTextfmt_center,			/**< horizonal/vertical center */
 	gTextfmt_current,			/**< current horizontal/vertical location */
 };
 

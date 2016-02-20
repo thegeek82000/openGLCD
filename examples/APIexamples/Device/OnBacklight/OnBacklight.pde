@@ -11,6 +11,9 @@
  * OnBacklight() turns on the backlight if backlight control is configured
  * OffBacklight() turns off the backlight if backlight control is configured
  *
+ * Returns:
+ *    0 or GLCD_NOERR when successful or non zero error code when unsucessful
+ *
  * Note: Backlight control requires additional circuitry
  *       It also requires that the glcdPinBL pin be enabled in the config file
  *       and that whatever pin is used for glcdPinBL be connected to the

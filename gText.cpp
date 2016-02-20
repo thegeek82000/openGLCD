@@ -277,7 +277,7 @@ uint8_t color;
 	 * fill the area with font background color
 	 */
 	glcd_Device::SetPixels(this->tarea.x1, this->tarea.y1, 
-		this->tarea.x2, this->tarea.y2, color);
+	this->tarea.x2, this->tarea.y2, color);
 
 	/*
 	 * put cursor at home position of text area to ensure we are always inside area.
@@ -2588,6 +2588,10 @@ size_t gText::write(uint8_t c)
  * 0xc2 and 0xc3 will be lost.
  * @note
  * This function exists only when UTF8 support is enabled.
+ *
+ * @returns
+ * On pre 1.0 it is a void function\n
+ * On 1.0 and beyond it returns 1 if a character is rendered, 0 if a character was not rendered
  *
  * @see write()
  * @see PutChar()

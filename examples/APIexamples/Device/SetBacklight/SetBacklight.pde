@@ -4,7 +4,8 @@
  * Example of using:
  * SetBacklight()
  *
- * status = SetBacklight();
+ * status = SetBacklight(val);
+ * val    - brightness level
  *
  * SetBacklight() Sets the backlight brightness
  *
@@ -15,6 +16,9 @@
  * this function is used to control backlight intensity and not
  * for on / off control.
  * A value of HIGH is typically 1 which would be a very dim backlight.
+ *
+ * Returns:
+ *    0 or GLCD_NOERR when successful or non zero error code when unsucessful
  *
  * Note: Backlight control requires additional circuitry
  *       It also requires that the glcdPinBL pin be enabled in the config file

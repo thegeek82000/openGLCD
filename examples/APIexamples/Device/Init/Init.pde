@@ -48,14 +48,12 @@
  * - the entire display will be cleared
  * - the x,y postion will be set to 0,0
  *
- * @returns 0 or GLCD_NOERR when successful or non zero error code when unsucessful
+ * Returns:
+ *    0 or GLCD_NOERR when successful or non zero error code when unsucessful
  *
- * @note
- * This function can also be called to re-initliaze the display hardware.
-
- * This sketch prints "Hello World!" to the LCD
- * and shows the time in seconds since Arduino board was reset.
- * 
+ * Note:
+ *    This function can also be called to re-initliaze the display hardware.
+ *
  * Created by Bill Perry 2013-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
  */

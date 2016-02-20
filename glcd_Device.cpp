@@ -626,6 +626,7 @@ int glcd_Device::SetBacklight(int val)
  * Turn the display pixels on
  *
  * Turns on the display pixels. It does not alter or modify the backlight setting.
+ *
  * @returns 0 or GLCD_NOERR when successful or non zero error code when unsucessful
  *
  * @see OffDisplay()
@@ -675,6 +676,8 @@ int glcd_Device::OffDisplay(void)
  *
  * Turns on the display's pixels and backlight
  *
+ * @returns 0 or GLCD_NOERR when successful or non zero error code when unsucessful
+ *
  * @note
  *	The backlight will be turned on at full intensity
  *
@@ -692,6 +695,8 @@ int glcd_Device::On(void)
  * Turn off the display & backlight
  *
  * Turns off the display's pixels and backlight
+ *
+ * @returns 0 or GLCD_NOERR when successful or non zero error code when unsucessful
  *
  * @see On()
  * @see OffDisplay()

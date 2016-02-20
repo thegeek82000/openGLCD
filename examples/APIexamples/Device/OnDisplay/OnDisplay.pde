@@ -11,6 +11,9 @@
  * OnDisplay() turns on the display pixels
  * OffDisplay() turns off the display pixels
  *
+ * Returns:
+ *    0 or GLCD_NOERR when successful or non zero error code when unsucessful
+ *
  * Created by Bill Perry 2013-08-01
  * bperrybap@opensource.billsworld.billandterrie.com
  */

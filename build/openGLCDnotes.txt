@@ -2,20 +2,17 @@ vi:ts=4
 
 1.0 release fixes:
 
-- decide how to handle the writeUTF8() function with doxygen.
-	Should it exist for documention even though it is disabled by default?
-	Should it exist and map to write() or should it not exist to cause a link error.
-	I'm leaning tward a link error when not enabled.
-
 - fix the html/doxygen documenation for the GLCD control/glcd_device functions.
 For some reason in the newest doxygen, you don't automatically get the hyperlinks anymore.
 
+- update/remove googlcode references in the additional resources section.
+Specifically MCUIO and GLCDv3
 
-- Fix glcd_Devide.cpp getStatus() function to ensure pullups are on.
-This is only done to ensure that users get a BUSY/RESET status when things are miswired
-or when no GLCD is attached. 
-Currently it is done by setting the bits in the port register which sets pullups
-on the AVR. This should be handled in a better more portable way.
+- add a way to read current row and col using GetAreaProp()
+This will not work correctly with proportional fonts.
+
+- update ks0108 html wiring section to include how to wire up backlight
+transistor
 
 - think about changing FORCE_CORECODE mode.
 It might be useful to force core code mode but still use
@@ -23,10 +20,18 @@ the board specific pin config file.
 currently it also forces the use of the "corecode" pin config file.
 Maybe there needs to be 2 seperate defines?
 
-- update diags to show glcd config defines.
-Several currently are not indicated by diags
+- update documentation for CoreCode mode.
+This includes the wiring table and config file documenation.
+Perhaps intruduce the term "board specific" configuration vs "generic" or "corecode".
+This is affect by the force corecode decision above
+
 
 ==============================================================================
+
+- 1.6.5 IDE supports local HTML consider using it for local documenation
+Unfortunately the path is chrooted so you can't get to directories above
+where the sketch lives
+
 
 - modify build script to work even if not using a git tree
 	Should be able to just check for .git file and then make up
@@ -575,3 +580,31 @@ DONE-------------------------------------------------------------
 		- play games with gaurd defines since openGLCD.h is included
 			before openGLCD_GLCDv3.h
 
+- add library name "openGLCD" to build info from build script so openglcd.h header doesn't hard code it
+- add support for Arduino IDE library.properties metadata:
+name=WebServer
+version=1.0
+author=Cristian Maglie <c.maglie@example.com>, Pippo Pluto <pippo@example.com>
+maintainer=Cristian Maglie <c.maglie@example.com>
+sentence=A library that makes coding a Webserver a breeze.
+paragraph=Supports HTTP1.1 and you can do GET and POST.
+category=Communication
+url=http://example.com/
+architectures=avr
+
+- add note to TroubleShooting to check for solder issues on GLCD to header connections
+
+- decide how to handle the writeUTF8() function with doxygen.
+	Should it exist for documention even though it is disabled by default?
+	Should it exist and map to write() or should it not exist to cause a link error.
+	I'm leaning tward a link error when not enabled.
+	SOLUTION: It will ALWAYS exist in documentation but will only exist in code if enabled.
+
+- Fix glcd_Device.cpp getStatus() function to ensure pullups are on.
+	Handled by doing it AVR code as well as portable code.
+	In portable mode, if INPUT_PULLUP is not available, then pullups are not enabled.
+	This shouldn't be an issue since it is only used diring selftest and only comes into
+	play if the module is wired up incorrectly.
+
+- update diags to show glcd config defines.
+	All conig defines are reported
